@@ -1976,6 +1976,7 @@ var Main = function() {
 	var verbose = false;
 	var genTasks = false;
 	var display = false;
+	var dump = false;
 	var help = false;
 	var modeStr = "build";
 	var args = process.argv.slice(2);
@@ -1983,7 +1984,7 @@ var Main = function() {
 	process.chdir(cwd);
 	var argHandler_parse;
 	var argHandler_getDoc = function() {
-		return "[-t | --target] <name> : One or multiple targets to build.\n[-m | --mode] <mode>   : Build mode - accepted values are 'build', 'install', and 'both'.\n[--debug]              : Build the target(s) in debug mode. Implies -debug, -D js_unflatten and -lib jstack.\n[--dry-run]            : Perform a dry run (no command invocations). Implies -verbose.\n[-v | --verbose]       : Output the commands that are executed.\n[--gen-tasks]          : Generate a tasks.json to .vscode (and don't build anything).\n[--display]            : Generate a complete.hxml for auto completion (and don't build anything).\n[--help]               : Display this help text and exit.";
+		return "[-t | --target] <name> : One or multiple targets to build.\n[-m | --mode] <mode>   : Build mode - accepted values are 'build', 'install', and 'both'.\n[--debug]              : Build the target(s) in debug mode. Implies -debug, -D js_unflatten and -lib jstack.\n[--dry-run]            : Perform a dry run (no command invocations). Implies -verbose.\n[-v | --verbose]       : Output the commands that are executed.\n[--gen-tasks]          : Generate a tasks.json to .vscode (and don't build anything).\n[--display]            : Generate a complete.hxml for auto completion (and don't build anything).\n[--dump]               : Dump the parsed project files to dump.json.\n[--help]               : Display this help text and exit.";
 	};
 	argHandler_parse = function(__args) {
 		var __index = 0;
@@ -2015,6 +2016,15 @@ var Main = function() {
 					}
 				}
 				dryRun = true;
+				__index += 0;
+				break;
+			case "--dump":
+				if(__index > __args.length) {
+					if(![][__args.length - 1]) {
+						throw new js__$Boot_HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
+					}
+				}
+				dump = true;
 				__index += 0;
 				break;
 			case "--gen-tasks":
@@ -2085,6 +2095,9 @@ var Main = function() {
 		return Main.DEFAULTS;
 	}));
 	var projects = [defaults,this.findProjectFiles()];
+	if(dump) {
+		js_node_Fs.writeFileSync("dump.json",JSON.stringify(projects,null,"    "));
+	}
 	this.validateTargets(cliArgs.targets);
 	var tmp = Mode.__constructs__.slice();
 	this.validateEnum("mode",modeStr,tmp);
@@ -4392,7 +4405,7 @@ var Class = { __name__ : ["Class"]};
 var Enum = { };
 var __map_reserved = {}
 Main.PROJECT_FILE = "vshaxe-project.json";
-Main.DEFAULTS = "{\r\n    \"haxelibs\": [\r\n        {\r\n            \"name\": \"hxnodejs\",\r\n            \"installArgs\": [\"git\", \"hxnodejs\", \"https://github.com/HaxeFoundation/hxnodejs\"]\r\n        },\r\n        {\r\n            \"name\": \"jstack\",\r\n            \"installArgs\": [\"install\", \"jstack\"]\r\n        },\r\n        {\r\n            \"name\": \"json2object\",\r\n            \"installArgs\": [\"git\", \"json2object\", \"https://github.com/elnabo/json2object\"]\r\n        }\r\n    ],\r\n    \"targets\": [\r\n        {\r\n            \"name\": \"empty\"\r\n        },\r\n        {\r\n            \"name\": \"vshaxe-node\",\r\n            \"debug\": {\r\n                \"args\": {\r\n                    \"defines\": [\"js_unflatten\"],\r\n                    \"haxelibs\": [\"jstack\"]\r\n                }\r\n            },\r\n            \"args\": {\r\n                \"haxelibs\": [\"hxnodejs\"]\r\n            }\r\n        }\r\n    ]\r\n}";
+Main.DEFAULTS = "{\r\n    \"haxelibs\": [\r\n        {\r\n            \"name\": \"hxnodejs\",\r\n            \"installArgs\": [\"git\", \"hxnodejs\", \"https://github.com/HaxeFoundation/hxnodejs\"]\r\n        },\r\n        {\r\n            \"name\": \"jstack\",\r\n            \"installArgs\": [\"install\", \"jstack\"]\r\n        }\r\n    ],\r\n    \"targets\": [\r\n        {\r\n            \"name\": \"empty\"\r\n        },\r\n        {\r\n            \"name\": \"vshaxe-node\",\r\n            \"debug\": {\r\n                \"args\": {\r\n                    \"defines\": [\"js_unflatten\"],\r\n                    \"haxelibs\": [\"jstack\"]\r\n                }\r\n            },\r\n            \"args\": {\r\n                \"haxelibs\": [\"hxnodejs\"]\r\n            }\r\n        }\r\n    ]\r\n}";
 builders_VSCodeTasksBuilder.problemMatcher = { owner : "haxe", pattern : { "regexp" : "^(.+):(\\d+): (?:lines \\d+-(\\d+)|character(?:s (\\d+)-| )(\\d+)) : (?:(Warning) : )?(.*)$", "file" : 1, "line" : 2, "endLine" : 3, "column" : 4, "endColumn" : 5, "severity" : 6, "message" : 7}};
 builders_VSCodeTasksBuilder.template = { version : "2.0.0", command : "haxelib", suppressTaskName : true, tasks : []};
 builders_VSCodeTasksBuilder.defaultTasks = [{ taskName : "{install-all}", args : builders_VSCodeTasksBuilder.makeArgs(["--mode","install","--target","all"]), problemMatcher : builders_VSCodeTasksBuilder.problemMatcher},{ taskName : "{generate-complete-hxml}", args : builders_VSCodeTasksBuilder.makeArgs(["--display","--target","all"]), problemMatcher : builders_VSCodeTasksBuilder.problemMatcher},{ taskName : "{generate-vscode-tasks}", args : builders_VSCodeTasksBuilder.makeArgs(["--gen-tasks","--target","all"]), problemMatcher : builders_VSCodeTasksBuilder.problemMatcher}];

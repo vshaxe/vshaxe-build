@@ -7,6 +7,7 @@ import json2object.JsonParser;
 import sys.io.File;
 import sys.FileSystem;
 import haxe.io.Path;
+import haxe.Json;
 using json2object.ErrorUtils;
 
 /** The build script for VSHaxe **/
@@ -30,6 +31,7 @@ class Main {
         var verbose = false;
         var genTasks = false;
         var display = false;
+        var dump = false;
         var help = false;
         var modeStr = "build";
 
@@ -59,6 +61,9 @@ class Main {
             @doc("Generate a complete.hxml for auto completion (and don't build anything).")
             ["--display"] => function() display = true,
 
+            @doc("Dump the parsed project files to dump.json.")
+            ["--dump"] => function() dump = true,
+
             @doc("Display this help text and exit.")
             ["--help"] => function() help = true,
         ]);
@@ -76,6 +81,8 @@ class Main {
 
         var defaults = toPlacedProject(".", readProjectFile("defaults.json", function(_) return DEFAULTS));
         var projects = [defaults, findProjectFiles()];
+
+        if (dump) File.saveContent("dump.json", Json.stringify(projects, "    "));
 
         validateTargets(cliArgs.targets);
         validateEnum("mode", modeStr, Mode.getConstructors());
