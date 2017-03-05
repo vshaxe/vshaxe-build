@@ -2118,7 +2118,14 @@ var Main = function() {
 Main.__name__ = true;
 Main.main = function() {
 	jstack.js.JStack.onReady(function() {
-		new Main();
+		try {
+			new Main();
+		} catch( e ) {
+			if (e instanceof js._Boot.HaxeError) e = e.val;
+			process.stdout.write(Std.string(e));
+			process.stdout.write("\n");
+			process.exit(1);
+		}
 	});
 };
 Main.prototype = {

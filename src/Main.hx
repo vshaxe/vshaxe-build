@@ -16,7 +16,14 @@ class Main {
     static var DEFAULTS:String = getFileContent("defaults.json");
 
     #if !macro
-    static function main() new Main();
+    static function main() {
+        try {
+            new Main();
+        } catch (e:Any) {
+            Sys.println(e);
+            Sys.exit(1);
+        }
+    }
 
     var cli:CliTools;
 
