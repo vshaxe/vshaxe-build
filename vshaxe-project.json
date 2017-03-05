@@ -32,8 +32,10 @@
                 "output": {
                     "target": "neko",
                     "path": "run.n"
-                }
-            }
+                },
+                "debug": true
+            },
+            "isBuildCommand": true
         }
     ]
 }

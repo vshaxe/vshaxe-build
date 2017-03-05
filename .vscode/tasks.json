@@ -5,34 +5,12 @@
     "suppressTaskName": true,
     "tasks": [
         {
-            "taskName": "run-script",
+            "taskName": "run-script - BUILD",
             "args": [
                 "run",
                 "vshaxe-build",
                 "-t",
-                "run-script"
-            ],
-            "problemMatcher": {
-                "owner": "haxe",
-                "pattern": {
-                    "regexp": "^(.+):(\\d+): (?:lines \\d+-(\\d+)|character(?:s (\\d+)-| )(\\d+)) : (?:(Warning) : )?(.*)$",
-                    "file": 1,
-                    "line": 2,
-                    "endLine": 3,
-                    "column": 4,
-                    "endColumn": 5,
-                    "severity": 6,
-                    "message": 7
-                }
-            }
-        },
-        {
-            "taskName": "run-script-node",
-            "args": [
-                "run",
-                "vshaxe-build",
-                "-t",
-                "run-script-node",
+                "run-script",
                 "--debug"
             ],
             "problemMatcher": {
@@ -47,15 +25,16 @@
                     "severity": 6,
                     "message": 7
                 }
-            }
+            },
+            "isBuildCommand": true
         },
         {
-            "taskName": "run-script (debug)",
+            "taskName": "run-script-node",
             "args": [
                 "run",
                 "vshaxe-build",
                 "-t",
-                "run-script",
+                "run-script-node",
                 "--debug"
             ],
             "problemMatcher": {

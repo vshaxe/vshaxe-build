@@ -133,7 +133,7 @@ CliTools.prototype = {
 		if(code == null) {
 			code = 0;
 		}
-		process.stdout.write("VSHaxe Build Script");
+		process.stdout.write("VSHaxe Build Tool");
 		process.stdout.write("\n");
 		process.stdout.write(message == null ? "null" : "" + message);
 		process.stdout.write("\n");
