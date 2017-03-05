@@ -1,0 +1,8 @@
+# This file is generated using the build script - DO NOT EDIT MANUALLY!
+-cp src
+-D js_unflatten
+-lib hxargs
+-lib json2object
+-lib hxnodejs
+-lib jstack
+-js run.js

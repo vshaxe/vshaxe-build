@@ -1,0 +1,8 @@
+language: haxe
+sudo: false
+dist: trusty
+haxe:
+ - development
+
+script:
+ - neko run.n -v -t run-script -m both

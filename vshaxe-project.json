@@ -1,0 +1,39 @@
+{
+    "haxelibs": [
+        {
+            "name": "hxargs",
+            "installArgs": ["install", "hxargs"]
+        },
+        {
+            "name": "json2object",
+            "installArgs": ["git", "json2object", "https://github.com/elnabo/json2object"]
+        }
+    ],
+    "targets": [
+        {
+            "inherit": "vshaxe-node",
+            "name": "run-script-node",
+            "args": {
+                "classPaths": ["src"],
+                "haxelibs": ["hxargs", "json2object"],
+                "main": "Main",
+                "output": {
+                    "target": "js",
+                    "path": "run.js"
+                },
+                "debug": true
+            }
+        },
+        {
+            "name": "run-script",
+            "targetDependencies": ["run-script-node"],
+            "args": {
+                "main": "Run",
+                "output": {
+                    "target": "neko",
+                    "path": "run.n"
+                }
+            }
+        }
+    ]
+}
