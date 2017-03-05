@@ -86,7 +86,7 @@ class Main {
         if (args.length == 0 || help)
             cli.exit(argHandler.getDoc());
 
-        var defaults = toPlacedProject(".", readProjectFile("defaults.json", function(_) return DEFAULTS));
+        var defaults = toPlacedProject(".", parseProjectFile("defaults.json", DEFAULTS));
         var projects = [defaults, findProjectFiles()];
 
         if (dump) File.saveContent("dump.json", Json.stringify(projects, "    "));
@@ -133,15 +133,15 @@ class Main {
                 var subProject = findProjectFiles(fullPath);
                 if (subProject != null) subProjects.push(subProject);
             } else if (file == PROJECT_FILE)
-                project = toPlacedProject(lastDir, readProjectFile(fullPath, function(file) return File.getContent(file)));
+                project = toPlacedProject(lastDir, parseProjectFile(fullPath, File.getContent(fullPath)));
         }
         if (project != null) project.subProjects = subProjects;
         return project;
     }
 
-    function readProjectFile(file:String, getFile:String->String):Project {
+    function parseProjectFile(path:String, file:String):Project {
         var parser = new JsonParser<Project>();
-        var json = parser.fromJson(getFile(file), file);
+        var json = parser.fromJson(file, path);
         if (parser.warnings.length > 0)
             cli.fail(parser.warnings.convertErrorArray());
         return json;

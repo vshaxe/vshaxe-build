@@ -2092,9 +2092,7 @@ var Main = function() {
 	if(args.length == 0 || help) {
 		this.cli.exit(argHandler_getDoc());
 	}
-	var defaults = this.toPlacedProject(".",this.readProjectFile("defaults.json",function(_) {
-		return Main.DEFAULTS;
-	}));
+	var defaults = this.toPlacedProject(".",this.parseProjectFile("defaults.json",Main.DEFAULTS));
 	var projects = [defaults,this.findProjectFiles()];
 	if(dump) {
 		js.node.Fs.writeFileSync("dump.json",JSON.stringify(projects,null,"    "));
@@ -2179,9 +2177,7 @@ Main.prototype = {
 					subProjects.push(subProject);
 				}
 			} else if(file == "vshaxe-project.json") {
-				project = this.toPlacedProject(lastDir,this.readProjectFile(fullPath,function(file1) {
-					return js.node.Fs.readFileSync(file1,{ encoding : "utf8"});
-				}));
+				project = this.toPlacedProject(lastDir,this.parseProjectFile(fullPath,js.node.Fs.readFileSync(fullPath,{ encoding : "utf8"})));
 			}
 		}
 		if(project != null) {
@@ -2189,9 +2185,9 @@ Main.prototype = {
 		}
 		return project;
 	}
-	,readProjectFile: function(file,getFile) {
+	,parseProjectFile: function(path,file) {
 		var parser = new JsonParser_Ano_haxelibs___Inst_Array___Ano_installArgs_____Inst_Array_____Inst_Stringname_____Inst_Stringinherit_targets___Inst_Array___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_();
-		var json = parser.fromJson(getFile(file),file);
+		var json = parser.fromJson(file,path);
 		if(parser.warnings.length > 0) {
 			this.cli.fail(json2object.ErrorUtils.convertErrorArray(parser.warnings));
 		}
