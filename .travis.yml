@@ -5,4 +5,4 @@ haxe:
  - development
 
 script:
- - neko run.n -v -t run-script -m both
+ - neko run.n -v -t run-script -m both .
