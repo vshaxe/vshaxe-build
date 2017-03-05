@@ -10,7 +10,7 @@ import haxe.io.Path;
 import haxe.Json;
 using json2object.ErrorUtils;
 
-/** The build script for VSHaxe **/
+/** The build tool for VSHaxe **/
 class Main {
     static inline var PROJECT_FILE = "vshaxe-project.json";
     static var DEFAULTS:String = getFileContent("defaults.json");

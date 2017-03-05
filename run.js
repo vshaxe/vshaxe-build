@@ -2793,7 +2793,7 @@ builders.DisplayHxmlBuilder.prototype = $extend(builders.BaseBuilder.prototype,{
 		var hxmls1 = this.resolveTargets(cliArgs.targets).map(hxmls);
 		var hxml = this.mergeHxmls(hxmls1,true);
 		var lines = this.printHxmlFile(hxml);
-		lines.splice(0,0,"# " + "This file is generated using the build script - DO NOT EDIT MANUALLY!");
+		lines.splice(0,0,"# " + "This file is generated with vshaxe-build - DO NOT EDIT MANUALLY!");
 		lines = ArrayTools.filterDuplicates(lines,function(s1,s2) {
 			return s1 == s2;
 		});
@@ -2986,7 +2986,7 @@ builders.VSCodeTasksBuilder.prototype = $extend(builders.BaseBuilder.prototype,{
 		});
 		base.tasks = base.tasks.concat(builders.VSCodeTasksBuilder.defaultTasks);
 		var tasksJson = JSON.stringify(base,null,"    ");
-		tasksJson = "// " + "This file is generated using the build script - DO NOT EDIT MANUALLY!" + "\n" + tasksJson;
+		tasksJson = "// " + "This file is generated with vshaxe-build - DO NOT EDIT MANUALLY!" + "\n" + tasksJson;
 		this.cli.saveContent(".vscode/tasks.json",tasksJson);
 	}
 	,buildTask: function(target,debug) {
@@ -4438,7 +4438,7 @@ Main.DEFAULTS = "{\r\n    \"haxelibs\": [\r\n        {\r\n            \"name\": 
 builders.VSCodeTasksBuilder.problemMatcher = { owner : "haxe", pattern : { "regexp" : "^(.+):(\\d+): (?:lines \\d+-(\\d+)|character(?:s (\\d+)-| )(\\d+)) : (?:(Warning) : )?(.*)$", "file" : 1, "line" : 2, "endLine" : 3, "column" : 4, "endColumn" : 5, "severity" : 6, "message" : 7}};
 builders.VSCodeTasksBuilder.template = { version : "2.0.0", command : "haxelib", suppressTaskName : true, tasks : []};
 builders.VSCodeTasksBuilder.defaultTasks = [{ taskName : "{install-all}", args : builders.VSCodeTasksBuilder.makeArgs(["--mode","install","--target","all"]), problemMatcher : builders.VSCodeTasksBuilder.problemMatcher},{ taskName : "{generate-complete-hxml}", args : builders.VSCodeTasksBuilder.makeArgs(["--display","--target","all"]), problemMatcher : builders.VSCodeTasksBuilder.problemMatcher},{ taskName : "{generate-vscode-tasks}", args : builders.VSCodeTasksBuilder.makeArgs(["--gen-tasks","--target","all"]), problemMatcher : builders.VSCodeTasksBuilder.problemMatcher}];
-builders.Warning.Message = "This file is generated using the build script - DO NOT EDIT MANUALLY!";
+builders.Warning.Message = "This file is generated with vshaxe-build - DO NOT EDIT MANUALLY!";
 js.Boot.__toStr = ({ }).toString;
 jstack.js.JStack.instance = new jstack.js.JStack();
 jstack.js.JStack.stackFile = new EReg("^at (.+?js):([0-9]+):([0-9]+)$","");

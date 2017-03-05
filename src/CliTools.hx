@@ -52,7 +52,7 @@ class CliTools {
     }
 
     function exit(message, code = 0) {
-        Sys.println("VSHaxe Build Script");
+        Sys.println("VSHaxe Build Tool");
         Sys.println(message);
         Sys.exit(code);
     }
