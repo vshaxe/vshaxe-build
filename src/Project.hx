@@ -56,10 +56,16 @@ typedef Hxml = {
     @:optional var haxelibs(default,null):ArrayHandle<String>;
     @:optional var debug(default,null):Bool;
     @:optional var output(default,null):Output;
-    @:optional var deadCodeElimination(default,null):String; // TODO enum abstract
+    @:optional var deadCodeElimination(default,null):DeadCodeElimination;
     @:optional var noInline(default,null):Bool;
     @:optional var main(default,null):String; // can only specify either main or package, but you could specify both here :/
     @:optional var packageName(default,null):String;
+}
+
+@:enum abstract DeadCodeElimination(String) to String {
+    var Std = "std";
+    var Full = "full";
+    var No = "no";
 }
 
 typedef Output = {

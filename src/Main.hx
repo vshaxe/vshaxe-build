@@ -8,6 +8,7 @@ import sys.io.File;
 import sys.FileSystem;
 import haxe.io.Path;
 import haxe.Json;
+import Std.string as stringify;
 using json2object.ErrorUtils;
 
 /** The build tool for VSHaxe **/
@@ -113,8 +114,8 @@ class Main {
     }
 
     function validateEnum<T>(name:String, value:T, validValues:Array<T>) {
-        var validStrValues = [for (value in validValues) Std.string(value).toLowerCase()];
-        if (validStrValues.indexOf(Std.string(value)) == -1)
+        var validStrValues = [for (value in validValues) stringify(value).toLowerCase()];
+        if (validStrValues.indexOf(stringify(value)) == -1)
             cli.fail('Unknown $name \'$value\'. Valid values are: $validStrValues');
     }
 
