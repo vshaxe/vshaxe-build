@@ -1,0 +1,13 @@
+-cp src
+-lib hxargs
+-lib json2object
+-lib hxnodejs
+-lib jstack
+-main Main
+-js run.js
+-debug
+
+--next
+
+-main Run
+-neko run.n

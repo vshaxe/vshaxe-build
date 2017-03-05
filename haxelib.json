@@ -1,0 +1,10 @@
+{
+	"name": "vshaxe-build",
+	"url" : "https://github.com/vshaxe/vshaxe-build",
+	"license": "MIT",
+	"tags": [],
+	"description": "Tool used to build vshaxe.",
+	"version": "0.0.1",
+	"contributors": ["vshaxe"],
+	"dependencies": {}
+}
