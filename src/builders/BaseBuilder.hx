@@ -27,7 +27,7 @@ class BaseBuilder implements IBuilder {
             adjustDir(projectBaseDir, target.args);
             if (target.debug != null) adjustDir(projectBaseDir, target.debug.args);
             if (target.display != null) adjustDir(projectBaseDir, target.display.args);
-            project.subProjects.map(adjustWorkingDirectories.bind(_, projectBaseDir));
+            project.subProjects.get().map(adjustWorkingDirectories.bind(_, projectBaseDir));
         }
     }
 
@@ -35,7 +35,7 @@ class BaseBuilder implements IBuilder {
 
     /** TODO: return Option<Haxelib> **/
     function resolveHaxelib(name:String):Haxelib {
-        function loop(projects:Array<PlacedProject>):Haxelib {
+        function loop(projects:ArrayHandle<PlacedProject>):Haxelib {
             for (project in projects) {
                 var lib = project.haxelibs.findNamed(name);
                 if (lib != null) return lib;
@@ -49,7 +49,7 @@ class BaseBuilder implements IBuilder {
 
     /** TODO: return Option<Target> **/
     function resolveTarget(name:String):Target {
-        function loop(projects:Array<PlacedProject>):Target {
+        function loop(projects:ArrayHandle<PlacedProject>):Target {
             for (project in projects) {
                 var target = project.targets.findNamed(name);
                 if (target != null) return target;
@@ -101,7 +101,7 @@ class BaseBuilder implements IBuilder {
 
     function flattenProjects(project:PlacedProject):Array<PlacedProject> {
         var projects = [project];
-        projects = projects.concat(project.subProjects.flatMap(flattenProjects));
+        projects = projects.concat(project.subProjects.get().flatMap(flattenProjects));
         return projects;
     }
 

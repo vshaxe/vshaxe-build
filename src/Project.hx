@@ -7,20 +7,20 @@ typedef Named = {
 typedef Project = {
     /** name of a target in defaults.json to base all targets in this config on **/
     @:optional var inherit(default,null):String;
-    var haxelibs(default,null):Array<Haxelib>;
-    var targets(default,null):Array<Target>;
+    var haxelibs(default,null):ArrayHandle<Haxelib>;
+    var targets(default,null):ArrayHandle<Target>;
 }
 
 /** simn is gonna love this naming... **/
 typedef PlacedProject = {
     >Project,
     var directory(default,null):String;
-    var subProjects:Array<PlacedProject>;
+    var subProjects:ArrayHandle<PlacedProject>;
 }
 
 typedef Haxelib = {
     >Named,
-    var installArgs(default,null):Array<String>;
+    var installArgs(default,null):ArrayHandle<String>;
 }
 
 typedef Target = {
@@ -41,19 +41,19 @@ typedef Target = {
 }
 
 typedef TargetArguments = {
-    @:optional var targetDependencies(default,null):Array<String>;
+    @:optional var targetDependencies(default,null):ArrayHandle<String>;
     /** additional, non-haxelib install commands (npm install...) **/
-    @:optional var installCommands(default,null):Array<Array<String>>;
-    @:optional var beforeBuildCommands(default,null):Array<Array<String>>;
-    @:optional var afterBuildCommands(default,null):Array<Array<String>>;
+    @:optional var installCommands(default,null):ArrayHandle<ArrayHandle<String>>;
+    @:optional var beforeBuildCommands(default,null):ArrayHandle<ArrayHandle<String>>;
+    @:optional var afterBuildCommands(default,null):ArrayHandle<ArrayHandle<String>>;
     @:optional var args(default,null):Hxml;
 }
 
 typedef Hxml = {
     @:optional var workingDirectory:String; // not read-only, meh
-    @:optional var classPaths(default,null):Array<String>;
-    @:optional var defines(default,null):Array<String>;
-    @:optional var haxelibs(default,null):Array<String>;
+    @:optional var classPaths(default,null):ArrayHandle<String>;
+    @:optional var defines(default,null):ArrayHandle<String>;
+    @:optional var haxelibs(default,null):ArrayHandle<String>;
     @:optional var debug(default,null):Bool;
     @:optional var output(default,null):Output;
     @:optional var deadCodeElimination(default,null):String; // TODO enum abstract
@@ -67,10 +67,9 @@ typedef Output = {
     var path(default,null):String;
 }
 
-// https://github.com/elnabo/json2object/issues/9
-/*@:forward(iterator)
+@:forward(iterator)
 abstract ArrayHandle<T>(Array<T>) from Array<T> {
     public function get() {
         return if (this == null) [] else this.copy();
     }
-}*/
+}

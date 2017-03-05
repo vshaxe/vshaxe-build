@@ -12,12 +12,8 @@ class ArrayTools {
         }
         return uniqueTasks;
     }
-
-    public static function get<T>(a:Array<T>):Array<T> {
-        return if (a == null) [] else a.copy();
-    }
-
-    public static function findNamed<T:Named>(a:Array<T>, name:String):T {
+    
+    public static function findNamed<T:Named>(a:ArrayHandle<T>, name:String):T {
         for (e in a)
             if (e.name == name)
                 return e;

@@ -32,20 +32,12 @@ ArrayTools.filterDuplicates = function(tasks,filter) {
 	}
 	return uniqueTasks;
 };
-ArrayTools.get = function(a) {
-	if(a == null) {
-		return [];
-	} else {
-		return a.slice();
-	}
-};
 ArrayTools.findNamed = function(a,name) {
-	var _g = 0;
-	while(_g < a.length) {
-		var e = a[_g];
-		++_g;
-		if(e.name == name) {
-			return e;
+	var e = HxOverrides.iter(a);
+	while(e.hasNext()) {
+		var e1 = e.next();
+		if(e1.name == name) {
+			return e1;
 		}
 	}
 	return null;
@@ -85,7 +77,7 @@ CliTools.__name__ = true;
 CliTools.prototype = {
 	runCommands: function(commands) {
 		var _g = 0;
-		var _g1 = ArrayTools.get(commands);
+		var _g1 = _Project.ArrayHandle_Impl_.get(commands);
 		while(_g < _g1.length) {
 			var command = _g1[_g];
 			++_g;
@@ -93,7 +85,7 @@ CliTools.prototype = {
 		}
 	}
 	,runCommand: function(cmd) {
-		var command = ArrayTools.get(cmd);
+		var command = _Project.ArrayHandle_Impl_.get(cmd);
 		if(command.length == 0) {
 			return;
 		}
@@ -1513,12 +1505,12 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInli
 	}
 	,__class__: JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInline_output_packageName_workingDirectory_
 };
-var JsonParser_Ano_haxelibs___Inst_Array___Ano_installArgs_____Inst_Array_____Inst_Stringname_____Inst_Stringinherit_targets___Inst_Array___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_ = function(warnings,putils) {
+var JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_ = function(warnings,putils) {
 	this.warnings = warnings == null ? [] : warnings;
 	this.putils = putils;
 };
-JsonParser_Ano_haxelibs___Inst_Array___Ano_installArgs_____Inst_Array_____Inst_Stringname_____Inst_Stringinherit_targets___Inst_Array___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_.__name__ = true;
-JsonParser_Ano_haxelibs___Inst_Array___Ano_installArgs_____Inst_Array_____Inst_Stringname_____Inst_Stringinherit_targets___Inst_Array___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_.prototype = {
+JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_.__name__ = true;
+JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_.prototype = {
 	loadJson: function(fields,objectPos) {
 		var assigned = new haxe.ds.StringMap();
 		if(__map_reserved["haxelibs"] != null) {
@@ -1558,7 +1550,7 @@ JsonParser_Ano_haxelibs___Inst_Array___Ano_installArgs_____Inst_Array_____Inst_S
 						switch(_g3[1]) {
 						case 2:
 							var s1 = _g3[2];
-							tmp = new JsonParser_Ano_installArgs___Inst_Array___Inst_Stringname___Inst_String(this.warnings,this.putils).loadJson(s1,content1.pos);
+							tmp = new JsonParser_Ano_installArgs___Abstract_ArrayHandle___Inst_Stringname___Inst_String(this.warnings,this.putils).loadJson(s1,content1.pos);
 							break;
 						case 5:
 							tmp = null;
@@ -1695,14 +1687,14 @@ JsonParser_Ano_haxelibs___Inst_Array___Ano_installArgs_____Inst_Array_____Inst_S
 			} else throw(e);
 		}
 	}
-	,__class__: JsonParser_Ano_haxelibs___Inst_Array___Ano_installArgs_____Inst_Array_____Inst_Stringname_____Inst_Stringinherit_targets___Inst_Array___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_
+	,__class__: JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_
 };
-var JsonParser_Ano_installArgs___Inst_Array___Inst_Stringname___Inst_String = function(warnings,putils) {
+var JsonParser_Ano_installArgs___Abstract_ArrayHandle___Inst_Stringname___Inst_String = function(warnings,putils) {
 	this.warnings = warnings == null ? [] : warnings;
 	this.putils = putils;
 };
-JsonParser_Ano_installArgs___Inst_Array___Inst_Stringname___Inst_String.__name__ = true;
-JsonParser_Ano_installArgs___Inst_Array___Inst_Stringname___Inst_String.prototype = {
+JsonParser_Ano_installArgs___Abstract_ArrayHandle___Inst_Stringname___Inst_String.__name__ = true;
+JsonParser_Ano_installArgs___Abstract_ArrayHandle___Inst_Stringname___Inst_String.prototype = {
 	loadJson: function(fields,objectPos) {
 		var assigned = new haxe.ds.StringMap();
 		if(__map_reserved["installArgs"] != null) {
@@ -1827,7 +1819,7 @@ JsonParser_Ano_installArgs___Inst_Array___Inst_Stringname___Inst_String.prototyp
 			} else throw(e);
 		}
 	}
-	,__class__: JsonParser_Ano_installArgs___Inst_Array___Inst_Stringname___Inst_String
+	,__class__: JsonParser_Ano_installArgs___Abstract_ArrayHandle___Inst_Stringname___Inst_String
 };
 var JsonParser_Ano_path___Inst_Stringtarget___Inst_String = function(warnings,putils) {
 	this.warnings = warnings == null ? [] : warnings;
@@ -2186,7 +2178,7 @@ Main.prototype = {
 		return project;
 	}
 	,parseProjectFile: function(path,file) {
-		var parser = new JsonParser_Ano_haxelibs___Inst_Array___Ano_installArgs_____Inst_Array_____Inst_Stringname_____Inst_Stringinherit_targets___Inst_Array___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_();
+		var parser = new JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_();
 		var json = parser.fromJson(file,path);
 		if(parser.warnings.length > 0) {
 			this.cli.fail(json2object.ErrorUtils.convertErrorArray(parser.warnings));
@@ -2209,6 +2201,16 @@ Mode.Both = ["Both",2];
 Mode.Both.toString = $estr;
 Mode.Both.__enum__ = Mode;
 Math.__name__ = true;
+var _Project = {};
+_Project.ArrayHandle_Impl_ = {};
+_Project.ArrayHandle_Impl_.__name__ = true;
+_Project.ArrayHandle_Impl_.get = function(this1) {
+	if(this1 == null) {
+		return [];
+	} else {
+		return this1.slice();
+	}
+};
 var Reflect = function() { };
 Reflect.__name__ = true;
 Reflect.field = function(o,field) {
@@ -2565,29 +2567,27 @@ builders.BaseBuilder.__name__ = true;
 builders.BaseBuilder.__interfaces__ = [builders.IBuilder];
 builders.BaseBuilder.prototype = {
 	adjustWorkingDirectories: function(project,baseDir) {
-		var _g = 0;
-		var _g1 = project.targets;
-		while(_g < _g1.length) {
-			var target = _g1[_g];
-			++_g;
+		var target = HxOverrides.iter(project.targets);
+		while(target.hasNext()) {
+			var target1 = target.next();
 			var projectBaseDir = haxe.io.Path.join([baseDir,project.directory]);
-			var hxml = target.args;
+			var hxml = target1.args;
 			if(hxml != null) {
 				hxml.workingDirectory = projectBaseDir;
 			}
-			if(target.debug != null) {
-				var hxml1 = target.debug.args;
+			if(target1.debug != null) {
+				var hxml1 = target1.debug.args;
 				if(hxml1 != null) {
 					hxml1.workingDirectory = projectBaseDir;
 				}
 			}
-			if(target.display != null) {
-				var hxml2 = target.display.args;
+			if(target1.display != null) {
+				var hxml2 = target1.display.args;
 				if(hxml2 != null) {
 					hxml2.workingDirectory = projectBaseDir;
 				}
 			}
-			project.subProjects.map((function(a2,f) {
+			_Project.ArrayHandle_Impl_.get(project.subProjects).map((function(a2,f) {
 				return function(a1) {
 					f[0](a1,a2[0]);
 					return;
@@ -2600,15 +2600,14 @@ builders.BaseBuilder.prototype = {
 	,resolveHaxelib: function(name) {
 		var loop = null;
 		loop = function(projects) {
-			var _g = 0;
-			while(_g < projects.length) {
-				var project = projects[_g];
-				++_g;
-				var lib = ArrayTools.findNamed(project.haxelibs,name);
+			var project = HxOverrides.iter(projects);
+			while(project.hasNext()) {
+				var project1 = project.next();
+				var lib = ArrayTools.findNamed(project1.haxelibs,name);
 				if(lib != null) {
 					return lib;
 				}
-				var libInSub = loop(project.subProjects);
+				var libInSub = loop(project1.subProjects);
 				if(libInSub != null) {
 					return libInSub;
 				}
@@ -2621,15 +2620,14 @@ builders.BaseBuilder.prototype = {
 	,resolveTarget: function(name) {
 		var loop = null;
 		loop = function(projects) {
-			var _g = 0;
-			while(_g < projects.length) {
-				var project = projects[_g];
-				++_g;
-				var target = ArrayTools.findNamed(project.targets,name);
+			var project = HxOverrides.iter(projects);
+			while(project.hasNext()) {
+				var project1 = project.next();
+				var target = ArrayTools.findNamed(project1.targets,name);
 				if(target != null) {
 					return target;
 				}
-				var targetInSub = loop(project.subProjects);
+				var targetInSub = loop(project1.subProjects);
 				if(targetInSub != null) {
 					return targetInSub;
 				}
@@ -2677,7 +2675,7 @@ builders.BaseBuilder.prototype = {
 			var dependencyHxmls = function(a1) {
 				return f(a1,a2,a3,a4);
 			};
-			var dependencyHxmls1 = this.resolveTargets(ArrayTools.get(target.targetDependencies)).map(dependencyHxmls);
+			var dependencyHxmls1 = this.resolveTargets(_Project.ArrayHandle_Impl_.get(target.targetDependencies)).map(dependencyHxmls);
 			hxmls = hxmls.concat(dependencyHxmls1);
 		}
 		return this.mergeHxmls(hxmls,flatten);
@@ -2698,7 +2696,7 @@ builders.BaseBuilder.prototype = {
 	}
 	,flattenProjects: function(project) {
 		var projects = [project];
-		projects = projects.concat(ArrayTools.flatten(project.subProjects.map($bind(this,this.flattenProjects))));
+		projects = projects.concat(ArrayTools.flatten(_Project.ArrayHandle_Impl_.get(project.subProjects).map($bind(this,this.flattenProjects))));
 		return projects;
 	}
 	,getTargetOwner: function(target) {
@@ -2733,16 +2731,16 @@ builders.BaseBuilder.prototype = {
 			if(hxml == null) {
 				return;
 			}
-			var rawClassPaths = ArrayTools.get(hxml.classPaths);
+			var rawClassPaths = _Project.ArrayHandle_Impl_.get(hxml.classPaths);
 			if(flatten) {
 				rawClassPaths = rawClassPaths.map(function(cp) {
 					return haxe.io.Path.join([hxml.workingDirectory,cp]);
 				});
 			}
 			classPaths = classPaths.concat(rawClassPaths);
-			var defines1 = ArrayTools.get(hxml.defines);
+			var defines1 = _Project.ArrayHandle_Impl_.get(hxml.defines);
 			defines = defines.concat(defines1);
-			var haxelibs1 = ArrayTools.get(hxml.haxelibs);
+			var haxelibs1 = _Project.ArrayHandle_Impl_.get(hxml.haxelibs);
 			haxelibs = haxelibs.concat(haxelibs1);
 			if(!debug) {
 				debug = hxml.debug;
@@ -2801,21 +2799,21 @@ builders.DisplayHxmlBuilder.prototype = $extend(builders.BaseBuilder.prototype,{
 		}
 		var lines = [];
 		var _g = 0;
-		var _g1 = ArrayTools.get(hxml.classPaths);
+		var _g1 = _Project.ArrayHandle_Impl_.get(hxml.classPaths);
 		while(_g < _g1.length) {
 			var cp = _g1[_g];
 			++_g;
 			lines.push("-cp " + cp);
 		}
 		var _g2 = 0;
-		var _g11 = ArrayTools.get(hxml.defines);
+		var _g11 = _Project.ArrayHandle_Impl_.get(hxml.defines);
 		while(_g2 < _g11.length) {
 			var define = _g11[_g2];
 			++_g2;
 			lines.push("-D " + define);
 		}
 		var _g3 = 0;
-		var _g12 = ArrayTools.get(hxml.haxelibs);
+		var _g12 = _Project.ArrayHandle_Impl_.get(hxml.haxelibs);
 		while(_g3 < _g12.length) {
 			var lib = _g12[_g3];
 			++_g3;
@@ -2852,7 +2850,7 @@ builders.HaxeBuilder.prototype = $extend(builders.BaseBuilder.prototype,{
 	,installTarget: function(target,debug) {
 		this.cli.println("Installing Haxelibs for '" + target.name + "'...\n");
 		this.cli.runCommands(target.installCommands);
-		var libs = ArrayTools.get(this.resolveTargetHxml(target,debug,false,false).haxelibs);
+		var libs = _Project.ArrayHandle_Impl_.get(this.resolveTargetHxml(target,debug,false,false).haxelibs);
 		libs = ArrayTools.filterDuplicates(libs,function(lib1,lib2) {
 			return lib1 == lib2;
 		});
@@ -2860,7 +2858,7 @@ builders.HaxeBuilder.prototype = $extend(builders.BaseBuilder.prototype,{
 		while(_g < libs.length) {
 			var lib = libs[_g];
 			++_g;
-			this.cli.run("haxelib",ArrayTools.get(this.resolveHaxelib(lib).installArgs));
+			this.cli.run("haxelib",_Project.ArrayHandle_Impl_.get(this.resolveHaxelib(lib).installArgs));
 		}
 		this.cli.println("");
 	}
@@ -2879,7 +2877,7 @@ builders.HaxeBuilder.prototype = $extend(builders.BaseBuilder.prototype,{
 			this.installTarget(target,debug);
 		}
 		var _g = 0;
-		var _g1 = ArrayTools.get(target.targetDependencies);
+		var _g1 = _Project.ArrayHandle_Impl_.get(target.targetDependencies);
 		while(_g < _g1.length) {
 			var dependency = _g1[_g];
 			++_g;
@@ -2910,7 +2908,7 @@ builders.HaxeBuilder.prototype = $extend(builders.BaseBuilder.prototype,{
 		}
 		var args = [];
 		var _g = 0;
-		var _g1 = ArrayTools.get(hxml.haxelibs);
+		var _g1 = _Project.ArrayHandle_Impl_.get(hxml.haxelibs);
 		while(_g < _g1.length) {
 			var lib = _g1[_g];
 			++_g;
@@ -2918,7 +2916,7 @@ builders.HaxeBuilder.prototype = $extend(builders.BaseBuilder.prototype,{
 			args.push(this.resolveHaxelib(lib).name);
 		}
 		var _g2 = 0;
-		var _g11 = ArrayTools.get(hxml.classPaths);
+		var _g11 = _Project.ArrayHandle_Impl_.get(hxml.classPaths);
 		while(_g2 < _g11.length) {
 			var cp = _g11[_g2];
 			++_g2;
@@ -2926,7 +2924,7 @@ builders.HaxeBuilder.prototype = $extend(builders.BaseBuilder.prototype,{
 			args.push(cp);
 		}
 		var _g3 = 0;
-		var _g12 = ArrayTools.get(hxml.defines);
+		var _g12 = _Project.ArrayHandle_Impl_.get(hxml.defines);
 		while(_g3 < _g12.length) {
 			var define = _g12[_g3];
 			++_g3;
@@ -3003,7 +3001,7 @@ builders.VSCodeTasksBuilder.prototype = $extend(builders.BaseBuilder.prototype,{
 			}
 			task.args.push("--debug");
 		}
-		return [task].concat(ArrayTools.flatten(ArrayTools.get(target.targetDependencies).map(function(name) {
+		return [task].concat(ArrayTools.flatten(_Project.ArrayHandle_Impl_.get(target.targetDependencies).map(function(name) {
 			var tmp = _gthis.resolveTarget(name);
 			return _gthis.buildTask(tmp,debug);
 		})));
