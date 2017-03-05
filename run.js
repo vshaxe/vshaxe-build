@@ -208,7 +208,7 @@ var JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$d
 };
 JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug_$display_$inherit_$installCommands_$isBuildCommand_$isTestCommand_$name_$_$_$Inst_$StringtargetDependencies_$.__name__ = true;
 JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug_$display_$inherit_$installCommands_$isBuildCommand_$isTestCommand_$name_$_$_$Inst_$StringtargetDependencies_$.prototype = {
-	loadJson: function(fields) {
+	loadJson: function(fields,objectPos) {
 		var assigned = new haxe_ds_StringMap();
 		if(__map_reserved["afterBuildCommands"] != null) {
 			assigned.setReserved("afterBuildCommands",true);
@@ -350,7 +350,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 				switch(_g13[1]) {
 				case 2:
 					var s01 = _g13[2];
-					this.object.args = new JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main_$noInline_$output_$packageName_$workingDirectory_$(this.warnings,this.putils).loadJson(s01);
+					this.object.args = new JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main_$noInline_$output_$packageName_$workingDirectory_$(this.warnings,this.putils).loadJson(s01,field.value.pos);
 					var key2 = field.name;
 					if(__map_reserved[key2] != null) {
 						assigned.setReserved(key2,true);
@@ -464,7 +464,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 				switch(_g17[1]) {
 				case 2:
 					var s04 = _g17[2];
-					this.object.debug = new JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_$targetDependencies_$(this.warnings,this.putils).loadJson(s04);
+					this.object.debug = new JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_$targetDependencies_$(this.warnings,this.putils).loadJson(s04,field.value.pos);
 					var key7 = field.name;
 					if(__map_reserved[key7] != null) {
 						assigned.setReserved(key7,true);
@@ -490,7 +490,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 				switch(_g18[1]) {
 				case 2:
 					var s05 = _g18[2];
-					this.object.display = new JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_$targetDependencies_$(this.warnings,this.putils).loadJson(s05);
+					this.object.display = new JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_$targetDependencies_$(this.warnings,this.putils).loadJson(s05,field.value.pos);
 					var key9 = field.name;
 					if(__map_reserved[key9] != null) {
 						assigned.setReserved(key9,true);
@@ -722,11 +722,12 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 				this.warnings.push(json2object_Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
 			}
 		}
+		var lastPos = this.putils.convertPosition(new hxjsonast_Position(objectPos.file,objectPos.max - 1,objectPos.max));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s3 = s.next();
 			if(!(__map_reserved[s3] != null ? assigned.getReserved(s3) : assigned.h[s3])) {
-				this.warnings.push(json2object_Error.UninitializedVariable(s3,null));
+				this.warnings.push(json2object_Error.UninitializedVariable(s3,lastPos));
 			}
 		}
 		return this.object;
@@ -738,7 +739,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 			var _g = json.value;
 			if(_g[1] == 2) {
 				var fields = _g[2];
-				return this.loadJson(fields);
+				return this.loadJson(fields,json.pos);
 			} else {
 				return null;
 			}
@@ -757,7 +758,7 @@ var JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installComma
 };
 JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_$targetDependencies_$.__name__ = true;
 JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_$targetDependencies_$.prototype = {
-	loadJson: function(fields) {
+	loadJson: function(fields,objectPos) {
 		var assigned = new haxe_ds_StringMap();
 		if(__map_reserved["afterBuildCommands"] != null) {
 			assigned.setReserved("afterBuildCommands",true);
@@ -864,7 +865,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_
 				switch(_g13[1]) {
 				case 2:
 					var s01 = _g13[2];
-					this.object.args = new JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main_$noInline_$output_$packageName_$workingDirectory_$(this.warnings,this.putils).loadJson(s01);
+					this.object.args = new JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main_$noInline_$output_$packageName_$workingDirectory_$(this.warnings,this.putils).loadJson(s01,field.value.pos);
 					var key2 = field.name;
 					if(__map_reserved[key2] != null) {
 						assigned.setReserved(key2,true);
@@ -1072,11 +1073,12 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_
 				this.warnings.push(json2object_Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
 			}
 		}
+		var lastPos = this.putils.convertPosition(new hxjsonast_Position(objectPos.file,objectPos.max - 1,objectPos.max));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s3 = s.next();
 			if(!(__map_reserved[s3] != null ? assigned.getReserved(s3) : assigned.h[s3])) {
-				this.warnings.push(json2object_Error.UninitializedVariable(s3,null));
+				this.warnings.push(json2object_Error.UninitializedVariable(s3,lastPos));
 			}
 		}
 		return this.object;
@@ -1088,7 +1090,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_
 			var _g = json.value;
 			if(_g[1] == 2) {
 				var fields = _g[2];
-				return this.loadJson(fields);
+				return this.loadJson(fields,json.pos);
 			} else {
 				return null;
 			}
@@ -1107,7 +1109,7 @@ var JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$
 };
 JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main_$noInline_$output_$packageName_$workingDirectory_$.__name__ = true;
 JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main_$noInline_$output_$packageName_$workingDirectory_$.prototype = {
-	loadJson: function(fields) {
+	loadJson: function(fields,objectPos) {
 		var assigned = new haxe_ds_StringMap();
 		if(__map_reserved["classPaths"] != null) {
 			assigned.setReserved("classPaths",true);
@@ -1404,7 +1406,7 @@ JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main
 				switch(_g111[1]) {
 				case 2:
 					var s07 = _g111[2];
-					this.object.output = new JsonParser_$Ano_$path_$_$_$Inst_$Stringtarget_$_$_$Inst_$String(this.warnings,this.putils).loadJson(s07);
+					this.object.output = new JsonParser_$Ano_$path_$_$_$Inst_$Stringtarget_$_$_$Inst_$String(this.warnings,this.putils).loadJson(s07,field.value.pos);
 					var key12 = field.name;
 					if(__map_reserved[key12] != null) {
 						assigned.setReserved(key12,true);
@@ -1481,11 +1483,12 @@ JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main
 				this.warnings.push(json2object_Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
 			}
 		}
+		var lastPos = this.putils.convertPosition(new hxjsonast_Position(objectPos.file,objectPos.max - 1,objectPos.max));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s2 = s.next();
 			if(!(__map_reserved[s2] != null ? assigned.getReserved(s2) : assigned.h[s2])) {
-				this.warnings.push(json2object_Error.UninitializedVariable(s2,null));
+				this.warnings.push(json2object_Error.UninitializedVariable(s2,lastPos));
 			}
 		}
 		return this.object;
@@ -1497,7 +1500,7 @@ JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main
 			var _g = json.value;
 			if(_g[1] == 2) {
 				var fields = _g[2];
-				return this.loadJson(fields);
+				return this.loadJson(fields,json.pos);
 			} else {
 				return null;
 			}
@@ -1516,7 +1519,7 @@ var JsonParser_$Ano_$haxelibs_$_$_$Inst_$Array_$_$_$Ano_$installArgs_$_$_$_$_$In
 };
 JsonParser_$Ano_$haxelibs_$_$_$Inst_$Array_$_$_$Ano_$installArgs_$_$_$_$_$Inst_$Array_$_$_$_$_$Inst_$Stringname_$_$_$_$_$Inst_$Stringinherit_$targets_$_$_$Inst_$Array_$_$_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug_$display_$inherit_$installCommands_$isBuildCommand_$isTestCommand_$name_$_$_$_$_$Inst_$StringtargetDependencies_$.__name__ = true;
 JsonParser_$Ano_$haxelibs_$_$_$Inst_$Array_$_$_$Ano_$installArgs_$_$_$_$_$Inst_$Array_$_$_$_$_$Inst_$Stringname_$_$_$_$_$Inst_$Stringinherit_$targets_$_$_$Inst_$Array_$_$_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug_$display_$inherit_$installCommands_$isBuildCommand_$isTestCommand_$name_$_$_$_$_$Inst_$StringtargetDependencies_$.prototype = {
-	loadJson: function(fields) {
+	loadJson: function(fields,objectPos) {
 		var assigned = new haxe_ds_StringMap();
 		if(__map_reserved["haxelibs"] != null) {
 			assigned.setReserved("haxelibs",false);
@@ -1555,7 +1558,7 @@ JsonParser_$Ano_$haxelibs_$_$_$Inst_$Array_$_$_$Ano_$installArgs_$_$_$_$_$Inst_$
 						switch(_g3[1]) {
 						case 2:
 							var s1 = _g3[2];
-							tmp = new JsonParser_$Ano_$installArgs_$_$_$Inst_$Array_$_$_$Inst_$Stringname_$_$_$Inst_$String(this.warnings,this.putils).loadJson(s1);
+							tmp = new JsonParser_$Ano_$installArgs_$_$_$Inst_$Array_$_$_$Inst_$Stringname_$_$_$Inst_$String(this.warnings,this.putils).loadJson(s1,content1.pos);
 							break;
 						case 5:
 							tmp = null;
@@ -1628,7 +1631,7 @@ JsonParser_$Ano_$haxelibs_$_$_$Inst_$Array_$_$_$Ano_$installArgs_$_$_$_$_$Inst_$
 						switch(_g31[1]) {
 						case 2:
 							var s11 = _g31[2];
-							tmp1 = new JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug_$display_$inherit_$installCommands_$isBuildCommand_$isTestCommand_$name_$_$_$Inst_$StringtargetDependencies_$(this.warnings,this.putils).loadJson(s11);
+							tmp1 = new JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug_$display_$inherit_$installCommands_$isBuildCommand_$isTestCommand_$name_$_$_$Inst_$StringtargetDependencies_$(this.warnings,this.putils).loadJson(s11,content11.pos);
 							break;
 						case 5:
 							tmp1 = null;
@@ -1664,11 +1667,12 @@ JsonParser_$Ano_$haxelibs_$_$_$Inst_$Array_$_$_$Ano_$installArgs_$_$_$_$_$Inst_$
 				this.warnings.push(json2object_Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
 			}
 		}
+		var lastPos = this.putils.convertPosition(new hxjsonast_Position(objectPos.file,objectPos.max - 1,objectPos.max));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s2 = s.next();
 			if(!(__map_reserved[s2] != null ? assigned.getReserved(s2) : assigned.h[s2])) {
-				this.warnings.push(json2object_Error.UninitializedVariable(s2,null));
+				this.warnings.push(json2object_Error.UninitializedVariable(s2,lastPos));
 			}
 		}
 		return this.object;
@@ -1680,7 +1684,7 @@ JsonParser_$Ano_$haxelibs_$_$_$Inst_$Array_$_$_$Ano_$installArgs_$_$_$_$_$Inst_$
 			var _g = json.value;
 			if(_g[1] == 2) {
 				var fields = _g[2];
-				return this.loadJson(fields);
+				return this.loadJson(fields,json.pos);
 			} else {
 				return null;
 			}
@@ -1699,7 +1703,7 @@ var JsonParser_$Ano_$installArgs_$_$_$Inst_$Array_$_$_$Inst_$Stringname_$_$_$Ins
 };
 JsonParser_$Ano_$installArgs_$_$_$Inst_$Array_$_$_$Inst_$Stringname_$_$_$Inst_$String.__name__ = true;
 JsonParser_$Ano_$installArgs_$_$_$Inst_$Array_$_$_$Inst_$Stringname_$_$_$Inst_$String.prototype = {
-	loadJson: function(fields) {
+	loadJson: function(fields,objectPos) {
 		var assigned = new haxe_ds_StringMap();
 		if(__map_reserved["installArgs"] != null) {
 			assigned.setReserved("installArgs",false);
@@ -1795,11 +1799,12 @@ JsonParser_$Ano_$installArgs_$_$_$Inst_$Array_$_$_$Inst_$Stringname_$_$_$Inst_$S
 				this.warnings.push(json2object_Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
 			}
 		}
+		var lastPos = this.putils.convertPosition(new hxjsonast_Position(objectPos.file,objectPos.max - 1,objectPos.max));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s2 = s.next();
 			if(!(__map_reserved[s2] != null ? assigned.getReserved(s2) : assigned.h[s2])) {
-				this.warnings.push(json2object_Error.UninitializedVariable(s2,null));
+				this.warnings.push(json2object_Error.UninitializedVariable(s2,lastPos));
 			}
 		}
 		return this.object;
@@ -1811,7 +1816,7 @@ JsonParser_$Ano_$installArgs_$_$_$Inst_$Array_$_$_$Inst_$Stringname_$_$_$Inst_$S
 			var _g = json.value;
 			if(_g[1] == 2) {
 				var fields = _g[2];
-				return this.loadJson(fields);
+				return this.loadJson(fields,json.pos);
 			} else {
 				return null;
 			}
@@ -1830,7 +1835,7 @@ var JsonParser_$Ano_$path_$_$_$Inst_$Stringtarget_$_$_$Inst_$String = function(w
 };
 JsonParser_$Ano_$path_$_$_$Inst_$Stringtarget_$_$_$Inst_$String.__name__ = true;
 JsonParser_$Ano_$path_$_$_$Inst_$Stringtarget_$_$_$Inst_$String.prototype = {
-	loadJson: function(fields) {
+	loadJson: function(fields,objectPos) {
 		var assigned = new haxe_ds_StringMap();
 		if(__map_reserved["path"] != null) {
 			assigned.setReserved("path",false);
@@ -1905,11 +1910,12 @@ JsonParser_$Ano_$path_$_$_$Inst_$Stringtarget_$_$_$Inst_$String.prototype = {
 				this.warnings.push(json2object_Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
 			}
 		}
+		var lastPos = this.putils.convertPosition(new hxjsonast_Position(objectPos.file,objectPos.max - 1,objectPos.max));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s1 = s.next();
 			if(!(__map_reserved[s1] != null ? assigned.getReserved(s1) : assigned.h[s1])) {
-				this.warnings.push(json2object_Error.UninitializedVariable(s1,null));
+				this.warnings.push(json2object_Error.UninitializedVariable(s1,lastPos));
 			}
 		}
 		return this.object;
@@ -1921,7 +1927,7 @@ JsonParser_$Ano_$path_$_$_$Inst_$Stringtarget_$_$_$Inst_$String.prototype = {
 			var _g = json.value;
 			if(_g[1] == 2) {
 				var fields = _g[2];
-				return this.loadJson(fields);
+				return this.loadJson(fields,json.pos);
 			} else {
 				return null;
 			}
@@ -4020,7 +4026,7 @@ json2object_ErrorUtils.convertError = function(e) {
 		pos = pos4;
 		break;
 	}
-	var res = pos != null ? "" + pos.file + ":" + Std.string(pos.line) + ": characters " + pos.min + "-" + pos.max + " : " : "";
+	var res = pos != null ? "" + pos.file + ":" + pos.line.number + ": characters " + pos.line.start + "-" + pos.line.end + " : " : "";
 	switch(e[1]) {
 	case 0:
 		var expected = e[3];
