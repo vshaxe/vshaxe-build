@@ -2,7 +2,7 @@
 if (typeof process !== "undefined") if (process.version < "v4.0.0") console.warn("Module " + (typeof(module) == "undefined" ? "" : module.filename) + " requires node.js version 4.0.0 or higher");
 
 (function ($global) { "use strict";
-var $estr = function() { return js_Boot.__string_rec(this,''); };
+var $estr = function() { return js.Boot.__string_rec(this,''); };
 function $extend(from, fields) {
 	function Inherit() {} Inherit.prototype = from; var proto = new Inherit();
 	for (var name in fields) proto[name] = fields[name];
@@ -117,7 +117,7 @@ CliTools.prototype = {
 	,run: function(command,args) {
 		this.println(command + " " + args.join(" "));
 		if(!this.dryRun) {
-			var result = args == null ? js_node_ChildProcess.spawnSync(command,{ stdio : "inherit"}).status : js_node_ChildProcess.spawnSync(command,args,{ stdio : "inherit"}).status;
+			var result = args == null ? js.node.ChildProcess.spawnSync(command,{ stdio : "inherit"}).status : js.node.ChildProcess.spawnSync(command,args,{ stdio : "inherit"}).status;
 			if(result != 0) {
 				process.exit(result);
 			}
@@ -147,7 +147,7 @@ CliTools.prototype = {
 			this.println("Saving to '" + path + "':\n\n" + content);
 		}
 		if(!this.dryRun) {
-			js_node_Fs.writeFileSync(path,content);
+			js.node.Fs.writeFileSync(path,content);
 		}
 	}
 	,__class__: CliTools
@@ -169,7 +169,7 @@ EReg.prototype = {
 		if(this.r.m != null && n >= 0 && n < this.r.m.length) {
 			return this.r.m[n];
 		} else {
-			throw new js__$Boot_HaxeError("EReg::matched");
+			throw new js._Boot.HaxeError("EReg::matched");
 		}
 	}
 	,__class__: EReg
@@ -202,14 +202,14 @@ HxOverrides.iter = function(a) {
 		return this.arr[this.cur++];
 	}};
 };
-var JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug_$display_$inherit_$installCommands_$isBuildCommand_$isTestCommand_$name_$_$_$Inst_$StringtargetDependencies_$ = function(warnings,putils) {
+var JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name___Inst_StringtargetDependencies_ = function(warnings,putils) {
 	this.warnings = warnings == null ? [] : warnings;
 	this.putils = putils;
 };
-JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug_$display_$inherit_$installCommands_$isBuildCommand_$isTestCommand_$name_$_$_$Inst_$StringtargetDependencies_$.__name__ = true;
-JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug_$display_$inherit_$installCommands_$isBuildCommand_$isTestCommand_$name_$_$_$Inst_$StringtargetDependencies_$.prototype = {
+JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name___Inst_StringtargetDependencies_.__name__ = true;
+JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name___Inst_StringtargetDependencies_.prototype = {
 	loadJson: function(fields,objectPos) {
-		var assigned = new haxe_ds_StringMap();
+		var assigned = new haxe.ds.StringMap();
 		if(__map_reserved["afterBuildCommands"] != null) {
 			assigned.setReserved("afterBuildCommands",true);
 		} else {
@@ -308,7 +308,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 									tmp1 = null;
 									break;
 								default:
-									this.warnings.push(json2object_Error.IncorrectType(field.name,"String",this.putils.convertPosition(content2.pos)));
+									this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content2.pos)));
 									continue;
 								}
 								_g31.push(tmp1);
@@ -319,7 +319,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 							tmp = null;
 							break;
 						default:
-							this.warnings.push(json2object_Error.IncorrectType(field.name,"Array",this.putils.convertPosition(content1.pos)));
+							this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(content1.pos)));
 							continue;
 						}
 						_g12.push(tmp);
@@ -342,7 +342,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "args":
@@ -350,7 +350,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 				switch(_g13[1]) {
 				case 2:
 					var s01 = _g13[2];
-					this.object.args = new JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main_$noInline_$output_$packageName_$workingDirectory_$(this.warnings,this.putils).loadJson(s01,field.value.pos);
+					this.object.args = new JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInline_output_packageName_workingDirectory_(this.warnings,this.putils).loadJson(s01,field.value.pos);
 					var key2 = field.name;
 					if(__map_reserved[key2] != null) {
 						assigned.setReserved(key2,true);
@@ -368,7 +368,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Anonymous",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Anonymous",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "beforeBuildCommands":
@@ -402,7 +402,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 									tmp3 = null;
 									break;
 								default:
-									this.warnings.push(json2object_Error.IncorrectType(field.name,"String",this.putils.convertPosition(content21.pos)));
+									this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content21.pos)));
 									continue;
 								}
 								_g33.push(tmp3);
@@ -413,7 +413,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 							tmp2 = null;
 							break;
 						default:
-							this.warnings.push(json2object_Error.IncorrectType(field.name,"Array",this.putils.convertPosition(content11.pos)));
+							this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(content11.pos)));
 							continue;
 						}
 						_g15.push(tmp2);
@@ -436,7 +436,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "composite":
@@ -453,10 +453,10 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 					}
 					break;
 				case 5:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Bool",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Bool",this.putils.convertPosition(field.value.pos)));
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Bool",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Bool",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "debug":
@@ -464,7 +464,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 				switch(_g17[1]) {
 				case 2:
 					var s04 = _g17[2];
-					this.object.debug = new JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_$targetDependencies_$(this.warnings,this.putils).loadJson(s04,field.value.pos);
+					this.object.debug = new JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_installCommands_targetDependencies_(this.warnings,this.putils).loadJson(s04,field.value.pos);
 					var key7 = field.name;
 					if(__map_reserved[key7] != null) {
 						assigned.setReserved(key7,true);
@@ -482,7 +482,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Anonymous",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Anonymous",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "display":
@@ -490,7 +490,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 				switch(_g18[1]) {
 				case 2:
 					var s05 = _g18[2];
-					this.object.display = new JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_$targetDependencies_$(this.warnings,this.putils).loadJson(s05,field.value.pos);
+					this.object.display = new JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_installCommands_targetDependencies_(this.warnings,this.putils).loadJson(s05,field.value.pos);
 					var key9 = field.name;
 					if(__map_reserved[key9] != null) {
 						assigned.setReserved(key9,true);
@@ -508,7 +508,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Anonymous",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Anonymous",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "inherit":
@@ -534,7 +534,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "installCommands":
@@ -568,7 +568,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 									tmp5 = null;
 									break;
 								default:
-									this.warnings.push(json2object_Error.IncorrectType(field.name,"String",this.putils.convertPosition(content22.pos)));
+									this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content22.pos)));
 									continue;
 								}
 								_g35.push(tmp5);
@@ -579,7 +579,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 							tmp4 = null;
 							break;
 						default:
-							this.warnings.push(json2object_Error.IncorrectType(field.name,"Array",this.putils.convertPosition(content12.pos)));
+							this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(content12.pos)));
 							continue;
 						}
 						_g111.push(tmp4);
@@ -602,7 +602,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "isBuildCommand":
@@ -619,10 +619,10 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 					}
 					break;
 				case 5:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Bool",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Bool",this.putils.convertPosition(field.value.pos)));
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Bool",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Bool",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "isTestCommand":
@@ -639,10 +639,10 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 					}
 					break;
 				case 5:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Bool",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Bool",this.putils.convertPosition(field.value.pos)));
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Bool",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Bool",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "name":
@@ -668,7 +668,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "targetDependencies":
@@ -692,7 +692,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 							tmp6 = null;
 							break;
 						default:
-							this.warnings.push(json2object_Error.IncorrectType(field.name,"String",this.putils.convertPosition(content13.pos)));
+							this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content13.pos)));
 							continue;
 						}
 						_g116.push(tmp6);
@@ -715,27 +715,27 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			default:
-				this.warnings.push(json2object_Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
+				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
 			}
 		}
-		var lastPos = this.putils.convertPosition(new hxjsonast_Position(objectPos.file,objectPos.max - 1,objectPos.max));
+		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s3 = s.next();
 			if(!(__map_reserved[s3] != null ? assigned.getReserved(s3) : assigned.h[s3])) {
-				this.warnings.push(json2object_Error.UninitializedVariable(s3,lastPos));
+				this.warnings.push(json2object.Error.UninitializedVariable(s3,lastPos));
 			}
 		}
 		return this.object;
 	}
 	,fromJson: function(jsonString,filename) {
-		this.putils = new json2object_PosUtils(jsonString);
+		this.putils = new json2object.PosUtils(jsonString);
 		try {
-			var json = new hxjsonast_Parser(jsonString,filename).parseRec();
+			var json = new hxjsonast.Parser(jsonString,filename).parseRec();
 			var _g = json.value;
 			if(_g[1] == 2) {
 				var fields = _g[2];
@@ -744,22 +744,22 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug
 				return null;
 			}
 		} catch( e ) {
-			if (e instanceof js__$Boot_HaxeError) e = e.val;
-			if( js_Boot.__instanceof(e,hxjsonast_Error) ) {
-				throw new js__$Boot_HaxeError(json2object_Error.ParserError(e.message,this.putils.convertPosition(e.pos)));
+			if (e instanceof js._Boot.HaxeError) e = e.val;
+			if( js.Boot.__instanceof(e,hxjsonast.Error) ) {
+				throw new js._Boot.HaxeError(json2object.Error.ParserError(e.message,this.putils.convertPosition(e.pos)));
 			} else throw(e);
 		}
 	}
-	,__class__: JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug_$display_$inherit_$installCommands_$isBuildCommand_$isTestCommand_$name_$_$_$Inst_$StringtargetDependencies_$
+	,__class__: JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name___Inst_StringtargetDependencies_
 };
-var JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_$targetDependencies_$ = function(warnings,putils) {
+var JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_installCommands_targetDependencies_ = function(warnings,putils) {
 	this.warnings = warnings == null ? [] : warnings;
 	this.putils = putils;
 };
-JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_$targetDependencies_$.__name__ = true;
-JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_$targetDependencies_$.prototype = {
+JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_installCommands_targetDependencies_.__name__ = true;
+JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_installCommands_targetDependencies_.prototype = {
 	loadJson: function(fields,objectPos) {
-		var assigned = new haxe_ds_StringMap();
+		var assigned = new haxe.ds.StringMap();
 		if(__map_reserved["afterBuildCommands"] != null) {
 			assigned.setReserved("afterBuildCommands",true);
 		} else {
@@ -823,7 +823,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_
 									tmp1 = null;
 									break;
 								default:
-									this.warnings.push(json2object_Error.IncorrectType(field.name,"String",this.putils.convertPosition(content2.pos)));
+									this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content2.pos)));
 									continue;
 								}
 								_g31.push(tmp1);
@@ -834,7 +834,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_
 							tmp = null;
 							break;
 						default:
-							this.warnings.push(json2object_Error.IncorrectType(field.name,"Array",this.putils.convertPosition(content1.pos)));
+							this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(content1.pos)));
 							continue;
 						}
 						_g12.push(tmp);
@@ -857,7 +857,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "args":
@@ -865,7 +865,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_
 				switch(_g13[1]) {
 				case 2:
 					var s01 = _g13[2];
-					this.object.args = new JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main_$noInline_$output_$packageName_$workingDirectory_$(this.warnings,this.putils).loadJson(s01,field.value.pos);
+					this.object.args = new JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInline_output_packageName_workingDirectory_(this.warnings,this.putils).loadJson(s01,field.value.pos);
 					var key2 = field.name;
 					if(__map_reserved[key2] != null) {
 						assigned.setReserved(key2,true);
@@ -883,7 +883,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Anonymous",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Anonymous",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "beforeBuildCommands":
@@ -917,7 +917,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_
 									tmp3 = null;
 									break;
 								default:
-									this.warnings.push(json2object_Error.IncorrectType(field.name,"String",this.putils.convertPosition(content21.pos)));
+									this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content21.pos)));
 									continue;
 								}
 								_g33.push(tmp3);
@@ -928,7 +928,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_
 							tmp2 = null;
 							break;
 						default:
-							this.warnings.push(json2object_Error.IncorrectType(field.name,"Array",this.putils.convertPosition(content11.pos)));
+							this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(content11.pos)));
 							continue;
 						}
 						_g15.push(tmp2);
@@ -951,7 +951,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "installCommands":
@@ -985,7 +985,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_
 									tmp5 = null;
 									break;
 								default:
-									this.warnings.push(json2object_Error.IncorrectType(field.name,"String",this.putils.convertPosition(content22.pos)));
+									this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content22.pos)));
 									continue;
 								}
 								_g35.push(tmp5);
@@ -996,7 +996,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_
 							tmp4 = null;
 							break;
 						default:
-							this.warnings.push(json2object_Error.IncorrectType(field.name,"Array",this.putils.convertPosition(content12.pos)));
+							this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(content12.pos)));
 							continue;
 						}
 						_g17.push(tmp4);
@@ -1019,7 +1019,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "targetDependencies":
@@ -1043,7 +1043,7 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_
 							tmp6 = null;
 							break;
 						default:
-							this.warnings.push(json2object_Error.IncorrectType(field.name,"String",this.putils.convertPosition(content13.pos)));
+							this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content13.pos)));
 							continue;
 						}
 						_g19.push(tmp6);
@@ -1066,27 +1066,27 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			default:
-				this.warnings.push(json2object_Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
+				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
 			}
 		}
-		var lastPos = this.putils.convertPosition(new hxjsonast_Position(objectPos.file,objectPos.max - 1,objectPos.max));
+		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s3 = s.next();
 			if(!(__map_reserved[s3] != null ? assigned.getReserved(s3) : assigned.h[s3])) {
-				this.warnings.push(json2object_Error.UninitializedVariable(s3,lastPos));
+				this.warnings.push(json2object.Error.UninitializedVariable(s3,lastPos));
 			}
 		}
 		return this.object;
 	}
 	,fromJson: function(jsonString,filename) {
-		this.putils = new json2object_PosUtils(jsonString);
+		this.putils = new json2object.PosUtils(jsonString);
 		try {
-			var json = new hxjsonast_Parser(jsonString,filename).parseRec();
+			var json = new hxjsonast.Parser(jsonString,filename).parseRec();
 			var _g = json.value;
 			if(_g[1] == 2) {
 				var fields = _g[2];
@@ -1095,22 +1095,22 @@ JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_
 				return null;
 			}
 		} catch( e ) {
-			if (e instanceof js__$Boot_HaxeError) e = e.val;
-			if( js_Boot.__instanceof(e,hxjsonast_Error) ) {
-				throw new js__$Boot_HaxeError(json2object_Error.ParserError(e.message,this.putils.convertPosition(e.pos)));
+			if (e instanceof js._Boot.HaxeError) e = e.val;
+			if( js.Boot.__instanceof(e,hxjsonast.Error) ) {
+				throw new js._Boot.HaxeError(json2object.Error.ParserError(e.message,this.putils.convertPosition(e.pos)));
 			} else throw(e);
 		}
 	}
-	,__class__: JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$installCommands_$targetDependencies_$
+	,__class__: JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_installCommands_targetDependencies_
 };
-var JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main_$noInline_$output_$packageName_$workingDirectory_$ = function(warnings,putils) {
+var JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInline_output_packageName_workingDirectory_ = function(warnings,putils) {
 	this.warnings = warnings == null ? [] : warnings;
 	this.putils = putils;
 };
-JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main_$noInline_$output_$packageName_$workingDirectory_$.__name__ = true;
-JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main_$noInline_$output_$packageName_$workingDirectory_$.prototype = {
+JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInline_output_packageName_workingDirectory_.__name__ = true;
+JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInline_output_packageName_workingDirectory_.prototype = {
 	loadJson: function(fields,objectPos) {
-		var assigned = new haxe_ds_StringMap();
+		var assigned = new haxe.ds.StringMap();
 		if(__map_reserved["classPaths"] != null) {
 			assigned.setReserved("classPaths",true);
 		} else {
@@ -1189,7 +1189,7 @@ JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main
 							tmp = null;
 							break;
 						default:
-							this.warnings.push(json2object_Error.IncorrectType(field.name,"String",this.putils.convertPosition(content1.pos)));
+							this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content1.pos)));
 							continue;
 						}
 						_g12.push(tmp);
@@ -1212,7 +1212,7 @@ JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "deadCodeElimination":
@@ -1238,7 +1238,7 @@ JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "debug":
@@ -1255,10 +1255,10 @@ JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main
 					}
 					break;
 				case 5:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Bool",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Bool",this.putils.convertPosition(field.value.pos)));
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Bool",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Bool",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "defines":
@@ -1282,7 +1282,7 @@ JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main
 							tmp1 = null;
 							break;
 						default:
-							this.warnings.push(json2object_Error.IncorrectType(field.name,"String",this.putils.convertPosition(content11.pos)));
+							this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content11.pos)));
 							continue;
 						}
 						_g16.push(tmp1);
@@ -1305,7 +1305,7 @@ JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "haxelibs":
@@ -1329,7 +1329,7 @@ JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main
 							tmp2 = null;
 							break;
 						default:
-							this.warnings.push(json2object_Error.IncorrectType(field.name,"String",this.putils.convertPosition(content12.pos)));
+							this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content12.pos)));
 							continue;
 						}
 						_g18.push(tmp2);
@@ -1352,7 +1352,7 @@ JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "main":
@@ -1378,7 +1378,7 @@ JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "noInline":
@@ -1395,10 +1395,10 @@ JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main
 					}
 					break;
 				case 5:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Bool",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Bool",this.putils.convertPosition(field.value.pos)));
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Bool",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Bool",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "output":
@@ -1406,7 +1406,7 @@ JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main
 				switch(_g111[1]) {
 				case 2:
 					var s07 = _g111[2];
-					this.object.output = new JsonParser_$Ano_$path_$_$_$Inst_$Stringtarget_$_$_$Inst_$String(this.warnings,this.putils).loadJson(s07,field.value.pos);
+					this.object.output = new JsonParser_Ano_path___Inst_Stringtarget___Inst_String(this.warnings,this.putils).loadJson(s07,field.value.pos);
 					var key12 = field.name;
 					if(__map_reserved[key12] != null) {
 						assigned.setReserved(key12,true);
@@ -1424,7 +1424,7 @@ JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Anonymous",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Anonymous",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "packageName":
@@ -1450,7 +1450,7 @@ JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "workingDirectory":
@@ -1476,27 +1476,27 @@ JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			default:
-				this.warnings.push(json2object_Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
+				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
 			}
 		}
-		var lastPos = this.putils.convertPosition(new hxjsonast_Position(objectPos.file,objectPos.max - 1,objectPos.max));
+		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s2 = s.next();
 			if(!(__map_reserved[s2] != null ? assigned.getReserved(s2) : assigned.h[s2])) {
-				this.warnings.push(json2object_Error.UninitializedVariable(s2,lastPos));
+				this.warnings.push(json2object.Error.UninitializedVariable(s2,lastPos));
 			}
 		}
 		return this.object;
 	}
 	,fromJson: function(jsonString,filename) {
-		this.putils = new json2object_PosUtils(jsonString);
+		this.putils = new json2object.PosUtils(jsonString);
 		try {
-			var json = new hxjsonast_Parser(jsonString,filename).parseRec();
+			var json = new hxjsonast.Parser(jsonString,filename).parseRec();
 			var _g = json.value;
 			if(_g[1] == 2) {
 				var fields = _g[2];
@@ -1505,22 +1505,22 @@ JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main
 				return null;
 			}
 		} catch( e ) {
-			if (e instanceof js__$Boot_HaxeError) e = e.val;
-			if( js_Boot.__instanceof(e,hxjsonast_Error) ) {
-				throw new js__$Boot_HaxeError(json2object_Error.ParserError(e.message,this.putils.convertPosition(e.pos)));
+			if (e instanceof js._Boot.HaxeError) e = e.val;
+			if( js.Boot.__instanceof(e,hxjsonast.Error) ) {
+				throw new js._Boot.HaxeError(json2object.Error.ParserError(e.message,this.putils.convertPosition(e.pos)));
 			} else throw(e);
 		}
 	}
-	,__class__: JsonParser_$Ano_$classPaths_$deadCodeElimination_$debug_$defines_$haxelibs_$main_$noInline_$output_$packageName_$workingDirectory_$
+	,__class__: JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInline_output_packageName_workingDirectory_
 };
-var JsonParser_$Ano_$haxelibs_$_$_$Inst_$Array_$_$_$Ano_$installArgs_$_$_$_$_$Inst_$Array_$_$_$_$_$Inst_$Stringname_$_$_$_$_$Inst_$Stringinherit_$targets_$_$_$Inst_$Array_$_$_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug_$display_$inherit_$installCommands_$isBuildCommand_$isTestCommand_$name_$_$_$_$_$Inst_$StringtargetDependencies_$ = function(warnings,putils) {
+var JsonParser_Ano_haxelibs___Inst_Array___Ano_installArgs_____Inst_Array_____Inst_Stringname_____Inst_Stringinherit_targets___Inst_Array___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_ = function(warnings,putils) {
 	this.warnings = warnings == null ? [] : warnings;
 	this.putils = putils;
 };
-JsonParser_$Ano_$haxelibs_$_$_$Inst_$Array_$_$_$Ano_$installArgs_$_$_$_$_$Inst_$Array_$_$_$_$_$Inst_$Stringname_$_$_$_$_$Inst_$Stringinherit_$targets_$_$_$Inst_$Array_$_$_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug_$display_$inherit_$installCommands_$isBuildCommand_$isTestCommand_$name_$_$_$_$_$Inst_$StringtargetDependencies_$.__name__ = true;
-JsonParser_$Ano_$haxelibs_$_$_$Inst_$Array_$_$_$Ano_$installArgs_$_$_$_$_$Inst_$Array_$_$_$_$_$Inst_$Stringname_$_$_$_$_$Inst_$Stringinherit_$targets_$_$_$Inst_$Array_$_$_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug_$display_$inherit_$installCommands_$isBuildCommand_$isTestCommand_$name_$_$_$_$_$Inst_$StringtargetDependencies_$.prototype = {
+JsonParser_Ano_haxelibs___Inst_Array___Ano_installArgs_____Inst_Array_____Inst_Stringname_____Inst_Stringinherit_targets___Inst_Array___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_.__name__ = true;
+JsonParser_Ano_haxelibs___Inst_Array___Ano_installArgs_____Inst_Array_____Inst_Stringname_____Inst_Stringinherit_targets___Inst_Array___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_.prototype = {
 	loadJson: function(fields,objectPos) {
-		var assigned = new haxe_ds_StringMap();
+		var assigned = new haxe.ds.StringMap();
 		if(__map_reserved["haxelibs"] != null) {
 			assigned.setReserved("haxelibs",false);
 		} else {
@@ -1558,13 +1558,13 @@ JsonParser_$Ano_$haxelibs_$_$_$Inst_$Array_$_$_$Ano_$installArgs_$_$_$_$_$Inst_$
 						switch(_g3[1]) {
 						case 2:
 							var s1 = _g3[2];
-							tmp = new JsonParser_$Ano_$installArgs_$_$_$Inst_$Array_$_$_$Inst_$Stringname_$_$_$Inst_$String(this.warnings,this.putils).loadJson(s1,content1.pos);
+							tmp = new JsonParser_Ano_installArgs___Inst_Array___Inst_Stringname___Inst_String(this.warnings,this.putils).loadJson(s1,content1.pos);
 							break;
 						case 5:
 							tmp = null;
 							break;
 						default:
-							this.warnings.push(json2object_Error.IncorrectType(field.name,"Anonymous",this.putils.convertPosition(content1.pos)));
+							this.warnings.push(json2object.Error.IncorrectType(field.name,"Anonymous",this.putils.convertPosition(content1.pos)));
 							continue;
 						}
 						_g12.push(tmp);
@@ -1587,7 +1587,7 @@ JsonParser_$Ano_$haxelibs_$_$_$Inst_$Array_$_$_$Ano_$installArgs_$_$_$_$_$Inst_$
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "inherit":
@@ -1613,7 +1613,7 @@ JsonParser_$Ano_$haxelibs_$_$_$Inst_$Array_$_$_$Ano_$installArgs_$_$_$_$_$Inst_$
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "targets":
@@ -1631,13 +1631,13 @@ JsonParser_$Ano_$haxelibs_$_$_$Inst_$Array_$_$_$Ano_$installArgs_$_$_$_$_$Inst_$
 						switch(_g31[1]) {
 						case 2:
 							var s11 = _g31[2];
-							tmp1 = new JsonParser_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug_$display_$inherit_$installCommands_$isBuildCommand_$isTestCommand_$name_$_$_$Inst_$StringtargetDependencies_$(this.warnings,this.putils).loadJson(s11,content11.pos);
+							tmp1 = new JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name___Inst_StringtargetDependencies_(this.warnings,this.putils).loadJson(s11,content11.pos);
 							break;
 						case 5:
 							tmp1 = null;
 							break;
 						default:
-							this.warnings.push(json2object_Error.IncorrectType(field.name,"Anonymous",this.putils.convertPosition(content11.pos)));
+							this.warnings.push(json2object.Error.IncorrectType(field.name,"Anonymous",this.putils.convertPosition(content11.pos)));
 							continue;
 						}
 						_g15.push(tmp1);
@@ -1660,27 +1660,27 @@ JsonParser_$Ano_$haxelibs_$_$_$Inst_$Array_$_$_$Ano_$installArgs_$_$_$_$_$Inst_$
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			default:
-				this.warnings.push(json2object_Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
+				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
 			}
 		}
-		var lastPos = this.putils.convertPosition(new hxjsonast_Position(objectPos.file,objectPos.max - 1,objectPos.max));
+		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s2 = s.next();
 			if(!(__map_reserved[s2] != null ? assigned.getReserved(s2) : assigned.h[s2])) {
-				this.warnings.push(json2object_Error.UninitializedVariable(s2,lastPos));
+				this.warnings.push(json2object.Error.UninitializedVariable(s2,lastPos));
 			}
 		}
 		return this.object;
 	}
 	,fromJson: function(jsonString,filename) {
-		this.putils = new json2object_PosUtils(jsonString);
+		this.putils = new json2object.PosUtils(jsonString);
 		try {
-			var json = new hxjsonast_Parser(jsonString,filename).parseRec();
+			var json = new hxjsonast.Parser(jsonString,filename).parseRec();
 			var _g = json.value;
 			if(_g[1] == 2) {
 				var fields = _g[2];
@@ -1689,22 +1689,22 @@ JsonParser_$Ano_$haxelibs_$_$_$Inst_$Array_$_$_$Ano_$installArgs_$_$_$_$_$Inst_$
 				return null;
 			}
 		} catch( e ) {
-			if (e instanceof js__$Boot_HaxeError) e = e.val;
-			if( js_Boot.__instanceof(e,hxjsonast_Error) ) {
-				throw new js__$Boot_HaxeError(json2object_Error.ParserError(e.message,this.putils.convertPosition(e.pos)));
+			if (e instanceof js._Boot.HaxeError) e = e.val;
+			if( js.Boot.__instanceof(e,hxjsonast.Error) ) {
+				throw new js._Boot.HaxeError(json2object.Error.ParserError(e.message,this.putils.convertPosition(e.pos)));
 			} else throw(e);
 		}
 	}
-	,__class__: JsonParser_$Ano_$haxelibs_$_$_$Inst_$Array_$_$_$Ano_$installArgs_$_$_$_$_$Inst_$Array_$_$_$_$_$Inst_$Stringname_$_$_$_$_$Inst_$Stringinherit_$targets_$_$_$Inst_$Array_$_$_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug_$display_$inherit_$installCommands_$isBuildCommand_$isTestCommand_$name_$_$_$_$_$Inst_$StringtargetDependencies_$
+	,__class__: JsonParser_Ano_haxelibs___Inst_Array___Ano_installArgs_____Inst_Array_____Inst_Stringname_____Inst_Stringinherit_targets___Inst_Array___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_
 };
-var JsonParser_$Ano_$installArgs_$_$_$Inst_$Array_$_$_$Inst_$Stringname_$_$_$Inst_$String = function(warnings,putils) {
+var JsonParser_Ano_installArgs___Inst_Array___Inst_Stringname___Inst_String = function(warnings,putils) {
 	this.warnings = warnings == null ? [] : warnings;
 	this.putils = putils;
 };
-JsonParser_$Ano_$installArgs_$_$_$Inst_$Array_$_$_$Inst_$Stringname_$_$_$Inst_$String.__name__ = true;
-JsonParser_$Ano_$installArgs_$_$_$Inst_$Array_$_$_$Inst_$Stringname_$_$_$Inst_$String.prototype = {
+JsonParser_Ano_installArgs___Inst_Array___Inst_Stringname___Inst_String.__name__ = true;
+JsonParser_Ano_installArgs___Inst_Array___Inst_Stringname___Inst_String.prototype = {
 	loadJson: function(fields,objectPos) {
-		var assigned = new haxe_ds_StringMap();
+		var assigned = new haxe.ds.StringMap();
 		if(__map_reserved["installArgs"] != null) {
 			assigned.setReserved("installArgs",false);
 		} else {
@@ -1743,7 +1743,7 @@ JsonParser_$Ano_$installArgs_$_$_$Inst_$Array_$_$_$Inst_$Stringname_$_$_$Inst_$S
 							tmp = null;
 							break;
 						default:
-							this.warnings.push(json2object_Error.IncorrectType(field.name,"String",this.putils.convertPosition(content1.pos)));
+							this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content1.pos)));
 							continue;
 						}
 						_g12.push(tmp);
@@ -1766,7 +1766,7 @@ JsonParser_$Ano_$installArgs_$_$_$Inst_$Array_$_$_$Inst_$Stringname_$_$_$Inst_$S
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "name":
@@ -1792,27 +1792,27 @@ JsonParser_$Ano_$installArgs_$_$_$Inst_$Array_$_$_$Inst_$Stringname_$_$_$Inst_$S
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			default:
-				this.warnings.push(json2object_Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
+				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
 			}
 		}
-		var lastPos = this.putils.convertPosition(new hxjsonast_Position(objectPos.file,objectPos.max - 1,objectPos.max));
+		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s2 = s.next();
 			if(!(__map_reserved[s2] != null ? assigned.getReserved(s2) : assigned.h[s2])) {
-				this.warnings.push(json2object_Error.UninitializedVariable(s2,lastPos));
+				this.warnings.push(json2object.Error.UninitializedVariable(s2,lastPos));
 			}
 		}
 		return this.object;
 	}
 	,fromJson: function(jsonString,filename) {
-		this.putils = new json2object_PosUtils(jsonString);
+		this.putils = new json2object.PosUtils(jsonString);
 		try {
-			var json = new hxjsonast_Parser(jsonString,filename).parseRec();
+			var json = new hxjsonast.Parser(jsonString,filename).parseRec();
 			var _g = json.value;
 			if(_g[1] == 2) {
 				var fields = _g[2];
@@ -1821,22 +1821,22 @@ JsonParser_$Ano_$installArgs_$_$_$Inst_$Array_$_$_$Inst_$Stringname_$_$_$Inst_$S
 				return null;
 			}
 		} catch( e ) {
-			if (e instanceof js__$Boot_HaxeError) e = e.val;
-			if( js_Boot.__instanceof(e,hxjsonast_Error) ) {
-				throw new js__$Boot_HaxeError(json2object_Error.ParserError(e.message,this.putils.convertPosition(e.pos)));
+			if (e instanceof js._Boot.HaxeError) e = e.val;
+			if( js.Boot.__instanceof(e,hxjsonast.Error) ) {
+				throw new js._Boot.HaxeError(json2object.Error.ParserError(e.message,this.putils.convertPosition(e.pos)));
 			} else throw(e);
 		}
 	}
-	,__class__: JsonParser_$Ano_$installArgs_$_$_$Inst_$Array_$_$_$Inst_$Stringname_$_$_$Inst_$String
+	,__class__: JsonParser_Ano_installArgs___Inst_Array___Inst_Stringname___Inst_String
 };
-var JsonParser_$Ano_$path_$_$_$Inst_$Stringtarget_$_$_$Inst_$String = function(warnings,putils) {
+var JsonParser_Ano_path___Inst_Stringtarget___Inst_String = function(warnings,putils) {
 	this.warnings = warnings == null ? [] : warnings;
 	this.putils = putils;
 };
-JsonParser_$Ano_$path_$_$_$Inst_$Stringtarget_$_$_$Inst_$String.__name__ = true;
-JsonParser_$Ano_$path_$_$_$Inst_$Stringtarget_$_$_$Inst_$String.prototype = {
+JsonParser_Ano_path___Inst_Stringtarget___Inst_String.__name__ = true;
+JsonParser_Ano_path___Inst_Stringtarget___Inst_String.prototype = {
 	loadJson: function(fields,objectPos) {
-		var assigned = new haxe_ds_StringMap();
+		var assigned = new haxe.ds.StringMap();
 		if(__map_reserved["path"] != null) {
 			assigned.setReserved("path",false);
 		} else {
@@ -1877,7 +1877,7 @@ JsonParser_$Ano_$path_$_$_$Inst_$Stringtarget_$_$_$Inst_$String.prototype = {
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			case "target":
@@ -1903,27 +1903,27 @@ JsonParser_$Ano_$path_$_$_$Inst_$Stringtarget_$_$_$Inst_$String.prototype = {
 					}
 					break;
 				default:
-					this.warnings.push(json2object_Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
 			default:
-				this.warnings.push(json2object_Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
+				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
 			}
 		}
-		var lastPos = this.putils.convertPosition(new hxjsonast_Position(objectPos.file,objectPos.max - 1,objectPos.max));
+		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s1 = s.next();
 			if(!(__map_reserved[s1] != null ? assigned.getReserved(s1) : assigned.h[s1])) {
-				this.warnings.push(json2object_Error.UninitializedVariable(s1,lastPos));
+				this.warnings.push(json2object.Error.UninitializedVariable(s1,lastPos));
 			}
 		}
 		return this.object;
 	}
 	,fromJson: function(jsonString,filename) {
-		this.putils = new json2object_PosUtils(jsonString);
+		this.putils = new json2object.PosUtils(jsonString);
 		try {
-			var json = new hxjsonast_Parser(jsonString,filename).parseRec();
+			var json = new hxjsonast.Parser(jsonString,filename).parseRec();
 			var _g = json.value;
 			if(_g[1] == 2) {
 				var fields = _g[2];
@@ -1932,13 +1932,13 @@ JsonParser_$Ano_$path_$_$_$Inst_$Stringtarget_$_$_$Inst_$String.prototype = {
 				return null;
 			}
 		} catch( e ) {
-			if (e instanceof js__$Boot_HaxeError) e = e.val;
-			if( js_Boot.__instanceof(e,hxjsonast_Error) ) {
-				throw new js__$Boot_HaxeError(json2object_Error.ParserError(e.message,this.putils.convertPosition(e.pos)));
+			if (e instanceof js._Boot.HaxeError) e = e.val;
+			if( js.Boot.__instanceof(e,hxjsonast.Error) ) {
+				throw new js._Boot.HaxeError(json2object.Error.ParserError(e.message,this.putils.convertPosition(e.pos)));
 			} else throw(e);
 		}
 	}
-	,__class__: JsonParser_$Ano_$path_$_$_$Inst_$Stringtarget_$_$_$Inst_$String
+	,__class__: JsonParser_Ano_path___Inst_Stringtarget___Inst_String
 };
 var List = function() {
 	this.length = 0;
@@ -1946,20 +1946,21 @@ var List = function() {
 List.__name__ = true;
 List.prototype = {
 	iterator: function() {
-		return new _$List_ListIterator(this.h);
+		return new _List.ListIterator(this.h);
 	}
 	,__class__: List
 };
-var _$List_ListNode = function() { };
-_$List_ListNode.__name__ = true;
-_$List_ListNode.prototype = {
-	__class__: _$List_ListNode
+var _List = {};
+_List.ListNode = function() { };
+_List.ListNode.__name__ = true;
+_List.ListNode.prototype = {
+	__class__: _List.ListNode
 };
-var _$List_ListIterator = function(head) {
+_List.ListIterator = function(head) {
 	this.head = head;
 };
-_$List_ListIterator.__name__ = true;
-_$List_ListIterator.prototype = {
+_List.ListIterator.__name__ = true;
+_List.ListIterator.prototype = {
 	hasNext: function() {
 		return this.head != null;
 	}
@@ -1968,7 +1969,7 @@ _$List_ListIterator.prototype = {
 		this.head = this.head.next;
 		return val;
 	}
-	,__class__: _$List_ListIterator
+	,__class__: _List.ListIterator
 };
 var Main = function() {
 	var cliArgs = { targets : [], debug : false, mode : Mode.Build};
@@ -1994,7 +1995,7 @@ var Main = function() {
 			case "--debug":
 				if(__index > __args.length) {
 					if(![][__args.length - 1]) {
-						throw new js__$Boot_HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
+						throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
 					}
 				}
 				cliArgs.debug = true;
@@ -2003,7 +2004,7 @@ var Main = function() {
 			case "--display":
 				if(__index > __args.length) {
 					if(![][__args.length - 1]) {
-						throw new js__$Boot_HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
+						throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
 					}
 				}
 				display = true;
@@ -2012,7 +2013,7 @@ var Main = function() {
 			case "--dry-run":
 				if(__index > __args.length) {
 					if(![][__args.length - 1]) {
-						throw new js__$Boot_HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
+						throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
 					}
 				}
 				dryRun = true;
@@ -2021,7 +2022,7 @@ var Main = function() {
 			case "--dump":
 				if(__index > __args.length) {
 					if(![][__args.length - 1]) {
-						throw new js__$Boot_HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
+						throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
 					}
 				}
 				dump = true;
@@ -2030,7 +2031,7 @@ var Main = function() {
 			case "--gen-tasks":
 				if(__index > __args.length) {
 					if(![][__args.length - 1]) {
-						throw new js__$Boot_HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
+						throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
 					}
 				}
 				genTasks = true;
@@ -2039,7 +2040,7 @@ var Main = function() {
 			case "--help":
 				if(__index > __args.length) {
 					if(![][__args.length - 1]) {
-						throw new js__$Boot_HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
+						throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
 					}
 				}
 				help = true;
@@ -2048,7 +2049,7 @@ var Main = function() {
 			case "--target":case "-t":
 				if(__index + 1 > __args.length) {
 					if(![false][__args.length - 1]) {
-						throw new js__$Boot_HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 1);
+						throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 1);
 					}
 				}
 				cliArgs.targets.push(__args[__index]);
@@ -2057,7 +2058,7 @@ var Main = function() {
 			case "--mode":case "-m":
 				if(__index + 1 > __args.length) {
 					if(![false][__args.length - 1]) {
-						throw new js__$Boot_HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 1);
+						throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 1);
 					}
 				}
 				modeStr = __args[__index];
@@ -2066,7 +2067,7 @@ var Main = function() {
 			case "--verbose":case "-v":
 				if(__index > __args.length) {
 					if(![][__args.length - 1]) {
-						throw new js__$Boot_HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
+						throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
 					}
 				}
 				verbose = true;
@@ -2074,14 +2075,14 @@ var Main = function() {
 				break;
 			default:
 				var arg = _g;
-				throw new js__$Boot_HaxeError("Unknown command: " + Std.string(arg));
+				throw new js._Boot.HaxeError("Unknown command: " + Std.string(arg));
 			}
 		}
 	};
 	try {
 		argHandler_parse(args);
 	} catch( e ) {
-		if (e instanceof js__$Boot_HaxeError) e = e.val;
+		if (e instanceof js._Boot.HaxeError) e = e.val;
 		var v = "" + Std.string(e) + "\n\nAvailable commands:\n" + argHandler_getDoc();
 		process.stdout.write(Std.string(v));
 		process.stdout.write("\n");
@@ -2096,7 +2097,7 @@ var Main = function() {
 	}));
 	var projects = [defaults,this.findProjectFiles()];
 	if(dump) {
-		js_node_Fs.writeFileSync("dump.json",JSON.stringify(projects,null,"    "));
+		js.node.Fs.writeFileSync("dump.json",JSON.stringify(projects,null,"    "));
 	}
 	this.validateTargets(cliArgs.targets);
 	var tmp = Mode.__constructs__.slice();
@@ -2107,16 +2108,16 @@ var Main = function() {
 		this.cli.fail("Can only specify one: --gen-tasks or --display");
 	}
 	if(genTasks) {
-		new builders_VSCodeTasksBuilder(this.cli,projects).build(cliArgs);
+		new builders.VSCodeTasksBuilder(this.cli,projects).build(cliArgs);
 	} else if(display) {
-		new builders_DisplayHxmlBuilder(this.cli,projects).build(cliArgs);
+		new builders.DisplayHxmlBuilder(this.cli,projects).build(cliArgs);
 	} else {
-		new builders_HaxeBuilder(this.cli,projects).build(cliArgs);
+		new builders.HaxeBuilder(this.cli,projects).build(cliArgs);
 	}
 };
 Main.__name__ = true;
 Main.main = function() {
-	jstack_js_JStack.onReady(function() {
+	jstack.js.JStack.onReady(function() {
 		new Main();
 	});
 };
@@ -2160,19 +2161,19 @@ Main.prototype = {
 		var project = null;
 		var subProjects = [];
 		var _g = 0;
-		var _g1 = js_node_Fs.readdirSync(dir);
+		var _g1 = js.node.Fs.readdirSync(dir);
 		while(_g < _g1.length) {
 			var file = _g1[_g];
 			++_g;
-			var fullPath = haxe_io_Path.join([dir,file]);
-			if(js_node_Fs.statSync(fullPath).isDirectory()) {
+			var fullPath = haxe.io.Path.join([dir,file]);
+			if(js.node.Fs.statSync(fullPath).isDirectory()) {
 				var subProject = this.findProjectFiles(fullPath);
 				if(subProject != null) {
 					subProjects.push(subProject);
 				}
 			} else if(file == "vshaxe-project.json") {
 				project = this.toPlacedProject(lastDir,this.readProjectFile(fullPath,function(file1) {
-					return js_node_Fs.readFileSync(file1,{ encoding : "utf8"});
+					return js.node.Fs.readFileSync(file1,{ encoding : "utf8"});
 				}));
 			}
 		}
@@ -2182,10 +2183,10 @@ Main.prototype = {
 		return project;
 	}
 	,readProjectFile: function(file,getFile) {
-		var parser = new JsonParser_$Ano_$haxelibs_$_$_$Inst_$Array_$_$_$Ano_$installArgs_$_$_$_$_$Inst_$Array_$_$_$_$_$Inst_$Stringname_$_$_$_$_$Inst_$Stringinherit_$targets_$_$_$Inst_$Array_$_$_$Ano_$afterBuildCommands_$args_$beforeBuildCommands_$composite_$debug_$display_$inherit_$installCommands_$isBuildCommand_$isTestCommand_$name_$_$_$_$_$Inst_$StringtargetDependencies_$();
+		var parser = new JsonParser_Ano_haxelibs___Inst_Array___Ano_installArgs_____Inst_Array_____Inst_Stringname_____Inst_Stringinherit_targets___Inst_Array___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_();
 		var json = parser.fromJson(getFile(file),file);
 		if(parser.warnings.length > 0) {
-			this.cli.fail(json2object_ErrorUtils.convertErrorArray(parser.warnings));
+			this.cli.fail(json2object.ErrorUtils.convertErrorArray(parser.warnings));
 		}
 		return json;
 	}
@@ -2307,7 +2308,7 @@ SourceMap.prototype = {
 	,parse: function(json) {
 		var data = JSON.parse(json);
 		if(data == null) {
-			throw new js__$Boot_HaxeError("Failed to parse source map data.");
+			throw new js._Boot.HaxeError("Failed to parse source map data.");
 		}
 		this.version = data.version;
 		this.file = data.file;
@@ -2394,7 +2395,7 @@ SourceMap.prototype = {
 var Std = function() { };
 Std.__name__ = true;
 Std.string = function(s) {
-	return js_Boot.__string_rec(s,"");
+	return js.Boot.__string_rec(s,"");
 };
 Std.parseInt = function(x) {
 	var v = parseInt(x,10);
@@ -2453,97 +2454,101 @@ StringTools.rtrim = function(s) {
 StringTools.trim = function(s) {
 	return StringTools.ltrim(StringTools.rtrim(s));
 };
-var haxe_io_Output = function() { };
-haxe_io_Output.__name__ = true;
-var _$Sys_FileOutput = function(fd) {
+var haxe = {};
+haxe.io = {};
+haxe.io.Output = function() { };
+haxe.io.Output.__name__ = true;
+var _Sys = {};
+_Sys.FileOutput = function(fd) {
 	this.fd = fd;
 };
-_$Sys_FileOutput.__name__ = true;
-_$Sys_FileOutput.__super__ = haxe_io_Output;
-_$Sys_FileOutput.prototype = $extend(haxe_io_Output.prototype,{
+_Sys.FileOutput.__name__ = true;
+_Sys.FileOutput.__super__ = haxe.io.Output;
+_Sys.FileOutput.prototype = $extend(haxe.io.Output.prototype,{
 	writeByte: function(c) {
-		js_node_Fs.writeSync(this.fd,String.fromCharCode(c));
+		js.node.Fs.writeSync(this.fd,String.fromCharCode(c));
 	}
 	,writeBytes: function(s,pos,len) {
 		var data = s.b;
-		return js_node_Fs.writeSync(this.fd,new js_node_buffer_Buffer(data.buffer,data.byteOffset,data.byteLength),pos,len);
+		return js.node.Fs.writeSync(this.fd,new js.node.buffer.Buffer(data.buffer,data.byteOffset,data.byteLength),pos,len);
 	}
 	,writeString: function(s) {
-		js_node_Fs.writeSync(this.fd,s);
+		js.node.Fs.writeSync(this.fd,s);
 	}
 	,flush: function() {
-		js_node_Fs.fsyncSync(this.fd);
+		js.node.Fs.fsyncSync(this.fd);
 	}
 	,close: function() {
-		js_node_Fs.closeSync(this.fd);
+		js.node.Fs.closeSync(this.fd);
 	}
-	,__class__: _$Sys_FileOutput
+	,__class__: _Sys.FileOutput
 });
-var haxe_io_Input = function() { };
-haxe_io_Input.__name__ = true;
-var _$Sys_FileInput = function(fd) {
+haxe.io.Input = function() { };
+haxe.io.Input.__name__ = true;
+_Sys.FileInput = function(fd) {
 	this.fd = fd;
 };
-_$Sys_FileInput.__name__ = true;
-_$Sys_FileInput.__super__ = haxe_io_Input;
-_$Sys_FileInput.prototype = $extend(haxe_io_Input.prototype,{
+_Sys.FileInput.__name__ = true;
+_Sys.FileInput.__super__ = haxe.io.Input;
+_Sys.FileInput.prototype = $extend(haxe.io.Input.prototype,{
 	readByte: function() {
-		var buf = new js_node_buffer_Buffer(1);
+		var buf = new js.node.buffer.Buffer(1);
 		try {
-			js_node_Fs.readSync(this.fd,buf,0,1,null);
+			js.node.Fs.readSync(this.fd,buf,0,1,null);
 		} catch( e ) {
-			if (e instanceof js__$Boot_HaxeError) e = e.val;
+			if (e instanceof js._Boot.HaxeError) e = e.val;
 			if(e.code == "EOF") {
-				throw new js__$Boot_HaxeError(new haxe_io_Eof());
+				throw new js._Boot.HaxeError(new haxe.io.Eof());
 			} else {
-				throw new js__$Boot_HaxeError(haxe_io_Error.Custom(e));
+				throw new js._Boot.HaxeError(haxe.io.Error.Custom(e));
 			}
 		}
 		return buf[0];
 	}
 	,readBytes: function(s,pos,len) {
 		var data = s.b;
-		var buf = new js_node_buffer_Buffer(data.buffer,data.byteOffset,data.byteLength);
+		var buf = new js.node.buffer.Buffer(data.buffer,data.byteOffset,data.byteLength);
 		try {
-			return js_node_Fs.readSync(this.fd,buf,pos,len,null);
+			return js.node.Fs.readSync(this.fd,buf,pos,len,null);
 		} catch( e ) {
-			if (e instanceof js__$Boot_HaxeError) e = e.val;
+			if (e instanceof js._Boot.HaxeError) e = e.val;
 			if(e.code == "EOF") {
-				throw new js__$Boot_HaxeError(new haxe_io_Eof());
+				throw new js._Boot.HaxeError(new haxe.io.Eof());
 			} else {
-				throw new js__$Boot_HaxeError(haxe_io_Error.Custom(e));
+				throw new js._Boot.HaxeError(haxe.io.Error.Custom(e));
 			}
 		}
 	}
 	,close: function() {
-		js_node_Fs.closeSync(this.fd);
+		js.node.Fs.closeSync(this.fd);
 	}
-	,__class__: _$Sys_FileInput
+	,__class__: _Sys.FileInput
 });
 var Type = function() { };
 Type.__name__ = true;
 Type.createEnum = function(e,constr,params) {
 	var f = Reflect.field(e,constr);
 	if(f == null) {
-		throw new js__$Boot_HaxeError("No such constructor " + constr);
+		throw new js._Boot.HaxeError("No such constructor " + constr);
 	}
 	if(Reflect.isFunction(f)) {
 		if(params == null) {
-			throw new js__$Boot_HaxeError("Constructor " + constr + " need parameters");
+			throw new js._Boot.HaxeError("Constructor " + constr + " need parameters");
 		}
 		return f.apply(e,params);
 	}
 	if(params != null && params.length != 0) {
-		throw new js__$Boot_HaxeError("Constructor " + constr + " does not need parameters");
+		throw new js._Boot.HaxeError("Constructor " + constr + " does not need parameters");
 	}
 	return f;
 };
-var builders_IBuilder = function() { };
-builders_IBuilder.__name__ = true;
-builders_IBuilder.prototype = {
-	__class__: builders_IBuilder
+var builders = {};
+builders.IBuilder = function() { };
+builders.IBuilder.__name__ = true;
+builders.IBuilder.prototype = {
+	__class__: builders.IBuilder
 };
-var builders_BaseBuilder = function(cli,projects) {
+builders.BaseBuilder = function(cli,projects) {
 	this.cli = cli;
 	this.projects = projects;
 	var _g = 0;
@@ -2553,16 +2558,16 @@ var builders_BaseBuilder = function(cli,projects) {
 		this.adjustWorkingDirectories(project,project.directory);
 	}
 };
-builders_BaseBuilder.__name__ = true;
-builders_BaseBuilder.__interfaces__ = [builders_IBuilder];
-builders_BaseBuilder.prototype = {
+builders.BaseBuilder.__name__ = true;
+builders.BaseBuilder.__interfaces__ = [builders.IBuilder];
+builders.BaseBuilder.prototype = {
 	adjustWorkingDirectories: function(project,baseDir) {
 		var _g = 0;
 		var _g1 = project.targets;
 		while(_g < _g1.length) {
 			var target = _g1[_g];
 			++_g;
-			var projectBaseDir = haxe_io_Path.join([baseDir,project.directory]);
+			var projectBaseDir = haxe.io.Path.join([baseDir,project.directory]);
 			var hxml = target.args;
 			if(hxml != null) {
 				hxml.workingDirectory = projectBaseDir;
@@ -2650,7 +2655,12 @@ builders_BaseBuilder.prototype = {
 			switch(_g[1]) {
 			case 0:
 				var parent = _g[2];
-				hxmls.push(this.resolveTargetHxml(parent,debug,flatten,display,false));
+				if(parent != null) {
+					var inheritedHxml = this.resolveTargetHxml(parent,debug,flatten,display,false);
+					if(inheritedHxml != null) {
+						hxmls.push(inheritedHxml);
+					}
+				}
 				break;
 			case 1:
 				break;
@@ -2671,15 +2681,15 @@ builders_BaseBuilder.prototype = {
 	}
 	,resolveParent: function(target) {
 		if(target.inherit != null) {
-			return haxe_ds_Option.Some(this.resolveTarget(target.inherit));
+			return haxe.ds.Option.Some(this.resolveTarget(target.inherit));
 		}
 		var _g = this.getTargetOwner(target);
 		switch(_g[1]) {
 		case 0:
 			var project = _g[2];
-			return haxe_ds_Option.Some(this.resolveTarget(project.inherit));
+			return haxe.ds.Option.Some(this.resolveTarget(project.inherit));
 		case 1:
-			throw new js__$Boot_HaxeError("unable to find owner of target " + target.name);
+			throw new js._Boot.HaxeError("unable to find owner of target " + target.name);
 			break;
 		}
 	}
@@ -2700,11 +2710,11 @@ builders_BaseBuilder.prototype = {
 				var flattenedProject = flattened[_g2];
 				++_g2;
 				if(ArrayTools.findNamed(flattenedProject.targets,target.name) != null) {
-					return haxe_ds_Option.Some(project);
+					return haxe.ds.Option.Some(project);
 				}
 			}
 		}
-		return haxe_ds_Option.None;
+		return haxe.ds.Option.None;
 	}
 	,mergeHxmls: function(hxmls,flatten) {
 		var classPaths = [];
@@ -2723,7 +2733,7 @@ builders_BaseBuilder.prototype = {
 			var rawClassPaths = ArrayTools.get(hxml.classPaths);
 			if(flatten) {
 				rawClassPaths = rawClassPaths.map(function(cp) {
-					return haxe_io_Path.join([hxml.workingDirectory,cp]);
+					return haxe.io.Path.join([hxml.workingDirectory,cp]);
 				});
 			}
 			classPaths = classPaths.concat(rawClassPaths);
@@ -2760,14 +2770,14 @@ builders_BaseBuilder.prototype = {
 		}
 		return { workingDirectory : "", classPaths : classPaths, defines : defines, haxelibs : haxelibs, debug : debug, output : output, deadCodeElimination : deadCodeElimination, noInline : noInline, main : main, packageName : packageName};
 	}
-	,__class__: builders_BaseBuilder
+	,__class__: builders.BaseBuilder
 };
-var builders_DisplayHxmlBuilder = function(cli,projects) {
-	builders_BaseBuilder.call(this,cli,projects);
+builders.DisplayHxmlBuilder = function(cli,projects) {
+	builders.BaseBuilder.call(this,cli,projects);
 };
-builders_DisplayHxmlBuilder.__name__ = true;
-builders_DisplayHxmlBuilder.__super__ = builders_BaseBuilder;
-builders_DisplayHxmlBuilder.prototype = $extend(builders_BaseBuilder.prototype,{
+builders.DisplayHxmlBuilder.__name__ = true;
+builders.DisplayHxmlBuilder.__super__ = builders.BaseBuilder;
+builders.DisplayHxmlBuilder.prototype = $extend(builders.BaseBuilder.prototype,{
 	build: function(cliArgs) {
 		var f = $bind(this,this.resolveTargetHxml);
 		var hxmls = function(a1) {
@@ -2819,14 +2829,14 @@ builders_DisplayHxmlBuilder.prototype = $extend(builders_BaseBuilder.prototype,{
 		}
 		return lines;
 	}
-	,__class__: builders_DisplayHxmlBuilder
+	,__class__: builders.DisplayHxmlBuilder
 });
-var builders_HaxeBuilder = function(cli,projects) {
-	builders_BaseBuilder.call(this,cli,projects);
+builders.HaxeBuilder = function(cli,projects) {
+	builders.BaseBuilder.call(this,cli,projects);
 };
-builders_HaxeBuilder.__name__ = true;
-builders_HaxeBuilder.__super__ = builders_BaseBuilder;
-builders_HaxeBuilder.prototype = $extend(builders_BaseBuilder.prototype,{
+builders.HaxeBuilder.__name__ = true;
+builders.HaxeBuilder.__super__ = builders.BaseBuilder;
+builders.HaxeBuilder.prototype = $extend(builders.BaseBuilder.prototype,{
 	build: function(cliArgs) {
 		var _g = 0;
 		var _g1 = cliArgs.targets;
@@ -2943,19 +2953,19 @@ builders_HaxeBuilder.prototype = $extend(builders_BaseBuilder.prototype,{
 		}
 		return args;
 	}
-	,__class__: builders_HaxeBuilder
+	,__class__: builders.HaxeBuilder
 });
-var builders_VSCodeTasksBuilder = function(cli,projects) {
-	builders_BaseBuilder.call(this,cli,projects);
+builders.VSCodeTasksBuilder = function(cli,projects) {
+	builders.BaseBuilder.call(this,cli,projects);
 };
-builders_VSCodeTasksBuilder.__name__ = true;
-builders_VSCodeTasksBuilder.makeArgs = function(additionalArgs) {
+builders.VSCodeTasksBuilder.__name__ = true;
+builders.VSCodeTasksBuilder.makeArgs = function(additionalArgs) {
 	return ["run","vshaxe-build"].concat(additionalArgs);
 };
-builders_VSCodeTasksBuilder.__super__ = builders_BaseBuilder;
-builders_VSCodeTasksBuilder.prototype = $extend(builders_BaseBuilder.prototype,{
+builders.VSCodeTasksBuilder.__super__ = builders.BaseBuilder;
+builders.VSCodeTasksBuilder.prototype = $extend(builders.BaseBuilder.prototype,{
 	build: function(cliArgs) {
-		var base = Reflect.copy(builders_VSCodeTasksBuilder.template);
+		var base = Reflect.copy(builders.VSCodeTasksBuilder.template);
 		var _g = 0;
 		var _g1 = cliArgs.targets;
 		while(_g < _g1.length) {
@@ -2967,7 +2977,7 @@ builders_VSCodeTasksBuilder.prototype = $extend(builders_BaseBuilder.prototype,{
 		base.tasks = ArrayTools.filterDuplicates(base.tasks,function(t1,t2) {
 			return t1.taskName == t2.taskName;
 		});
-		base.tasks = base.tasks.concat(builders_VSCodeTasksBuilder.defaultTasks);
+		base.tasks = base.tasks.concat(builders.VSCodeTasksBuilder.defaultTasks);
 		var tasksJson = JSON.stringify(base,null,"    ");
 		tasksJson = "// " + "This file is generated using the build script - DO NOT EDIT MANUALLY!" + "\n" + tasksJson;
 		this.cli.saveContent(".vscode/tasks.json",tasksJson);
@@ -2978,7 +2988,7 @@ builders_VSCodeTasksBuilder.prototype = $extend(builders_BaseBuilder.prototype,{
 		if((target.args == null || !target.args.debug) && debug) {
 			suffix = " (debug)";
 		}
-		var task = { taskName : "" + target.name + suffix, args : builders_VSCodeTasksBuilder.makeArgs(["-t",target.name]), problemMatcher : builders_VSCodeTasksBuilder.problemMatcher};
+		var task = { taskName : "" + target.name + suffix, args : builders.VSCodeTasksBuilder.makeArgs(["-t",target.name]), problemMatcher : builders.VSCodeTasksBuilder.problemMatcher};
 		if(target.args != null && target.args.debug || debug) {
 			if(target.isBuildCommand) {
 				task.isBuildCommand = true;
@@ -2995,21 +3005,21 @@ builders_VSCodeTasksBuilder.prototype = $extend(builders_BaseBuilder.prototype,{
 			return _gthis.buildTask(tmp,debug);
 		})));
 	}
-	,__class__: builders_VSCodeTasksBuilder
+	,__class__: builders.VSCodeTasksBuilder
 });
-var builders_Warning = function() { };
-builders_Warning.__name__ = true;
-var haxe_StackItem = { __ename__ : true, __constructs__ : ["CFunction","Module","FilePos","Method","LocalFunction"] };
-haxe_StackItem.CFunction = ["CFunction",0];
-haxe_StackItem.CFunction.toString = $estr;
-haxe_StackItem.CFunction.__enum__ = haxe_StackItem;
-haxe_StackItem.Module = function(m) { var $x = ["Module",1,m]; $x.__enum__ = haxe_StackItem; $x.toString = $estr; return $x; };
-haxe_StackItem.FilePos = function(s,file,line) { var $x = ["FilePos",2,s,file,line]; $x.__enum__ = haxe_StackItem; $x.toString = $estr; return $x; };
-haxe_StackItem.Method = function(classname,method) { var $x = ["Method",3,classname,method]; $x.__enum__ = haxe_StackItem; $x.toString = $estr; return $x; };
-haxe_StackItem.LocalFunction = function(v) { var $x = ["LocalFunction",4,v]; $x.__enum__ = haxe_StackItem; $x.toString = $estr; return $x; };
-var haxe_CallStack = function() { };
-haxe_CallStack.__name__ = true;
-haxe_CallStack.getStack = function(e) {
+builders.Warning = function() { };
+builders.Warning.__name__ = true;
+haxe.StackItem = { __ename__ : true, __constructs__ : ["CFunction","Module","FilePos","Method","LocalFunction"] };
+haxe.StackItem.CFunction = ["CFunction",0];
+haxe.StackItem.CFunction.toString = $estr;
+haxe.StackItem.CFunction.__enum__ = haxe.StackItem;
+haxe.StackItem.Module = function(m) { var $x = ["Module",1,m]; $x.__enum__ = haxe.StackItem; $x.toString = $estr; return $x; };
+haxe.StackItem.FilePos = function(s,file,line) { var $x = ["FilePos",2,s,file,line]; $x.__enum__ = haxe.StackItem; $x.toString = $estr; return $x; };
+haxe.StackItem.Method = function(classname,method) { var $x = ["Method",3,classname,method]; $x.__enum__ = haxe.StackItem; $x.toString = $estr; return $x; };
+haxe.StackItem.LocalFunction = function(v) { var $x = ["LocalFunction",4,v]; $x.__enum__ = haxe.StackItem; $x.toString = $estr; return $x; };
+haxe.CallStack = function() { };
+haxe.CallStack.__name__ = true;
+haxe.CallStack.getStack = function(e) {
 	if(e == null) {
 		return [];
 	}
@@ -3020,8 +3030,8 @@ haxe_CallStack.getStack = function(e) {
 		while(_g < callsites.length) {
 			var site = callsites[_g];
 			++_g;
-			if(haxe_CallStack.wrapCallSite != null) {
-				site = haxe_CallStack.wrapCallSite(site);
+			if(haxe.CallStack.wrapCallSite != null) {
+				site = haxe.CallStack.wrapCallSite(site);
 			}
 			var method = null;
 			var fullName = site.getFunctionName();
@@ -3030,29 +3040,29 @@ haxe_CallStack.getStack = function(e) {
 				if(idx >= 0) {
 					var className = HxOverrides.substr(fullName,0,idx);
 					var methodName = HxOverrides.substr(fullName,idx + 1,null);
-					method = haxe_StackItem.Method(className,methodName);
+					method = haxe.StackItem.Method(className,methodName);
 				}
 			}
-			stack.push(haxe_StackItem.FilePos(method,site.getFileName(),site.getLineNumber()));
+			stack.push(haxe.StackItem.FilePos(method,site.getFileName(),site.getLineNumber()));
 		}
 		return stack;
 	};
-	var a = haxe_CallStack.makeStack(e.stack);
+	var a = haxe.CallStack.makeStack(e.stack);
 	Error.prepareStackTrace = oldValue;
 	return a;
 };
-haxe_CallStack.toString = function(stack) {
+haxe.CallStack.toString = function(stack) {
 	var b = new StringBuf();
 	var _g = 0;
 	while(_g < stack.length) {
 		var s = stack[_g];
 		++_g;
 		b.b += "\nCalled from ";
-		haxe_CallStack.itemToString(b,s);
+		haxe.CallStack.itemToString(b,s);
 	}
 	return b.b;
 };
-haxe_CallStack.itemToString = function(b,s) {
+haxe.CallStack.itemToString = function(b,s) {
 	switch(s[1]) {
 	case 0:
 		b.b += "a C function";
@@ -3067,7 +3077,7 @@ haxe_CallStack.itemToString = function(b,s) {
 		var file = s[3];
 		var s1 = s[2];
 		if(s1 != null) {
-			haxe_CallStack.itemToString(b,s1);
+			haxe.CallStack.itemToString(b,s1);
 			b.b += " (";
 		}
 		b.b += file == null ? "null" : "" + file;
@@ -3091,7 +3101,7 @@ haxe_CallStack.itemToString = function(b,s) {
 		break;
 	}
 };
-haxe_CallStack.makeStack = function(s) {
+haxe.CallStack.makeStack = function(s) {
 	if(s == null) {
 		return [];
 	} else if(typeof(s) == "string") {
@@ -3110,9 +3120,9 @@ haxe_CallStack.makeStack = function(s) {
 				var meth = path.pop();
 				var file = rie10.matched(2);
 				var line1 = Std.parseInt(rie10.matched(3));
-				m.push(haxe_StackItem.FilePos(meth == "Anonymous function" ? haxe_StackItem.LocalFunction() : meth == "Global code" ? null : haxe_StackItem.Method(path.join("."),meth),file,line1));
+				m.push(haxe.StackItem.FilePos(meth == "Anonymous function" ? haxe.StackItem.LocalFunction() : meth == "Global code" ? null : haxe.StackItem.Method(path.join("."),meth),file,line1));
 			} else {
-				m.push(haxe_StackItem.Module(StringTools.trim(line)));
+				m.push(haxe.StackItem.Module(StringTools.trim(line)));
 			}
 		}
 		return m;
@@ -3120,19 +3130,19 @@ haxe_CallStack.makeStack = function(s) {
 		return s;
 	}
 };
-var haxe_IMap = function() { };
-haxe_IMap.__name__ = true;
-var haxe_Http = function(url) {
+haxe.IMap = function() { };
+haxe.IMap.__name__ = true;
+haxe.Http = function(url) {
 	this.url = url;
 	this.headers = new List();
 	this.params = new List();
 };
-haxe_Http.__name__ = true;
-haxe_Http.prototype = {
+haxe.Http.__name__ = true;
+haxe.Http.prototype = {
 	request: function(post) {
 		var me = this;
 		me.responseData = null;
-		var parsedUrl = js_node_Url.parse(this.url);
+		var parsedUrl = js.node.Url.parse(this.url);
 		var secure = parsedUrl.protocol == "https:";
 		var host = parsedUrl.hostname;
 		var path = parsedUrl.path;
@@ -3194,7 +3204,7 @@ haxe_Http.prototype = {
 				}
 			});
 		};
-		this.req = secure ? js_node_Https.request(opts,httpResponse) : js_node_Http.request(opts,httpResponse);
+		this.req = secure ? js.node.Https.request(opts,httpResponse) : js.node.Http.request(opts,httpResponse);
 		if(post) {
 			this.req.write(uri);
 		}
@@ -3206,19 +3216,20 @@ haxe_Http.prototype = {
 	}
 	,onStatus: function(status) {
 	}
-	,__class__: haxe_Http
+	,__class__: haxe.Http
 };
-var haxe_ds_Option = { __ename__ : true, __constructs__ : ["Some","None"] };
-haxe_ds_Option.Some = function(v) { var $x = ["Some",0,v]; $x.__enum__ = haxe_ds_Option; $x.toString = $estr; return $x; };
-haxe_ds_Option.None = ["None",1];
-haxe_ds_Option.None.toString = $estr;
-haxe_ds_Option.None.__enum__ = haxe_ds_Option;
-var haxe_ds_StringMap = function() {
+haxe.ds = {};
+haxe.ds.Option = { __ename__ : true, __constructs__ : ["Some","None"] };
+haxe.ds.Option.Some = function(v) { var $x = ["Some",0,v]; $x.__enum__ = haxe.ds.Option; $x.toString = $estr; return $x; };
+haxe.ds.Option.None = ["None",1];
+haxe.ds.Option.None.toString = $estr;
+haxe.ds.Option.None.__enum__ = haxe.ds.Option;
+haxe.ds.StringMap = function() {
 	this.h = { };
 };
-haxe_ds_StringMap.__name__ = true;
-haxe_ds_StringMap.__interfaces__ = [haxe_IMap];
-haxe_ds_StringMap.prototype = {
+haxe.ds.StringMap.__name__ = true;
+haxe.ds.StringMap.__interfaces__ = [haxe.IMap];
+haxe.ds.StringMap.prototype = {
 	setReserved: function(key,value) {
 		if(this.rh == null) {
 			this.rh = { };
@@ -3257,34 +3268,34 @@ haxe_ds_StringMap.prototype = {
 		}
 		return out;
 	}
-	,__class__: haxe_ds_StringMap
+	,__class__: haxe.ds.StringMap
 };
-var haxe_io_Bytes = function() { };
-haxe_io_Bytes.__name__ = true;
-haxe_io_Bytes.prototype = {
-	__class__: haxe_io_Bytes
+haxe.io.Bytes = function() { };
+haxe.io.Bytes.__name__ = true;
+haxe.io.Bytes.prototype = {
+	__class__: haxe.io.Bytes
 };
-var haxe_io_Eof = function() {
+haxe.io.Eof = function() {
 };
-haxe_io_Eof.__name__ = true;
-haxe_io_Eof.prototype = {
+haxe.io.Eof.__name__ = true;
+haxe.io.Eof.prototype = {
 	toString: function() {
 		return "Eof";
 	}
-	,__class__: haxe_io_Eof
+	,__class__: haxe.io.Eof
 };
-var haxe_io_Error = { __ename__ : true, __constructs__ : ["Blocked","Overflow","OutsideBounds","Custom"] };
-haxe_io_Error.Blocked = ["Blocked",0];
-haxe_io_Error.Blocked.toString = $estr;
-haxe_io_Error.Blocked.__enum__ = haxe_io_Error;
-haxe_io_Error.Overflow = ["Overflow",1];
-haxe_io_Error.Overflow.toString = $estr;
-haxe_io_Error.Overflow.__enum__ = haxe_io_Error;
-haxe_io_Error.OutsideBounds = ["OutsideBounds",2];
-haxe_io_Error.OutsideBounds.toString = $estr;
-haxe_io_Error.OutsideBounds.__enum__ = haxe_io_Error;
-haxe_io_Error.Custom = function(e) { var $x = ["Custom",3,e]; $x.__enum__ = haxe_io_Error; $x.toString = $estr; return $x; };
-var haxe_io_Path = function(path) {
+haxe.io.Error = { __ename__ : true, __constructs__ : ["Blocked","Overflow","OutsideBounds","Custom"] };
+haxe.io.Error.Blocked = ["Blocked",0];
+haxe.io.Error.Blocked.toString = $estr;
+haxe.io.Error.Blocked.__enum__ = haxe.io.Error;
+haxe.io.Error.Overflow = ["Overflow",1];
+haxe.io.Error.Overflow.toString = $estr;
+haxe.io.Error.Overflow.__enum__ = haxe.io.Error;
+haxe.io.Error.OutsideBounds = ["OutsideBounds",2];
+haxe.io.Error.OutsideBounds.toString = $estr;
+haxe.io.Error.OutsideBounds.__enum__ = haxe.io.Error;
+haxe.io.Error.Custom = function(e) { var $x = ["Custom",3,e]; $x.__enum__ = haxe.io.Error; $x.toString = $estr; return $x; };
+haxe.io.Path = function(path) {
 	switch(path) {
 	case ".":case "..":
 		this.dir = path;
@@ -3312,8 +3323,8 @@ var haxe_io_Path = function(path) {
 		this.file = path;
 	}
 };
-haxe_io_Path.__name__ = true;
-haxe_io_Path.join = function(paths) {
+haxe.io.Path.__name__ = true;
+haxe.io.Path.join = function(paths) {
 	var paths1 = paths.filter(function(s) {
 		if(s != null) {
 			return s != "";
@@ -3329,12 +3340,12 @@ haxe_io_Path.join = function(paths) {
 	var _g = paths1.length;
 	while(_g1 < _g) {
 		var i = _g1++;
-		path = haxe_io_Path.addTrailingSlash(path);
+		path = haxe.io.Path.addTrailingSlash(path);
 		path += paths1[i];
 	}
-	return haxe_io_Path.normalize(path);
+	return haxe.io.Path.normalize(path);
 };
-haxe_io_Path.normalize = function(path) {
+haxe.io.Path.normalize = function(path) {
 	var slash = "/";
 	path = path.split("\\").join(slash);
 	if(path == slash) {
@@ -3393,7 +3404,7 @@ haxe_io_Path.normalize = function(path) {
 	}
 	return acc_b;
 };
-haxe_io_Path.addTrailingSlash = function(path) {
+haxe.io.Path.addTrailingSlash = function(path) {
 	if(path.length == 0) {
 		return "/";
 	}
@@ -3411,55 +3422,57 @@ haxe_io_Path.addTrailingSlash = function(path) {
 		return path;
 	}
 };
-haxe_io_Path.prototype = {
-	__class__: haxe_io_Path
+haxe.io.Path.prototype = {
+	__class__: haxe.io.Path
 };
-var hxargs_Args = function() { };
-hxargs_Args.__name__ = true;
-var hxjsonast_Error = function(message,pos) {
+var hxargs = {};
+hxargs.Args = function() { };
+hxargs.Args.__name__ = true;
+var hxjsonast = {};
+hxjsonast.Error = function(message,pos) {
 	this.message = message;
 	this.pos = pos;
 };
-hxjsonast_Error.__name__ = true;
-hxjsonast_Error.prototype = {
-	__class__: hxjsonast_Error
+hxjsonast.Error.__name__ = true;
+hxjsonast.Error.prototype = {
+	__class__: hxjsonast.Error
 };
-var hxjsonast_Json = function(value,pos) {
+hxjsonast.Json = function(value,pos) {
 	this.value = value;
 	this.pos = pos;
 };
-hxjsonast_Json.__name__ = true;
-hxjsonast_Json.prototype = {
-	__class__: hxjsonast_Json
+hxjsonast.Json.__name__ = true;
+hxjsonast.Json.prototype = {
+	__class__: hxjsonast.Json
 };
-var hxjsonast_JsonValue = { __ename__ : true, __constructs__ : ["JString","JNumber","JObject","JArray","JBool","JNull"] };
-hxjsonast_JsonValue.JString = function(s) { var $x = ["JString",0,s]; $x.__enum__ = hxjsonast_JsonValue; $x.toString = $estr; return $x; };
-hxjsonast_JsonValue.JNumber = function(s) { var $x = ["JNumber",1,s]; $x.__enum__ = hxjsonast_JsonValue; $x.toString = $estr; return $x; };
-hxjsonast_JsonValue.JObject = function(fields) { var $x = ["JObject",2,fields]; $x.__enum__ = hxjsonast_JsonValue; $x.toString = $estr; return $x; };
-hxjsonast_JsonValue.JArray = function(values) { var $x = ["JArray",3,values]; $x.__enum__ = hxjsonast_JsonValue; $x.toString = $estr; return $x; };
-hxjsonast_JsonValue.JBool = function(b) { var $x = ["JBool",4,b]; $x.__enum__ = hxjsonast_JsonValue; $x.toString = $estr; return $x; };
-hxjsonast_JsonValue.JNull = ["JNull",5];
-hxjsonast_JsonValue.JNull.toString = $estr;
-hxjsonast_JsonValue.JNull.__enum__ = hxjsonast_JsonValue;
-var hxjsonast_JObjectField = function(name,namePos,value) {
+hxjsonast.JsonValue = { __ename__ : true, __constructs__ : ["JString","JNumber","JObject","JArray","JBool","JNull"] };
+hxjsonast.JsonValue.JString = function(s) { var $x = ["JString",0,s]; $x.__enum__ = hxjsonast.JsonValue; $x.toString = $estr; return $x; };
+hxjsonast.JsonValue.JNumber = function(s) { var $x = ["JNumber",1,s]; $x.__enum__ = hxjsonast.JsonValue; $x.toString = $estr; return $x; };
+hxjsonast.JsonValue.JObject = function(fields) { var $x = ["JObject",2,fields]; $x.__enum__ = hxjsonast.JsonValue; $x.toString = $estr; return $x; };
+hxjsonast.JsonValue.JArray = function(values) { var $x = ["JArray",3,values]; $x.__enum__ = hxjsonast.JsonValue; $x.toString = $estr; return $x; };
+hxjsonast.JsonValue.JBool = function(b) { var $x = ["JBool",4,b]; $x.__enum__ = hxjsonast.JsonValue; $x.toString = $estr; return $x; };
+hxjsonast.JsonValue.JNull = ["JNull",5];
+hxjsonast.JsonValue.JNull.toString = $estr;
+hxjsonast.JsonValue.JNull.__enum__ = hxjsonast.JsonValue;
+hxjsonast.JObjectField = function(name,namePos,value) {
 	this.name = name;
 	this.namePos = namePos;
 	this.value = value;
 };
-hxjsonast_JObjectField.__name__ = true;
-hxjsonast_JObjectField.prototype = {
-	__class__: hxjsonast_JObjectField
+hxjsonast.JObjectField.__name__ = true;
+hxjsonast.JObjectField.prototype = {
+	__class__: hxjsonast.JObjectField
 };
-var hxjsonast_Parser = function(source,filename) {
+hxjsonast.Parser = function(source,filename) {
 	this.source = source;
 	this.filename = filename;
 	this.pos = 0;
 };
-hxjsonast_Parser.__name__ = true;
-hxjsonast_Parser.parse = function(source,filename) {
-	return new hxjsonast_Parser(source,filename).parseRec();
+hxjsonast.Parser.__name__ = true;
+hxjsonast.Parser.parse = function(source,filename) {
+	return new hxjsonast.Parser(source,filename).parseRec();
 };
-hxjsonast_Parser.prototype = {
+hxjsonast.Parser.prototype = {
 	parseRec: function() {
 		while(true) {
 			var c = this.source.charCodeAt(this.pos++);
@@ -3469,7 +3482,7 @@ hxjsonast_Parser.prototype = {
 			case 34:
 				var save = this.pos;
 				var s = this.parseString();
-				return new hxjsonast_Json(hxjsonast_JsonValue.JString(s),new hxjsonast_Position(this.filename,save - 1,this.pos));
+				return new hxjsonast.Json(hxjsonast.JsonValue.JString(s),new hxjsonast.Position(this.filename,save - 1,this.pos));
 			case 45:case 48:case 49:case 50:case 51:case 52:case 53:case 54:case 55:case 56:case 57:
 				var start = this.pos - 1;
 				var minus = c == 45;
@@ -3535,7 +3548,7 @@ hxjsonast_Parser.prototype = {
 					}
 				}
 				var s1 = HxOverrides.substr(this.source,start,this.pos - start);
-				return new hxjsonast_Json(hxjsonast_JsonValue.JNumber(s1),new hxjsonast_Position(this.filename,start,this.pos));
+				return new hxjsonast.Json(hxjsonast.JsonValue.JNumber(s1),new hxjsonast.Position(this.filename,start,this.pos));
 			case 91:
 				var values = [];
 				var comma = null;
@@ -3556,7 +3569,7 @@ hxjsonast_Parser.prototype = {
 						if(comma == false) {
 							this.invalidChar();
 						}
-						return new hxjsonast_Json(hxjsonast_JsonValue.JArray(values),new hxjsonast_Position(this.filename,startPos,this.pos));
+						return new hxjsonast.Json(hxjsonast.JsonValue.JArray(values),new hxjsonast.Position(this.filename,startPos,this.pos));
 					default:
 						if(comma) {
 							this.invalidChar();
@@ -3573,24 +3586,24 @@ hxjsonast_Parser.prototype = {
 					this.pos = save1;
 					this.invalidChar();
 				}
-				return new hxjsonast_Json(hxjsonast_JsonValue.JBool(false),new hxjsonast_Position(this.filename,save1 - 1,this.pos));
+				return new hxjsonast.Json(hxjsonast.JsonValue.JBool(false),new hxjsonast.Position(this.filename,save1 - 1,this.pos));
 			case 110:
 				var save2 = this.pos;
 				if(this.source.charCodeAt(this.pos++) != 117 || this.source.charCodeAt(this.pos++) != 108 || this.source.charCodeAt(this.pos++) != 108) {
 					this.pos = save2;
 					this.invalidChar();
 				}
-				return new hxjsonast_Json(hxjsonast_JsonValue.JNull,new hxjsonast_Position(this.filename,save2 - 1,this.pos));
+				return new hxjsonast.Json(hxjsonast.JsonValue.JNull,new hxjsonast.Position(this.filename,save2 - 1,this.pos));
 			case 116:
 				var save3 = this.pos;
 				if(this.source.charCodeAt(this.pos++) != 114 || this.source.charCodeAt(this.pos++) != 117 || this.source.charCodeAt(this.pos++) != 101) {
 					this.pos = save3;
 					this.invalidChar();
 				}
-				return new hxjsonast_Json(hxjsonast_JsonValue.JBool(true),new hxjsonast_Position(this.filename,save3 - 1,this.pos));
+				return new hxjsonast.Json(hxjsonast.JsonValue.JBool(true),new hxjsonast.Position(this.filename,save3 - 1,this.pos));
 			case 123:
 				var fields = [];
-				var names = new haxe_ds_StringMap();
+				var names = new haxe.ds.StringMap();
 				var field = null;
 				var fieldPos = null;
 				var comma1 = null;
@@ -3606,9 +3619,9 @@ hxjsonast_Parser.prototype = {
 						}
 						var fieldStartPos = this.pos - 1;
 						field = this.parseString();
-						fieldPos = new hxjsonast_Position(this.filename,fieldStartPos,this.pos);
+						fieldPos = new hxjsonast.Position(this.filename,fieldStartPos,this.pos);
 						if(__map_reserved[field] != null ? names.existsReserved(field) : names.h.hasOwnProperty(field)) {
-							throw new js__$Boot_HaxeError(new hxjsonast_Error("Duplicate field name \"" + field + "\"",fieldPos));
+							throw new js._Boot.HaxeError(new hxjsonast.Error("Duplicate field name \"" + field + "\"",fieldPos));
 						} else if(__map_reserved[field] != null) {
 							names.setReserved(field,true);
 						} else {
@@ -3626,7 +3639,7 @@ hxjsonast_Parser.prototype = {
 						if(field == null) {
 							this.invalidChar();
 						}
-						fields.push(new hxjsonast_JObjectField(field,fieldPos,this.parseRec()));
+						fields.push(new hxjsonast.JObjectField(field,fieldPos,this.parseRec()));
 						field = null;
 						fieldPos = null;
 						comma1 = true;
@@ -3635,7 +3648,7 @@ hxjsonast_Parser.prototype = {
 						if(field != null || comma1 == false) {
 							this.invalidChar();
 						}
-						return new hxjsonast_Json(hxjsonast_JsonValue.JObject(fields),new hxjsonast_Position(this.filename,startPos1,this.pos));
+						return new hxjsonast.Json(hxjsonast.JsonValue.JObject(fields),new hxjsonast.Position(this.filename,startPos1,this.pos));
 					default:
 						this.invalidChar();
 					}
@@ -3687,12 +3700,12 @@ hxjsonast_Parser.prototype = {
 					buf.b += String.fromCharCode(uc);
 					break;
 				default:
-					throw new js__$Boot_HaxeError(new hxjsonast_Error("Invalid escape sequence \\" + String.fromCharCode(c),new hxjsonast_Position(this.filename,this.pos - 2,this.pos)));
+					throw new js._Boot.HaxeError(new hxjsonast.Error("Invalid escape sequence \\" + String.fromCharCode(c),new hxjsonast.Position(this.filename,this.pos - 2,this.pos)));
 				}
 				start = this.pos;
 			} else if(c != c) {
 				this.pos--;
-				throw new js__$Boot_HaxeError(new hxjsonast_Error("Unclosed string",new hxjsonast_Position(this.filename,start - 1,this.pos)));
+				throw new js._Boot.HaxeError(new hxjsonast.Error("Unclosed string",new hxjsonast.Position(this.filename,start - 1,this.pos)));
 			}
 		}
 		if(buf == null) {
@@ -3769,58 +3782,60 @@ hxjsonast_Parser.prototype = {
 			}
 		}
 		var s = HxOverrides.substr(this.source,start,this.pos - start);
-		return new hxjsonast_Json(hxjsonast_JsonValue.JNumber(s),new hxjsonast_Position(this.filename,start,this.pos));
+		return new hxjsonast.Json(hxjsonast.JsonValue.JNumber(s),new hxjsonast.Position(this.filename,start,this.pos));
 	}
 	,nextChar: function() {
 		return this.source.charCodeAt(this.pos++);
 	}
 	,mk: function(pos,value) {
-		return new hxjsonast_Json(value,pos);
+		return new hxjsonast.Json(value,pos);
 	}
 	,mkPos: function(min,max) {
-		return new hxjsonast_Position(this.filename,min,max);
+		return new hxjsonast.Position(this.filename,min,max);
 	}
 	,invalidChar: function() {
 		this.pos--;
-		throw new js__$Boot_HaxeError(new hxjsonast_Error("Invalid character: " + this.source.charAt(this.pos),new hxjsonast_Position(this.filename,this.pos,this.pos + 1)));
+		throw new js._Boot.HaxeError(new hxjsonast.Error("Invalid character: " + this.source.charAt(this.pos),new hxjsonast.Position(this.filename,this.pos,this.pos + 1)));
 	}
 	,invalidNumber: function(start) {
-		throw new js__$Boot_HaxeError(new hxjsonast_Error("Invalid number: " + this.source.substring(start,this.pos),new hxjsonast_Position(this.filename,start,this.pos)));
+		throw new js._Boot.HaxeError(new hxjsonast.Error("Invalid number: " + this.source.substring(start,this.pos),new hxjsonast.Position(this.filename,start,this.pos)));
 	}
-	,__class__: hxjsonast_Parser
+	,__class__: hxjsonast.Parser
 };
-var hxjsonast_Position = function(file,min,max) {
+hxjsonast.Position = function(file,min,max) {
 	this.file = file;
 	this.min = min;
 	this.max = max;
 };
-hxjsonast_Position.__name__ = true;
-hxjsonast_Position.prototype = {
-	__class__: hxjsonast_Position
+hxjsonast.Position.__name__ = true;
+hxjsonast.Position.prototype = {
+	__class__: hxjsonast.Position
 };
-var js__$Boot_HaxeError = function(val) {
+var js = {};
+js._Boot = {};
+js._Boot.HaxeError = function(val) {
 	Error.call(this);
 	this.val = val;
 	this.message = String(val);
 	if(Error.captureStackTrace) {
-		Error.captureStackTrace(this,js__$Boot_HaxeError);
+		Error.captureStackTrace(this,js._Boot.HaxeError);
 	}
 };
-js__$Boot_HaxeError.__name__ = true;
-js__$Boot_HaxeError.wrap = function(val) {
+js._Boot.HaxeError.__name__ = true;
+js._Boot.HaxeError.wrap = function(val) {
 	if((val instanceof Error)) {
 		return val;
 	} else {
-		return new js__$Boot_HaxeError(val);
+		return new js._Boot.HaxeError(val);
 	}
 };
-js__$Boot_HaxeError.__super__ = Error;
-js__$Boot_HaxeError.prototype = $extend(Error.prototype,{
-	__class__: js__$Boot_HaxeError
+js._Boot.HaxeError.__super__ = Error;
+js._Boot.HaxeError.prototype = $extend(Error.prototype,{
+	__class__: js._Boot.HaxeError
 });
-var js_Boot = function() { };
-js_Boot.__name__ = true;
-js_Boot.getClass = function(o) {
+js.Boot = function() { };
+js.Boot.__name__ = true;
+js.Boot.getClass = function(o) {
 	if((o instanceof Array) && o.__enum__ == null) {
 		return Array;
 	} else {
@@ -3828,14 +3843,14 @@ js_Boot.getClass = function(o) {
 		if(cl != null) {
 			return cl;
 		}
-		var name = js_Boot.__nativeClassName(o);
+		var name = js.Boot.__nativeClassName(o);
 		if(name != null) {
-			return js_Boot.__resolveNativeClass(name);
+			return js.Boot.__resolveNativeClass(name);
 		}
 		return null;
 	}
 };
-js_Boot.__string_rec = function(o,s) {
+js.Boot.__string_rec = function(o,s) {
 	if(o == null) {
 		return "null";
 	}
@@ -3862,9 +3877,9 @@ js_Boot.__string_rec = function(o,s) {
 				while(_g1 < _g) {
 					var i = _g1++;
 					if(i != 2) {
-						str += "," + js_Boot.__string_rec(o[i],s);
+						str += "," + js.Boot.__string_rec(o[i],s);
 					} else {
-						str += js_Boot.__string_rec(o[i],s);
+						str += js.Boot.__string_rec(o[i],s);
 					}
 				}
 				return str + ")";
@@ -3877,7 +3892,7 @@ js_Boot.__string_rec = function(o,s) {
 			var _g2 = l;
 			while(_g11 < _g2) {
 				var i2 = _g11++;
-				str1 += (i2 > 0 ? "," : "") + js_Boot.__string_rec(o[i2],s);
+				str1 += (i2 > 0 ? "," : "") + js.Boot.__string_rec(o[i2],s);
 			}
 			str1 += "]";
 			return str1;
@@ -3908,7 +3923,7 @@ js_Boot.__string_rec = function(o,s) {
 		if(str2.length != 2) {
 			str2 += ", \n";
 		}
-		str2 += s + k + " : " + js_Boot.__string_rec(o[k],s);
+		str2 += s + k + " : " + js.Boot.__string_rec(o[k],s);
 		}
 		s = s.substring(1);
 		str2 += "\n" + s + "}";
@@ -3919,7 +3934,7 @@ js_Boot.__string_rec = function(o,s) {
 		return String(o);
 	}
 };
-js_Boot.__interfLoop = function(cc,cl) {
+js.Boot.__interfLoop = function(cc,cl) {
 	if(cc == null) {
 		return false;
 	}
@@ -3933,14 +3948,14 @@ js_Boot.__interfLoop = function(cc,cl) {
 		while(_g1 < _g) {
 			var i = _g1++;
 			var i1 = intf[i];
-			if(i1 == cl || js_Boot.__interfLoop(i1,cl)) {
+			if(i1 == cl || js.Boot.__interfLoop(i1,cl)) {
 				return true;
 			}
 		}
 	}
-	return js_Boot.__interfLoop(cc.__super__,cl);
+	return js.Boot.__interfLoop(cc.__super__,cl);
 };
-js_Boot.__instanceof = function(o,cl) {
+js.Boot.__instanceof = function(o,cl) {
 	if(cl == null) {
 		return false;
 	}
@@ -3973,10 +3988,10 @@ js_Boot.__instanceof = function(o,cl) {
 				if(o instanceof cl) {
 					return true;
 				}
-				if(js_Boot.__interfLoop(js_Boot.getClass(o),cl)) {
+				if(js.Boot.__interfLoop(js.Boot.getClass(o),cl)) {
 					return true;
 				}
-			} else if(typeof(cl) == "object" && js_Boot.__isNativeObj(cl)) {
+			} else if(typeof(cl) == "object" && js.Boot.__isNativeObj(cl)) {
 				if(o instanceof cl) {
 					return true;
 				}
@@ -3993,33 +4008,36 @@ js_Boot.__instanceof = function(o,cl) {
 		return o.__enum__ == cl;
 	}
 };
-js_Boot.__nativeClassName = function(o) {
-	var name = js_Boot.__toStr.call(o).slice(8,-1);
+js.Boot.__nativeClassName = function(o) {
+	var name = js.Boot.__toStr.call(o).slice(8,-1);
 	if(name == "Object" || name == "Function" || name == "Math" || name == "JSON") {
 		return null;
 	}
 	return name;
 };
-js_Boot.__isNativeObj = function(o) {
-	return js_Boot.__nativeClassName(o) != null;
+js.Boot.__isNativeObj = function(o) {
+	return js.Boot.__nativeClassName(o) != null;
 };
-js_Boot.__resolveNativeClass = function(name) {
+js.Boot.__resolveNativeClass = function(name) {
 	return $global[name];
 };
-var js_node_ChildProcess = require("child_process");
-var js_node_Fs = require("fs");
-var js_node_Http = require("http");
-var js_node_Https = require("https");
-var js_node_Url = require("url");
-var js_node_buffer_Buffer = require("buffer").Buffer;
-var json2object_Error = { __ename__ : true, __constructs__ : ["IncorrectType","UninitializedVariable","UnknownVariable","ParserError"] };
-json2object_Error.IncorrectType = function(variable,expected,pos) { var $x = ["IncorrectType",0,variable,expected,pos]; $x.__enum__ = json2object_Error; $x.toString = $estr; return $x; };
-json2object_Error.UninitializedVariable = function(variable,pos) { var $x = ["UninitializedVariable",1,variable,pos]; $x.__enum__ = json2object_Error; $x.toString = $estr; return $x; };
-json2object_Error.UnknownVariable = function(variable,pos) { var $x = ["UnknownVariable",2,variable,pos]; $x.__enum__ = json2object_Error; $x.toString = $estr; return $x; };
-json2object_Error.ParserError = function(message,pos) { var $x = ["ParserError",3,message,pos]; $x.__enum__ = json2object_Error; $x.toString = $estr; return $x; };
-var json2object_ErrorUtils = function() { };
-json2object_ErrorUtils.__name__ = true;
-json2object_ErrorUtils.convertError = function(e) {
+js.node = {};
+js.node.ChildProcess = require("child_process");
+js.node.Fs = require("fs");
+js.node.Http = require("http");
+js.node.Https = require("https");
+js.node.Url = require("url");
+js.node.buffer = {};
+js.node.buffer.Buffer = require("buffer").Buffer;
+var json2object = {};
+json2object.Error = { __ename__ : true, __constructs__ : ["IncorrectType","UninitializedVariable","UnknownVariable","ParserError"] };
+json2object.Error.IncorrectType = function(variable,expected,pos) { var $x = ["IncorrectType",0,variable,expected,pos]; $x.__enum__ = json2object.Error; $x.toString = $estr; return $x; };
+json2object.Error.UninitializedVariable = function(variable,pos) { var $x = ["UninitializedVariable",1,variable,pos]; $x.__enum__ = json2object.Error; $x.toString = $estr; return $x; };
+json2object.Error.UnknownVariable = function(variable,pos) { var $x = ["UnknownVariable",2,variable,pos]; $x.__enum__ = json2object.Error; $x.toString = $estr; return $x; };
+json2object.Error.ParserError = function(message,pos) { var $x = ["ParserError",3,message,pos]; $x.__enum__ = json2object.Error; $x.toString = $estr; return $x; };
+json2object.ErrorUtils = function() { };
+json2object.ErrorUtils.__name__ = true;
+json2object.ErrorUtils.convertError = function(e) {
 	var pos;
 	switch(e[1]) {
 	case 0:
@@ -4061,12 +4079,12 @@ json2object_ErrorUtils.convertError = function(e) {
 	}
 	return res;
 };
-json2object_ErrorUtils.convertErrorArray = function(e) {
-	return e.map(json2object_ErrorUtils.convertError).join("\n");
+json2object.ErrorUtils.convertErrorArray = function(e) {
+	return e.map(json2object.ErrorUtils.convertError).join("\n");
 };
-var json2object_JsonParser = function() { };
-json2object_JsonParser.__name__ = true;
-var json2object_PosUtils = function(content) {
+json2object.JsonParser = function() { };
+json2object.JsonParser.__name__ = true;
+json2object.PosUtils = function(content) {
 	this.linesInfo = [];
 	var s = 0;
 	var e = 0;
@@ -4097,8 +4115,8 @@ var json2object_PosUtils = function(content) {
 		this.linesInfo.push({ number : lineCount, start : s, end : i});
 	}
 };
-json2object_PosUtils.__name__ = true;
-json2object_PosUtils.prototype = {
+json2object.PosUtils.__name__ = true;
+json2object.PosUtils.prototype = {
 	convertPosition: function(position) {
 		var file = position.file;
 		var min = position.min;
@@ -4114,68 +4132,70 @@ json2object_PosUtils.prototype = {
 		}
 		return null;
 	}
-	,__class__: json2object_PosUtils
+	,__class__: json2object.PosUtils
 };
-var jstack_Tools = function() { };
-jstack_Tools.__name__ = true;
-var jstack_js_JStack = function() {
+var jstack = {};
+jstack.Tools = function() { };
+jstack.Tools.__name__ = true;
+jstack.js = {};
+jstack.js.JStack = function() {
 	this.ready = false;
-	if(jstack_js_JStack.isNode()) {
-		process.on("uncaughtException", jstack_js_JStack._uncaughtExceptionHandler);
+	if(jstack.js.JStack.isNode()) {
+		process.on("uncaughtException", jstack.js.JStack._uncaughtExceptionHandler);
 	}
 	this.inject();
 };
-jstack_js_JStack.__name__ = true;
-jstack_js_JStack.onReady = function(callback) {
-	jstack_js_JStack.onReadyCallback = callback;
-	if(jstack_js_JStack.instance.ready) {
+jstack.js.JStack.__name__ = true;
+jstack.js.JStack.onReady = function(callback) {
+	jstack.js.JStack.onReadyCallback = callback;
+	if(jstack.js.JStack.instance.ready) {
 		callback();
 	}
 };
-jstack_js_JStack.uncaughtExceptionHandler = function(e) {
-	var stack = haxe_CallStack.getStack(e).map(jstack_js_JStack.improveStackItem);
-	var error = e.message + haxe_CallStack.toString(stack) + "\n";
+jstack.js.JStack.uncaughtExceptionHandler = function(e) {
+	var stack = haxe.CallStack.getStack(e).map(jstack.js.JStack.improveStackItem);
+	var error = e.message + haxe.CallStack.toString(stack) + "\n";
 	return error;
 };
-jstack_js_JStack._uncaughtExceptionHandler = function(e) {
-	var error = jstack_js_JStack.uncaughtExceptionHandler(e);
+jstack.js.JStack._uncaughtExceptionHandler = function(e) {
+	var error = jstack.js.JStack.uncaughtExceptionHandler(e);
 	if(error != null && error.length > 0) {
 		console.log(error);
 	}
 };
-jstack_js_JStack.isNode = function() {
+jstack.js.JStack.isNode = function() {
 	return typeof window == 'undefined';
 };
-jstack_js_JStack.improveStackItem = function(item) {
+jstack.js.JStack.improveStackItem = function(item) {
 	if(item[1] == 1) {
 		var line = item[2];
-		if(jstack_js_JStack.stackFile.match(line)) {
-			var file = jstack_js_JStack.stackFile.matched(1);
-			if(file != jstack_js_JStack.currentFile()) {
+		if(jstack.js.JStack.stackFile.match(line)) {
+			var file = jstack.js.JStack.stackFile.matched(1);
+			if(file != jstack.js.JStack.currentFile()) {
 				return item;
 			}
-			var line1 = Std.parseInt(jstack_js_JStack.stackFile.matched(2));
-			var column = Std.parseInt(jstack_js_JStack.stackFile.matched(3));
-			var pos = jstack_js_JStack.mapper.originalPositionFor(line1,column);
-			return haxe_StackItem.FilePos(null,pos.source,pos.originalLine);
+			var line1 = Std.parseInt(jstack.js.JStack.stackFile.matched(2));
+			var column = Std.parseInt(jstack.js.JStack.stackFile.matched(3));
+			var pos = jstack.js.JStack.mapper.originalPositionFor(line1,column);
+			return haxe.StackItem.FilePos(null,pos.source,pos.originalLine);
 		} else {
 			var line2 = item[2];
-			if(jstack_js_JStack.stackFunctionFile.match(line2)) {
-				var file1 = jstack_js_JStack.stackFunctionFile.matched(2);
-				if(file1 != jstack_js_JStack.currentFile()) {
+			if(jstack.js.JStack.stackFunctionFile.match(line2)) {
+				var file1 = jstack.js.JStack.stackFunctionFile.matched(2);
+				if(file1 != jstack.js.JStack.currentFile()) {
 					return item;
 				}
-				var line3 = Std.parseInt(jstack_js_JStack.stackFunctionFile.matched(3));
-				var column1 = Std.parseInt(jstack_js_JStack.stackFunctionFile.matched(4));
-				var pos1 = jstack_js_JStack.mapper.originalPositionFor(line3,column1);
+				var line3 = Std.parseInt(jstack.js.JStack.stackFunctionFile.matched(3));
+				var column1 = Std.parseInt(jstack.js.JStack.stackFunctionFile.matched(4));
+				var pos1 = jstack.js.JStack.mapper.originalPositionFor(line3,column1);
 				if(pos1 == null) {
 					return item;
 				}
-				var fn = jstack_js_JStack.stackFunctionFile.matched(1).split(".");
+				var fn = jstack.js.JStack.stackFunctionFile.matched(1).split(".");
 				var method = fn.pop();
 				var cls = fn.join(".");
-				var methodItem = cls != null && method != null ? haxe_StackItem.Method(cls,method) : null;
-				return haxe_StackItem.FilePos(methodItem,pos1.source,pos1.originalLine);
+				var methodItem = cls != null && method != null ? haxe.StackItem.Method(cls,method) : null;
+				return haxe.StackItem.FilePos(methodItem,pos1.source,pos1.originalLine);
 			} else {
 				return item;
 			}
@@ -4184,29 +4204,29 @@ jstack_js_JStack.improveStackItem = function(item) {
 		return item;
 	}
 };
-jstack_js_JStack.currentFile = function() {
-	if(jstack_js_JStack.isNode()) {
+jstack.js.JStack.currentFile = function() {
+	if(jstack.js.JStack.isNode()) {
 		return __filename;
 	}
 	return null;
 };
-jstack_js_JStack.prototype = {
+jstack.js.JStack.prototype = {
 	inject: function() {
 		var _gthis = this;
 		this.loadSourceMap(function(sourceMapData) {
-			jstack_js_JStack.mapper = new SourceMap(sourceMapData);
-			haxe_CallStack.wrapCallSite = function(site) {
-				var pos = jstack_js_JStack.mapper.originalPositionFor(site.getLineNumber(),site.getColumnNumber());
-				return new jstack_js_StackPos(site,pos);
+			jstack.js.JStack.mapper = new SourceMap(sourceMapData);
+			haxe.CallStack.wrapCallSite = function(site) {
+				var pos = jstack.js.JStack.mapper.originalPositionFor(site.getLineNumber(),site.getColumnNumber());
+				return new jstack.js.StackPos(site,pos);
 			};
 			_gthis.ready = true;
-			if(jstack_js_JStack.onReadyCallback != null) {
-				jstack_js_JStack.onReadyCallback();
+			if(jstack.js.JStack.onReadyCallback != null) {
+				jstack.js.JStack.onReadyCallback();
 			}
 		});
 	}
 	,loadSourceMap: function(callback) {
-		if(!jstack_js_JStack.isNode()) {
+		if(!jstack.js.JStack.isNode()) {
 			this.loadInBrowser(callback);
 		} else {
 			this.loadInNode(callback);
@@ -4214,7 +4234,7 @@ jstack_js_JStack.prototype = {
 	}
 	,loadInBrowser: function(callback) {
 		var file = this.getCurrentDirInBrowser() + "/" + ("run.js" + ".map");
-		var http = new haxe_Http(file);
+		var http = new haxe.Http(file);
 		http.onError = function(error) {
 			console.log(error);
 		};
@@ -4247,17 +4267,17 @@ jstack_js_JStack.prototype = {
 				fullPath = src.value;
 			}
 		}
-		var path = new haxe_io_Path(fullPath);
+		var path = new haxe.io.Path(fullPath);
 		return path.dir;
 	}
-	,__class__: jstack_js_JStack
+	,__class__: jstack.js.JStack
 };
-var jstack_js_StackPos = function(js,hx) {
+jstack.js.StackPos = function(js,hx) {
 	this.js = js;
 	this.hx = hx;
 };
-jstack_js_StackPos.__name__ = true;
-jstack_js_StackPos.prototype = {
+jstack.js.StackPos.__name__ = true;
+jstack.js.StackPos.prototype = {
 	getFunctionName: function() {
 		return this.js.getFunctionName();
 	}
@@ -4275,15 +4295,17 @@ jstack_js_StackPos.prototype = {
 			return this.hx.originalLine;
 		}
 	}
-	,__class__: jstack_js_StackPos
+	,__class__: jstack.js.StackPos
 };
-var sourcemap__$Mapping_Mapping_$Impl_$ = {};
-sourcemap__$Mapping_Mapping_$Impl_$.__name__ = true;
-sourcemap__$Mapping_Mapping_$Impl_$._new = function(data) {
+var sourcemap = {};
+sourcemap._Mapping = {};
+sourcemap._Mapping.Mapping_Impl_ = {};
+sourcemap._Mapping.Mapping_Impl_.__name__ = true;
+sourcemap._Mapping.Mapping_Impl_._new = function(data) {
 	var this1 = data;
 	return this1;
 };
-sourcemap__$Mapping_Mapping_$Impl_$.getSourcePos = function(this1,map,generatedLine) {
+sourcemap._Mapping.Mapping_Impl_.getSourcePos = function(this1,map,generatedLine) {
 	var pos = { generatedLine : generatedLine, generatedColumn : this1[0]};
 	if(this1.length > 1) {
 		pos.originalLine = this1[2] + 1;
@@ -4295,51 +4317,51 @@ sourcemap__$Mapping_Mapping_$Impl_$.getSourcePos = function(this1,map,generatedL
 	}
 	return pos;
 };
-sourcemap__$Mapping_Mapping_$Impl_$.hasSource = function(this1) {
+sourcemap._Mapping.Mapping_Impl_.hasSource = function(this1) {
 	return this1.length > 1;
 };
-sourcemap__$Mapping_Mapping_$Impl_$.hasLine = function(this1) {
+sourcemap._Mapping.Mapping_Impl_.hasLine = function(this1) {
 	return this1.length > 2;
 };
-sourcemap__$Mapping_Mapping_$Impl_$.hasColumn = function(this1) {
+sourcemap._Mapping.Mapping_Impl_.hasColumn = function(this1) {
 	return this1.length > 3;
 };
-sourcemap__$Mapping_Mapping_$Impl_$.hasName = function(this1) {
+sourcemap._Mapping.Mapping_Impl_.hasName = function(this1) {
 	return this1.length > 4;
 };
-sourcemap__$Mapping_Mapping_$Impl_$.offsetGeneratedColumn = function(this1,offset) {
+sourcemap._Mapping.Mapping_Impl_.offsetGeneratedColumn = function(this1,offset) {
 	this1[0] += offset;
 };
-sourcemap__$Mapping_Mapping_$Impl_$.offsetSource = function(this1,offset) {
+sourcemap._Mapping.Mapping_Impl_.offsetSource = function(this1,offset) {
 	this1[1] += offset;
 };
-sourcemap__$Mapping_Mapping_$Impl_$.offsetLine = function(this1,offset) {
+sourcemap._Mapping.Mapping_Impl_.offsetLine = function(this1,offset) {
 	this1[2] += offset;
 };
-sourcemap__$Mapping_Mapping_$Impl_$.offsetColumn = function(this1,offset) {
+sourcemap._Mapping.Mapping_Impl_.offsetColumn = function(this1,offset) {
 	this1[3] += offset;
 };
-sourcemap__$Mapping_Mapping_$Impl_$.offsetName = function(this1,offset) {
+sourcemap._Mapping.Mapping_Impl_.offsetName = function(this1,offset) {
 	this1[4] += offset;
 };
-sourcemap__$Mapping_Mapping_$Impl_$.get_generatedColumn = function(this1) {
+sourcemap._Mapping.Mapping_Impl_.get_generatedColumn = function(this1) {
 	return this1[0];
 };
-sourcemap__$Mapping_Mapping_$Impl_$.get_source = function(this1) {
+sourcemap._Mapping.Mapping_Impl_.get_source = function(this1) {
 	return this1[1];
 };
-sourcemap__$Mapping_Mapping_$Impl_$.get_line = function(this1) {
+sourcemap._Mapping.Mapping_Impl_.get_line = function(this1) {
 	return this1[2];
 };
-sourcemap__$Mapping_Mapping_$Impl_$.get_column = function(this1) {
+sourcemap._Mapping.Mapping_Impl_.get_column = function(this1) {
 	return this1[3];
 };
-sourcemap__$Mapping_Mapping_$Impl_$.get_name = function(this1) {
+sourcemap._Mapping.Mapping_Impl_.get_name = function(this1) {
 	return this1[4];
 };
-var sourcemap_Vlq = function() { };
-sourcemap_Vlq.__name__ = true;
-sourcemap_Vlq.base64Decode = function(charCode) {
+sourcemap.Vlq = function() { };
+sourcemap.Vlq.__name__ = true;
+sourcemap.Vlq.base64Decode = function(charCode) {
 	if(97 <= charCode) {
 		return charCode - 97 + 26;
 	}
@@ -4354,7 +4376,7 @@ sourcemap_Vlq.base64Decode = function(charCode) {
 	}
 	return 63;
 };
-sourcemap_Vlq.decode = function(vlq) {
+sourcemap.Vlq.decode = function(vlq) {
 	var data = [0,0,0,0];
 	var index = -1;
 	var _g1 = 0;
@@ -4406,21 +4428,21 @@ var Enum = { };
 var __map_reserved = {}
 Main.PROJECT_FILE = "vshaxe-project.json";
 Main.DEFAULTS = "{\r\n    \"haxelibs\": [\r\n        {\r\n            \"name\": \"hxnodejs\",\r\n            \"installArgs\": [\"git\", \"hxnodejs\", \"https://github.com/HaxeFoundation/hxnodejs\"]\r\n        },\r\n        {\r\n            \"name\": \"jstack\",\r\n            \"installArgs\": [\"install\", \"jstack\"]\r\n        }\r\n    ],\r\n    \"targets\": [\r\n        {\r\n            \"name\": \"empty\"\r\n        },\r\n        {\r\n            \"name\": \"vshaxe-node\",\r\n            \"debug\": {\r\n                \"args\": {\r\n                    \"defines\": [\"js_unflatten\"],\r\n                    \"haxelibs\": [\"jstack\"]\r\n                }\r\n            },\r\n            \"args\": {\r\n                \"haxelibs\": [\"hxnodejs\"]\r\n            }\r\n        }\r\n    ]\r\n}";
-builders_VSCodeTasksBuilder.problemMatcher = { owner : "haxe", pattern : { "regexp" : "^(.+):(\\d+): (?:lines \\d+-(\\d+)|character(?:s (\\d+)-| )(\\d+)) : (?:(Warning) : )?(.*)$", "file" : 1, "line" : 2, "endLine" : 3, "column" : 4, "endColumn" : 5, "severity" : 6, "message" : 7}};
-builders_VSCodeTasksBuilder.template = { version : "2.0.0", command : "haxelib", suppressTaskName : true, tasks : []};
-builders_VSCodeTasksBuilder.defaultTasks = [{ taskName : "{install-all}", args : builders_VSCodeTasksBuilder.makeArgs(["--mode","install","--target","all"]), problemMatcher : builders_VSCodeTasksBuilder.problemMatcher},{ taskName : "{generate-complete-hxml}", args : builders_VSCodeTasksBuilder.makeArgs(["--display","--target","all"]), problemMatcher : builders_VSCodeTasksBuilder.problemMatcher},{ taskName : "{generate-vscode-tasks}", args : builders_VSCodeTasksBuilder.makeArgs(["--gen-tasks","--target","all"]), problemMatcher : builders_VSCodeTasksBuilder.problemMatcher}];
-builders_Warning.Message = "This file is generated using the build script - DO NOT EDIT MANUALLY!";
-js_Boot.__toStr = ({ }).toString;
-jstack_js_JStack.instance = new jstack_js_JStack();
-jstack_js_JStack.stackFile = new EReg("^at (.+?js):([0-9]+):([0-9]+)$","");
-jstack_js_JStack.stackFunctionFile = new EReg("^at (.+?) \\((.+?js):([0-9]+):([0-9]+)\\)$","");
-sourcemap__$Mapping_Mapping_$Impl_$.GENERATED_COLUMN = 0;
-sourcemap__$Mapping_Mapping_$Impl_$.SOURCE = 1;
-sourcemap__$Mapping_Mapping_$Impl_$.LINE = 2;
-sourcemap__$Mapping_Mapping_$Impl_$.COLUMN = 3;
-sourcemap__$Mapping_Mapping_$Impl_$.NAME = 4;
-sourcemap_Vlq.SHIFT = 5;
-sourcemap_Vlq.MASK = 31;
+builders.VSCodeTasksBuilder.problemMatcher = { owner : "haxe", pattern : { "regexp" : "^(.+):(\\d+): (?:lines \\d+-(\\d+)|character(?:s (\\d+)-| )(\\d+)) : (?:(Warning) : )?(.*)$", "file" : 1, "line" : 2, "endLine" : 3, "column" : 4, "endColumn" : 5, "severity" : 6, "message" : 7}};
+builders.VSCodeTasksBuilder.template = { version : "2.0.0", command : "haxelib", suppressTaskName : true, tasks : []};
+builders.VSCodeTasksBuilder.defaultTasks = [{ taskName : "{install-all}", args : builders.VSCodeTasksBuilder.makeArgs(["--mode","install","--target","all"]), problemMatcher : builders.VSCodeTasksBuilder.problemMatcher},{ taskName : "{generate-complete-hxml}", args : builders.VSCodeTasksBuilder.makeArgs(["--display","--target","all"]), problemMatcher : builders.VSCodeTasksBuilder.problemMatcher},{ taskName : "{generate-vscode-tasks}", args : builders.VSCodeTasksBuilder.makeArgs(["--gen-tasks","--target","all"]), problemMatcher : builders.VSCodeTasksBuilder.problemMatcher}];
+builders.Warning.Message = "This file is generated using the build script - DO NOT EDIT MANUALLY!";
+js.Boot.__toStr = ({ }).toString;
+jstack.js.JStack.instance = new jstack.js.JStack();
+jstack.js.JStack.stackFile = new EReg("^at (.+?js):([0-9]+):([0-9]+)$","");
+jstack.js.JStack.stackFunctionFile = new EReg("^at (.+?) \\((.+?js):([0-9]+):([0-9]+)\\)$","");
+sourcemap._Mapping.Mapping_Impl_.GENERATED_COLUMN = 0;
+sourcemap._Mapping.Mapping_Impl_.SOURCE = 1;
+sourcemap._Mapping.Mapping_Impl_.LINE = 2;
+sourcemap._Mapping.Mapping_Impl_.COLUMN = 3;
+sourcemap._Mapping.Mapping_Impl_.NAME = 4;
+sourcemap.Vlq.SHIFT = 5;
+sourcemap.Vlq.MASK = 31;
 Main.main();
 })(typeof window != "undefined" ? window : typeof global != "undefined" ? global : typeof self != "undefined" ? self : this);
 

@@ -73,7 +73,10 @@ class BaseBuilder implements IBuilder {
         if (recurse) {
             switch (resolveParent(target)) {
                 case Some(parent):
-                    hxmls.push(resolveTargetHxml(parent, debug, flatten, display, false));
+                    if (parent != null) {
+                        var inheritedHxml = resolveTargetHxml(parent, debug, flatten, display, false);
+                        if (inheritedHxml != null) hxmls.push(inheritedHxml);
+                    }
                 case None:
             }
         }
