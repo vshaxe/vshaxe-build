@@ -15,7 +15,7 @@
             "inherit": "vshaxe-node",
             "name": "run-script-node",
             "args": {
-                "classPaths": ["src"],
+                "classPaths": ["src", "api"],
                 "haxelibs": ["hxargs", "json2object"],
                 "deadCodeElimination": "full",
                 "defines": ["analyzer-optimize"],
