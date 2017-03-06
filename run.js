@@ -49,9 +49,6 @@ ArrayTools.idx = function(a,i) {
 		return a[a.length + i];
 	}
 };
-ArrayTools.flatMap = function(array,callback) {
-	return ArrayTools.flatten(array.map(callback));
-};
 ArrayTools.flatten = function(array) {
 	return ArrayTools.reduce(array,function(acc,element) {
 		return acc.concat(element);
@@ -724,24 +721,6 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_displ
 		}
 		return this.object;
 	}
-	,fromJson: function(jsonString,filename) {
-		this.putils = new json2object.PosUtils(jsonString);
-		try {
-			var json = new hxjsonast.Parser(jsonString,filename).parseRec();
-			var _g = json.value;
-			if(_g[1] == 2) {
-				var fields = _g[2];
-				return this.loadJson(fields,json.pos);
-			} else {
-				return null;
-			}
-		} catch( e ) {
-			if (e instanceof js._Boot.HaxeError) e = e.val;
-			if( js.Boot.__instanceof(e,hxjsonast.Error) ) {
-				throw new js._Boot.HaxeError(json2object.Error.ParserError(e.message,this.putils.convertPosition(e.pos)));
-			} else throw(e);
-		}
-	}
 	,__class__: JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name___Inst_StringtargetDependencies_
 };
 var JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_installCommands_targetDependencies_ = function(warnings,putils) {
@@ -1074,24 +1053,6 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_installCommands_targe
 			}
 		}
 		return this.object;
-	}
-	,fromJson: function(jsonString,filename) {
-		this.putils = new json2object.PosUtils(jsonString);
-		try {
-			var json = new hxjsonast.Parser(jsonString,filename).parseRec();
-			var _g = json.value;
-			if(_g[1] == 2) {
-				var fields = _g[2];
-				return this.loadJson(fields,json.pos);
-			} else {
-				return null;
-			}
-		} catch( e ) {
-			if (e instanceof js._Boot.HaxeError) e = e.val;
-			if( js.Boot.__instanceof(e,hxjsonast.Error) ) {
-				throw new js._Boot.HaxeError(json2object.Error.ParserError(e.message,this.putils.convertPosition(e.pos)));
-			} else throw(e);
-		}
 	}
 	,__class__: JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_installCommands_targetDependencies_
 };
@@ -1485,24 +1446,6 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInli
 		}
 		return this.object;
 	}
-	,fromJson: function(jsonString,filename) {
-		this.putils = new json2object.PosUtils(jsonString);
-		try {
-			var json = new hxjsonast.Parser(jsonString,filename).parseRec();
-			var _g = json.value;
-			if(_g[1] == 2) {
-				var fields = _g[2];
-				return this.loadJson(fields,json.pos);
-			} else {
-				return null;
-			}
-		} catch( e ) {
-			if (e instanceof js._Boot.HaxeError) e = e.val;
-			if( js.Boot.__instanceof(e,hxjsonast.Error) ) {
-				throw new js._Boot.HaxeError(json2object.Error.ParserError(e.message,this.putils.convertPosition(e.pos)));
-			} else throw(e);
-		}
-	}
 	,__class__: JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInline_output_packageName_workingDirectory_
 };
 var JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_ = function(warnings,putils) {
@@ -1801,24 +1744,6 @@ JsonParser_Ano_installArgs___Abstract_ArrayHandle___Inst_Stringname___Inst_Strin
 		}
 		return this.object;
 	}
-	,fromJson: function(jsonString,filename) {
-		this.putils = new json2object.PosUtils(jsonString);
-		try {
-			var json = new hxjsonast.Parser(jsonString,filename).parseRec();
-			var _g = json.value;
-			if(_g[1] == 2) {
-				var fields = _g[2];
-				return this.loadJson(fields,json.pos);
-			} else {
-				return null;
-			}
-		} catch( e ) {
-			if (e instanceof js._Boot.HaxeError) e = e.val;
-			if( js.Boot.__instanceof(e,hxjsonast.Error) ) {
-				throw new js._Boot.HaxeError(json2object.Error.ParserError(e.message,this.putils.convertPosition(e.pos)));
-			} else throw(e);
-		}
-	}
 	,__class__: JsonParser_Ano_installArgs___Abstract_ArrayHandle___Inst_Stringname___Inst_String
 };
 var JsonParser_Ano_path___Inst_Stringtarget___Abstract_HaxeTarget = function(warnings,putils) {
@@ -1911,24 +1836,6 @@ JsonParser_Ano_path___Inst_Stringtarget___Abstract_HaxeTarget.prototype = {
 			}
 		}
 		return this.object;
-	}
-	,fromJson: function(jsonString,filename) {
-		this.putils = new json2object.PosUtils(jsonString);
-		try {
-			var json = new hxjsonast.Parser(jsonString,filename).parseRec();
-			var _g = json.value;
-			if(_g[1] == 2) {
-				var fields = _g[2];
-				return this.loadJson(fields,json.pos);
-			} else {
-				return null;
-			}
-		} catch( e ) {
-			if (e instanceof js._Boot.HaxeError) e = e.val;
-			if( js.Boot.__instanceof(e,hxjsonast.Error) ) {
-				throw new js._Boot.HaxeError(json2object.Error.ParserError(e.message,this.putils.convertPosition(e.pos)));
-			} else throw(e);
-		}
 	}
 	,__class__: JsonParser_Ano_path___Inst_Stringtarget___Abstract_HaxeTarget
 };
@@ -2066,8 +1973,7 @@ var Main = function() {
 				__index += 0;
 				break;
 			default:
-				var arg = _g;
-				throw new js._Boot.HaxeError("Unknown command: " + Std.string(arg));
+				throw new js._Boot.HaxeError("Unknown command: " + Std.string(_g));
 			}
 		}
 	};
@@ -2139,9 +2045,8 @@ Main.prototype = {
 			++_g1;
 			_g.push(Std.string(value1).toLowerCase());
 		}
-		var validStrValues = _g;
-		if(validStrValues.indexOf(Std.string(value)) == -1) {
-			this.cli.fail("Unknown " + name + " '" + Std.string(value) + "'. Valid values are: " + Std.string(validStrValues));
+		if(_g.indexOf(Std.string(value)) == -1) {
+			this.cli.fail("Unknown " + name + " '" + Std.string(value) + "'. Valid values are: " + Std.string(_g));
 		}
 	}
 	,getEnumName: function(cliName) {
@@ -2287,29 +2192,6 @@ SourceMap.prototype = {
 		}
 		return pos;
 	}
-	,eachMapping: function(callback) {
-		var _g1 = 0;
-		var _g = this.mappings.length;
-		while(_g1 < _g) {
-			var line = _g1++;
-			var _g2 = 0;
-			var _g3 = this.mappings[line];
-			while(_g2 < _g3.length) {
-				var mapping = _g3[_g2];
-				++_g2;
-				var pos = { generatedLine : line + 1, generatedColumn : mapping[0]};
-				if(mapping.length > 1) {
-					pos.originalLine = mapping[2] + 1;
-					pos.originalColumn = mapping[3];
-					pos.source = this.sourceRoot + this.sources[mapping[1]];
-					if(mapping.length > 4) {
-						pos.name = this.names[mapping[4]];
-					}
-				}
-				callback(pos);
-			}
-		}
-	}
 	,parse: function(json) {
 		var data = JSON.parse(json);
 		if(data == null) {
@@ -2375,8 +2257,7 @@ SourceMap.prototype = {
 					}
 					data1[i] = (value & 1) == 1 ? -(value >> 1) : value >> 1;
 				}
-				var this1 = data1;
-				var mapping = this1;
+				var mapping = data1;
 				this.mappings[l][s] = mapping;
 				mapping[0] += previousGeneratedColumn;
 				if(mapping.length > 1) {
@@ -2459,76 +2340,6 @@ StringTools.rtrim = function(s) {
 StringTools.trim = function(s) {
 	return StringTools.ltrim(StringTools.rtrim(s));
 };
-var haxe = {};
-haxe.io = {};
-haxe.io.Output = function() { };
-haxe.io.Output.__name__ = true;
-var _Sys = {};
-_Sys.FileOutput = function(fd) {
-	this.fd = fd;
-};
-_Sys.FileOutput.__name__ = true;
-_Sys.FileOutput.__super__ = haxe.io.Output;
-_Sys.FileOutput.prototype = $extend(haxe.io.Output.prototype,{
-	writeByte: function(c) {
-		js.node.Fs.writeSync(this.fd,String.fromCharCode(c));
-	}
-	,writeBytes: function(s,pos,len) {
-		var data = s.b;
-		return js.node.Fs.writeSync(this.fd,new js.node.buffer.Buffer(data.buffer,data.byteOffset,data.byteLength),pos,len);
-	}
-	,writeString: function(s) {
-		js.node.Fs.writeSync(this.fd,s);
-	}
-	,flush: function() {
-		js.node.Fs.fsyncSync(this.fd);
-	}
-	,close: function() {
-		js.node.Fs.closeSync(this.fd);
-	}
-	,__class__: _Sys.FileOutput
-});
-haxe.io.Input = function() { };
-haxe.io.Input.__name__ = true;
-_Sys.FileInput = function(fd) {
-	this.fd = fd;
-};
-_Sys.FileInput.__name__ = true;
-_Sys.FileInput.__super__ = haxe.io.Input;
-_Sys.FileInput.prototype = $extend(haxe.io.Input.prototype,{
-	readByte: function() {
-		var buf = new js.node.buffer.Buffer(1);
-		try {
-			js.node.Fs.readSync(this.fd,buf,0,1,null);
-		} catch( e ) {
-			if (e instanceof js._Boot.HaxeError) e = e.val;
-			if(e.code == "EOF") {
-				throw new js._Boot.HaxeError(new haxe.io.Eof());
-			} else {
-				throw new js._Boot.HaxeError(haxe.io.Error.Custom(e));
-			}
-		}
-		return buf[0];
-	}
-	,readBytes: function(s,pos,len) {
-		var data = s.b;
-		var buf = new js.node.buffer.Buffer(data.buffer,data.byteOffset,data.byteLength);
-		try {
-			return js.node.Fs.readSync(this.fd,buf,pos,len,null);
-		} catch( e ) {
-			if (e instanceof js._Boot.HaxeError) e = e.val;
-			if(e.code == "EOF") {
-				throw new js._Boot.HaxeError(new haxe.io.Eof());
-			} else {
-				throw new js._Boot.HaxeError(haxe.io.Error.Custom(e));
-			}
-		}
-	}
-	,close: function() {
-		js.node.Fs.closeSync(this.fd);
-	}
-	,__class__: _Sys.FileInput
-});
 var Type = function() { };
 Type.__name__ = true;
 Type.createEnum = function(e,constr,params) {
@@ -2550,9 +2361,6 @@ Type.createEnum = function(e,constr,params) {
 var builders = {};
 builders.IBuilder = function() { };
 builders.IBuilder.__name__ = true;
-builders.IBuilder.prototype = {
-	__class__: builders.IBuilder
-};
 builders.BaseBuilder = function(cli,projects) {
 	this.cli = cli;
 	this.projects = projects;
@@ -2594,8 +2402,6 @@ builders.BaseBuilder.prototype = {
 				};
 			})([projectBaseDir],[$bind(this,this.adjustWorkingDirectories)]));
 		}
-	}
-	,build: function(cliArgs) {
 	}
 	,resolveHaxelib: function(name) {
 		var loop = null;
@@ -3012,8 +2818,7 @@ builders.VSCodeTasksBuilder.prototype = $extend(builders.BaseBuilder.prototype,{
 	}
 	,__class__: builders.VSCodeTasksBuilder
 });
-builders.Warning = function() { };
-builders.Warning.__name__ = true;
+var haxe = {};
 haxe.StackItem = { __ename__ : true, __constructs__ : ["CFunction","Module","FilePos","Method","LocalFunction"] };
 haxe.StackItem.CFunction = ["CFunction",0];
 haxe.StackItem.CFunction.toString = $estr;
@@ -3074,8 +2879,7 @@ haxe.CallStack.itemToString = function(b,s) {
 		break;
 	case 1:
 		var m = s[2];
-		b.b += "module ";
-		b.b += m == null ? "null" : "" + m;
+		b.b = (b.b += "module ") + (m == null ? "null" : "" + m);
 		break;
 	case 2:
 		var line = s[4];
@@ -3085,8 +2889,7 @@ haxe.CallStack.itemToString = function(b,s) {
 			haxe.CallStack.itemToString(b,s1);
 			b.b += " (";
 		}
-		b.b += file == null ? "null" : "" + file;
-		b.b += " line ";
+		b.b = (b.b += file == null ? "null" : "" + file) + " line ";
 		b.b += line == null ? "null" : "" + line;
 		if(s1 != null) {
 			b.b += ")";
@@ -3095,14 +2898,12 @@ haxe.CallStack.itemToString = function(b,s) {
 	case 3:
 		var meth = s[3];
 		var cname = s[2];
-		b.b += cname == null ? "null" : "" + cname;
-		b.b += ".";
+		b.b = (b.b += cname == null ? "null" : "" + cname) + ".";
 		b.b += meth == null ? "null" : "" + meth;
 		break;
 	case 4:
 		var n = s[2];
-		b.b += "local function #";
-		b.b += n == null ? "null" : "" + n;
+		b.b = (b.b += "local function #") + (n == null ? "null" : "" + n);
 		break;
 	}
 };
@@ -3275,13 +3076,13 @@ haxe.ds.StringMap.prototype = {
 	}
 	,__class__: haxe.ds.StringMap
 };
+haxe.io = {};
 haxe.io.Bytes = function() { };
 haxe.io.Bytes.__name__ = true;
 haxe.io.Bytes.prototype = {
 	__class__: haxe.io.Bytes
 };
-haxe.io.Eof = function() {
-};
+haxe.io.Eof = function() { };
 haxe.io.Eof.__name__ = true;
 haxe.io.Eof.prototype = {
 	toString: function() {
@@ -3289,17 +3090,6 @@ haxe.io.Eof.prototype = {
 	}
 	,__class__: haxe.io.Eof
 };
-haxe.io.Error = { __ename__ : true, __constructs__ : ["Blocked","Overflow","OutsideBounds","Custom"] };
-haxe.io.Error.Blocked = ["Blocked",0];
-haxe.io.Error.Blocked.toString = $estr;
-haxe.io.Error.Blocked.__enum__ = haxe.io.Error;
-haxe.io.Error.Overflow = ["Overflow",1];
-haxe.io.Error.Overflow.toString = $estr;
-haxe.io.Error.Overflow.__enum__ = haxe.io.Error;
-haxe.io.Error.OutsideBounds = ["OutsideBounds",2];
-haxe.io.Error.OutsideBounds.toString = $estr;
-haxe.io.Error.OutsideBounds.__enum__ = haxe.io.Error;
-haxe.io.Error.Custom = function(e) { var $x = ["Custom",3,e]; $x.__enum__ = haxe.io.Error; $x.toString = $estr; return $x; };
 haxe.io.Path = function(path) {
 	switch(path) {
 	case ".":case "..":
@@ -3351,14 +3141,13 @@ haxe.io.Path.join = function(paths) {
 	return haxe.io.Path.normalize(path);
 };
 haxe.io.Path.normalize = function(path) {
-	var slash = "/";
-	path = path.split("\\").join(slash);
-	if(path == slash) {
-		return slash;
+	path = path.split("\\").join("/");
+	if(path == "/") {
+		return "/";
 	}
 	var target = [];
 	var _g = 0;
-	var _g1 = path.split(slash);
+	var _g1 = path.split("/");
 	while(_g < _g1.length) {
 		var token = _g1[_g];
 		++_g;
@@ -3368,9 +3157,9 @@ haxe.io.Path.normalize = function(path) {
 			target.push(token);
 		}
 	}
-	var tmp = target.join(slash);
+	var tmp = target.join("/");
 	var regex_r = new RegExp("([^:])/+","g".split("u").join(""));
-	var result = tmp.replace(regex_r,"$1" + slash);
+	tmp.replace(regex_r,"$1" + "/");
 	var acc_b = "";
 	var colon = false;
 	var slashes = false;
@@ -3384,13 +3173,12 @@ haxe.io.Path.normalize = function(path) {
 			if(!colon) {
 				slashes = true;
 			} else {
-				var i1 = _g21;
 				colon = false;
 				if(slashes) {
 					acc_b += "/";
 					slashes = false;
 				}
-				acc_b += String.fromCharCode(i1);
+				acc_b += String.fromCharCode(_g21);
 			}
 			break;
 		case 58:
@@ -3398,13 +3186,12 @@ haxe.io.Path.normalize = function(path) {
 			colon = true;
 			break;
 		default:
-			var i2 = _g21;
 			colon = false;
 			if(slashes) {
 				acc_b += "/";
 				slashes = false;
 			}
-			acc_b += String.fromCharCode(i2);
+			acc_b += String.fromCharCode(_g21);
 		}
 	}
 	return acc_b;
@@ -3430,9 +3217,6 @@ haxe.io.Path.addTrailingSlash = function(path) {
 haxe.io.Path.prototype = {
 	__class__: haxe.io.Path
 };
-var hxargs = {};
-hxargs.Args = function() { };
-hxargs.Args.__name__ = true;
 var hxjsonast = {};
 hxjsonast.Error = function(message,pos) {
 	this.message = message;
@@ -3474,9 +3258,6 @@ hxjsonast.Parser = function(source,filename) {
 	this.pos = 0;
 };
 hxjsonast.Parser.__name__ = true;
-hxjsonast.Parser.parse = function(source,filename) {
-	return new hxjsonast.Parser(source,filename).parseRec();
-};
 hxjsonast.Parser.prototype = {
 	parseRec: function() {
 		while(true) {
@@ -3721,82 +3502,6 @@ hxjsonast.Parser.prototype = {
 			buf.b += len1 == null ? HxOverrides.substr(s1,start,null) : HxOverrides.substr(s1,start,len1);
 			return buf.b;
 		}
-	}
-	,parseNumber: function(c) {
-		var start = this.pos - 1;
-		var minus = c == 45;
-		var digit = !minus;
-		var zero = c == 48;
-		var point = false;
-		var e = false;
-		var pm = false;
-		var end = false;
-		while(true) {
-			var _g = this.source.charCodeAt(this.pos++);
-			switch(_g) {
-			case 43:case 45:
-				if(!e || pm) {
-					this.invalidNumber(start);
-				}
-				digit = false;
-				pm = true;
-				break;
-			case 46:
-				if(minus || point) {
-					this.invalidNumber(start);
-				}
-				digit = false;
-				point = true;
-				break;
-			case 48:
-				if(zero && !point) {
-					this.invalidNumber(start);
-				}
-				if(minus) {
-					minus = false;
-					zero = true;
-				}
-				digit = true;
-				break;
-			case 49:case 50:case 51:case 52:case 53:case 54:case 55:case 56:case 57:
-				if(zero && !point) {
-					this.invalidNumber(start);
-				}
-				if(minus) {
-					minus = false;
-				}
-				digit = true;
-				zero = false;
-				break;
-			case 69:case 101:
-				if(minus || zero || e) {
-					this.invalidNumber(start);
-				}
-				digit = false;
-				e = true;
-				break;
-			default:
-				if(!digit) {
-					this.invalidNumber(start);
-				}
-				this.pos--;
-				end = true;
-			}
-			if(end) {
-				break;
-			}
-		}
-		var s = HxOverrides.substr(this.source,start,this.pos - start);
-		return new hxjsonast.Json(hxjsonast.JsonValue.JNumber(s),new hxjsonast.Position(this.filename,start,this.pos));
-	}
-	,nextChar: function() {
-		return this.source.charCodeAt(this.pos++);
-	}
-	,mk: function(pos,value) {
-		return new hxjsonast.Json(value,pos);
-	}
-	,mkPos: function(min,max) {
-		return new hxjsonast.Position(this.filename,min,max);
 	}
 	,invalidChar: function() {
 		this.pos--;
@@ -4087,8 +3792,6 @@ json2object.ErrorUtils.convertError = function(e) {
 json2object.ErrorUtils.convertErrorArray = function(e) {
 	return e.map(json2object.ErrorUtils.convertError).join("\n");
 };
-json2object.JsonParser = function() { };
-json2object.JsonParser.__name__ = true;
 json2object.PosUtils = function(content) {
 	this.linesInfo = [];
 	var s = 0;
@@ -4140,8 +3843,6 @@ json2object.PosUtils.prototype = {
 	,__class__: json2object.PosUtils
 };
 var jstack = {};
-jstack.Tools = function() { };
-jstack.Tools.__name__ = true;
 jstack.js = {};
 jstack.js.JStack = function() {
 	this.ready = false;
@@ -4302,121 +4003,6 @@ jstack.js.StackPos.prototype = {
 	}
 	,__class__: jstack.js.StackPos
 };
-var sourcemap = {};
-sourcemap._Mapping = {};
-sourcemap._Mapping.Mapping_Impl_ = {};
-sourcemap._Mapping.Mapping_Impl_.__name__ = true;
-sourcemap._Mapping.Mapping_Impl_._new = function(data) {
-	var this1 = data;
-	return this1;
-};
-sourcemap._Mapping.Mapping_Impl_.getSourcePos = function(this1,map,generatedLine) {
-	var pos = { generatedLine : generatedLine, generatedColumn : this1[0]};
-	if(this1.length > 1) {
-		pos.originalLine = this1[2] + 1;
-		pos.originalColumn = this1[3];
-		pos.source = map.sourceRoot + map.sources[this1[1]];
-		if(this1.length > 4) {
-			pos.name = map.names[this1[4]];
-		}
-	}
-	return pos;
-};
-sourcemap._Mapping.Mapping_Impl_.hasSource = function(this1) {
-	return this1.length > 1;
-};
-sourcemap._Mapping.Mapping_Impl_.hasLine = function(this1) {
-	return this1.length > 2;
-};
-sourcemap._Mapping.Mapping_Impl_.hasColumn = function(this1) {
-	return this1.length > 3;
-};
-sourcemap._Mapping.Mapping_Impl_.hasName = function(this1) {
-	return this1.length > 4;
-};
-sourcemap._Mapping.Mapping_Impl_.offsetGeneratedColumn = function(this1,offset) {
-	this1[0] += offset;
-};
-sourcemap._Mapping.Mapping_Impl_.offsetSource = function(this1,offset) {
-	this1[1] += offset;
-};
-sourcemap._Mapping.Mapping_Impl_.offsetLine = function(this1,offset) {
-	this1[2] += offset;
-};
-sourcemap._Mapping.Mapping_Impl_.offsetColumn = function(this1,offset) {
-	this1[3] += offset;
-};
-sourcemap._Mapping.Mapping_Impl_.offsetName = function(this1,offset) {
-	this1[4] += offset;
-};
-sourcemap._Mapping.Mapping_Impl_.get_generatedColumn = function(this1) {
-	return this1[0];
-};
-sourcemap._Mapping.Mapping_Impl_.get_source = function(this1) {
-	return this1[1];
-};
-sourcemap._Mapping.Mapping_Impl_.get_line = function(this1) {
-	return this1[2];
-};
-sourcemap._Mapping.Mapping_Impl_.get_column = function(this1) {
-	return this1[3];
-};
-sourcemap._Mapping.Mapping_Impl_.get_name = function(this1) {
-	return this1[4];
-};
-sourcemap.Vlq = function() { };
-sourcemap.Vlq.__name__ = true;
-sourcemap.Vlq.base64Decode = function(charCode) {
-	if(97 <= charCode) {
-		return charCode - 97 + 26;
-	}
-	if(65 <= charCode) {
-		return charCode - 65;
-	}
-	if(48 <= charCode) {
-		return charCode - 48 + 52;
-	}
-	if(charCode == 43) {
-		return 62;
-	}
-	return 63;
-};
-sourcemap.Vlq.decode = function(vlq) {
-	var data = [0,0,0,0];
-	var index = -1;
-	var _g1 = 0;
-	var _g = data.length;
-	while(_g1 < _g) {
-		var i = _g1++;
-		var value = 0;
-		var shift = 0;
-		var digit;
-		var masked;
-		while(true) {
-			var charCode = vlq.charCodeAt(++index);
-			if(97 <= charCode) {
-				digit = charCode - 97 + 26;
-			} else if(65 <= charCode) {
-				digit = charCode - 65;
-			} else if(48 <= charCode) {
-				digit = charCode - 48 + 52;
-			} else if(charCode == 43) {
-				digit = 62;
-			} else {
-				digit = 63;
-			}
-			masked = digit & 31;
-			value += masked << shift;
-			shift += 5;
-			if(!(digit != masked)) {
-				break;
-			}
-		}
-		data[i] = (value & 1) == 1 ? -(value >> 1) : value >> 1;
-	}
-	var this1 = data;
-	return this1;
-};
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
 String.prototype.__class__ = String;
@@ -4431,22 +4017,13 @@ Bool.__ename__ = ["Bool"];
 var Class = { __name__ : ["Class"]};
 var Enum = { };
 var __map_reserved = {}
-Main.PROJECT_FILE = "vshaxe-build.json";
 Main.DEFAULTS = "{\r\n    \"haxelibs\": [\r\n        {\r\n            \"name\": \"hxnodejs\",\r\n            \"installArgs\": [\"git\", \"hxnodejs\", \"https://github.com/HaxeFoundation/hxnodejs\"]\r\n        },\r\n        {\r\n            \"name\": \"jstack\",\r\n            \"installArgs\": [\"install\", \"jstack\"]\r\n        }\r\n    ],\r\n    \"targets\": [\r\n        {\r\n            \"name\": \"empty\"\r\n        },\r\n        {\r\n            \"name\": \"vshaxe-node\",\r\n            \"debug\": {\r\n                \"args\": {\r\n                    \"defines\": [\"js_unflatten\"],\r\n                    \"haxelibs\": [\"jstack\"]\r\n                }\r\n            },\r\n            \"args\": {\r\n                \"haxelibs\": [\"hxnodejs\"]\r\n            }\r\n        }\r\n    ]\r\n}";
 builders.VSCodeTasksBuilder.problemMatcher = { owner : "haxe", pattern : { "regexp" : "^(.+):(\\d+): (?:lines \\d+-(\\d+)|character(?:s (\\d+)-| )(\\d+)) : (?:(Warning) : )?(.*)$", "file" : 1, "line" : 2, "endLine" : 3, "column" : 4, "endColumn" : 5, "severity" : 6, "message" : 7}};
 builders.VSCodeTasksBuilder.template = { version : "2.0.0", command : "haxelib", suppressTaskName : true, tasks : []};
-builders.Warning.Message = "This file is generated with vshaxe-build - DO NOT EDIT MANUALLY!";
 js.Boot.__toStr = ({ }).toString;
 jstack.js.JStack.instance = new jstack.js.JStack();
 jstack.js.JStack.stackFile = new EReg("^at (.+?js):([0-9]+):([0-9]+)$","");
 jstack.js.JStack.stackFunctionFile = new EReg("^at (.+?) \\((.+?js):([0-9]+):([0-9]+)\\)$","");
-sourcemap._Mapping.Mapping_Impl_.GENERATED_COLUMN = 0;
-sourcemap._Mapping.Mapping_Impl_.SOURCE = 1;
-sourcemap._Mapping.Mapping_Impl_.LINE = 2;
-sourcemap._Mapping.Mapping_Impl_.COLUMN = 3;
-sourcemap._Mapping.Mapping_Impl_.NAME = 4;
-sourcemap.Vlq.SHIFT = 5;
-sourcemap.Vlq.MASK = 31;
 Main.main();
 })(typeof window != "undefined" ? window : typeof global != "undefined" ? global : typeof self != "undefined" ? self : this);
 

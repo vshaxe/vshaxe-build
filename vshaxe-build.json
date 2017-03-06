@@ -16,6 +16,8 @@
             "args": {
                 "classPaths": ["src"],
                 "haxelibs": ["hxargs", "json2object"],
+                "deadCodeElimination": "full",
+                "defines": ["analyzer-optimize"],
                 "main": "Main",
                 "output": {
                     "target": "js",
