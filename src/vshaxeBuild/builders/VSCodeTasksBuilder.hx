@@ -1,4 +1,4 @@
-package builders;
+package vshaxeBuild.builders;
 
 class VSCodeTasksBuilder extends BaseBuilder {
     static var problemMatcher = {

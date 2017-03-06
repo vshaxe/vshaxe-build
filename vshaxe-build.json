@@ -18,7 +18,7 @@
                 "haxelibs": ["hxargs", "json2object"],
                 "deadCodeElimination": "full",
                 "defines": ["analyzer-optimize"],
-                "main": "Main",
+                "main": "vshaxeBuild.Main",
                 "output": {
                     "target": "js",
                     "path": "run.js"

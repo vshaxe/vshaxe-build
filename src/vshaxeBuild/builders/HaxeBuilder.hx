@@ -1,4 +1,4 @@
-package builders;
+package vshaxeBuild.builders;
 
 class HaxeBuilder extends BaseBuilder {
     override public function build(cliArgs:CliArguments) {

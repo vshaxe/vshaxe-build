@@ -1,4 +1,4 @@
-package;
+package vshaxeBuild;
 
 @:publicFields
 class CliTools {

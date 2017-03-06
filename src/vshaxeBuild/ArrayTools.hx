@@ -1,4 +1,4 @@
-package;
+package vshaxeBuild;
 
 class ArrayTools {
     public static function filterDuplicates<T>(tasks:Array<T>, filter:T->T->Bool):Array<T> {
@@ -12,7 +12,7 @@ class ArrayTools {
         }
         return uniqueTasks;
     }
-    
+
     public static function findNamed<T:Named>(a:ArrayHandle<T>, name:String):T {
         for (e in a)
             if (e.name == name)

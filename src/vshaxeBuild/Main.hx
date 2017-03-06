@@ -1,6 +1,6 @@
-package;
+package vshaxeBuild;
 
-import builders.*;
+import vshaxeBuild.builders.*;
 #if !macro
 import json2object.JsonParser;
 #end

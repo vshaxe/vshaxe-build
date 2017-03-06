@@ -1,4 +1,4 @@
-package builders;
+package vshaxeBuild.builders;
 
 class DisplayHxmlBuilder extends BaseBuilder {
     override public function build(cliArgs:CliArguments) {
