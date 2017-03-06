@@ -1843,13 +1843,6 @@ Reflect.fields = function(o) {
 	}
 	return a;
 };
-Reflect.isFunction = function(f) {
-	if(typeof(f) == "function") {
-		return !(f.__name__ || f.__ename__);
-	} else {
-		return false;
-	}
-};
 Reflect.copy = function(o) {
 	var o2 = { };
 	var _g = 0;
@@ -2045,24 +2038,6 @@ StringTools.rtrim = function(s) {
 };
 StringTools.trim = function(s) {
 	return StringTools.ltrim(StringTools.rtrim(s));
-};
-var Type = function() { };
-Type.__name__ = true;
-Type.createEnum = function(e,constr,params) {
-	var f = Reflect.field(e,constr);
-	if(f == null) {
-		throw new js._Boot.HaxeError("No such constructor " + constr);
-	}
-	if(Reflect.isFunction(f)) {
-		if(params == null) {
-			throw new js._Boot.HaxeError("Constructor " + constr + " need parameters");
-		}
-		return f.apply(e,params);
-	}
-	if(params != null && params.length != 0) {
-		throw new js._Boot.HaxeError("Constructor " + constr + " does not need parameters");
-	}
-	return f;
 };
 var haxe = {};
 haxe.StackItem = { __ename__ : true, __constructs__ : ["CFunction","Module","FilePos","Method","LocalFunction"] };
@@ -3261,139 +3236,18 @@ jstack.js.StackPos.prototype = {
 };
 var vshaxeBuild = {};
 vshaxeBuild.Main = function() {
-	var cliArgs = { targets : [], debug : false, mode : vshaxeBuild.Mode.Build};
-	var dryRun = false;
-	var verbose = false;
-	var genTasks = false;
-	var display = false;
-	var dump = false;
-	var help = false;
-	var modeStr = "build";
+	this.cli = new vshaxeBuild.cli.CliTools();
 	var args = process.argv.slice(2);
 	var cwd = args.pop();
-	var argHandler_parse;
-	var argHandler_getDoc = function() {
-		return "[-t | --target] <name> : One or multiple targets to build.\n[-m | --mode] <mode>   : Build mode - accepted values are 'build', 'install', and 'both'.\n[--debug]              : Build the target(s) in debug mode. Implies -debug, -D js_unflatten and -lib jstack.\n[--dry-run]            : Perform a dry run (no command invocations). Implies -verbose.\n[-v | --verbose]       : Output the commands that are executed.\n[--gen-tasks]          : Generate a tasks.json to .vscode (and don't build anything).\n[--display]            : Generate a complete.hxml for auto completion (and don't build anything).\n[--dump]               : Dump the parsed project files to dump.json.\n[--help]               : Display this help text and exit.";
-	};
-	argHandler_parse = function(__args) {
-		var __index = 0;
-		while(__index < __args.length) {
-			var _g = __args[__index++];
-			switch(_g) {
-			case "--debug":
-				if(__index > __args.length) {
-					if(![][__args.length - 1]) {
-						throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
-					}
-				}
-				cliArgs.debug = true;
-				__index += 0;
-				break;
-			case "--display":
-				if(__index > __args.length) {
-					if(![][__args.length - 1]) {
-						throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
-					}
-				}
-				display = true;
-				__index += 0;
-				break;
-			case "--dry-run":
-				if(__index > __args.length) {
-					if(![][__args.length - 1]) {
-						throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
-					}
-				}
-				dryRun = true;
-				__index += 0;
-				break;
-			case "--dump":
-				if(__index > __args.length) {
-					if(![][__args.length - 1]) {
-						throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
-					}
-				}
-				dump = true;
-				__index += 0;
-				break;
-			case "--gen-tasks":
-				if(__index > __args.length) {
-					if(![][__args.length - 1]) {
-						throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
-					}
-				}
-				genTasks = true;
-				__index += 0;
-				break;
-			case "--help":
-				if(__index > __args.length) {
-					if(![][__args.length - 1]) {
-						throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
-					}
-				}
-				help = true;
-				__index += 0;
-				break;
-			case "--target":case "-t":
-				if(__index + 1 > __args.length) {
-					if(![false][__args.length - 1]) {
-						throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 1);
-					}
-				}
-				cliArgs.targets.push(__args[__index]);
-				++__index;
-				break;
-			case "--mode":case "-m":
-				if(__index + 1 > __args.length) {
-					if(![false][__args.length - 1]) {
-						throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 1);
-					}
-				}
-				modeStr = __args[__index];
-				++__index;
-				break;
-			case "--verbose":case "-v":
-				if(__index > __args.length) {
-					if(![][__args.length - 1]) {
-						throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
-					}
-				}
-				verbose = true;
-				__index += 0;
-				break;
-			default:
-				throw new js._Boot.HaxeError("Unknown command: " + Std.string(_g));
-			}
-		}
-	};
-	try {
-		argHandler_parse(args);
-	} catch( e ) {
-		if (e instanceof js._Boot.HaxeError) e = e.val;
-		var v = "" + Std.string(e) + "\n\nAvailable commands:\n" + argHandler_getDoc();
-		process.stdout.write(Std.string(v));
-		process.stdout.write("\n");
-		process.exit(1);
-	}
-	this.cli = new vshaxeBuild.tools.CliTools(verbose,dryRun);
-	if(args.length == 0 || help) {
-		this.cli.exit(argHandler_getDoc());
-	}
+	var parser = new vshaxeBuild.cli.CliParser(this.cli);
+	var cliArgs = parser.parse(args);
 	var projects = new vshaxeBuild.project.ProjectLoader(this.cli).load(cwd);
-	if(dump) {
+	if(cliArgs.dump) {
 		js.node.Fs.writeFileSync("dump.json",JSON.stringify(projects,null,"    "));
 	}
-	this.validateTargets(cliArgs.targets);
-	var tmp = vshaxeBuild.Mode.__constructs__.slice();
-	this.validateEnum("mode",modeStr,tmp);
-	var tmp1 = Type.createEnum(vshaxeBuild.Mode,this.getEnumName(modeStr),null);
-	cliArgs.mode = tmp1;
-	if(genTasks && display) {
-		this.cli.fail("Can only specify one: --gen-tasks or --display");
-	}
-	if(genTasks) {
+	if(cliArgs.genTasks) {
 		new vshaxeBuild.builders.VSCodeTasksBuilder(this.cli,projects).build(cliArgs);
-	} else if(display) {
+	} else if(cliArgs.display) {
 		new vshaxeBuild.builders.DisplayHxmlBuilder(this.cli,projects).build(cliArgs);
 	} else {
 		new vshaxeBuild.builders.HaxeBuilder(this.cli,projects).build(cliArgs);
@@ -3416,45 +3270,8 @@ vshaxeBuild.Main.main = function() {
 	});
 };
 vshaxeBuild.Main.prototype = {
-	validateTargets: function(targets) {
-		var targetList = "List of valid targets:\n  " + Std.string(targets);
-		if(targets.length == 0) {
-			this.cli.fail("No target(s) specified! " + targetList);
-		}
-		var _g = 0;
-		while(_g < targets.length) {
-			var target = targets[_g];
-			++_g;
-			this.validateEnum("target",target,targets);
-		}
-	}
-	,validateEnum: function(name,value,validValues) {
-		var _g = [];
-		var _g1 = 0;
-		while(_g1 < validValues.length) {
-			var value1 = validValues[_g1];
-			++_g1;
-			_g.push(Std.string(value1).toLowerCase());
-		}
-		if(_g.indexOf(Std.string(value)) == -1) {
-			this.cli.fail("Unknown " + name + " '" + Std.string(value) + "'. Valid values are: " + Std.string(_g));
-		}
-	}
-	,getEnumName: function(cliName) {
-		return HxOverrides.substr(cliName,0,1).toUpperCase() + HxOverrides.substr(cliName,1,null);
-	}
-	,__class__: vshaxeBuild.Main
+	__class__: vshaxeBuild.Main
 };
-vshaxeBuild.Mode = { __ename__ : true, __constructs__ : ["Build","Install","Both"] };
-vshaxeBuild.Mode.Build = ["Build",0];
-vshaxeBuild.Mode.Build.toString = $estr;
-vshaxeBuild.Mode.Build.__enum__ = vshaxeBuild.Mode;
-vshaxeBuild.Mode.Install = ["Install",1];
-vshaxeBuild.Mode.Install.toString = $estr;
-vshaxeBuild.Mode.Install.__enum__ = vshaxeBuild.Mode;
-vshaxeBuild.Mode.Both = ["Both",2];
-vshaxeBuild.Mode.Both.toString = $estr;
-vshaxeBuild.Mode.Both.__enum__ = vshaxeBuild.Mode;
 vshaxeBuild.builders = {};
 vshaxeBuild.builders.BaseBuilder = function(cli,projects) {
 	this.cli = cli;
@@ -3776,7 +3593,7 @@ vshaxeBuild.builders.HaxeBuilder.prototype = $extend(vshaxeBuild.builders.BaseBu
 		} else {
 			debug = true;
 		}
-		if(mode != vshaxeBuild.Mode.Build) {
+		if(mode != "build") {
 			this.installTarget(target,debug);
 		}
 		var _g = 0;
@@ -3786,7 +3603,7 @@ vshaxeBuild.builders.HaxeBuilder.prototype = $extend(vshaxeBuild.builders.BaseBu
 			++_g;
 			this.buildTarget(this.resolveTarget(dependency),debug,mode);
 		}
-		if(mode == vshaxeBuild.Mode.Install) {
+		if(mode == "install") {
 			return;
 		}
 		this.cli.println("Building '" + target.name + "'...\n");
@@ -3925,6 +3742,209 @@ vshaxeBuild.builders.VSCodeTasksBuilder.prototype = $extend(vshaxeBuild.builders
 	}
 	,__class__: vshaxeBuild.builders.VSCodeTasksBuilder
 });
+vshaxeBuild.cli = {};
+vshaxeBuild.cli.CliParser = function(cli) {
+	this.cli = cli;
+};
+vshaxeBuild.cli.CliParser.__name__ = true;
+vshaxeBuild.cli.CliParser.prototype = {
+	parse: function(args) {
+		var targets = [];
+		var mode = "build";
+		var debug = false;
+		var dryRun = false;
+		var verbose = false;
+		var genTasks = false;
+		var display = false;
+		var dump = false;
+		var help = false;
+		var argHandler_parse;
+		var argHandler_getDoc = function() {
+			return "[-t | --target] <name> : One or multiple targets to build.\n[-m | --mode] <name>   : Build mode - accepted values are 'build', 'install', and 'both'.\n[--debug]              : Build the target(s) in debug mode. Implies -debug, -D js_unflatten and -lib jstack.\n[--dry-run]            : Perform a dry run (no command invocations). Implies -verbose.\n[-v | --verbose]       : Output the commands that are executed.\n[--gen-tasks]          : Generate a tasks.json to .vscode (and don't build anything).\n[--display]            : Generate a complete.hxml for auto completion (and don't build anything).\n[--dump]               : Dump the parsed project files to dump.json.\n[--help]               : Display this help text and exit.";
+		};
+		argHandler_parse = function(__args) {
+			var __index = 0;
+			while(__index < __args.length) {
+				var _g = __args[__index++];
+				switch(_g) {
+				case "--debug":
+					if(__index > __args.length) {
+						if(![][__args.length - 1]) {
+							throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
+						}
+					}
+					debug = true;
+					__index += 0;
+					break;
+				case "--display":
+					if(__index > __args.length) {
+						if(![][__args.length - 1]) {
+							throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
+						}
+					}
+					display = true;
+					__index += 0;
+					break;
+				case "--dry-run":
+					if(__index > __args.length) {
+						if(![][__args.length - 1]) {
+							throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
+						}
+					}
+					dryRun = true;
+					__index += 0;
+					break;
+				case "--dump":
+					if(__index > __args.length) {
+						if(![][__args.length - 1]) {
+							throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
+						}
+					}
+					dump = true;
+					__index += 0;
+					break;
+				case "--gen-tasks":
+					if(__index > __args.length) {
+						if(![][__args.length - 1]) {
+							throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
+						}
+					}
+					genTasks = true;
+					__index += 0;
+					break;
+				case "--help":
+					if(__index > __args.length) {
+						if(![][__args.length - 1]) {
+							throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
+						}
+					}
+					help = true;
+					__index += 0;
+					break;
+				case "--target":case "-t":
+					if(__index + 1 > __args.length) {
+						if(![false][__args.length - 1]) {
+							throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 1);
+						}
+					}
+					targets.push(__args[__index]);
+					++__index;
+					break;
+				case "--mode":case "-m":
+					if(__index + 1 > __args.length) {
+						if(![false][__args.length - 1]) {
+							throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 1);
+						}
+					}
+					mode = __args[__index];
+					++__index;
+					break;
+				case "--verbose":case "-v":
+					if(__index > __args.length) {
+						if(![][__args.length - 1]) {
+							throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
+						}
+					}
+					verbose = true;
+					__index += 0;
+					break;
+				default:
+					throw new js._Boot.HaxeError("Unknown command: " + Std.string(_g));
+				}
+			}
+		};
+		try {
+			argHandler_parse(args);
+		} catch( e ) {
+			if (e instanceof js._Boot.HaxeError) e = e.val;
+			var v = "" + Std.string(e) + "\n\nAvailable commands:\n" + argHandler_getDoc();
+			process.stdout.write(Std.string(v));
+			process.stdout.write("\n");
+			process.exit(1);
+		}
+		if(args.length == 0 || help) {
+			this.cli.exit(argHandler_getDoc());
+		}
+		if(genTasks && display) {
+			this.cli.fail("Can only specify one: --gen-tasks or --display");
+		}
+		return { targets : targets, mode : mode, debug : debug, dryRun : dryRun, verbose : verbose, genTasks : genTasks, display : display, dump : dump};
+	}
+	,__class__: vshaxeBuild.cli.CliParser
+};
+vshaxeBuild.cli.CliTools = function() {
+};
+vshaxeBuild.cli.CliTools.__name__ = true;
+vshaxeBuild.cli.CliTools.prototype = {
+	runCommands: function(commands) {
+		var _g = 0;
+		var _g1 = vshaxeBuild.project._Project.ArrayHandle_Impl_.get(commands);
+		while(_g < _g1.length) {
+			var command = _g1[_g];
+			++_g;
+			this.runCommand(command);
+		}
+	}
+	,runCommand: function(cmd) {
+		var command = vshaxeBuild.project._Project.ArrayHandle_Impl_.get(cmd);
+		if(command.length == 0) {
+			return;
+		}
+		var executable = command[0];
+		command.shift();
+		this.run(executable,command);
+	}
+	,inDir: function(dir,f) {
+		var oldCwd = process.cwd();
+		this.setCwd(dir);
+		f();
+		this.setCwd(oldCwd);
+	}
+	,setCwd: function(dir) {
+		if(dir == null || StringTools.trim(dir) == "") {
+			return;
+		}
+		this.println("cd " + dir);
+		process.chdir(dir);
+	}
+	,run: function(command,args) {
+		this.println(command + " " + args.join(" "));
+		if(!this.dryRun) {
+			var result = args == null ? js.node.ChildProcess.spawnSync(command,{ stdio : "inherit"}).status : js.node.ChildProcess.spawnSync(command,args,{ stdio : "inherit"}).status;
+			if(result != 0) {
+				process.exit(result);
+			}
+		}
+	}
+	,println: function(message) {
+		if(this.verbose) {
+			process.stdout.write(message == null ? "null" : "" + message);
+			process.stdout.write("\n");
+		}
+	}
+	,exit: function(message,code) {
+		if(code == null) {
+			code = 0;
+		}
+		process.stdout.write("VSHaxe Build Tool");
+		process.stdout.write("\n");
+		process.stdout.write(message == null ? "null" : "" + message);
+		process.stdout.write("\n");
+		process.exit(code);
+	}
+	,fail: function(message) {
+		this.exit(message,1);
+	}
+	,saveContent: function(path,content) {
+		if(this.verbose) {
+			this.println("Saving to '" + path + "':\n\n" + content);
+		}
+		if(!this.dryRun) {
+			js.node.Fs.writeFileSync(path,content);
+		}
+	}
+	,__class__: vshaxeBuild.cli.CliTools
+};
 vshaxeBuild.project = {};
 vshaxeBuild.project._Project = {};
 vshaxeBuild.project._Project.ArrayHandle_Impl_ = {};
@@ -4052,84 +4072,6 @@ vshaxeBuild.tools.ArrayTools.reduce = function(array,f,initial) {
 		initial = f(initial,v);
 	}
 	return initial;
-};
-vshaxeBuild.tools.CliTools = function(verbose,dryRun) {
-	this.verbose = verbose;
-	this.dryRun = dryRun;
-	if(dryRun) {
-		this.verbose = true;
-	}
-};
-vshaxeBuild.tools.CliTools.__name__ = true;
-vshaxeBuild.tools.CliTools.prototype = {
-	runCommands: function(commands) {
-		var _g = 0;
-		var _g1 = vshaxeBuild.project._Project.ArrayHandle_Impl_.get(commands);
-		while(_g < _g1.length) {
-			var command = _g1[_g];
-			++_g;
-			this.runCommand(command);
-		}
-	}
-	,runCommand: function(cmd) {
-		var command = vshaxeBuild.project._Project.ArrayHandle_Impl_.get(cmd);
-		if(command.length == 0) {
-			return;
-		}
-		var executable = command[0];
-		command.shift();
-		this.run(executable,command);
-	}
-	,inDir: function(dir,f) {
-		var oldCwd = process.cwd();
-		this.setCwd(dir);
-		f();
-		this.setCwd(oldCwd);
-	}
-	,setCwd: function(dir) {
-		if(dir == null || StringTools.trim(dir) == "") {
-			return;
-		}
-		this.println("cd " + dir);
-		process.chdir(dir);
-	}
-	,run: function(command,args) {
-		this.println(command + " " + args.join(" "));
-		if(!this.dryRun) {
-			var result = args == null ? js.node.ChildProcess.spawnSync(command,{ stdio : "inherit"}).status : js.node.ChildProcess.spawnSync(command,args,{ stdio : "inherit"}).status;
-			if(result != 0) {
-				process.exit(result);
-			}
-		}
-	}
-	,println: function(message) {
-		if(this.verbose) {
-			process.stdout.write(message == null ? "null" : "" + message);
-			process.stdout.write("\n");
-		}
-	}
-	,exit: function(message,code) {
-		if(code == null) {
-			code = 0;
-		}
-		process.stdout.write("VSHaxe Build Tool");
-		process.stdout.write("\n");
-		process.stdout.write(message == null ? "null" : "" + message);
-		process.stdout.write("\n");
-		process.exit(code);
-	}
-	,fail: function(message) {
-		this.exit(message,1);
-	}
-	,saveContent: function(path,content) {
-		if(this.verbose) {
-			this.println("Saving to '" + path + "':\n\n" + content);
-		}
-		if(!this.dryRun) {
-			js.node.Fs.writeFileSync(path,content);
-		}
-	}
-	,__class__: vshaxeBuild.tools.CliTools
 };
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }

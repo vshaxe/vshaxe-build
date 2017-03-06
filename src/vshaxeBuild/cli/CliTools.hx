@@ -1,11 +1,13 @@
-package vshaxeBuild.tools;
+package vshaxeBuild.cli;
 
 @:publicFields
 class CliTools {
     private var verbose:Bool;
     private var dryRun:Bool;
 
-    function new(verbose, dryRun) {
+    function new() {}
+
+    function init(verbose, dryRun) {
         this.verbose = verbose;
         this.dryRun = dryRun;
 
