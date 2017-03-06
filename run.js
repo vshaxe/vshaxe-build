@@ -127,7 +127,7 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_displ
 		} else {
 			assigned.h["targetDependencies"] = true;
 		}
-		this.object = { afterBuildCommands : null, args : null, beforeBuildCommands : null, composite : null, debug : null, display : null, inherit : null, installCommands : null, isBuildCommand : null, isTestCommand : null, name : null, targetDependencies : null};
+		this.object = { afterBuildCommands : null, args : { }, beforeBuildCommands : null, composite : null, debug : { }, display : { }, inherit : null, installCommands : null, isBuildCommand : null, isTestCommand : null, name : null, targetDependencies : null};
 		var _g = 0;
 		while(_g < fields.length) {
 			var field = fields[_g];
@@ -624,7 +624,7 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_installCommands_targe
 		} else {
 			assigned.h["targetDependencies"] = true;
 		}
-		this.object = { afterBuildCommands : null, args : null, beforeBuildCommands : null, installCommands : null, targetDependencies : null};
+		this.object = { afterBuildCommands : null, args : { }, beforeBuildCommands : null, installCommands : null, targetDependencies : null};
 		var _g = 0;
 		while(_g < fields.length) {
 			var field = fields[_g];
@@ -2039,6 +2039,9 @@ StringTools.rtrim = function(s) {
 StringTools.trim = function(s) {
 	return StringTools.ltrim(StringTools.rtrim(s));
 };
+StringTools.replace = function(s,sub,by) {
+	return s.split(sub).join(by);
+};
 var haxe = {};
 haxe.StackItem = { __ename__ : true, __constructs__ : ["CFunction","Module","FilePos","Method","LocalFunction"] };
 haxe.StackItem.CFunction = ["CFunction",0];
@@ -2093,50 +2096,7 @@ haxe.CallStack.callStack = function() {
 	}
 };
 haxe.CallStack.toString = function(stack) {
-	var b = new StringBuf();
-	var _g = 0;
-	while(_g < stack.length) {
-		var s = stack[_g];
-		++_g;
-		b.b += "\nCalled from ";
-		haxe.CallStack.itemToString(b,s);
-	}
-	return b.b;
-};
-haxe.CallStack.itemToString = function(b,s) {
-	switch(s[1]) {
-	case 0:
-		b.b += "a C function";
-		break;
-	case 1:
-		var m = s[2];
-		b.b = (b.b += "module ") + (m == null ? "null" : "" + m);
-		break;
-	case 2:
-		var line = s[4];
-		var file = s[3];
-		var s1 = s[2];
-		if(s1 != null) {
-			haxe.CallStack.itemToString(b,s1);
-			b.b += " (";
-		}
-		b.b = (b.b += file == null ? "null" : "" + file) + " line ";
-		b.b += line == null ? "null" : "" + line;
-		if(s1 != null) {
-			b.b += ")";
-		}
-		break;
-	case 3:
-		var meth = s[3];
-		var cname = s[2];
-		b.b = (b.b += cname == null ? "null" : "" + cname) + ".";
-		b.b += meth == null ? "null" : "" + meth;
-		break;
-	case 4:
-		var n = s[2];
-		b.b = (b.b += "local function #") + (n == null ? "null" : "" + n);
-		break;
-	}
+	return jstack.Format.toString(stack);
 };
 haxe.CallStack.makeStack = function(s) {
 	if(s == null) {
@@ -3074,6 +3034,45 @@ json2object.PosUtils.prototype = {
 	,__class__: json2object.PosUtils
 };
 var jstack = {};
+jstack.Format = function() { };
+jstack.Format.__name__ = true;
+jstack.Format.toString = function(stack) {
+	var buf = new StringBuf();
+	var _g = 0;
+	while(_g < stack.length) {
+		var item = stack[_g];
+		++_g;
+		buf.b += "\n";
+		var x = jstack.Format.itemToFormat("Called from %symbol% file://%file%#%line%",item);
+		buf.b += Std.string(x);
+	}
+	return buf.b;
+};
+jstack.Format.itemToFormat = function(format,item) {
+	switch(item[1]) {
+	case 0:
+		return "a C function";
+	case 1:
+		var m = item[2];
+		return "module " + m;
+	case 2:
+		var line = item[4];
+		var file = item[3];
+		var s = item[2];
+		if(HxOverrides.substr(file,0,"file://".length) == "file://") {
+			file = HxOverrides.substr(file,"file://".length,null);
+		}
+		var symbol = s == null ? "" : jstack.Format.itemToFormat(format,s);
+		return StringTools.replace(StringTools.replace(StringTools.replace(format,"%file%",file),"%line%","" + line),"%symbol%",symbol);
+	case 3:
+		var meth = item[3];
+		var cname = item[2];
+		return "" + cname + "." + meth;
+	case 4:
+		var n = item[2];
+		return "local function #" + n;
+	}
+};
 jstack.js = {};
 jstack.js.JStack = function() {
 	this.ready = false;
@@ -3328,10 +3327,10 @@ vshaxeBuild.builders.BaseBuilder.prototype = {
 			recurse = true;
 		}
 		var hxmls = [target.args];
-		if(debug && target.debug != null) {
+		if(debug) {
 			hxmls.push(target.debug.args);
 		}
-		if(display && target.display != null) {
+		if(display) {
 			hxmls.push(target.display.args);
 		}
 		if(recurse) {
@@ -3551,11 +3550,7 @@ vshaxeBuild.builders.HaxeBuilder.prototype = $extend(vshaxeBuild.builders.BaseBu
 	,buildTarget: function(target,debug,mode) {
 		var _gthis = this;
 		if(!debug) {
-			if(target.args != null) {
-				debug = target.args.debug;
-			} else {
-				debug = false;
-			}
+			debug = target.args.debug;
 		} else {
 			debug = true;
 		}
@@ -3574,9 +3569,7 @@ vshaxeBuild.builders.HaxeBuilder.prototype = $extend(vshaxeBuild.builders.BaseBu
 		}
 		this.cli.println("Building '" + target.name + "'...\n");
 		var workingDirectory = null;
-		if(target.args != null) {
-			workingDirectory = target.args.workingDirectory;
-		}
+		workingDirectory = target.args.workingDirectory;
 		this.cli.inDir(workingDirectory,function() {
 			_gthis.cli.runCommands(target.beforeBuildCommands);
 			if(!target.composite) {
@@ -3679,11 +3672,11 @@ vshaxeBuild.builders.VSCodeTasksBuilder.prototype = $extend(vshaxeBuild.builders
 	,buildTask: function(target,debug) {
 		var _gthis = this;
 		var suffix = "";
-		if((target.args == null || !target.args.debug) && debug) {
+		if(!target.args.debug && debug) {
 			suffix = " (debug)";
 		}
 		var task = { taskName : "" + target.name + suffix, args : this.makeArgs(["-t",target.name]), problemMatcher : vshaxeBuild.builders.VSCodeTasksBuilder.problemMatcher};
-		if(target.args != null && target.args.debug || debug) {
+		if(target.args.debug || debug) {
 			if(target.isBuildCommand) {
 				task.isBuildCommand = true;
 				task.taskName += " - BUILD";
@@ -4016,17 +4009,13 @@ vshaxeBuild.project.ProjectLoader.prototype = {
 			if(hxml != null) {
 				hxml.workingDirectory = baseDir;
 			}
-			if(target1.debug != null) {
-				var hxml1 = target1.debug.args;
-				if(hxml1 != null) {
-					hxml1.workingDirectory = baseDir;
-				}
+			var hxml1 = target1.debug.args;
+			if(hxml1 != null) {
+				hxml1.workingDirectory = baseDir;
 			}
-			if(target1.display != null) {
-				var hxml2 = target1.display.args;
-				if(hxml2 != null) {
-					hxml2.workingDirectory = baseDir;
-				}
+			var hxml2 = target1.display.args;
+			if(hxml2 != null) {
+				hxml2.workingDirectory = baseDir;
 			}
 		}
 	}

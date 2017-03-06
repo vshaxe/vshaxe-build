@@ -21,7 +21,7 @@ class HaxeBuilder extends BaseBuilder {
     }
 
     function buildTarget(target:Target, debug:Bool, mode:Mode) {
-        debug = debug || (target.args != null && target.args.debug);
+        debug = debug || target.args.debug;
 
         if (mode != Build)
             installTarget(target, debug);
@@ -35,7 +35,7 @@ class HaxeBuilder extends BaseBuilder {
         cli.println('Building \'${target.name}\'...\n');
 
         var workingDirectory = null;
-        if (target.args != null) workingDirectory = target.args.workingDirectory;
+        workingDirectory = target.args.workingDirectory;
         cli.inDir(workingDirectory, function() {
             cli.runCommands(target.beforeBuildCommands);
             if (!target.composite)

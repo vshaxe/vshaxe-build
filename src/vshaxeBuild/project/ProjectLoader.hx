@@ -72,8 +72,8 @@ class ProjectLoader {
 
         for (target in project.targets) {
             adjustDir(baseDir, target.args);
-            if (target.debug != null) adjustDir(baseDir, target.debug.args);
-            if (target.display != null) adjustDir(baseDir, target.display.args);
+            adjustDir(baseDir, target.debug.args);
+            adjustDir(baseDir, target.display.args);
         }
     }
 }

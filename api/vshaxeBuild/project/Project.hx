@@ -33,9 +33,9 @@ typedef Target = {
     /** name of a target in defaults.json to base this config on **/
     @:optional var inherit(default,null):String;
     /** arguments that only apply in debug mode **/
-    @:optional var debug(default,null):TargetArguments;
+    @:optional @:default({}) var debug(default,null):TargetArguments;
     /** arguments that only apply for display **/
-    @:optional var display(default,null):TargetArguments;
+    @:optional @:default({}) var display(default,null):TargetArguments;
 
     /** VSCode tasks.json config **/
     @:optional var isBuildCommand(default,null):Bool;
@@ -48,7 +48,7 @@ typedef TargetArguments = {
     @:optional var installCommands(default,null):ArrayHandle<ArrayHandle<String>>;
     @:optional var beforeBuildCommands(default,null):ArrayHandle<ArrayHandle<String>>;
     @:optional var afterBuildCommands(default,null):ArrayHandle<ArrayHandle<String>>;
-    @:optional var args(default,null):Hxml;
+    @:optional @:default({}) var args(default,null):Hxml;
 }
 
 typedef Hxml = {
