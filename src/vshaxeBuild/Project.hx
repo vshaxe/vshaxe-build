@@ -56,6 +56,7 @@ typedef Hxml = {
     @:optional var classPaths(default,null):ArrayHandle<String>;
     @:optional var defines(default,null):ArrayHandle<String>;
     @:optional var haxelibs(default,null):ArrayHandle<String>;
+    @:optional var macros(default,null):ArrayHandle<String>;
     @:optional var debug(default,null):Bool;
     @:optional var output(default,null):Output;
     @:optional var deadCodeElimination(default,null):DeadCodeElimination;

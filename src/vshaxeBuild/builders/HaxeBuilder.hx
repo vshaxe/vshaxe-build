@@ -76,17 +76,22 @@ class HaxeBuilder extends BaseBuilder {
 
         if (hxml.debug) args.push("-debug");
 
+        for (_macro in hxml.macros.get()) {
+            args.push("--macro");
+            args.push(_macro);
+        }
+
+        if (hxml.output != null) {
+            args.push('-${hxml.output.target}');
+            args.push(hxml.output.path);
+        }
+
         if (hxml.main != null) {
             args.push('-main');
             args.push(hxml.main);
         }
 
         if (hxml.packageName != null) args.push(hxml.packageName);
-
-        if (hxml.output != null) {
-            args.push('-${hxml.output.target}');
-            args.push(hxml.output.path);
-        }
 
         return args;
     }

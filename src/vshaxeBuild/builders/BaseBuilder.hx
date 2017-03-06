@@ -120,6 +120,7 @@ class BaseBuilder implements IBuilder {
         var classPaths = [];
         var defines = [];
         var haxelibs = [];
+        var macros = [];
         var debug = false;
         var output = null;
         var deadCodeElimination = null;
@@ -134,6 +135,7 @@ class BaseBuilder implements IBuilder {
             classPaths = classPaths.concat(rawClassPaths);
             defines = defines.concat(hxml.defines.get());
             haxelibs = haxelibs.concat(hxml.haxelibs.get());
+            macros = macros.concat(hxml.macros.get());
             debug = debug || hxml.debug;
             if (hxml.output != null) output = hxml.output; // just use the most recent one I guess?
             if (hxml.deadCodeElimination != null) deadCodeElimination = hxml.deadCodeElimination;
@@ -149,6 +151,7 @@ class BaseBuilder implements IBuilder {
             classPaths: classPaths,
             defines: defines,
             haxelibs: haxelibs,
+            macros: macros,
             debug: debug,
             output: output,
             deadCodeElimination: deadCodeElimination,

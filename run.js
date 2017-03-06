@@ -207,7 +207,7 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_displ
 				switch(_g13[1]) {
 				case 2:
 					var s01 = _g13[2];
-					this.object.args = new JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInline_output_packageName_workingDirectory_(this.warnings,this.putils).loadJson(s01,field.value.pos);
+					this.object.args = new JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main_noInline_output_packageName_workingDirectory_(this.warnings,this.putils).loadJson(s01,field.value.pos);
 					var key2 = field.name;
 					if(__map_reserved[key2] != null) {
 						assigned.setReserved(key2,true);
@@ -704,7 +704,7 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_installCommands_targe
 				switch(_g13[1]) {
 				case 2:
 					var s01 = _g13[2];
-					this.object.args = new JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInline_output_packageName_workingDirectory_(this.warnings,this.putils).loadJson(s01,field.value.pos);
+					this.object.args = new JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main_noInline_output_packageName_workingDirectory_(this.warnings,this.putils).loadJson(s01,field.value.pos);
 					var key2 = field.name;
 					if(__map_reserved[key2] != null) {
 						assigned.setReserved(key2,true);
@@ -924,12 +924,12 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_installCommands_targe
 	}
 	,__class__: JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_installCommands_targetDependencies_
 };
-var JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInline_output_packageName_workingDirectory_ = function(warnings,putils) {
+var JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main_noInline_output_packageName_workingDirectory_ = function(warnings,putils) {
 	this.warnings = warnings == null ? [] : warnings;
 	this.putils = putils;
 };
-JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInline_output_packageName_workingDirectory_.__name__ = true;
-JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInline_output_packageName_workingDirectory_.prototype = {
+JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main_noInline_output_packageName_workingDirectory_.__name__ = true;
+JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main_noInline_output_packageName_workingDirectory_.prototype = {
 	loadJson: function(fields,objectPos) {
 		var assigned = new haxe.ds.StringMap();
 		if(__map_reserved["classPaths"] != null) {
@@ -957,6 +957,11 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInli
 		} else {
 			assigned.h["haxelibs"] = true;
 		}
+		if(__map_reserved["macros"] != null) {
+			assigned.setReserved("macros",true);
+		} else {
+			assigned.h["macros"] = true;
+		}
 		if(__map_reserved["main"] != null) {
 			assigned.setReserved("main",true);
 		} else {
@@ -982,7 +987,7 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInli
 		} else {
 			assigned.h["workingDirectory"] = true;
 		}
-		this.object = { classPaths : null, deadCodeElimination : null, debug : null, defines : null, haxelibs : null, main : null, noInline : null, output : null, packageName : null, workingDirectory : null};
+		this.object = { classPaths : null, deadCodeElimination : null, debug : null, defines : null, haxelibs : null, macros : null, main : null, noInline : null, output : null, packageName : null, workingDirectory : null};
 		var _g = 0;
 		while(_g < fields.length) {
 			var field = fields[_g];
@@ -1176,12 +1181,33 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInli
 					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
-			case "main":
+			case "macros":
 				var _g19 = field.value.value;
 				switch(_g19[1]) {
-				case 0:
+				case 3:
 					var s05 = _g19[2];
-					this.object.main = s05;
+					var _g110 = [];
+					var _g23 = 0;
+					while(_g23 < s05.length) {
+						var content13 = s05[_g23];
+						++_g23;
+						var _g33 = content13.value;
+						var tmp3;
+						switch(_g33[1]) {
+						case 0:
+							var s13 = _g33[2];
+							tmp3 = s13;
+							break;
+						case 5:
+							tmp3 = null;
+							break;
+						default:
+							this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content13.pos)));
+							continue;
+						}
+						_g110.push(tmp3);
+					}
+					this.object.macros = _g110;
 					var key9 = field.name;
 					if(__map_reserved[key9] != null) {
 						assigned.setReserved(key9,true);
@@ -1190,7 +1216,7 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInli
 					}
 					break;
 				case 5:
-					this.object.main = null;
+					this.object.macros = null;
 					var key10 = field.name;
 					if(__map_reserved[key10] != null) {
 						assigned.setReserved(key10,true);
@@ -1199,20 +1225,46 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInli
 					}
 					break;
 				default:
-					this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
-			case "noInline":
-				var _g110 = field.value.value;
-				switch(_g110[1]) {
-				case 4:
-					var s06 = _g110[2];
-					this.object.noInline = s06;
+			case "main":
+				var _g111 = field.value.value;
+				switch(_g111[1]) {
+				case 0:
+					var s06 = _g111[2];
+					this.object.main = s06;
 					var key11 = field.name;
 					if(__map_reserved[key11] != null) {
 						assigned.setReserved(key11,true);
 					} else {
 						assigned.h[key11] = true;
+					}
+					break;
+				case 5:
+					this.object.main = null;
+					var key12 = field.name;
+					if(__map_reserved[key12] != null) {
+						assigned.setReserved(key12,true);
+					} else {
+						assigned.h[key12] = true;
+					}
+					break;
+				default:
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
+				}
+				break;
+			case "noInline":
+				var _g112 = field.value.value;
+				switch(_g112[1]) {
+				case 4:
+					var s07 = _g112[2];
+					this.object.noInline = s07;
+					var key13 = field.name;
+					if(__map_reserved[key13] != null) {
+						assigned.setReserved(key13,true);
+					} else {
+						assigned.h[key13] = true;
 					}
 					break;
 				case 5:
@@ -1223,37 +1275,11 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInli
 				}
 				break;
 			case "output":
-				var _g111 = field.value.value;
-				switch(_g111[1]) {
+				var _g113 = field.value.value;
+				switch(_g113[1]) {
 				case 2:
-					var s07 = _g111[2];
-					this.object.output = new JsonParser_Ano_path___Inst_Stringtarget___Abstract_HaxeTarget(this.warnings,this.putils).loadJson(s07,field.value.pos);
-					var key12 = field.name;
-					if(__map_reserved[key12] != null) {
-						assigned.setReserved(key12,true);
-					} else {
-						assigned.h[key12] = true;
-					}
-					break;
-				case 5:
-					this.object.output = null;
-					var key13 = field.name;
-					if(__map_reserved[key13] != null) {
-						assigned.setReserved(key13,true);
-					} else {
-						assigned.h[key13] = true;
-					}
-					break;
-				default:
-					this.warnings.push(json2object.Error.IncorrectType(field.name,"Anonymous",this.putils.convertPosition(field.value.pos)));
-				}
-				break;
-			case "packageName":
-				var _g112 = field.value.value;
-				switch(_g112[1]) {
-				case 0:
-					var s08 = _g112[2];
-					this.object.packageName = s08;
+					var s08 = _g113[2];
+					this.object.output = new JsonParser_Ano_path___Inst_Stringtarget___Abstract_HaxeTarget(this.warnings,this.putils).loadJson(s08,field.value.pos);
 					var key14 = field.name;
 					if(__map_reserved[key14] != null) {
 						assigned.setReserved(key14,true);
@@ -1262,7 +1288,7 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInli
 					}
 					break;
 				case 5:
-					this.object.packageName = null;
+					this.object.output = null;
 					var key15 = field.name;
 					if(__map_reserved[key15] != null) {
 						assigned.setReserved(key15,true);
@@ -1271,15 +1297,15 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInli
 					}
 					break;
 				default:
-					this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Anonymous",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
-			case "workingDirectory":
-				var _g113 = field.value.value;
-				switch(_g113[1]) {
+			case "packageName":
+				var _g114 = field.value.value;
+				switch(_g114[1]) {
 				case 0:
-					var s09 = _g113[2];
-					this.object.workingDirectory = s09;
+					var s09 = _g114[2];
+					this.object.packageName = s09;
 					var key16 = field.name;
 					if(__map_reserved[key16] != null) {
 						assigned.setReserved(key16,true);
@@ -1288,12 +1314,38 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInli
 					}
 					break;
 				case 5:
-					this.object.workingDirectory = null;
+					this.object.packageName = null;
 					var key17 = field.name;
 					if(__map_reserved[key17] != null) {
 						assigned.setReserved(key17,true);
 					} else {
 						assigned.h[key17] = true;
+					}
+					break;
+				default:
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
+				}
+				break;
+			case "workingDirectory":
+				var _g115 = field.value.value;
+				switch(_g115[1]) {
+				case 0:
+					var s010 = _g115[2];
+					this.object.workingDirectory = s010;
+					var key18 = field.name;
+					if(__map_reserved[key18] != null) {
+						assigned.setReserved(key18,true);
+					} else {
+						assigned.h[key18] = true;
+					}
+					break;
+				case 5:
+					this.object.workingDirectory = null;
+					var key19 = field.name;
+					if(__map_reserved[key19] != null) {
+						assigned.setReserved(key19,true);
+					} else {
+						assigned.h[key19] = true;
 					}
 					break;
 				default:
@@ -1314,7 +1366,7 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInli
 		}
 		return this.object;
 	}
-	,__class__: JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInline_output_packageName_workingDirectory_
+	,__class__: JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main_noInline_output_packageName_workingDirectory_
 };
 var JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_ = function(warnings,putils) {
 	this.warnings = warnings == null ? [] : warnings;
@@ -3744,6 +3796,7 @@ vshaxeBuild.builders.BaseBuilder.prototype = {
 		var classPaths = [];
 		var defines = [];
 		var haxelibs = [];
+		var macros = [];
 		var debug = false;
 		var output = null;
 		var deadCodeElimination = null;
@@ -3765,6 +3818,8 @@ vshaxeBuild.builders.BaseBuilder.prototype = {
 			defines = defines.concat(defines1);
 			var haxelibs1 = vshaxeBuild._Project.ArrayHandle_Impl_.get(hxml.haxelibs);
 			haxelibs = haxelibs.concat(haxelibs1);
+			var macros1 = vshaxeBuild._Project.ArrayHandle_Impl_.get(hxml.macros);
+			macros = macros.concat(macros1);
 			if(!debug) {
 				debug = hxml.debug;
 			} else {
@@ -3792,7 +3847,7 @@ vshaxeBuild.builders.BaseBuilder.prototype = {
 			++_g;
 			merge(hxml1);
 		}
-		return { workingDirectory : "", classPaths : classPaths, defines : defines, haxelibs : haxelibs, debug : debug, output : output, deadCodeElimination : deadCodeElimination, noInline : noInline, main : main, packageName : packageName};
+		return { workingDirectory : "", classPaths : classPaths, defines : defines, haxelibs : haxelibs, macros : macros, debug : debug, output : output, deadCodeElimination : deadCodeElimination, noInline : noInline, main : main, packageName : packageName};
 	}
 	,__class__: vshaxeBuild.builders.BaseBuilder
 };
@@ -3964,16 +4019,24 @@ vshaxeBuild.builders.HaxeBuilder.prototype = $extend(vshaxeBuild.builders.BaseBu
 		if(hxml.debug) {
 			args.push("-debug");
 		}
+		var _g4 = 0;
+		var _g13 = vshaxeBuild._Project.ArrayHandle_Impl_.get(hxml.macros);
+		while(_g4 < _g13.length) {
+			var _macro = _g13[_g4];
+			++_g4;
+			args.push("--macro");
+			args.push(_macro);
+		}
+		if(hxml.output != null) {
+			args.push("-" + hxml.output.target);
+			args.push(hxml.output.path);
+		}
 		if(hxml.main != null) {
 			args.push("-main");
 			args.push(hxml.main);
 		}
 		if(hxml.packageName != null) {
 			args.push(hxml.packageName);
-		}
-		if(hxml.output != null) {
-			args.push("-" + hxml.output.target);
-			args.push(hxml.output.path);
 		}
 		return args;
 	}
