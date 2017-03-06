@@ -2039,9 +2039,6 @@ StringTools.rtrim = function(s) {
 StringTools.trim = function(s) {
 	return StringTools.ltrim(StringTools.rtrim(s));
 };
-StringTools.replace = function(s,sub,by) {
-	return s.split(sub).join(by);
-};
 var haxe = {};
 haxe.StackItem = { __ename__ : true, __constructs__ : ["CFunction","Module","FilePos","Method","LocalFunction"] };
 haxe.StackItem.CFunction = ["CFunction",0];
@@ -2096,7 +2093,50 @@ haxe.CallStack.callStack = function() {
 	}
 };
 haxe.CallStack.toString = function(stack) {
-	return jstack.Format.toString(stack);
+	var b = new StringBuf();
+	var _g = 0;
+	while(_g < stack.length) {
+		var s = stack[_g];
+		++_g;
+		b.b += "\nCalled from ";
+		haxe.CallStack.itemToString(b,s);
+	}
+	return b.b;
+};
+haxe.CallStack.itemToString = function(b,s) {
+	switch(s[1]) {
+	case 0:
+		b.b += "a C function";
+		break;
+	case 1:
+		var m = s[2];
+		b.b = (b.b += "module ") + (m == null ? "null" : "" + m);
+		break;
+	case 2:
+		var line = s[4];
+		var file = s[3];
+		var s1 = s[2];
+		if(s1 != null) {
+			haxe.CallStack.itemToString(b,s1);
+			b.b += " (";
+		}
+		b.b = (b.b += file == null ? "null" : "" + file) + " line ";
+		b.b += line == null ? "null" : "" + line;
+		if(s1 != null) {
+			b.b += ")";
+		}
+		break;
+	case 3:
+		var meth = s[3];
+		var cname = s[2];
+		b.b = (b.b += cname == null ? "null" : "" + cname) + ".";
+		b.b += meth == null ? "null" : "" + meth;
+		break;
+	case 4:
+		var n = s[2];
+		b.b = (b.b += "local function #") + (n == null ? "null" : "" + n);
+		break;
+	}
 };
 haxe.CallStack.makeStack = function(s) {
 	if(s == null) {
@@ -3034,45 +3074,6 @@ json2object.PosUtils.prototype = {
 	,__class__: json2object.PosUtils
 };
 var jstack = {};
-jstack.Format = function() { };
-jstack.Format.__name__ = true;
-jstack.Format.toString = function(stack) {
-	var buf = new StringBuf();
-	var _g = 0;
-	while(_g < stack.length) {
-		var item = stack[_g];
-		++_g;
-		buf.b += "\n";
-		var x = jstack.Format.itemToFormat("Called from %symbol% file://%file%#%line%",item);
-		buf.b += Std.string(x);
-	}
-	return buf.b;
-};
-jstack.Format.itemToFormat = function(format,item) {
-	switch(item[1]) {
-	case 0:
-		return "a C function";
-	case 1:
-		var m = item[2];
-		return "module " + m;
-	case 2:
-		var line = item[4];
-		var file = item[3];
-		var s = item[2];
-		if(HxOverrides.substr(file,0,"file://".length) == "file://") {
-			file = HxOverrides.substr(file,"file://".length,null);
-		}
-		var symbol = s == null ? "" : jstack.Format.itemToFormat(format,s);
-		return StringTools.replace(StringTools.replace(StringTools.replace(format,"%file%",file),"%line%","" + line),"%symbol%",symbol);
-	case 3:
-		var meth = item[3];
-		var cname = item[2];
-		return "" + cname + "." + meth;
-	case 4:
-		var n = item[2];
-		return "local function #" + n;
-	}
-};
 jstack.js = {};
 jstack.js.JStack = function() {
 	this.ready = false;
