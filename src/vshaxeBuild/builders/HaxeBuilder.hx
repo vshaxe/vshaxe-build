@@ -7,7 +7,7 @@ class HaxeBuilder extends BaseBuilder {
     }
 
     function installTarget(target:Target, debug:Bool) {
-        cli.println('Installing Haxelibs for \'${target.name}\'...\n');
+        cli.println('Installing dependencies for \'${target.name}\'...\n');
 
         cli.runCommands(target.installCommands);
 

@@ -41,11 +41,13 @@ class CliTools {
     }
 
     function run(command:String, args:Array<String>) {
-        println(command + " " + args.join(" "));
-        if (!dryRun) {
-            var result = Sys.command(command, args);
-            if (result != 0)
-                Sys.exit(result);
+        var str = command + " " + args.join(" ");
+        println(str);
+        if (dryRun) return;
+        var result = Sys.command(command, args);
+        if (result != 0) {
+            Sys.println('\'$str\' exited with $result');
+            Sys.exit(result);
         }
     }
 
