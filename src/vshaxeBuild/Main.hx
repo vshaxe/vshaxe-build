@@ -18,11 +18,10 @@ class Main {
         }
     }
 
-    var cli = new CliTools();
-
     function new() {
         var args = Sys.args();
         var cwd = args.pop();
+        var cli = new CliTools();
         var parser = new CliParser(cli);
         var cliArgs = parser.parse(args);
         cli.init(cliArgs.verbose, cliArgs.dryRun);

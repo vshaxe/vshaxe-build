@@ -14,7 +14,7 @@ class ArrayTools {
     }
 
     public static function findNamed<T:Named>(a:ArrayHandle<T>, name:String):T {
-        for (e in a)
+        for (e in a.get())
             if (e.name == name)
                 return e;
         return null;

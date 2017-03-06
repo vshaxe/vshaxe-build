@@ -9,7 +9,7 @@ typedef Project = {
     @:optional var inherit(default,null):String;
     /** name of a target to generate special task.json tasks for (install-all, generate-complete-hxml, generate-vscode-tasks) **/
     @:optional var mainTarget(default,null):String;
-    var haxelibs(default,null):ArrayHandle<Haxelib>;
+    @:optional var haxelibs(default,null):ArrayHandle<Haxelib>;
     var targets(default,null):ArrayHandle<Target>;
 }
 

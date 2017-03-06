@@ -1368,18 +1368,18 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main
 	}
 	,__class__: JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main_noInline_output_packageName_workingDirectory_
 };
-var JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_ = function(warnings,putils) {
+var JsonParser_Ano_haxelibs_inherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_ = function(warnings,putils) {
 	this.warnings = warnings == null ? [] : warnings;
 	this.putils = putils;
 };
-JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_.__name__ = true;
-JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_.prototype = {
+JsonParser_Ano_haxelibs_inherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_.__name__ = true;
+JsonParser_Ano_haxelibs_inherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_.prototype = {
 	loadJson: function(fields,objectPos) {
 		var assigned = new haxe.ds.StringMap();
 		if(__map_reserved["haxelibs"] != null) {
-			assigned.setReserved("haxelibs",false);
+			assigned.setReserved("haxelibs",true);
 		} else {
-			assigned.h["haxelibs"] = false;
+			assigned.h["haxelibs"] = true;
 		}
 		if(__map_reserved["inherit"] != null) {
 			assigned.setReserved("inherit",true);
@@ -1581,7 +1581,7 @@ JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_Ar
 			} else throw(e);
 		}
 	}
-	,__class__: JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_
+	,__class__: JsonParser_Ano_haxelibs_inherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_
 };
 var JsonParser_Ano_installArgs___Abstract_ArrayHandle___Inst_Stringname___Inst_String = function(warnings,putils) {
 	this.warnings = warnings == null ? [] : warnings;
@@ -3236,22 +3236,22 @@ jstack.js.StackPos.prototype = {
 };
 var vshaxeBuild = {};
 vshaxeBuild.Main = function() {
-	this.cli = new vshaxeBuild.cli.CliTools();
 	var args = process.argv.slice(2);
 	var cwd = args.pop();
-	var parser = new vshaxeBuild.cli.CliParser(this.cli);
+	var cli = new vshaxeBuild.cli.CliTools();
+	var parser = new vshaxeBuild.cli.CliParser(cli);
 	var cliArgs = parser.parse(args);
-	this.cli.init(cliArgs.verbose,cliArgs.dryRun);
-	var projects = new vshaxeBuild.project.ProjectLoader(this.cli).load(cwd);
+	cli.init(cliArgs.verbose,cliArgs.dryRun);
+	var projects = new vshaxeBuild.project.ProjectLoader(cli).load(cwd);
 	if(cliArgs.dump) {
 		js.node.Fs.writeFileSync("dump.json",JSON.stringify(projects,null,"    "));
 	}
 	if(cliArgs.genTasks) {
-		new vshaxeBuild.builders.VSCodeTasksBuilder(this.cli,projects).build(cliArgs);
+		new vshaxeBuild.builders.VSCodeTasksBuilder(cli,projects).build(cliArgs);
 	} else if(cliArgs.display) {
-		new vshaxeBuild.builders.DisplayHxmlBuilder(this.cli,projects).build(cliArgs);
+		new vshaxeBuild.builders.DisplayHxmlBuilder(cli,projects).build(cliArgs);
 	} else {
-		new vshaxeBuild.builders.HaxeBuilder(this.cli,projects).build(cliArgs);
+		new vshaxeBuild.builders.HaxeBuilder(cli,projects).build(cliArgs);
 	}
 };
 vshaxeBuild.Main.__name__ = true;
@@ -3993,7 +3993,7 @@ vshaxeBuild.project.ProjectLoader.prototype = {
 		return StringTools.startsWith(name,".");
 	}
 	,readProjectFile: function(path) {
-		var parser = new JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_();
+		var parser = new JsonParser_Ano_haxelibs_inherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_();
 		var json = parser.fromJson(js.node.Fs.readFileSync(path,{ encoding : "utf8"}),path);
 		if(parser.warnings.length > 0) {
 			this.cli.fail(json2object.ErrorUtils.convertErrorArray(parser.warnings));
@@ -4052,11 +4052,13 @@ vshaxeBuild.tools.ArrayTools.filterDuplicates = function(tasks,filter) {
 	return uniqueTasks;
 };
 vshaxeBuild.tools.ArrayTools.findNamed = function(a,name) {
-	var e = HxOverrides.iter(a);
-	while(e.hasNext()) {
-		var e1 = e.next();
-		if(e1.name == name) {
-			return e1;
+	var _g = 0;
+	var _g1 = vshaxeBuild.project._Project.ArrayHandle_Impl_.get(a);
+	while(_g < _g1.length) {
+		var e = _g1[_g];
+		++_g;
+		if(e.name == name) {
+			return e;
 		}
 	}
 	return null;
