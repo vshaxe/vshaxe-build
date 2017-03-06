@@ -3379,9 +3379,7 @@ vshaxeBuild.Main = function() {
 	if(args.length == 0 || help) {
 		this.cli.exit(argHandler_getDoc());
 	}
-	var defaults = this.toPlacedProject(".",this.readProjectFile("vshaxe-build-defaults.json"));
-	process.chdir(cwd);
-	var projects = [defaults,this.findProjectFiles()];
+	var projects = new vshaxeBuild.project.ProjectLoader(this.cli).load(cwd);
 	if(dump) {
 		js.node.Fs.writeFileSync("dump.json",JSON.stringify(projects,null,"    "));
 	}
@@ -3445,47 +3443,6 @@ vshaxeBuild.Main.prototype = {
 	,getEnumName: function(cliName) {
 		return HxOverrides.substr(cliName,0,1).toUpperCase() + HxOverrides.substr(cliName,1,null);
 	}
-	,findProjectFiles: function(dir) {
-		if(dir == null) {
-			dir = ".";
-		}
-		var lastDir = vshaxeBuild.tools.ArrayTools.idx(dir.split("/"),-1);
-		if(lastDir != "." && lastDir != ".." && StringTools.startsWith(lastDir,".") || ["dump","node_modules"].indexOf(dir) != -1) {
-			return null;
-		}
-		var project = null;
-		var subProjects = [];
-		var _g = 0;
-		var _g1 = js.node.Fs.readdirSync(dir);
-		while(_g < _g1.length) {
-			var file = _g1[_g];
-			++_g;
-			var fullPath = haxe.io.Path.join([dir,file]);
-			if(js.node.Fs.statSync(fullPath).isDirectory()) {
-				var subProject = this.findProjectFiles(fullPath);
-				if(subProject != null) {
-					subProjects.push(subProject);
-				}
-			} else if(file == "vshaxe-build.json") {
-				project = this.toPlacedProject(lastDir,this.readProjectFile(fullPath));
-			}
-		}
-		if(project != null) {
-			project.subProjects = subProjects;
-		}
-		return project;
-	}
-	,readProjectFile: function(path) {
-		var parser = new JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_();
-		var json = parser.fromJson(js.node.Fs.readFileSync(path,{ encoding : "utf8"}),path);
-		if(parser.warnings.length > 0) {
-			this.cli.fail(json2object.ErrorUtils.convertErrorArray(parser.warnings));
-		}
-		return json;
-	}
-	,toPlacedProject: function(directory,project) {
-		return { inherit : project.inherit, mainTarget : project.mainTarget, haxelibs : project.haxelibs, targets : project.targets, directory : directory, subProjects : []};
-	}
 	,__class__: vshaxeBuild.Main
 };
 vshaxeBuild.Mode = { __ename__ : true, __constructs__ : ["Build","Install","Both"] };
@@ -3498,16 +3455,6 @@ vshaxeBuild.Mode.Install.__enum__ = vshaxeBuild.Mode;
 vshaxeBuild.Mode.Both = ["Both",2];
 vshaxeBuild.Mode.Both.toString = $estr;
 vshaxeBuild.Mode.Both.__enum__ = vshaxeBuild.Mode;
-vshaxeBuild._Project = {};
-vshaxeBuild._Project.ArrayHandle_Impl_ = {};
-vshaxeBuild._Project.ArrayHandle_Impl_.__name__ = true;
-vshaxeBuild._Project.ArrayHandle_Impl_.get = function(this1) {
-	if(this1 == null) {
-		return [];
-	} else {
-		return this1.slice();
-	}
-};
 vshaxeBuild.builders = {};
 vshaxeBuild.builders.BaseBuilder = function(cli,projects) {
 	this.cli = cli;
@@ -3542,7 +3489,7 @@ vshaxeBuild.builders.BaseBuilder.prototype = {
 					hxml2.workingDirectory = projectBaseDir;
 				}
 			}
-			vshaxeBuild._Project.ArrayHandle_Impl_.get(project.subProjects).map((function(a2,f) {
+			vshaxeBuild.project._Project.ArrayHandle_Impl_.get(project.subProjects).map((function(a2,f) {
 				return function(a1) {
 					f[0](a1,a2[0]);
 					return;
@@ -3628,7 +3575,7 @@ vshaxeBuild.builders.BaseBuilder.prototype = {
 			var dependencyHxmls = function(a1) {
 				return f(a1,a2,a3,a4);
 			};
-			var dependencyHxmls1 = this.resolveTargets(vshaxeBuild._Project.ArrayHandle_Impl_.get(target.targetDependencies)).map(dependencyHxmls);
+			var dependencyHxmls1 = this.resolveTargets(vshaxeBuild.project._Project.ArrayHandle_Impl_.get(target.targetDependencies)).map(dependencyHxmls);
 			hxmls = hxmls.concat(dependencyHxmls1);
 		}
 		return this.mergeHxmls(hxmls,flatten,debug);
@@ -3649,7 +3596,7 @@ vshaxeBuild.builders.BaseBuilder.prototype = {
 	}
 	,flattenProjects: function(project) {
 		var projects = [project];
-		projects = projects.concat(vshaxeBuild.tools.ArrayTools.flatten(vshaxeBuild._Project.ArrayHandle_Impl_.get(project.subProjects).map($bind(this,this.flattenProjects))));
+		projects = projects.concat(vshaxeBuild.tools.ArrayTools.flatten(vshaxeBuild.project._Project.ArrayHandle_Impl_.get(project.subProjects).map($bind(this,this.flattenProjects))));
 		return projects;
 	}
 	,getTargetOwner: function(target) {
@@ -3685,18 +3632,18 @@ vshaxeBuild.builders.BaseBuilder.prototype = {
 			if(hxml == null) {
 				return;
 			}
-			var rawClassPaths = vshaxeBuild._Project.ArrayHandle_Impl_.get(hxml.classPaths);
+			var rawClassPaths = vshaxeBuild.project._Project.ArrayHandle_Impl_.get(hxml.classPaths);
 			if(flatten) {
 				rawClassPaths = rawClassPaths.map(function(cp) {
 					return haxe.io.Path.join([hxml.workingDirectory,cp]);
 				});
 			}
 			classPaths = classPaths.concat(rawClassPaths);
-			var defines1 = vshaxeBuild._Project.ArrayHandle_Impl_.get(hxml.defines);
+			var defines1 = vshaxeBuild.project._Project.ArrayHandle_Impl_.get(hxml.defines);
 			defines = defines.concat(defines1);
-			var haxelibs1 = vshaxeBuild._Project.ArrayHandle_Impl_.get(hxml.haxelibs);
+			var haxelibs1 = vshaxeBuild.project._Project.ArrayHandle_Impl_.get(hxml.haxelibs);
 			haxelibs = haxelibs.concat(haxelibs1);
-			var macros1 = vshaxeBuild._Project.ArrayHandle_Impl_.get(hxml.macros);
+			var macros1 = vshaxeBuild.project._Project.ArrayHandle_Impl_.get(hxml.macros);
 			macros = macros.concat(macros1);
 			if(!debug1) {
 				debug1 = hxml.debug;
@@ -3755,21 +3702,21 @@ vshaxeBuild.builders.DisplayHxmlBuilder.prototype = $extend(vshaxeBuild.builders
 		}
 		var lines = [];
 		var _g = 0;
-		var _g1 = vshaxeBuild._Project.ArrayHandle_Impl_.get(hxml.classPaths);
+		var _g1 = vshaxeBuild.project._Project.ArrayHandle_Impl_.get(hxml.classPaths);
 		while(_g < _g1.length) {
 			var cp = _g1[_g];
 			++_g;
 			lines.push("-cp " + cp);
 		}
 		var _g2 = 0;
-		var _g11 = vshaxeBuild._Project.ArrayHandle_Impl_.get(hxml.defines);
+		var _g11 = vshaxeBuild.project._Project.ArrayHandle_Impl_.get(hxml.defines);
 		while(_g2 < _g11.length) {
 			var define = _g11[_g2];
 			++_g2;
 			lines.push("-D " + define);
 		}
 		var _g3 = 0;
-		var _g12 = vshaxeBuild._Project.ArrayHandle_Impl_.get(hxml.haxelibs);
+		var _g12 = vshaxeBuild.project._Project.ArrayHandle_Impl_.get(hxml.haxelibs);
 		while(_g3 < _g12.length) {
 			var lib = _g12[_g3];
 			++_g3;
@@ -3806,7 +3753,7 @@ vshaxeBuild.builders.HaxeBuilder.prototype = $extend(vshaxeBuild.builders.BaseBu
 	,installTarget: function(target,debug) {
 		this.cli.println("Installing Haxelibs for '" + target.name + "'...\n");
 		this.cli.runCommands(target.installCommands);
-		var libs = vshaxeBuild._Project.ArrayHandle_Impl_.get(this.resolveTargetHxml(target,debug,false,false).haxelibs);
+		var libs = vshaxeBuild.project._Project.ArrayHandle_Impl_.get(this.resolveTargetHxml(target,debug,false,false).haxelibs);
 		libs = vshaxeBuild.tools.ArrayTools.filterDuplicates(libs,function(lib1,lib2) {
 			return lib1 == lib2;
 		});
@@ -3814,7 +3761,7 @@ vshaxeBuild.builders.HaxeBuilder.prototype = $extend(vshaxeBuild.builders.BaseBu
 		while(_g < libs.length) {
 			var lib = libs[_g];
 			++_g;
-			this.cli.run("haxelib",vshaxeBuild._Project.ArrayHandle_Impl_.get(this.resolveHaxelib(lib).installArgs));
+			this.cli.run("haxelib",vshaxeBuild.project._Project.ArrayHandle_Impl_.get(this.resolveHaxelib(lib).installArgs));
 		}
 		this.cli.println("");
 	}
@@ -3833,7 +3780,7 @@ vshaxeBuild.builders.HaxeBuilder.prototype = $extend(vshaxeBuild.builders.BaseBu
 			this.installTarget(target,debug);
 		}
 		var _g = 0;
-		var _g1 = vshaxeBuild._Project.ArrayHandle_Impl_.get(target.targetDependencies);
+		var _g1 = vshaxeBuild.project._Project.ArrayHandle_Impl_.get(target.targetDependencies);
 		while(_g < _g1.length) {
 			var dependency = _g1[_g];
 			++_g;
@@ -3864,7 +3811,7 @@ vshaxeBuild.builders.HaxeBuilder.prototype = $extend(vshaxeBuild.builders.BaseBu
 		}
 		var args = [];
 		var _g = 0;
-		var _g1 = vshaxeBuild._Project.ArrayHandle_Impl_.get(hxml.haxelibs);
+		var _g1 = vshaxeBuild.project._Project.ArrayHandle_Impl_.get(hxml.haxelibs);
 		while(_g < _g1.length) {
 			var lib = _g1[_g];
 			++_g;
@@ -3872,7 +3819,7 @@ vshaxeBuild.builders.HaxeBuilder.prototype = $extend(vshaxeBuild.builders.BaseBu
 			args.push(this.resolveHaxelib(lib).name);
 		}
 		var _g2 = 0;
-		var _g11 = vshaxeBuild._Project.ArrayHandle_Impl_.get(hxml.classPaths);
+		var _g11 = vshaxeBuild.project._Project.ArrayHandle_Impl_.get(hxml.classPaths);
 		while(_g2 < _g11.length) {
 			var cp = _g11[_g2];
 			++_g2;
@@ -3880,7 +3827,7 @@ vshaxeBuild.builders.HaxeBuilder.prototype = $extend(vshaxeBuild.builders.BaseBu
 			args.push(cp);
 		}
 		var _g3 = 0;
-		var _g12 = vshaxeBuild._Project.ArrayHandle_Impl_.get(hxml.defines);
+		var _g12 = vshaxeBuild.project._Project.ArrayHandle_Impl_.get(hxml.defines);
 		while(_g3 < _g12.length) {
 			var define = _g12[_g3];
 			++_g3;
@@ -3898,7 +3845,7 @@ vshaxeBuild.builders.HaxeBuilder.prototype = $extend(vshaxeBuild.builders.BaseBu
 			args.push("-debug");
 		}
 		var _g4 = 0;
-		var _g13 = vshaxeBuild._Project.ArrayHandle_Impl_.get(hxml.macros);
+		var _g13 = vshaxeBuild.project._Project.ArrayHandle_Impl_.get(hxml.macros);
 		while(_g4 < _g13.length) {
 			var _macro = _g13[_g4];
 			++_g4;
@@ -3964,7 +3911,7 @@ vshaxeBuild.builders.VSCodeTasksBuilder.prototype = $extend(vshaxeBuild.builders
 			}
 			task.args.push("--debug");
 		}
-		return [task].concat(vshaxeBuild.tools.ArrayTools.flatten(vshaxeBuild._Project.ArrayHandle_Impl_.get(target.targetDependencies).map(function(name) {
+		return [task].concat(vshaxeBuild.tools.ArrayTools.flatten(vshaxeBuild.project._Project.ArrayHandle_Impl_.get(target.targetDependencies).map(function(name) {
 			var tmp = _gthis.resolveTarget(name);
 			return _gthis.buildTask(tmp,debug);
 		})));
@@ -3978,6 +3925,70 @@ vshaxeBuild.builders.VSCodeTasksBuilder.prototype = $extend(vshaxeBuild.builders
 	}
 	,__class__: vshaxeBuild.builders.VSCodeTasksBuilder
 });
+vshaxeBuild.project = {};
+vshaxeBuild.project._Project = {};
+vshaxeBuild.project._Project.ArrayHandle_Impl_ = {};
+vshaxeBuild.project._Project.ArrayHandle_Impl_.__name__ = true;
+vshaxeBuild.project._Project.ArrayHandle_Impl_.get = function(this1) {
+	if(this1 == null) {
+		return [];
+	} else {
+		return this1.slice();
+	}
+};
+vshaxeBuild.project.ProjectLoader = function(cli) {
+	this.cli = cli;
+};
+vshaxeBuild.project.ProjectLoader.__name__ = true;
+vshaxeBuild.project.ProjectLoader.prototype = {
+	load: function(cwd) {
+		var defaults = this.toPlacedProject(".",this.readProjectFile("vshaxe-build-defaults.json"));
+		this.cli.setCwd(cwd);
+		return [defaults,this.findProjectFiles()];
+	}
+	,findProjectFiles: function(dir) {
+		if(dir == null) {
+			dir = ".";
+		}
+		var lastDir = vshaxeBuild.tools.ArrayTools.idx(dir.split("/"),-1);
+		if(lastDir != "." && lastDir != ".." && StringTools.startsWith(lastDir,".") || ["dump","node_modules"].indexOf(dir) != -1) {
+			return null;
+		}
+		var project = null;
+		var subProjects = [];
+		var _g = 0;
+		var _g1 = js.node.Fs.readdirSync(dir);
+		while(_g < _g1.length) {
+			var file = _g1[_g];
+			++_g;
+			var fullPath = haxe.io.Path.join([dir,file]);
+			if(js.node.Fs.statSync(fullPath).isDirectory()) {
+				var subProject = this.findProjectFiles(fullPath);
+				if(subProject != null) {
+					subProjects.push(subProject);
+				}
+			} else if(file == "vshaxe-build.json") {
+				project = this.toPlacedProject(lastDir,this.readProjectFile(fullPath));
+			}
+		}
+		if(project != null) {
+			project.subProjects = subProjects;
+		}
+		return project;
+	}
+	,readProjectFile: function(path) {
+		var parser = new JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_();
+		var json = parser.fromJson(js.node.Fs.readFileSync(path,{ encoding : "utf8"}),path);
+		if(parser.warnings.length > 0) {
+			this.cli.fail(json2object.ErrorUtils.convertErrorArray(parser.warnings));
+		}
+		return json;
+	}
+	,toPlacedProject: function(directory,project) {
+		return { inherit : project.inherit, mainTarget : project.mainTarget, haxelibs : project.haxelibs, targets : project.targets, directory : directory, subProjects : []};
+	}
+	,__class__: vshaxeBuild.project.ProjectLoader
+};
 vshaxeBuild.tools = {};
 vshaxeBuild.tools.ArrayTools = function() { };
 vshaxeBuild.tools.ArrayTools.__name__ = true;
@@ -4044,7 +4055,7 @@ vshaxeBuild.tools.CliTools.__name__ = true;
 vshaxeBuild.tools.CliTools.prototype = {
 	runCommands: function(commands) {
 		var _g = 0;
-		var _g1 = vshaxeBuild._Project.ArrayHandle_Impl_.get(commands);
+		var _g1 = vshaxeBuild.project._Project.ArrayHandle_Impl_.get(commands);
 		while(_g < _g1.length) {
 			var command = _g1[_g];
 			++_g;
@@ -4052,7 +4063,7 @@ vshaxeBuild.tools.CliTools.prototype = {
 		}
 	}
 	,runCommand: function(cmd) {
-		var command = vshaxeBuild._Project.ArrayHandle_Impl_.get(cmd);
+		var command = vshaxeBuild.project._Project.ArrayHandle_Impl_.get(cmd);
 		if(command.length == 0) {
 			return;
 		}

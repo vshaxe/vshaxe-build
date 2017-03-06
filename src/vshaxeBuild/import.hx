@@ -2,7 +2,7 @@ package vshaxeBuild;
 
 import vshaxeBuild.Main.CliArguments;
 import vshaxeBuild.Main.Mode;
-import vshaxeBuild.Project;
+import vshaxeBuild.project.Project;
 import vshaxeBuild.tools.CliTools;
 
 using vshaxeBuild.tools.ArrayTools;

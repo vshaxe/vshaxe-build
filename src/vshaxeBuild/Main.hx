@@ -3,18 +3,12 @@ package vshaxeBuild;
 import Std.string as stringify;
 import haxe.CallStack;
 import haxe.Json;
-import haxe.io.Path;
-import json2object.JsonParser;
-import sys.FileSystem;
 import sys.io.File;
 import vshaxeBuild.builders.*;
-using json2object.ErrorUtils;
+import vshaxeBuild.project.ProjectLoader;
 
 /** The build tool for VSHaxe **/
 class Main {
-    static inline var PROJECT_FILE = "vshaxe-build.json";
-    static inline var DEFAULTS_FILE = "vshaxe-build-defaults.json";
-
     static function main() {
         try {
             new Main();
@@ -85,10 +79,7 @@ class Main {
         if (args.length == 0 || help)
             cli.exit(argHandler.getDoc());
 
-        var defaults = toPlacedProject(".", readProjectFile(DEFAULTS_FILE));
-        Sys.setCwd(cwd);
-        var projects = [defaults, findProjectFiles()];
-
+        var projects = new ProjectLoader(cli).load(cwd);
         if (dump) File.saveContent("dump.json", Json.stringify(projects, "    "));
 
         validateTargets(cliArgs.targets);
@@ -120,42 +111,6 @@ class Main {
 
     function getEnumName(cliName:String):String {
         return cliName.substr(0, 1).toUpperCase() + cliName.substr(1);
-    }
-
-    function findProjectFiles(dir:String = "."):PlacedProject {
-        var lastDir = dir.split("/").idx(-1);
-        if ((lastDir != "." && lastDir != ".." && lastDir.startsWith(".")) || ["dump", "node_modules"].indexOf(dir) != -1) return null;
-        var project:PlacedProject = null;
-        var subProjects = [];
-        for (file in FileSystem.readDirectory(dir)) {
-            var fullPath = Path.join([dir, file]);
-            if (FileSystem.isDirectory(fullPath)) {
-                var subProject = findProjectFiles(fullPath);
-                if (subProject != null) subProjects.push(subProject);
-            } else if (file == PROJECT_FILE)
-                project = toPlacedProject(lastDir, readProjectFile(fullPath));
-        }
-        if (project != null) project.subProjects = subProjects;
-        return project;
-    }
-
-    function readProjectFile(path:String):Project {
-        var parser = new JsonParser<Project>();
-        var json = parser.fromJson(File.getContent(path), path);
-        if (parser.warnings.length > 0)
-            cli.fail(parser.warnings.convertErrorArray());
-        return json;
-    }
-
-    function toPlacedProject(directory:String, project:Project):PlacedProject {
-        return {
-            inherit: project.inherit,
-            mainTarget: project.mainTarget,
-            haxelibs: project.haxelibs,
-            targets: project.targets,
-            directory: directory,
-            subProjects: []
-        }
     }
 }
 

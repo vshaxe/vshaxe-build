@@ -1,4 +1,4 @@
-package vshaxeBuild;
+package vshaxeBuild.project;
 
 typedef Named = {
     public var name(default,null):String;
