@@ -52,7 +52,7 @@ typedef TargetArguments = {
 }
 
 typedef Hxml = {
-    @:optional var workingDirectory:String; // not read-only, meh
+    @:optional var workingDirectory:String; // just for internal use right now
     @:optional var classPaths(default,null):ArrayHandle<String>;
     @:optional var defines(default,null):ArrayHandle<String>;
     @:optional var haxelibs(default,null):ArrayHandle<String>;

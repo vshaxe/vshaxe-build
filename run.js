@@ -3241,6 +3241,7 @@ vshaxeBuild.Main = function() {
 	var cwd = args.pop();
 	var parser = new vshaxeBuild.cli.CliParser(this.cli);
 	var cliArgs = parser.parse(args);
+	this.cli.init(cliArgs.verbose,cliArgs.dryRun);
 	var projects = new vshaxeBuild.project.ProjectLoader(this.cli).load(cwd);
 	if(cliArgs.dump) {
 		js.node.Fs.writeFileSync("dump.json",JSON.stringify(projects,null,"    "));
@@ -3276,45 +3277,10 @@ vshaxeBuild.builders = {};
 vshaxeBuild.builders.BaseBuilder = function(cli,projects) {
 	this.cli = cli;
 	this.projects = projects;
-	var _g = 0;
-	while(_g < projects.length) {
-		var project = projects[_g];
-		++_g;
-		this.adjustWorkingDirectories(project,project.directory);
-	}
 };
 vshaxeBuild.builders.BaseBuilder.__name__ = true;
 vshaxeBuild.builders.BaseBuilder.prototype = {
-	adjustWorkingDirectories: function(project,baseDir) {
-		var target = HxOverrides.iter(project.targets);
-		while(target.hasNext()) {
-			var target1 = target.next();
-			var projectBaseDir = haxe.io.Path.join([baseDir,project.directory]);
-			var hxml = target1.args;
-			if(hxml != null) {
-				hxml.workingDirectory = projectBaseDir;
-			}
-			if(target1.debug != null) {
-				var hxml1 = target1.debug.args;
-				if(hxml1 != null) {
-					hxml1.workingDirectory = projectBaseDir;
-				}
-			}
-			if(target1.display != null) {
-				var hxml2 = target1.display.args;
-				if(hxml2 != null) {
-					hxml2.workingDirectory = projectBaseDir;
-				}
-			}
-			vshaxeBuild.project._Project.ArrayHandle_Impl_.get(project.subProjects).map((function(a2,f) {
-				return function(a1) {
-					f[0](a1,a2[0]);
-					return;
-				};
-			})([projectBaseDir],[$bind(this,this.adjustWorkingDirectories)]));
-		}
-	}
-	,resolveHaxelib: function(name) {
+	resolveHaxelib: function(name) {
 		var loop = null;
 		loop = function(projects) {
 			var project = HxOverrides.iter(projects);
@@ -3889,7 +3855,14 @@ vshaxeBuild.cli.CliTools = function() {
 };
 vshaxeBuild.cli.CliTools.__name__ = true;
 vshaxeBuild.cli.CliTools.prototype = {
-	runCommands: function(commands) {
+	init: function(verbose,dryRun) {
+		this.verbose = verbose;
+		this.dryRun = dryRun;
+		if(dryRun) {
+			this.verbose = true;
+		}
+	}
+	,runCommands: function(commands) {
 		var _g = 0;
 		var _g1 = vshaxeBuild.project._Project.ArrayHandle_Impl_.get(commands);
 		while(_g < _g1.length) {
@@ -4002,6 +3975,7 @@ vshaxeBuild.project.ProjectLoader.prototype = {
 				}
 			} else if(file == "vshaxe-build.json") {
 				project = this.toPlacedProject(lastDir,this.readProjectFile(fullPath));
+				this.adjustWorkingDirectories(project,dir);
 			}
 		}
 		if(project != null) {
@@ -4028,6 +4002,28 @@ vshaxeBuild.project.ProjectLoader.prototype = {
 	}
 	,toPlacedProject: function(directory,project) {
 		return { inherit : project.inherit, mainTarget : project.mainTarget, haxelibs : project.haxelibs, targets : project.targets, directory : directory, subProjects : []};
+	}
+	,adjustWorkingDirectories: function(project,baseDir) {
+		var target = HxOverrides.iter(project.targets);
+		while(target.hasNext()) {
+			var target1 = target.next();
+			var hxml = target1.args;
+			if(hxml != null) {
+				hxml.workingDirectory = baseDir;
+			}
+			if(target1.debug != null) {
+				var hxml1 = target1.debug.args;
+				if(hxml1 != null) {
+					hxml1.workingDirectory = baseDir;
+				}
+			}
+			if(target1.display != null) {
+				var hxml2 = target1.display.args;
+				if(hxml2 != null) {
+					hxml2.workingDirectory = baseDir;
+				}
+			}
+		}
 	}
 	,__class__: vshaxeBuild.project.ProjectLoader
 };

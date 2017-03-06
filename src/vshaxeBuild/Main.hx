@@ -1,6 +1,5 @@
 package vshaxeBuild;
 
-import Std.string as stringify;
 import haxe.CallStack;
 import haxe.Json;
 import sys.io.File;
@@ -26,6 +25,7 @@ class Main {
         var cwd = args.pop();
         var parser = new CliParser(cli);
         var cliArgs = parser.parse(args);
+        cli.init(cliArgs.verbose, cliArgs.dryRun);
 
         var projects = new ProjectLoader(cli).load(cwd);
         if (cliArgs.dump) File.saveContent("dump.json", Json.stringify(projects, "    "));

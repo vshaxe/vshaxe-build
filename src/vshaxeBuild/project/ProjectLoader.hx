@@ -31,8 +31,10 @@ class ProjectLoader {
             if (FileSystem.isDirectory(fullPath)) {
                 var subProject = findProjectFiles(fullPath);
                 if (subProject != null) subProjects.push(subProject);
-            } else if (file == PROJECT_FILE)
+            } else if (file == PROJECT_FILE) {
                 project = toPlacedProject(lastDir, readProjectFile(fullPath));
+                adjustWorkingDirectories(project, dir);
+            }
         }
         if (project != null) project.subProjects = subProjects;
         return project;
@@ -60,6 +62,17 @@ class ProjectLoader {
             targets: project.targets,
             directory: directory,
             subProjects: []
+        }
+    }
+
+    function adjustWorkingDirectories(project:PlacedProject, baseDir:String) {
+        inline function adjustDir(baseDir:String, hxml:Hxml)
+            if (hxml != null) hxml.workingDirectory = baseDir;
+
+        for (target in project.targets) {
+            adjustDir(baseDir, target.args);
+            if (target.debug != null) adjustDir(baseDir, target.debug.args);
+            if (target.display != null) adjustDir(baseDir, target.display.args);
         }
     }
 }

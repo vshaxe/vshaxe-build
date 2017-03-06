@@ -13,24 +13,6 @@ class BaseBuilder {
     public function new(cli:CliTools, projects:Array<PlacedProject>) {
         this.cli = cli;
         this.projects = projects;
-        for (project in projects) adjustWorkingDirectories(project, project.directory);
-    }
-
-    function adjustWorkingDirectories(project:PlacedProject, baseDir:String) {
-        inline function adjustDir(baseDir:String, hxml:Hxml) {
-            if (hxml == null) return;
-            hxml.workingDirectory = baseDir; // TODO: fix this if you need cwd support... :P
-                /*if (hxml.workingDirectory == null) baseDir;
-                else hxml.workingDirectory = Path.join([baseDir, hxml.workingDirectory]);*/
-        }
-
-        for (target in project.targets) {
-            var projectBaseDir = Path.join([baseDir, project.directory]);
-            adjustDir(projectBaseDir, target.args);
-            if (target.debug != null) adjustDir(projectBaseDir, target.debug.args);
-            if (target.display != null) adjustDir(projectBaseDir, target.display.args);
-            project.subProjects.get().map(adjustWorkingDirectories.bind(_, projectBaseDir));
-        }
     }
 
     public function build(cliArgs:CliArguments) {}
