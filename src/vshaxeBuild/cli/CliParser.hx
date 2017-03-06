@@ -61,6 +61,9 @@ class CliParser {
         if (genTasks && display)
             cli.fail("Can only specify one: --gen-tasks or --display");
 
+        if (!mode.isValid())
+            cli.fail('Unknown --mode: $mode');
+
         return {
             targets: targets,
             mode: mode,
@@ -89,4 +92,8 @@ typedef CliArguments = {
     var Build = "build";
     var Install = "install";
     var Both = "both";
+
+    public function isValid() {
+        return this == Build || this == Install || this == Both;
+    }
 }

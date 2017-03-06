@@ -3868,9 +3868,22 @@ vshaxeBuild.cli.CliParser.prototype = {
 		if(genTasks && display) {
 			this.cli.fail("Can only specify one: --gen-tasks or --display");
 		}
+		if(!vshaxeBuild.cli._CliParser.Mode_Impl_.isValid(mode)) {
+			this.cli.fail("Unknown --mode: " + mode);
+		}
 		return { targets : targets, mode : mode, debug : debug, dryRun : dryRun, verbose : verbose, genTasks : genTasks, display : display, dump : dump};
 	}
 	,__class__: vshaxeBuild.cli.CliParser
+};
+vshaxeBuild.cli._CliParser = {};
+vshaxeBuild.cli._CliParser.Mode_Impl_ = {};
+vshaxeBuild.cli._CliParser.Mode_Impl_.__name__ = true;
+vshaxeBuild.cli._CliParser.Mode_Impl_.isValid = function(this1) {
+	if(!(this1 == "build" || this1 == "install")) {
+		return this1 == "both";
+	} else {
+		return true;
+	}
 };
 vshaxeBuild.cli.CliTools = function() {
 };
