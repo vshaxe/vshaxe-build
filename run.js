@@ -2168,7 +2168,7 @@ Main.prototype = {
 				if(subProject != null) {
 					subProjects.push(subProject);
 				}
-			} else if(file == "vshaxe-project.json") {
+			} else if(file == "vshaxe-build.json") {
 				project = this.toPlacedProject(lastDir,this.parseProjectFile(fullPath,js.node.Fs.readFileSync(fullPath,{ encoding : "utf8"})));
 			}
 		}
@@ -4427,7 +4427,7 @@ Bool.__ename__ = ["Bool"];
 var Class = { __name__ : ["Class"]};
 var Enum = { };
 var __map_reserved = {}
-Main.PROJECT_FILE = "vshaxe-project.json";
+Main.PROJECT_FILE = "vshaxe-build.json";
 Main.DEFAULTS = "{\r\n    \"haxelibs\": [\r\n        {\r\n            \"name\": \"hxnodejs\",\r\n            \"installArgs\": [\"git\", \"hxnodejs\", \"https://github.com/HaxeFoundation/hxnodejs\"]\r\n        },\r\n        {\r\n            \"name\": \"jstack\",\r\n            \"installArgs\": [\"install\", \"jstack\"]\r\n        }\r\n    ],\r\n    \"targets\": [\r\n        {\r\n            \"name\": \"empty\"\r\n        },\r\n        {\r\n            \"name\": \"vshaxe-node\",\r\n            \"debug\": {\r\n                \"args\": {\r\n                    \"defines\": [\"js_unflatten\"],\r\n                    \"haxelibs\": [\"jstack\"]\r\n                }\r\n            },\r\n            \"args\": {\r\n                \"haxelibs\": [\"hxnodejs\"]\r\n            }\r\n        }\r\n    ]\r\n}";
 builders.VSCodeTasksBuilder.problemMatcher = { owner : "haxe", pattern : { "regexp" : "^(.+):(\\d+): (?:lines \\d+-(\\d+)|character(?:s (\\d+)-| )(\\d+)) : (?:(Warning) : )?(.*)$", "file" : 1, "line" : 2, "endLine" : 3, "column" : 4, "endColumn" : 5, "severity" : 6, "message" : 7}};
 builders.VSCodeTasksBuilder.template = { version : "2.0.0", command : "haxelib", suppressTaskName : true, tasks : []};

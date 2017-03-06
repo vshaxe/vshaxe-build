@@ -13,7 +13,7 @@ using json2object.ErrorUtils;
 
 /** The build tool for VSHaxe **/
 class Main {
-    static inline var PROJECT_FILE = "vshaxe-project.json";
+    static inline var PROJECT_FILE = "vshaxe-build.json";
     static var DEFAULTS:String = getFileContent("defaults.json");
 
     #if !macro
