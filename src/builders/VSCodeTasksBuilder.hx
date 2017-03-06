@@ -64,25 +64,17 @@ class VSCodeTasksBuilder extends BaseBuilder {
     }
 
     function createDefaultTasks(target:String):Array<Task> {
-        inline function makeTargetArgs(additionalArgs:Array<String>)
-            return makeArgs(["--target", target].concat(additionalArgs));
+        inline function makeTask(name:String, additionalArgs:Array<String>):Task
+            return {
+                taskName: '{$name}',
+                args: makeArgs(["--target", target].concat(additionalArgs)),
+                problemMatcher: problemMatcher
+            };
 
         return [
-            {
-                taskName: "{install-all}",
-                args: makeTargetArgs(["--mode", "install"]),
-                problemMatcher: problemMatcher
-            },
-            {
-                taskName: "{generate-complete-hxml}",
-                args: makeTargetArgs(["--display"]),
-                problemMatcher: problemMatcher
-            },
-            {
-                taskName: "{generate-vscode-tasks}",
-                args: makeTargetArgs(["--gen-tasks"]),
-                problemMatcher: problemMatcher
-            }
+            makeTask("install-all", ["--mode", "install"]),
+            makeTask("generate-complete-hxml", ["--display"]),
+            makeTask("generate-vscode-tasks", ["--gen-tasks"])
         ];
     }
 

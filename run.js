@@ -3005,7 +3005,7 @@ builders.VSCodeTasksBuilder.prototype = $extend(builders.BaseBuilder.prototype,{
 	}
 	,createDefaultTasks: function(target) {
 		var _gthis = this;
-		return [{ taskName : "{install-all}", args : _gthis.makeArgs(["--target",target].concat(["--mode","install"])), problemMatcher : builders.VSCodeTasksBuilder.problemMatcher},{ taskName : "{generate-complete-hxml}", args : _gthis.makeArgs(["--target",target].concat(["--display"])), problemMatcher : builders.VSCodeTasksBuilder.problemMatcher},{ taskName : "{generate-vscode-tasks}", args : _gthis.makeArgs(["--target",target].concat(["--gen-tasks"])), problemMatcher : builders.VSCodeTasksBuilder.problemMatcher}];
+		return [{ taskName : "{" + "install-all" + "}", args : _gthis.makeArgs(["--target",target].concat(["--mode","install"])), problemMatcher : builders.VSCodeTasksBuilder.problemMatcher},{ taskName : "{" + "generate-complete-hxml" + "}", args : _gthis.makeArgs(["--target",target].concat(["--display"])), problemMatcher : builders.VSCodeTasksBuilder.problemMatcher},{ taskName : "{" + "generate-vscode-tasks" + "}", args : _gthis.makeArgs(["--target",target].concat(["--gen-tasks"])), problemMatcher : builders.VSCodeTasksBuilder.problemMatcher}];
 	}
 	,makeArgs: function(additionalArgs) {
 		return ["run","vshaxe-build"].concat(additionalArgs);
