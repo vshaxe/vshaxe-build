@@ -579,7 +579,7 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_displ
 				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
 			}
 		}
-		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max));
+		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max,objectPos.max));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s3 = s.next();
@@ -912,7 +912,7 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_installCommands_targe
 				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
 			}
 		}
-		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max));
+		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max,objectPos.max));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s3 = s.next();
@@ -1356,7 +1356,7 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main
 				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
 			}
 		}
-		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max));
+		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max,objectPos.max));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s2 = s.next();
@@ -1553,7 +1553,7 @@ JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_Ar
 				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
 			}
 		}
-		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max));
+		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max,objectPos.max));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s2 = s.next();
@@ -1685,7 +1685,7 @@ JsonParser_Ano_installArgs___Abstract_ArrayHandle___Inst_Stringname___Inst_Strin
 				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
 			}
 		}
-		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max));
+		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max,objectPos.max));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s2 = s.next();
@@ -1778,7 +1778,7 @@ JsonParser_Ano_path___Inst_Stringtarget___Abstract_HaxeTarget.prototype = {
 				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
 			}
 		}
-		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max));
+		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max,objectPos.max));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s1 = s.next();
@@ -3043,7 +3043,7 @@ json2object.PosUtils = function(content) {
 	var s = 0;
 	var e = 0;
 	var i = 0;
-	var lineCount = 0;
+	var lineCount = 1;
 	while(i < content.length) {
 		var _g = content.charAt(i);
 		switch(_g) {
@@ -3066,8 +3066,8 @@ json2object.PosUtils = function(content) {
 		default:
 			++i;
 		}
-		this.linesInfo.push({ number : lineCount, start : s, end : i});
 	}
+	this.linesInfo.push({ number : lineCount, start : s, end : i});
 };
 json2object.PosUtils.__name__ = true;
 json2object.PosUtils.prototype = {
