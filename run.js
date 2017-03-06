@@ -1398,7 +1398,7 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInli
 				switch(_g111[1]) {
 				case 2:
 					var s07 = _g111[2];
-					this.object.output = new JsonParser_Ano_path___Inst_Stringtarget___Inst_String(this.warnings,this.putils).loadJson(s07,field.value.pos);
+					this.object.output = new JsonParser_Ano_path___Inst_Stringtarget___Abstract_HaxeTarget(this.warnings,this.putils).loadJson(s07,field.value.pos);
 					var key12 = field.name;
 					if(__map_reserved[key12] != null) {
 						assigned.setReserved(key12,true);
@@ -1821,12 +1821,12 @@ JsonParser_Ano_installArgs___Abstract_ArrayHandle___Inst_Stringname___Inst_Strin
 	}
 	,__class__: JsonParser_Ano_installArgs___Abstract_ArrayHandle___Inst_Stringname___Inst_String
 };
-var JsonParser_Ano_path___Inst_Stringtarget___Inst_String = function(warnings,putils) {
+var JsonParser_Ano_path___Inst_Stringtarget___Abstract_HaxeTarget = function(warnings,putils) {
 	this.warnings = warnings == null ? [] : warnings;
 	this.putils = putils;
 };
-JsonParser_Ano_path___Inst_Stringtarget___Inst_String.__name__ = true;
-JsonParser_Ano_path___Inst_Stringtarget___Inst_String.prototype = {
+JsonParser_Ano_path___Inst_Stringtarget___Abstract_HaxeTarget.__name__ = true;
+JsonParser_Ano_path___Inst_Stringtarget___Abstract_HaxeTarget.prototype = {
 	loadJson: function(fields,objectPos) {
 		var assigned = new haxe.ds.StringMap();
 		if(__map_reserved["path"] != null) {
@@ -1930,7 +1930,7 @@ JsonParser_Ano_path___Inst_Stringtarget___Inst_String.prototype = {
 			} else throw(e);
 		}
 	}
-	,__class__: JsonParser_Ano_path___Inst_Stringtarget___Inst_String
+	,__class__: JsonParser_Ano_path___Inst_Stringtarget___Abstract_HaxeTarget
 };
 var List = function() {
 	this.length = 0;

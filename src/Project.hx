@@ -69,8 +69,22 @@ typedef Hxml = {
 }
 
 typedef Output = {
-    var target(default,null):String; // TODO enum abstract
+    var target(default,null):HaxeTarget;
     var path(default,null):String;
+}
+
+@:enum abstract HaxeTarget(String) to String {
+    var Swf = "swf";
+    var Js = "js";
+    var Neko = "neko";
+    var Php = "php";
+    var Cpp = "cpp";
+    var Cppia = "cppia";
+    var As3 = "as3";
+    var Java = "java";
+    var Python = "python";
+    var Hl = "hl";
+    var Lua = "lua";
 }
 
 @:forward(iterator)
