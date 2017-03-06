@@ -1,12 +1,13 @@
 package vshaxeBuild;
 
-import vshaxeBuild.builders.*;
-import json2object.JsonParser;
-import sys.io.File;
-import sys.FileSystem;
-import haxe.io.Path;
-import haxe.Json;
 import Std.string as stringify;
+import haxe.CallStack;
+import haxe.Json;
+import haxe.io.Path;
+import json2object.JsonParser;
+import sys.FileSystem;
+import sys.io.File;
+import vshaxeBuild.builders.*;
 using json2object.ErrorUtils;
 
 /** The build tool for VSHaxe **/
@@ -19,6 +20,7 @@ class Main {
             new Main();
         } catch (e:Any) {
             Sys.println(e);
+            Sys.println(CallStack.toString(CallStack.callStack()));
             Sys.exit(1);
         }
     }

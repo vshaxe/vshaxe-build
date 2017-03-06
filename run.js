@@ -2107,6 +2107,16 @@ haxe.CallStack.getStack = function(e) {
 	Error.prepareStackTrace = oldValue;
 	return a;
 };
+haxe.CallStack.callStack = function() {
+	try {
+		throw new Error();
+	} catch( e ) {
+		if (e instanceof js._Boot.HaxeError) e = e.val;
+		var a = haxe.CallStack.getStack(e);
+		a.shift();
+		return a;
+	}
+};
 haxe.CallStack.toString = function(stack) {
 	var b = new StringBuf();
 	var _g = 0;
@@ -3531,6 +3541,9 @@ vshaxeBuild.Main.main = function() {
 		} catch( e ) {
 			if (e instanceof js._Boot.HaxeError) e = e.val;
 			process.stdout.write(Std.string(e));
+			process.stdout.write("\n");
+			var v = haxe.CallStack.toString(haxe.CallStack.callStack());
+			process.stdout.write(Std.string(v));
 			process.stdout.write("\n");
 			process.exit(1);
 		}
