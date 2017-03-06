@@ -33,7 +33,7 @@ class VSCodeTasksBuilder extends BaseBuilder {
             base.tasks = base.tasks.concat(createDefaultTasks(projects[1].mainTarget));
 
         var tasksJson = haxe.Json.stringify(base, null, "    ");
-        tasksJson = '// ${Warning.Message}\n$tasksJson';
+        tasksJson = '// ${BaseBuilder.Warning}\n$tasksJson';
         cli.saveContent(".vscode/tasks.json", tasksJson);
     }
 

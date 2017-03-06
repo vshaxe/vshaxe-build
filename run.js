@@ -3641,8 +3641,6 @@ vshaxeBuild._Project.ArrayHandle_Impl_.get = function(this1) {
 	}
 };
 vshaxeBuild.builders = {};
-vshaxeBuild.builders.IBuilder = function() { };
-vshaxeBuild.builders.IBuilder.__name__ = true;
 vshaxeBuild.builders.BaseBuilder = function(cli,projects) {
 	this.cli = cli;
 	this.projects = projects;
@@ -3654,7 +3652,6 @@ vshaxeBuild.builders.BaseBuilder = function(cli,projects) {
 	}
 };
 vshaxeBuild.builders.BaseBuilder.__name__ = true;
-vshaxeBuild.builders.BaseBuilder.__interfaces__ = [vshaxeBuild.builders.IBuilder];
 vshaxeBuild.builders.BaseBuilder.prototype = {
 	adjustWorkingDirectories: function(project,baseDir) {
 		var target = HxOverrides.iter(project.targets);

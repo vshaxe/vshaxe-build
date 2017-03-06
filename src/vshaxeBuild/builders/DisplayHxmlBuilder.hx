@@ -5,7 +5,7 @@ class DisplayHxmlBuilder extends BaseBuilder {
         var hxmls = resolveTargets(cliArgs.targets).map(resolveTargetHxml.bind(_, true, true, true));
         var hxml = mergeHxmls(hxmls, true, true);
         var lines = printHxmlFile(hxml);
-        lines.insert(0, '# ${Warning.Message}');
+        lines.insert(0, '# ${BaseBuilder.Warning}');
         lines = lines.filterDuplicates(function(s1, s2) return s1 == s2);
 
         cli.saveContent("complete.hxml", lines.join("\n"));

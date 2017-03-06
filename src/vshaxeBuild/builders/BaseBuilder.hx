@@ -4,7 +4,9 @@ import haxe.ds.Option;
 import haxe.io.Path;
 
 /** sounds like an RTS... **/
-class BaseBuilder implements IBuilder {
+class BaseBuilder {
+    static inline var Warning = "This file is generated with vshaxe-build - DO NOT EDIT MANUALLY!";
+
     var cli:CliTools;
     var projects:Array<PlacedProject>;
 
