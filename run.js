@@ -576,10 +576,10 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_displ
 				}
 				break;
 			default:
-				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
+				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.namePos)));
 			}
 		}
-		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max,objectPos.max));
+		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max - 1));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s3 = s.next();
@@ -909,10 +909,10 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_installCommands_targe
 				}
 				break;
 			default:
-				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
+				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.namePos)));
 			}
 		}
-		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max,objectPos.max));
+		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max - 1));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s3 = s.next();
@@ -1353,10 +1353,10 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main
 				}
 				break;
 			default:
-				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
+				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.namePos)));
 			}
 		}
-		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max,objectPos.max));
+		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max - 1));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s2 = s.next();
@@ -1550,10 +1550,10 @@ JsonParser_Ano_haxelibs_inherit_mainTarget_targets___Abstract_ArrayHandle___Ano_
 				}
 				break;
 			default:
-				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
+				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.namePos)));
 			}
 		}
-		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max,objectPos.max));
+		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max - 1));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s2 = s.next();
@@ -1682,10 +1682,10 @@ JsonParser_Ano_installArgs___Abstract_ArrayHandle___Inst_Stringname___Inst_Strin
 				}
 				break;
 			default:
-				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
+				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.namePos)));
 			}
 		}
-		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max,objectPos.max));
+		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max - 1));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s2 = s.next();
@@ -1775,10 +1775,10 @@ JsonParser_Ano_path___Inst_Stringtarget___Abstract_HaxeTarget.prototype = {
 				}
 				break;
 			default:
-				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.value.pos)));
+				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.namePos)));
 			}
 		}
-		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max,objectPos.max));
+		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max - 1));
 		var s = assigned.keys();
 		while(s.hasNext()) {
 			var s1 = s.next();
@@ -2988,7 +2988,7 @@ json2object.PosUtils = function(content) {
 	var s = 0;
 	var e = 0;
 	var i = 0;
-	var lineCount = 1;
+	var lineCount = 0;
 	while(i < content.length) {
 		var _g = content.charAt(i);
 		switch(_g) {
@@ -3026,7 +3026,7 @@ json2object.PosUtils.prototype = {
 			var line = _g1[_g];
 			++_g;
 			if(line.start <= min && line.end >= max) {
-				return { file : file, line : { number : line.number, start : min - line.start, end : max - line.start}, min : min, max : max};
+				return { file : file, line : { number : line.number + 1, start : min - line.start + 1, end : max - line.start + 1}, min : min + 1, max : max + 1};
 			}
 		}
 		return null;
