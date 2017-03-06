@@ -3501,7 +3501,7 @@ vshaxeBuild.Main = function() {
 	if(args.length == 0 || help) {
 		this.cli.exit(argHandler_getDoc());
 	}
-	var defaults = this.toPlacedProject(".",this.readProjectFile("defaults.json"));
+	var defaults = this.toPlacedProject(".",this.readProjectFile("vshaxe-build-defaults.json"));
 	process.chdir(cwd);
 	var projects = [defaults,this.findProjectFiles()];
 	if(dump) {
