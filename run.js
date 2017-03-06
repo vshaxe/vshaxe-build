@@ -3341,7 +3341,6 @@ vshaxeBuild.Main = function() {
 	var modeStr = "build";
 	var args = process.argv.slice(2);
 	var cwd = args.pop();
-	process.chdir(cwd);
 	var argHandler_parse;
 	var argHandler_getDoc = function() {
 		return "[-t | --target] <name> : One or multiple targets to build.\n[-m | --mode] <mode>   : Build mode - accepted values are 'build', 'install', and 'both'.\n[--debug]              : Build the target(s) in debug mode. Implies -debug, -D js_unflatten and -lib jstack.\n[--dry-run]            : Perform a dry run (no command invocations). Implies -verbose.\n[-v | --verbose]       : Output the commands that are executed.\n[--gen-tasks]          : Generate a tasks.json to .vscode (and don't build anything).\n[--display]            : Generate a complete.hxml for auto completion (and don't build anything).\n[--dump]               : Dump the parsed project files to dump.json.\n[--help]               : Display this help text and exit.";
@@ -3450,7 +3449,8 @@ vshaxeBuild.Main = function() {
 	if(args.length == 0 || help) {
 		this.cli.exit(argHandler_getDoc());
 	}
-	var defaults = this.toPlacedProject(".",this.parseProjectFile("defaults.json",vshaxeBuild.Main.DEFAULTS));
+	var defaults = this.toPlacedProject(".",this.readProjectFile("defaults.json"));
+	process.chdir(cwd);
 	var projects = [defaults,this.findProjectFiles()];
 	if(dump) {
 		js.node.Fs.writeFileSync("dump.json",JSON.stringify(projects,null,"    "));
@@ -3534,7 +3534,7 @@ vshaxeBuild.Main.prototype = {
 					subProjects.push(subProject);
 				}
 			} else if(file == "vshaxe-build.json") {
-				project = this.toPlacedProject(lastDir,this.parseProjectFile(fullPath,js.node.Fs.readFileSync(fullPath,{ encoding : "utf8"})));
+				project = this.toPlacedProject(lastDir,this.readProjectFile(fullPath));
 			}
 		}
 		if(project != null) {
@@ -3542,9 +3542,9 @@ vshaxeBuild.Main.prototype = {
 		}
 		return project;
 	}
-	,parseProjectFile: function(path,file) {
+	,readProjectFile: function(path) {
 		var parser = new JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_();
-		var json = parser.fromJson(file,path);
+		var json = parser.fromJson(js.node.Fs.readFileSync(path,{ encoding : "utf8"}),path);
 		if(parser.warnings.length > 0) {
 			this.cli.fail(json2object.ErrorUtils.convertErrorArray(parser.warnings));
 		}
@@ -4055,7 +4055,6 @@ js.Boot.__toStr = ({ }).toString;
 jstack.js.JStack.instance = new jstack.js.JStack();
 jstack.js.JStack.stackFile = new EReg("^at (.+?js):([0-9]+):([0-9]+)$","");
 jstack.js.JStack.stackFunctionFile = new EReg("^at (.+?) \\((.+?js):([0-9]+):([0-9]+)\\)$","");
-vshaxeBuild.Main.DEFAULTS = "{\r\n    \"haxelibs\": [\r\n        {\r\n            \"name\": \"hxnodejs\",\r\n            \"installArgs\": [\"git\", \"hxnodejs\", \"https://github.com/HaxeFoundation/hxnodejs\"]\r\n        },\r\n        {\r\n            \"name\": \"jstack\",\r\n            \"installArgs\": [\"install\", \"jstack\"]\r\n        }\r\n    ],\r\n    \"targets\": [\r\n        {\r\n            \"name\": \"empty\"\r\n        },\r\n        {\r\n            \"name\": \"vshaxe-node\",\r\n            \"debug\": {\r\n                \"args\": {\r\n                    \"defines\": [\"js_unflatten\"],\r\n                    \"haxelibs\": [\"jstack\"]\r\n                }\r\n            },\r\n            \"args\": {\r\n                \"haxelibs\": [\"hxnodejs\"]\r\n            }\r\n        }\r\n    ]\r\n}";
 vshaxeBuild.builders.VSCodeTasksBuilder.problemMatcher = { owner : "haxe", pattern : { "regexp" : "^(.+):(\\d+): (?:lines \\d+-(\\d+)|character(?:s (\\d+)-| )(\\d+)) : (?:(Warning) : )?(.*)$", "file" : 1, "line" : 2, "endLine" : 3, "column" : 4, "endColumn" : 5, "severity" : 6, "message" : 7}};
 vshaxeBuild.builders.VSCodeTasksBuilder.template = { version : "2.0.0", command : "haxelib", suppressTaskName : true, tasks : []};
 vshaxeBuild.Main.main();

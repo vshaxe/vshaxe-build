@@ -1,9 +1,7 @@
 package vshaxeBuild;
 
 import vshaxeBuild.builders.*;
-#if !macro
 import json2object.JsonParser;
-#end
 import sys.io.File;
 import sys.FileSystem;
 import haxe.io.Path;
@@ -14,9 +12,8 @@ using json2object.ErrorUtils;
 /** The build tool for VSHaxe **/
 class Main {
     static inline var PROJECT_FILE = "vshaxe-build.json";
-    static var DEFAULTS:String = getFileContent("defaults.json");
+    static inline var DEFAULTS_FILE = "defaults.json";
 
-    #if !macro
     static function main() {
         try {
             new Main();
@@ -45,7 +42,6 @@ class Main {
 
         var args = Sys.args();
         var cwd = args.pop();
-        Sys.setCwd(cwd);
 
         var argHandler = hxargs.Args.generate([
             @doc("One or multiple targets to build.")
@@ -87,7 +83,8 @@ class Main {
         if (args.length == 0 || help)
             cli.exit(argHandler.getDoc());
 
-        var defaults = toPlacedProject(".", parseProjectFile("defaults.json", DEFAULTS));
+        var defaults = toPlacedProject(".", readProjectFile(DEFAULTS_FILE));
+        Sys.setCwd(cwd);
         var projects = [defaults, findProjectFiles()];
 
         if (dump) File.saveContent("dump.json", Json.stringify(projects, "    "));
@@ -134,15 +131,15 @@ class Main {
                 var subProject = findProjectFiles(fullPath);
                 if (subProject != null) subProjects.push(subProject);
             } else if (file == PROJECT_FILE)
-                project = toPlacedProject(lastDir, parseProjectFile(fullPath, File.getContent(fullPath)));
+                project = toPlacedProject(lastDir, readProjectFile(fullPath));
         }
         if (project != null) project.subProjects = subProjects;
         return project;
     }
 
-    function parseProjectFile(path:String, file:String):Project {
+    function readProjectFile(path:String):Project {
         var parser = new JsonParser<Project>();
-        var json = parser.fromJson(file, path);
+        var json = parser.fromJson(File.getContent(path), path);
         if (parser.warnings.length > 0)
             cli.fail(parser.warnings.convertErrorArray());
         return json;
@@ -157,11 +154,6 @@ class Main {
             directory: directory,
             subProjects: []
         }
-    }
-    #end
-
-    macro static function getFileContent(file:String):haxe.macro.Expr {
-        return macro $v{sys.io.File.getContent(file)};
     }
 }
 
