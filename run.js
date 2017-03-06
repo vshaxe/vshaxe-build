@@ -3753,7 +3753,7 @@ vshaxeBuild.builders.BaseBuilder.prototype = {
 			var dependencyHxmls1 = this.resolveTargets(vshaxeBuild._Project.ArrayHandle_Impl_.get(target.targetDependencies)).map(dependencyHxmls);
 			hxmls = hxmls.concat(dependencyHxmls1);
 		}
-		return this.mergeHxmls(hxmls,flatten);
+		return this.mergeHxmls(hxmls,flatten,debug);
 	}
 	,resolveParent: function(target) {
 		if(target.inherit != null) {
@@ -3792,12 +3792,12 @@ vshaxeBuild.builders.BaseBuilder.prototype = {
 		}
 		return haxe.ds.Option.None;
 	}
-	,mergeHxmls: function(hxmls,flatten) {
+	,mergeHxmls: function(hxmls,flatten,debug) {
 		var classPaths = [];
 		var defines = [];
 		var haxelibs = [];
 		var macros = [];
-		var debug = false;
+		var debug1 = debug;
 		var output = null;
 		var deadCodeElimination = null;
 		var noInline = false;
@@ -3820,10 +3820,10 @@ vshaxeBuild.builders.BaseBuilder.prototype = {
 			haxelibs = haxelibs.concat(haxelibs1);
 			var macros1 = vshaxeBuild._Project.ArrayHandle_Impl_.get(hxml.macros);
 			macros = macros.concat(macros1);
-			if(!debug) {
-				debug = hxml.debug;
+			if(!debug1) {
+				debug1 = hxml.debug;
 			} else {
-				debug = true;
+				debug1 = true;
 			}
 			if(hxml.output != null) {
 				output = hxml.output;
@@ -3847,7 +3847,7 @@ vshaxeBuild.builders.BaseBuilder.prototype = {
 			++_g;
 			merge(hxml1);
 		}
-		return { workingDirectory : "", classPaths : classPaths, defines : defines, haxelibs : haxelibs, macros : macros, debug : debug, output : output, deadCodeElimination : deadCodeElimination, noInline : noInline, main : main, packageName : packageName};
+		return { workingDirectory : "", classPaths : classPaths, defines : defines, haxelibs : haxelibs, macros : macros, debug : debug1, output : output, deadCodeElimination : deadCodeElimination, noInline : noInline, main : main, packageName : packageName};
 	}
 	,__class__: vshaxeBuild.builders.BaseBuilder
 };
@@ -3863,7 +3863,7 @@ vshaxeBuild.builders.DisplayHxmlBuilder.prototype = $extend(vshaxeBuild.builders
 			return f(a1,true,true,true);
 		};
 		var hxmls1 = this.resolveTargets(cliArgs.targets).map(hxmls);
-		var hxml = this.mergeHxmls(hxmls1,true);
+		var hxml = this.mergeHxmls(hxmls1,true,true);
 		var lines = this.printHxmlFile(hxml);
 		lines.splice(0,0,"# " + "This file is generated with vshaxe-build - DO NOT EDIT MANUALLY!");
 		lines = vshaxeBuild.ArrayTools.filterDuplicates(lines,function(s1,s2) {

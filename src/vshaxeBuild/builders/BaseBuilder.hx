@@ -86,7 +86,7 @@ class BaseBuilder implements IBuilder {
             hxmls = hxmls.concat(dependencyHxmls);
         }
 
-        return mergeHxmls(hxmls, flatten);
+        return mergeHxmls(hxmls, flatten, debug);
     }
 
     function resolveParent(target:Target):Option<Target> {
@@ -116,12 +116,12 @@ class BaseBuilder implements IBuilder {
         return None;
     }
 
-    function mergeHxmls(hxmls:Array<Hxml>, flatten:Bool):Hxml {
+    function mergeHxmls(hxmls:Array<Hxml>, flatten:Bool, debug:Bool):Hxml {
         var classPaths = [];
         var defines = [];
         var haxelibs = [];
         var macros = [];
-        var debug = false;
+        var debug = debug;
         var output = null;
         var deadCodeElimination = null;
         var noInline = false;

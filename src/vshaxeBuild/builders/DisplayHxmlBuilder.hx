@@ -3,7 +3,7 @@ package vshaxeBuild.builders;
 class DisplayHxmlBuilder extends BaseBuilder {
     override public function build(cliArgs:CliArguments) {
         var hxmls = resolveTargets(cliArgs.targets).map(resolveTargetHxml.bind(_, true, true, true));
-        var hxml = mergeHxmls(hxmls, true);
+        var hxml = mergeHxmls(hxmls, true, true);
         var lines = printHxmlFile(hxml);
         lines.insert(0, '# ${Warning.Message}');
         lines = lines.filterDuplicates(function(s1, s2) return s1 == s2);
