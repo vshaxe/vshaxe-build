@@ -3260,138 +3260,6 @@ jstack.js.StackPos.prototype = {
 	,__class__: jstack.js.StackPos
 };
 var vshaxeBuild = {};
-vshaxeBuild.ArrayTools = function() { };
-vshaxeBuild.ArrayTools.__name__ = true;
-vshaxeBuild.ArrayTools.filterDuplicates = function(tasks,filter) {
-	var uniqueTasks = [];
-	var _g = 0;
-	while(_g < tasks.length) {
-		var task = tasks[_g];
-		++_g;
-		var present = false;
-		var _g1 = 0;
-		while(_g1 < uniqueTasks.length) {
-			var unique = uniqueTasks[_g1];
-			++_g1;
-			if(filter(unique,task)) {
-				present = true;
-			}
-		}
-		if(!present) {
-			uniqueTasks.push(task);
-		}
-	}
-	return uniqueTasks;
-};
-vshaxeBuild.ArrayTools.findNamed = function(a,name) {
-	var e = HxOverrides.iter(a);
-	while(e.hasNext()) {
-		var e1 = e.next();
-		if(e1.name == name) {
-			return e1;
-		}
-	}
-	return null;
-};
-vshaxeBuild.ArrayTools.idx = function(a,i) {
-	if(i >= 0) {
-		return a[i];
-	} else {
-		return a[a.length + i];
-	}
-};
-vshaxeBuild.ArrayTools.flatten = function(array) {
-	return vshaxeBuild.ArrayTools.reduce(array,function(acc,element) {
-		return acc.concat(element);
-	},[]);
-};
-vshaxeBuild.ArrayTools.reduce = function(array,f,initial) {
-	var _g = 0;
-	while(_g < array.length) {
-		var v = array[_g];
-		++_g;
-		initial = f(initial,v);
-	}
-	return initial;
-};
-vshaxeBuild.CliTools = function(verbose,dryRun) {
-	this.verbose = verbose;
-	this.dryRun = dryRun;
-	if(dryRun) {
-		this.verbose = true;
-	}
-};
-vshaxeBuild.CliTools.__name__ = true;
-vshaxeBuild.CliTools.prototype = {
-	runCommands: function(commands) {
-		var _g = 0;
-		var _g1 = vshaxeBuild._Project.ArrayHandle_Impl_.get(commands);
-		while(_g < _g1.length) {
-			var command = _g1[_g];
-			++_g;
-			this.runCommand(command);
-		}
-	}
-	,runCommand: function(cmd) {
-		var command = vshaxeBuild._Project.ArrayHandle_Impl_.get(cmd);
-		if(command.length == 0) {
-			return;
-		}
-		var executable = command[0];
-		command.shift();
-		this.run(executable,command);
-	}
-	,inDir: function(dir,f) {
-		var oldCwd = process.cwd();
-		this.setCwd(dir);
-		f();
-		this.setCwd(oldCwd);
-	}
-	,setCwd: function(dir) {
-		if(dir == null || StringTools.trim(dir) == "") {
-			return;
-		}
-		this.println("cd " + dir);
-		process.chdir(dir);
-	}
-	,run: function(command,args) {
-		this.println(command + " " + args.join(" "));
-		if(!this.dryRun) {
-			var result = args == null ? js.node.ChildProcess.spawnSync(command,{ stdio : "inherit"}).status : js.node.ChildProcess.spawnSync(command,args,{ stdio : "inherit"}).status;
-			if(result != 0) {
-				process.exit(result);
-			}
-		}
-	}
-	,println: function(message) {
-		if(this.verbose) {
-			process.stdout.write(message == null ? "null" : "" + message);
-			process.stdout.write("\n");
-		}
-	}
-	,exit: function(message,code) {
-		if(code == null) {
-			code = 0;
-		}
-		process.stdout.write("VSHaxe Build Tool");
-		process.stdout.write("\n");
-		process.stdout.write(message == null ? "null" : "" + message);
-		process.stdout.write("\n");
-		process.exit(code);
-	}
-	,fail: function(message) {
-		this.exit(message,1);
-	}
-	,saveContent: function(path,content) {
-		if(this.verbose) {
-			this.println("Saving to '" + path + "':\n\n" + content);
-		}
-		if(!this.dryRun) {
-			js.node.Fs.writeFileSync(path,content);
-		}
-	}
-	,__class__: vshaxeBuild.CliTools
-};
 vshaxeBuild.Main = function() {
 	var cliArgs = { targets : [], debug : false, mode : vshaxeBuild.Mode.Build};
 	var dryRun = false;
@@ -3507,7 +3375,7 @@ vshaxeBuild.Main = function() {
 		process.stdout.write("\n");
 		process.exit(1);
 	}
-	this.cli = new vshaxeBuild.CliTools(verbose,dryRun);
+	this.cli = new vshaxeBuild.tools.CliTools(verbose,dryRun);
 	if(args.length == 0 || help) {
 		this.cli.exit(argHandler_getDoc());
 	}
@@ -3581,7 +3449,7 @@ vshaxeBuild.Main.prototype = {
 		if(dir == null) {
 			dir = ".";
 		}
-		var lastDir = vshaxeBuild.ArrayTools.idx(dir.split("/"),-1);
+		var lastDir = vshaxeBuild.tools.ArrayTools.idx(dir.split("/"),-1);
 		if(lastDir != "." && lastDir != ".." && StringTools.startsWith(lastDir,".") || ["dump","node_modules"].indexOf(dir) != -1) {
 			return null;
 		}
@@ -3688,7 +3556,7 @@ vshaxeBuild.builders.BaseBuilder.prototype = {
 			var project = HxOverrides.iter(projects);
 			while(project.hasNext()) {
 				var project1 = project.next();
-				var lib = vshaxeBuild.ArrayTools.findNamed(project1.haxelibs,name);
+				var lib = vshaxeBuild.tools.ArrayTools.findNamed(project1.haxelibs,name);
 				if(lib != null) {
 					return lib;
 				}
@@ -3708,7 +3576,7 @@ vshaxeBuild.builders.BaseBuilder.prototype = {
 			var project = HxOverrides.iter(projects);
 			while(project.hasNext()) {
 				var project1 = project.next();
-				var target = vshaxeBuild.ArrayTools.findNamed(project1.targets,name);
+				var target = vshaxeBuild.tools.ArrayTools.findNamed(project1.targets,name);
 				if(target != null) {
 					return target;
 				}
@@ -3781,7 +3649,7 @@ vshaxeBuild.builders.BaseBuilder.prototype = {
 	}
 	,flattenProjects: function(project) {
 		var projects = [project];
-		projects = projects.concat(vshaxeBuild.ArrayTools.flatten(vshaxeBuild._Project.ArrayHandle_Impl_.get(project.subProjects).map($bind(this,this.flattenProjects))));
+		projects = projects.concat(vshaxeBuild.tools.ArrayTools.flatten(vshaxeBuild._Project.ArrayHandle_Impl_.get(project.subProjects).map($bind(this,this.flattenProjects))));
 		return projects;
 	}
 	,getTargetOwner: function(target) {
@@ -3795,7 +3663,7 @@ vshaxeBuild.builders.BaseBuilder.prototype = {
 			while(_g2 < flattened.length) {
 				var flattenedProject = flattened[_g2];
 				++_g2;
-				if(vshaxeBuild.ArrayTools.findNamed(flattenedProject.targets,target.name) != null) {
+				if(vshaxeBuild.tools.ArrayTools.findNamed(flattenedProject.targets,target.name) != null) {
 					return haxe.ds.Option.Some(project);
 				}
 			}
@@ -3876,7 +3744,7 @@ vshaxeBuild.builders.DisplayHxmlBuilder.prototype = $extend(vshaxeBuild.builders
 		var hxml = this.mergeHxmls(hxmls1,true,true);
 		var lines = this.printHxmlFile(hxml);
 		lines.splice(0,0,"# " + "This file is generated with vshaxe-build - DO NOT EDIT MANUALLY!");
-		lines = vshaxeBuild.ArrayTools.filterDuplicates(lines,function(s1,s2) {
+		lines = vshaxeBuild.tools.ArrayTools.filterDuplicates(lines,function(s1,s2) {
 			return s1 == s2;
 		});
 		this.cli.saveContent("complete.hxml",lines.join("\n"));
@@ -3939,7 +3807,7 @@ vshaxeBuild.builders.HaxeBuilder.prototype = $extend(vshaxeBuild.builders.BaseBu
 		this.cli.println("Installing Haxelibs for '" + target.name + "'...\n");
 		this.cli.runCommands(target.installCommands);
 		var libs = vshaxeBuild._Project.ArrayHandle_Impl_.get(this.resolveTargetHxml(target,debug,false,false).haxelibs);
-		libs = vshaxeBuild.ArrayTools.filterDuplicates(libs,function(lib1,lib2) {
+		libs = vshaxeBuild.tools.ArrayTools.filterDuplicates(libs,function(lib1,lib2) {
 			return lib1 == lib2;
 		});
 		var _g = 0;
@@ -4068,7 +3936,7 @@ vshaxeBuild.builders.VSCodeTasksBuilder.prototype = $extend(vshaxeBuild.builders
 			var target = this.resolveTarget(name);
 			base.tasks = this.buildTask(target,false).concat(this.buildTask(target,true));
 		}
-		base.tasks = vshaxeBuild.ArrayTools.filterDuplicates(base.tasks,function(t1,t2) {
+		base.tasks = vshaxeBuild.tools.ArrayTools.filterDuplicates(base.tasks,function(t1,t2) {
 			return t1.taskName == t2.taskName;
 		});
 		if(this.projects.length > 1 && this.projects[1].mainTarget != null) {
@@ -4096,7 +3964,7 @@ vshaxeBuild.builders.VSCodeTasksBuilder.prototype = $extend(vshaxeBuild.builders
 			}
 			task.args.push("--debug");
 		}
-		return [task].concat(vshaxeBuild.ArrayTools.flatten(vshaxeBuild._Project.ArrayHandle_Impl_.get(target.targetDependencies).map(function(name) {
+		return [task].concat(vshaxeBuild.tools.ArrayTools.flatten(vshaxeBuild._Project.ArrayHandle_Impl_.get(target.targetDependencies).map(function(name) {
 			var tmp = _gthis.resolveTarget(name);
 			return _gthis.buildTask(tmp,debug);
 		})));
@@ -4110,6 +3978,139 @@ vshaxeBuild.builders.VSCodeTasksBuilder.prototype = $extend(vshaxeBuild.builders
 	}
 	,__class__: vshaxeBuild.builders.VSCodeTasksBuilder
 });
+vshaxeBuild.tools = {};
+vshaxeBuild.tools.ArrayTools = function() { };
+vshaxeBuild.tools.ArrayTools.__name__ = true;
+vshaxeBuild.tools.ArrayTools.filterDuplicates = function(tasks,filter) {
+	var uniqueTasks = [];
+	var _g = 0;
+	while(_g < tasks.length) {
+		var task = tasks[_g];
+		++_g;
+		var present = false;
+		var _g1 = 0;
+		while(_g1 < uniqueTasks.length) {
+			var unique = uniqueTasks[_g1];
+			++_g1;
+			if(filter(unique,task)) {
+				present = true;
+			}
+		}
+		if(!present) {
+			uniqueTasks.push(task);
+		}
+	}
+	return uniqueTasks;
+};
+vshaxeBuild.tools.ArrayTools.findNamed = function(a,name) {
+	var e = HxOverrides.iter(a);
+	while(e.hasNext()) {
+		var e1 = e.next();
+		if(e1.name == name) {
+			return e1;
+		}
+	}
+	return null;
+};
+vshaxeBuild.tools.ArrayTools.idx = function(a,i) {
+	if(i >= 0) {
+		return a[i];
+	} else {
+		return a[a.length + i];
+	}
+};
+vshaxeBuild.tools.ArrayTools.flatten = function(array) {
+	return vshaxeBuild.tools.ArrayTools.reduce(array,function(acc,element) {
+		return acc.concat(element);
+	},[]);
+};
+vshaxeBuild.tools.ArrayTools.reduce = function(array,f,initial) {
+	var _g = 0;
+	while(_g < array.length) {
+		var v = array[_g];
+		++_g;
+		initial = f(initial,v);
+	}
+	return initial;
+};
+vshaxeBuild.tools.CliTools = function(verbose,dryRun) {
+	this.verbose = verbose;
+	this.dryRun = dryRun;
+	if(dryRun) {
+		this.verbose = true;
+	}
+};
+vshaxeBuild.tools.CliTools.__name__ = true;
+vshaxeBuild.tools.CliTools.prototype = {
+	runCommands: function(commands) {
+		var _g = 0;
+		var _g1 = vshaxeBuild._Project.ArrayHandle_Impl_.get(commands);
+		while(_g < _g1.length) {
+			var command = _g1[_g];
+			++_g;
+			this.runCommand(command);
+		}
+	}
+	,runCommand: function(cmd) {
+		var command = vshaxeBuild._Project.ArrayHandle_Impl_.get(cmd);
+		if(command.length == 0) {
+			return;
+		}
+		var executable = command[0];
+		command.shift();
+		this.run(executable,command);
+	}
+	,inDir: function(dir,f) {
+		var oldCwd = process.cwd();
+		this.setCwd(dir);
+		f();
+		this.setCwd(oldCwd);
+	}
+	,setCwd: function(dir) {
+		if(dir == null || StringTools.trim(dir) == "") {
+			return;
+		}
+		this.println("cd " + dir);
+		process.chdir(dir);
+	}
+	,run: function(command,args) {
+		this.println(command + " " + args.join(" "));
+		if(!this.dryRun) {
+			var result = args == null ? js.node.ChildProcess.spawnSync(command,{ stdio : "inherit"}).status : js.node.ChildProcess.spawnSync(command,args,{ stdio : "inherit"}).status;
+			if(result != 0) {
+				process.exit(result);
+			}
+		}
+	}
+	,println: function(message) {
+		if(this.verbose) {
+			process.stdout.write(message == null ? "null" : "" + message);
+			process.stdout.write("\n");
+		}
+	}
+	,exit: function(message,code) {
+		if(code == null) {
+			code = 0;
+		}
+		process.stdout.write("VSHaxe Build Tool");
+		process.stdout.write("\n");
+		process.stdout.write(message == null ? "null" : "" + message);
+		process.stdout.write("\n");
+		process.exit(code);
+	}
+	,fail: function(message) {
+		this.exit(message,1);
+	}
+	,saveContent: function(path,content) {
+		if(this.verbose) {
+			this.println("Saving to '" + path + "':\n\n" + content);
+		}
+		if(!this.dryRun) {
+			js.node.Fs.writeFileSync(path,content);
+		}
+	}
+	,__class__: vshaxeBuild.tools.CliTools
+};
 var $_, $fid = 0;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $fid++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = function(){ return f.method.apply(f.scope, arguments); }; f.scope = o; f.method = m; o.hx__closures__[m.__id__] = f; } return f; }
 String.prototype.__class__ = String;

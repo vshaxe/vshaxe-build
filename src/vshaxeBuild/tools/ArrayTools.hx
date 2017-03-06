@@ -1,4 +1,4 @@
-package vshaxeBuild;
+package vshaxeBuild.tools;
 
 class ArrayTools {
     public static function filterDuplicates<T>(tasks:Array<T>, filter:T->T->Bool):Array<T> {
