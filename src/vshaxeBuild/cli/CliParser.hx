@@ -26,7 +26,7 @@ class CliParser {
             @doc("Build mode - accepted values are 'build', 'install', and 'both'.")
             ["-m", "--mode"] => function(name:String) mode = name,
 
-            @doc("Build the target(s) in debug mode. Implies -debug, -D js_unflatten and -lib jstack.")
+            @doc("Build the target(s) in debug mode.")
             ["--debug"] => function() debug = true,
 
             @doc("Perform a dry run (no command invocations). Implies -verbose.")

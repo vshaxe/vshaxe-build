@@ -3726,7 +3726,7 @@ vshaxeBuild.cli.CliParser.prototype = {
 		var help = false;
 		var argHandler_parse;
 		var argHandler_getDoc = function() {
-			return "[-t | --target] <name> : One or multiple targets to build.\n[-m | --mode] <name>   : Build mode - accepted values are 'build', 'install', and 'both'.\n[--debug]              : Build the target(s) in debug mode. Implies -debug, -D js_unflatten and -lib jstack.\n[--dry-run]            : Perform a dry run (no command invocations). Implies -verbose.\n[-v | --verbose]       : Output the commands that are executed.\n[--gen-tasks]          : Generate a tasks.json to .vscode (and don't build anything).\n[--display]            : Generate a complete.hxml for auto completion (and don't build anything).\n[--dump]               : Dump the parsed project files to dump.json.\n[--help]               : Display this help text and exit.";
+			return "[-t | --target] <name> : One or multiple targets to build.\n[-m | --mode] <name>   : Build mode - accepted values are 'build', 'install', and 'both'.\n[--debug]              : Build the target(s) in debug mode.\n[--dry-run]            : Perform a dry run (no command invocations). Implies -verbose.\n[-v | --verbose]       : Output the commands that are executed.\n[--gen-tasks]          : Generate a tasks.json to .vscode (and don't build anything).\n[--display]            : Generate a complete.hxml for auto completion (and don't build anything).\n[--dump]               : Dump the parsed project files to dump.json.\n[--help]               : Display this help text and exit.";
 		};
 		argHandler_parse = function(__args) {
 			var __index = 0;
