@@ -23,7 +23,7 @@ class ProjectLoader {
 
     function findProjectFiles(dir:String = "."):PlacedProject {
         var lastDir = dir.split("/").idx(-1);
-        if ((lastDir != "." && lastDir != ".." && lastDir.startsWith(".")) || ["dump", "node_modules"].indexOf(dir) != -1) return null;
+        if (isDirectoryIgnored(lastDir)) return null;
         var project:PlacedProject = null;
         var subProjects = [];
         for (file in FileSystem.readDirectory(dir)) {
@@ -36,6 +36,12 @@ class ProjectLoader {
         }
         if (project != null) project.subProjects = subProjects;
         return project;
+    }
+
+    function isDirectoryIgnored(name:String):Bool {
+        if (["dump", "node_modules"].indexOf(name) != -1) return true;
+        if (name == "." || name == "..") return false;
+        return name.startsWith(".");
     }
 
     function readProjectFile(path:String):Project {

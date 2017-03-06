@@ -3951,7 +3951,7 @@ vshaxeBuild.project.ProjectLoader.prototype = {
 			dir = ".";
 		}
 		var lastDir = vshaxeBuild.tools.ArrayTools.idx(dir.split("/"),-1);
-		if(lastDir != "." && lastDir != ".." && StringTools.startsWith(lastDir,".") || ["dump","node_modules"].indexOf(dir) != -1) {
+		if(this.isDirectoryIgnored(lastDir)) {
 			return null;
 		}
 		var project = null;
@@ -3975,6 +3975,15 @@ vshaxeBuild.project.ProjectLoader.prototype = {
 			project.subProjects = subProjects;
 		}
 		return project;
+	}
+	,isDirectoryIgnored: function(name) {
+		if(["dump","node_modules"].indexOf(name) != -1) {
+			return true;
+		}
+		if(name == "." || name == "..") {
+			return false;
+		}
+		return StringTools.startsWith(name,".");
 	}
 	,readProjectFile: function(path) {
 		var parser = new JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_();
