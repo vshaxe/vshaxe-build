@@ -56,10 +56,10 @@
             "args": [
                 "run",
                 "vshaxe-build",
-                "--mode",
-                "install",
                 "--target",
-                "all"
+                "all",
+                "--mode",
+                "install"
             ],
             "problemMatcher": {
                 "owner": "haxe",
@@ -80,9 +80,9 @@
             "args": [
                 "run",
                 "vshaxe-build",
-                "--display",
                 "--target",
-                "all"
+                "all",
+                "--display"
             ],
             "problemMatcher": {
                 "owner": "haxe",
@@ -103,9 +103,9 @@
             "args": [
                 "run",
                 "vshaxe-build",
-                "--gen-tasks",
                 "--target",
-                "all"
+                "all",
+                "--gen-tasks"
             ],
             "problemMatcher": {
                 "owner": "haxe",

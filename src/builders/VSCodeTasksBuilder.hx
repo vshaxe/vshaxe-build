@@ -22,24 +22,6 @@ class VSCodeTasksBuilder extends BaseBuilder {
         tasks: []
     }
 
-    static var defaultTasks = [
-        {
-            taskName: "{install-all}",
-            args: makeArgs(["--mode", "install", "--target", "all"]),
-            problemMatcher: problemMatcher
-        },
-        {
-            taskName: "{generate-complete-hxml}",
-            args: makeArgs(["--display", "--target", "all"]),
-            problemMatcher: problemMatcher
-        },
-        {
-            taskName: "{generate-vscode-tasks}",
-            args: makeArgs(["--gen-tasks", "--target", "all"]),
-            problemMatcher: problemMatcher
-        }
-    ];
-
     override public function build(cliArgs:CliArguments) {
         var base = Reflect.copy(template);
         for (name in cliArgs.targets) {
@@ -47,7 +29,7 @@ class VSCodeTasksBuilder extends BaseBuilder {
             base.tasks = buildTask(target, false).concat(buildTask(target, true));
         }
         base.tasks = base.tasks.filterDuplicates(function(t1, t2) return t1.taskName == t2.taskName);
-        base.tasks = base.tasks.concat(defaultTasks);
+        base.tasks = base.tasks.concat(createDefaultTasks("all"));
 
         var tasksJson = haxe.Json.stringify(base, null, "    ");
         tasksJson = '// ${Warning.Message}\n$tasksJson';
@@ -81,7 +63,30 @@ class VSCodeTasksBuilder extends BaseBuilder {
         ));
     }
 
-    static function makeArgs(additionalArgs:Array<String>):Array<String> {
+    function createDefaultTasks(target:String):Array<Task> {
+        inline function makeTargetArgs(additionalArgs:Array<String>)
+            return makeArgs(["--target", target].concat(additionalArgs));
+
+        return [
+            {
+                taskName: "{install-all}",
+                args: makeTargetArgs(["--mode", "install"]),
+                problemMatcher: problemMatcher
+            },
+            {
+                taskName: "{generate-complete-hxml}",
+                args: makeTargetArgs(["--display"]),
+                problemMatcher: problemMatcher
+            },
+            {
+                taskName: "{generate-vscode-tasks}",
+                args: makeTargetArgs(["--gen-tasks"]),
+                problemMatcher: problemMatcher
+            }
+        ];
+    }
+
+    function makeArgs(additionalArgs:Array<String>):Array<String> {
         return ["run", "vshaxe-build"].concat(additionalArgs);
     }
 }

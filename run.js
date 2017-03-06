@@ -2960,9 +2960,6 @@ builders.VSCodeTasksBuilder = function(cli,projects) {
 	builders.BaseBuilder.call(this,cli,projects);
 };
 builders.VSCodeTasksBuilder.__name__ = true;
-builders.VSCodeTasksBuilder.makeArgs = function(additionalArgs) {
-	return ["run","vshaxe-build"].concat(additionalArgs);
-};
 builders.VSCodeTasksBuilder.__super__ = builders.BaseBuilder;
 builders.VSCodeTasksBuilder.prototype = $extend(builders.BaseBuilder.prototype,{
 	build: function(cliArgs) {
@@ -2978,7 +2975,7 @@ builders.VSCodeTasksBuilder.prototype = $extend(builders.BaseBuilder.prototype,{
 		base.tasks = ArrayTools.filterDuplicates(base.tasks,function(t1,t2) {
 			return t1.taskName == t2.taskName;
 		});
-		base.tasks = base.tasks.concat(builders.VSCodeTasksBuilder.defaultTasks);
+		base.tasks = base.tasks.concat(this.createDefaultTasks("all"));
 		var tasksJson = JSON.stringify(base,null,"    ");
 		tasksJson = "// " + "This file is generated with vshaxe-build - DO NOT EDIT MANUALLY!" + "\n" + tasksJson;
 		this.cli.saveContent(".vscode/tasks.json",tasksJson);
@@ -2989,7 +2986,7 @@ builders.VSCodeTasksBuilder.prototype = $extend(builders.BaseBuilder.prototype,{
 		if((target.args == null || !target.args.debug) && debug) {
 			suffix = " (debug)";
 		}
-		var task = { taskName : "" + target.name + suffix, args : builders.VSCodeTasksBuilder.makeArgs(["-t",target.name]), problemMatcher : builders.VSCodeTasksBuilder.problemMatcher};
+		var task = { taskName : "" + target.name + suffix, args : this.makeArgs(["-t",target.name]), problemMatcher : builders.VSCodeTasksBuilder.problemMatcher};
 		if(target.args != null && target.args.debug || debug) {
 			if(target.isBuildCommand) {
 				task.isBuildCommand = true;
@@ -3005,6 +3002,13 @@ builders.VSCodeTasksBuilder.prototype = $extend(builders.BaseBuilder.prototype,{
 			var tmp = _gthis.resolveTarget(name);
 			return _gthis.buildTask(tmp,debug);
 		})));
+	}
+	,createDefaultTasks: function(target) {
+		var _gthis = this;
+		return [{ taskName : "{install-all}", args : _gthis.makeArgs(["--target",target].concat(["--mode","install"])), problemMatcher : builders.VSCodeTasksBuilder.problemMatcher},{ taskName : "{generate-complete-hxml}", args : _gthis.makeArgs(["--target",target].concat(["--display"])), problemMatcher : builders.VSCodeTasksBuilder.problemMatcher},{ taskName : "{generate-vscode-tasks}", args : _gthis.makeArgs(["--target",target].concat(["--gen-tasks"])), problemMatcher : builders.VSCodeTasksBuilder.problemMatcher}];
+	}
+	,makeArgs: function(additionalArgs) {
+		return ["run","vshaxe-build"].concat(additionalArgs);
 	}
 	,__class__: builders.VSCodeTasksBuilder
 });
@@ -4431,7 +4435,6 @@ Main.PROJECT_FILE = "vshaxe-build.json";
 Main.DEFAULTS = "{\r\n    \"haxelibs\": [\r\n        {\r\n            \"name\": \"hxnodejs\",\r\n            \"installArgs\": [\"git\", \"hxnodejs\", \"https://github.com/HaxeFoundation/hxnodejs\"]\r\n        },\r\n        {\r\n            \"name\": \"jstack\",\r\n            \"installArgs\": [\"install\", \"jstack\"]\r\n        }\r\n    ],\r\n    \"targets\": [\r\n        {\r\n            \"name\": \"empty\"\r\n        },\r\n        {\r\n            \"name\": \"vshaxe-node\",\r\n            \"debug\": {\r\n                \"args\": {\r\n                    \"defines\": [\"js_unflatten\"],\r\n                    \"haxelibs\": [\"jstack\"]\r\n                }\r\n            },\r\n            \"args\": {\r\n                \"haxelibs\": [\"hxnodejs\"]\r\n            }\r\n        }\r\n    ]\r\n}";
 builders.VSCodeTasksBuilder.problemMatcher = { owner : "haxe", pattern : { "regexp" : "^(.+):(\\d+): (?:lines \\d+-(\\d+)|character(?:s (\\d+)-| )(\\d+)) : (?:(Warning) : )?(.*)$", "file" : 1, "line" : 2, "endLine" : 3, "column" : 4, "endColumn" : 5, "severity" : 6, "message" : 7}};
 builders.VSCodeTasksBuilder.template = { version : "2.0.0", command : "haxelib", suppressTaskName : true, tasks : []};
-builders.VSCodeTasksBuilder.defaultTasks = [{ taskName : "{install-all}", args : builders.VSCodeTasksBuilder.makeArgs(["--mode","install","--target","all"]), problemMatcher : builders.VSCodeTasksBuilder.problemMatcher},{ taskName : "{generate-complete-hxml}", args : builders.VSCodeTasksBuilder.makeArgs(["--display","--target","all"]), problemMatcher : builders.VSCodeTasksBuilder.problemMatcher},{ taskName : "{generate-vscode-tasks}", args : builders.VSCodeTasksBuilder.makeArgs(["--gen-tasks","--target","all"]), problemMatcher : builders.VSCodeTasksBuilder.problemMatcher}];
 builders.Warning.Message = "This file is generated with vshaxe-build - DO NOT EDIT MANUALLY!";
 js.Boot.__toStr = ({ }).toString;
 jstack.js.JStack.instance = new jstack.js.JStack();
