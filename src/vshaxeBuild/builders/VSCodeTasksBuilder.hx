@@ -29,7 +29,8 @@ class VSCodeTasksBuilder extends BaseBuilder {
             base.tasks = buildTask(target, false).concat(buildTask(target, true));
         }
         base.tasks = base.tasks.filterDuplicates(function(t1, t2) return t1.taskName == t2.taskName);
-        base.tasks = base.tasks.concat(createDefaultTasks("all"));
+        if (projects.length > 1 && projects[1].mainTarget != null)
+            base.tasks = base.tasks.concat(createDefaultTasks(projects[1].mainTarget));
 
         var tasksJson = haxe.Json.stringify(base, null, "    ");
         tasksJson = '// ${Warning.Message}\n$tasksJson';

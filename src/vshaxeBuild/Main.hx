@@ -151,6 +151,7 @@ class Main {
     function toPlacedProject(directory:String, project:Project):PlacedProject {
         return {
             inherit: project.inherit,
+            mainTarget: project.mainTarget,
             haxelibs: project.haxelibs,
             targets: project.targets,
             directory: directory,

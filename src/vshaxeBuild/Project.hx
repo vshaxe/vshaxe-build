@@ -7,6 +7,8 @@ typedef Named = {
 typedef Project = {
     /** name of a target in defaults.json to base all targets in this config on **/
     @:optional var inherit(default,null):String;
+    /** name of a target to generate special task.json tasks for (install-all, generate-complete-hxml, generate-vscode-tasks) **/
+    @:optional var mainTarget(default,null):String;
     var haxelibs(default,null):ArrayHandle<Haxelib>;
     var targets(default,null):ArrayHandle<Target>;
 }

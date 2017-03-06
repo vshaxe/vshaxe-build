@@ -57,7 +57,7 @@
                 "run",
                 "vshaxe-build",
                 "--target",
-                "all",
+                "run-script",
                 "--mode",
                 "install"
             ],
@@ -81,7 +81,7 @@
                 "run",
                 "vshaxe-build",
                 "--target",
-                "all",
+                "run-script",
                 "--display"
             ],
             "problemMatcher": {
@@ -104,7 +104,7 @@
                 "run",
                 "vshaxe-build",
                 "--target",
-                "all",
+                "run-script",
                 "--gen-tasks"
             ],
             "problemMatcher": {

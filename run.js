@@ -1316,12 +1316,12 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInli
 	}
 	,__class__: JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_main_noInline_output_packageName_workingDirectory_
 };
-var JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_ = function(warnings,putils) {
+var JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_ = function(warnings,putils) {
 	this.warnings = warnings == null ? [] : warnings;
 	this.putils = putils;
 };
-JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_.__name__ = true;
-JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_.prototype = {
+JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_.__name__ = true;
+JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_.prototype = {
 	loadJson: function(fields,objectPos) {
 		var assigned = new haxe.ds.StringMap();
 		if(__map_reserved["haxelibs"] != null) {
@@ -1334,12 +1334,17 @@ JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_Ar
 		} else {
 			assigned.h["inherit"] = true;
 		}
+		if(__map_reserved["mainTarget"] != null) {
+			assigned.setReserved("mainTarget",true);
+		} else {
+			assigned.h["mainTarget"] = true;
+		}
 		if(__map_reserved["targets"] != null) {
 			assigned.setReserved("targets",false);
 		} else {
 			assigned.h["targets"] = false;
 		}
-		this.object = { haxelibs : null, inherit : null, targets : null};
+		this.object = { haxelibs : null, inherit : null, mainTarget : null, targets : null};
 		var _g = 0;
 		while(_g < fields.length) {
 			var field = fields[_g];
@@ -1419,15 +1424,41 @@ JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_Ar
 					this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
 				}
 				break;
-			case "targets":
+			case "mainTarget":
 				var _g14 = field.value.value;
 				switch(_g14[1]) {
-				case 3:
+				case 0:
 					var s02 = _g14[2];
-					var _g15 = [];
+					this.object.mainTarget = s02;
+					var key4 = field.name;
+					if(__map_reserved[key4] != null) {
+						assigned.setReserved(key4,true);
+					} else {
+						assigned.h[key4] = true;
+					}
+					break;
+				case 5:
+					this.object.mainTarget = null;
+					var key5 = field.name;
+					if(__map_reserved[key5] != null) {
+						assigned.setReserved(key5,true);
+					} else {
+						assigned.h[key5] = true;
+					}
+					break;
+				default:
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
+				}
+				break;
+			case "targets":
+				var _g15 = field.value.value;
+				switch(_g15[1]) {
+				case 3:
+					var s03 = _g15[2];
+					var _g16 = [];
 					var _g21 = 0;
-					while(_g21 < s02.length) {
-						var content11 = s02[_g21];
+					while(_g21 < s03.length) {
+						var content11 = s03[_g21];
 						++_g21;
 						var _g31 = content11.value;
 						var tmp1;
@@ -1443,23 +1474,23 @@ JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_Ar
 							this.warnings.push(json2object.Error.IncorrectType(field.name,"Anonymous",this.putils.convertPosition(content11.pos)));
 							continue;
 						}
-						_g15.push(tmp1);
+						_g16.push(tmp1);
 					}
-					this.object.targets = _g15;
-					var key4 = field.name;
-					if(__map_reserved[key4] != null) {
-						assigned.setReserved(key4,true);
+					this.object.targets = _g16;
+					var key6 = field.name;
+					if(__map_reserved[key6] != null) {
+						assigned.setReserved(key6,true);
 					} else {
-						assigned.h[key4] = true;
+						assigned.h[key6] = true;
 					}
 					break;
 				case 5:
 					this.object.targets = null;
-					var key5 = field.name;
-					if(__map_reserved[key5] != null) {
-						assigned.setReserved(key5,true);
+					var key7 = field.name;
+					if(__map_reserved[key7] != null) {
+						assigned.setReserved(key7,true);
 					} else {
-						assigned.h[key5] = true;
+						assigned.h[key7] = true;
 					}
 					break;
 				default:
@@ -1498,7 +1529,7 @@ JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_Ar
 			} else throw(e);
 		}
 	}
-	,__class__: JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_
+	,__class__: JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_
 };
 var JsonParser_Ano_installArgs___Abstract_ArrayHandle___Inst_Stringname___Inst_String = function(warnings,putils) {
 	this.warnings = warnings == null ? [] : warnings;
@@ -3512,7 +3543,7 @@ vshaxeBuild.Main.prototype = {
 		return project;
 	}
 	,parseProjectFile: function(path,file) {
-		var parser = new JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_();
+		var parser = new JsonParser_Ano_haxelibs___Abstract_ArrayHandle___Ano_installArgs_____Abstract_ArrayHandle_____Inst_Stringname_____Inst_Stringinherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_();
 		var json = parser.fromJson(file,path);
 		if(parser.warnings.length > 0) {
 			this.cli.fail(json2object.ErrorUtils.convertErrorArray(parser.warnings));
@@ -3520,7 +3551,7 @@ vshaxeBuild.Main.prototype = {
 		return json;
 	}
 	,toPlacedProject: function(directory,project) {
-		return { inherit : project.inherit, haxelibs : project.haxelibs, targets : project.targets, directory : directory, subProjects : []};
+		return { inherit : project.inherit, mainTarget : project.mainTarget, haxelibs : project.haxelibs, targets : project.targets, directory : directory, subProjects : []};
 	}
 	,__class__: vshaxeBuild.Main
 };
@@ -3967,7 +3998,9 @@ vshaxeBuild.builders.VSCodeTasksBuilder.prototype = $extend(vshaxeBuild.builders
 		base.tasks = vshaxeBuild.ArrayTools.filterDuplicates(base.tasks,function(t1,t2) {
 			return t1.taskName == t2.taskName;
 		});
-		base.tasks = base.tasks.concat(this.createDefaultTasks("all"));
+		if(this.projects.length > 1 && this.projects[1].mainTarget != null) {
+			base.tasks = base.tasks.concat(this.createDefaultTasks(this.projects[1].mainTarget));
+		}
 		var tasksJson = JSON.stringify(base,null,"    ");
 		tasksJson = "// " + "This file is generated with vshaxe-build - DO NOT EDIT MANUALLY!" + "\n" + tasksJson;
 		this.cli.saveContent(".vscode/tasks.json",tasksJson);
