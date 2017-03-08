@@ -127,7 +127,7 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_displ
 		} else {
 			assigned.h["targetDependencies"] = true;
 		}
-		this.object = { afterBuildCommands : null, args : { }, beforeBuildCommands : null, composite : null, debug : { }, display : { }, inherit : null, installCommands : null, isBuildCommand : null, isTestCommand : null, name : null, targetDependencies : null};
+		this.object = { afterBuildCommands : null, args : { }, beforeBuildCommands : null, composite : false, debug : { }, display : { }, inherit : null, installCommands : null, isBuildCommand : false, isTestCommand : false, name : null, targetDependencies : null};
 		var _g = 0;
 		while(_g < fields.length) {
 			var field = fields[_g];
@@ -987,7 +987,7 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main
 		} else {
 			assigned.h["workingDirectory"] = true;
 		}
-		this.object = { classPaths : null, deadCodeElimination : null, debug : null, defines : null, haxelibs : null, macros : null, main : null, noInline : null, output : null, packageName : null, workingDirectory : null};
+		this.object = { classPaths : null, deadCodeElimination : null, debug : false, defines : null, haxelibs : null, macros : null, main : null, noInline : false, output : null, packageName : null, workingDirectory : null};
 		var _g = 0;
 		while(_g < fields.length) {
 			var field = fields[_g];

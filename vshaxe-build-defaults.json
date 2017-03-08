@@ -22,7 +22,9 @@
                 }
             },
             "args": {
-                "haxelibs": ["hxnodejs"]
+                "haxelibs": ["hxnodejs"],
+                "deadCodeElimination": "full",
+                "defines": ["analyzer-optimize"]
             }
         }
     ]

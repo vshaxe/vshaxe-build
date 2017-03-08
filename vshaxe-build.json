@@ -17,8 +17,6 @@
             "args": {
                 "classPaths": ["src", "api"],
                 "haxelibs": ["hxargs", "json2object"],
-                "deadCodeElimination": "full",
-                "defines": ["analyzer-optimize"],
                 "main": "vshaxeBuild.Main",
                 "output": {
                     "target": "js",
