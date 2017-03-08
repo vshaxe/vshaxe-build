@@ -16,6 +16,7 @@ class CliParser {
         var genTasks = false;
         var display = false;
         var dump = false;
+        var listTargets = false;
 
         var help = false;
 
@@ -43,6 +44,9 @@ class CliParser {
 
             @doc("Dump the parsed project files to dump.json.")
             ["--dump"] => function() dump = true,
+
+            @doc("List all available targets and exit.")
+            ["--list-targets"] => function() listTargets = true,
 
             @doc("Display this help text and exit.")
             ["--help"] => function() help = true,
@@ -72,6 +76,7 @@ class CliParser {
             verbose: verbose,
             genTasks: genTasks,
             display: display,
+            listTargets: listTargets,
             dump: dump
         };
     }
@@ -86,6 +91,7 @@ typedef CliArguments = {
     var genTasks(default,null):Bool;
     var display(default,null):Bool;
     var dump(default,null):Bool;
+    var listTargets(default,null):Bool;
 }
 
 @:enum abstract Mode(String) from String {

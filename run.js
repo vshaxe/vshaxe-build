@@ -3246,6 +3246,12 @@ vshaxeBuild.Main = function() {
 	if(cliArgs.dump) {
 		js.node.Fs.writeFileSync("dump.json",JSON.stringify(projects,null,"    "));
 	}
+	if(cliArgs.listTargets) {
+		var v = this.listTargets([projects[1]]).join("\n");
+		process.stdout.write(Std.string(v));
+		process.stdout.write("\n");
+		process.exit(0);
+	}
 	if(cliArgs.genTasks) {
 		new vshaxeBuild.builders.VSCodeTasksBuilder(cli,projects).build(cliArgs);
 	} else if(cliArgs.display) {
@@ -3271,7 +3277,24 @@ vshaxeBuild.Main.main = function() {
 	});
 };
 vshaxeBuild.Main.prototype = {
-	__class__: vshaxeBuild.Main
+	listTargets: function(projects) {
+		var targets = [];
+		var _g = 0;
+		while(_g < projects.length) {
+			var project = projects[_g];
+			++_g;
+			var _g1 = 0;
+			var _g2 = vshaxeBuild.project._Project.ArrayHandle_Impl_.get(project.targets);
+			while(_g1 < _g2.length) {
+				var target = _g2[_g1];
+				++_g1;
+				targets.push(target.name);
+			}
+			targets = targets.concat(this.listTargets(vshaxeBuild.project._Project.ArrayHandle_Impl_.get(project.subProjects)));
+		}
+		return targets;
+	}
+	,__class__: vshaxeBuild.Main
 };
 vshaxeBuild.builders = {};
 vshaxeBuild.builders.BaseBuilder = function(cli,projects) {
@@ -3717,10 +3740,11 @@ vshaxeBuild.cli.CliParser.prototype = {
 		var genTasks = false;
 		var display = false;
 		var dump = false;
+		var listTargets = false;
 		var help = false;
 		var argHandler_parse;
 		var argHandler_getDoc = function() {
-			return "[-t | --target] <name> : One or multiple targets to build.\n[-m | --mode] <name>   : Build mode - accepted values are 'build', 'install', and 'both'.\n[--debug]              : Build the target(s) in debug mode.\n[--dry-run]            : Perform a dry run (no command invocations). Implies -verbose.\n[-v | --verbose]       : Output the commands that are executed.\n[--gen-tasks]          : Generate a tasks.json to .vscode (and don't build anything).\n[--display]            : Generate a complete.hxml for auto completion (and don't build anything).\n[--dump]               : Dump the parsed project files to dump.json.\n[--help]               : Display this help text and exit.";
+			return "[-t | --target] <name> : One or multiple targets to build.\n[-m | --mode] <name>   : Build mode - accepted values are 'build', 'install', and 'both'.\n[--debug]              : Build the target(s) in debug mode.\n[--dry-run]            : Perform a dry run (no command invocations). Implies -verbose.\n[-v | --verbose]       : Output the commands that are executed.\n[--gen-tasks]          : Generate a tasks.json to .vscode (and don't build anything).\n[--display]            : Generate a complete.hxml for auto completion (and don't build anything).\n[--dump]               : Dump the parsed project files to dump.json.\n[--list-targets]       : List all available targets and exit.\n[--help]               : Display this help text and exit.";
 		};
 		argHandler_parse = function(__args) {
 			var __index = 0;
@@ -3781,6 +3805,15 @@ vshaxeBuild.cli.CliParser.prototype = {
 					help = true;
 					__index += 0;
 					break;
+				case "--list-targets":
+					if(__index > __args.length) {
+						if(![][__args.length - 1]) {
+							throw new js._Boot.HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
+						}
+					}
+					listTargets = true;
+					__index += 0;
+					break;
 				case "--target":case "-t":
 					if(__index + 1 > __args.length) {
 						if(![false][__args.length - 1]) {
@@ -3831,7 +3864,7 @@ vshaxeBuild.cli.CliParser.prototype = {
 		if(!vshaxeBuild.cli._CliParser.Mode_Impl_.isValid(mode)) {
 			this.cli.fail("Unknown --mode: " + mode);
 		}
-		return { targets : targets, mode : mode, debug : debug, dryRun : dryRun, verbose : verbose, genTasks : genTasks, display : display, dump : dump};
+		return { targets : targets, mode : mode, debug : debug, dryRun : dryRun, verbose : verbose, genTasks : genTasks, display : display, listTargets : listTargets, dump : dump};
 	}
 	,__class__: vshaxeBuild.cli.CliParser
 };
