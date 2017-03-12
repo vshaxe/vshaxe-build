@@ -12,24 +12,11 @@
     ],
     "targets": [
         {
-            "inherit": "vshaxe-node",
-            "name": "run-script-node",
+            "name": "run-script",
             "args": {
                 "classPaths": ["src", "api"],
                 "haxelibs": ["hxargs", "json2object"],
                 "main": "vshaxeBuild.Main",
-                "output": {
-                    "target": "js",
-                    "path": "run.js"
-                },
-                "debug": true
-            }
-        },
-        {
-            "name": "run-script",
-            "targetDependencies": ["run-script-node"],
-            "args": {
-                "main": "Run",
                 "output": {
                     "target": "neko",
                     "path": "run.n"

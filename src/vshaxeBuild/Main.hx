@@ -1,6 +1,5 @@
 package vshaxeBuild;
 
-import haxe.CallStack;
 import haxe.Json;
 import sys.io.File;
 import vshaxeBuild.builders.*;
@@ -8,15 +7,7 @@ import vshaxeBuild.project.ProjectLoader;
 
 /** The build tool for VSHaxe **/
 class Main {
-    static function main() {
-        try {
-            new Main();
-        } catch (e:Any) {
-            Sys.println(e);
-            Sys.println(CallStack.toString(CallStack.callStack()));
-            Sys.exit(1);
-        }
-    }
+    static function main() new Main();
 
     function new() {
         var args = Sys.args();
