@@ -59,12 +59,377 @@ HxOverrides.iter = function(a) {
 		return this.arr[this.cur++];
 	}};
 };
-var JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name___Inst_StringtargetDependencies_ = function(warnings,putils) {
+var JsonParser_Impl0 = function(warnings,putils) {
 	this.warnings = warnings == null ? [] : warnings;
 	this.putils = putils;
 };
-JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name___Inst_StringtargetDependencies_.__name__ = true;
-JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name___Inst_StringtargetDependencies_.prototype = {
+JsonParser_Impl0.__name__ = true;
+JsonParser_Impl0.prototype = {
+	fromJson: function(jsonString,filename) {
+		this.putils = new json2object.PosUtils(jsonString);
+		try {
+			var json = new hxjsonast.Parser(jsonString,filename).parseRec();
+			var _g = json.value;
+			if(_g[1] == 2) {
+				var s = _g[2];
+				return this.loadJson(s,json.pos);
+			} else {
+				return null;
+			}
+		} catch( e ) {
+			if (e instanceof js._Boot.HaxeError) e = e.val;
+			if( js.Boot.__instanceof(e,hxjsonast.Error) ) {
+				throw new js._Boot.HaxeError(json2object.Error.ParserError(e.message,this.putils.convertPosition(e.pos)));
+			} else throw(e);
+		}
+	}
+	,loadJson: function(fields,objectPos) {
+		var assigned = new haxe.ds.StringMap();
+		if(__map_reserved["haxelibs"] != null) {
+			assigned.setReserved("haxelibs",true);
+		} else {
+			assigned.h["haxelibs"] = true;
+		}
+		if(__map_reserved["inherit"] != null) {
+			assigned.setReserved("inherit",true);
+		} else {
+			assigned.h["inherit"] = true;
+		}
+		if(__map_reserved["mainTarget"] != null) {
+			assigned.setReserved("mainTarget",true);
+		} else {
+			assigned.h["mainTarget"] = true;
+		}
+		if(__map_reserved["targets"] != null) {
+			assigned.setReserved("targets",false);
+		} else {
+			assigned.h["targets"] = false;
+		}
+		this.object = { haxelibs : null, inherit : null, mainTarget : null, targets : null};
+		var _g = 0;
+		while(_g < fields.length) {
+			var field = fields[_g];
+			++_g;
+			var _g1 = field.name;
+			switch(_g1) {
+			case "haxelibs":
+				var _g11 = field.value.value;
+				switch(_g11[1]) {
+				case 3:
+					var s0 = _g11[2];
+					this.object.haxelibs = new JsonParser_Impl1(this.warnings,this.putils).loadJson(s0,field.value.pos);
+					var key = field.name;
+					if(__map_reserved[key] != null) {
+						assigned.setReserved(key,true);
+					} else {
+						assigned.h[key] = true;
+					}
+					break;
+				case 5:
+					this.object.haxelibs = null;
+					var key1 = field.name;
+					if(__map_reserved[key1] != null) {
+						assigned.setReserved(key1,true);
+					} else {
+						assigned.h[key1] = true;
+					}
+					break;
+				default:
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
+				}
+				break;
+			case "inherit":
+				var _g12 = field.value.value;
+				switch(_g12[1]) {
+				case 0:
+					var s01 = _g12[2];
+					this.object.inherit = s01;
+					var key2 = field.name;
+					if(__map_reserved[key2] != null) {
+						assigned.setReserved(key2,true);
+					} else {
+						assigned.h[key2] = true;
+					}
+					break;
+				case 5:
+					this.object.inherit = null;
+					var key3 = field.name;
+					if(__map_reserved[key3] != null) {
+						assigned.setReserved(key3,true);
+					} else {
+						assigned.h[key3] = true;
+					}
+					break;
+				default:
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
+				}
+				break;
+			case "mainTarget":
+				var _g13 = field.value.value;
+				switch(_g13[1]) {
+				case 0:
+					var s02 = _g13[2];
+					this.object.mainTarget = s02;
+					var key4 = field.name;
+					if(__map_reserved[key4] != null) {
+						assigned.setReserved(key4,true);
+					} else {
+						assigned.h[key4] = true;
+					}
+					break;
+				case 5:
+					this.object.mainTarget = null;
+					var key5 = field.name;
+					if(__map_reserved[key5] != null) {
+						assigned.setReserved(key5,true);
+					} else {
+						assigned.h[key5] = true;
+					}
+					break;
+				default:
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
+				}
+				break;
+			case "targets":
+				var _g14 = field.value.value;
+				switch(_g14[1]) {
+				case 3:
+					var s03 = _g14[2];
+					this.object.targets = new JsonParser_Impl4(this.warnings,this.putils).loadJson(s03,field.value.pos);
+					var key6 = field.name;
+					if(__map_reserved[key6] != null) {
+						assigned.setReserved(key6,true);
+					} else {
+						assigned.h[key6] = true;
+					}
+					break;
+				case 5:
+					this.object.targets = null;
+					var key7 = field.name;
+					if(__map_reserved[key7] != null) {
+						assigned.setReserved(key7,true);
+					} else {
+						assigned.h[key7] = true;
+					}
+					break;
+				default:
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
+				}
+				break;
+			default:
+				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.namePos)));
+			}
+		}
+		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max - 1));
+		var s = assigned.keys();
+		while(s.hasNext()) {
+			var s1 = s.next();
+			if(!(__map_reserved[s1] != null ? assigned.getReserved(s1) : assigned.h[s1])) {
+				this.warnings.push(json2object.Error.UninitializedVariable(s1,lastPos));
+			}
+		}
+		return this.object;
+	}
+	,__class__: JsonParser_Impl0
+};
+var JsonParser_Impl1 = function(warnings,putils) {
+	this.warnings = warnings == null ? [] : warnings;
+	this.putils = putils;
+};
+JsonParser_Impl1.__name__ = true;
+JsonParser_Impl1.prototype = {
+	loadJson: function(values,objectPos) {
+		var _g = [];
+		var _g1 = 0;
+		while(_g1 < values.length) {
+			var v = values[_g1];
+			++_g1;
+			var _g2 = v.value;
+			var tmp;
+			switch(_g2[1]) {
+			case 2:
+				var s0 = _g2[2];
+				tmp = new JsonParser_Impl2(this.warnings,this.putils).loadJson(s0,v.pos);
+				break;
+			case 5:
+				tmp = null;
+				break;
+			default:
+				this.warnings.push(json2object.Error.IncorrectType("Array value","Anonymous",this.putils.convertPosition(v.pos)));
+				continue;
+			}
+			_g.push(tmp);
+		}
+		this.object = _g;
+		return this.object;
+	}
+	,__class__: JsonParser_Impl1
+};
+var JsonParser_Impl2 = function(warnings,putils) {
+	this.warnings = warnings == null ? [] : warnings;
+	this.putils = putils;
+};
+JsonParser_Impl2.__name__ = true;
+JsonParser_Impl2.prototype = {
+	loadJson: function(fields,objectPos) {
+		var assigned = new haxe.ds.StringMap();
+		if(__map_reserved["installArgs"] != null) {
+			assigned.setReserved("installArgs",false);
+		} else {
+			assigned.h["installArgs"] = false;
+		}
+		if(__map_reserved["name"] != null) {
+			assigned.setReserved("name",false);
+		} else {
+			assigned.h["name"] = false;
+		}
+		this.object = { installArgs : null, name : null};
+		var _g = 0;
+		while(_g < fields.length) {
+			var field = fields[_g];
+			++_g;
+			var _g1 = field.name;
+			switch(_g1) {
+			case "installArgs":
+				var _g11 = field.value.value;
+				switch(_g11[1]) {
+				case 3:
+					var s0 = _g11[2];
+					this.object.installArgs = new JsonParser_Impl3(this.warnings,this.putils).loadJson(s0,field.value.pos);
+					var key = field.name;
+					if(__map_reserved[key] != null) {
+						assigned.setReserved(key,true);
+					} else {
+						assigned.h[key] = true;
+					}
+					break;
+				case 5:
+					this.object.installArgs = null;
+					var key1 = field.name;
+					if(__map_reserved[key1] != null) {
+						assigned.setReserved(key1,true);
+					} else {
+						assigned.h[key1] = true;
+					}
+					break;
+				default:
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
+				}
+				break;
+			case "name":
+				var _g12 = field.value.value;
+				switch(_g12[1]) {
+				case 0:
+					var s01 = _g12[2];
+					this.object.name = s01;
+					var key2 = field.name;
+					if(__map_reserved[key2] != null) {
+						assigned.setReserved(key2,true);
+					} else {
+						assigned.h[key2] = true;
+					}
+					break;
+				case 5:
+					this.object.name = null;
+					var key3 = field.name;
+					if(__map_reserved[key3] != null) {
+						assigned.setReserved(key3,true);
+					} else {
+						assigned.h[key3] = true;
+					}
+					break;
+				default:
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
+				}
+				break;
+			default:
+				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.namePos)));
+			}
+		}
+		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max - 1));
+		var s = assigned.keys();
+		while(s.hasNext()) {
+			var s1 = s.next();
+			if(!(__map_reserved[s1] != null ? assigned.getReserved(s1) : assigned.h[s1])) {
+				this.warnings.push(json2object.Error.UninitializedVariable(s1,lastPos));
+			}
+		}
+		return this.object;
+	}
+	,__class__: JsonParser_Impl2
+};
+var JsonParser_Impl3 = function(warnings,putils) {
+	this.warnings = warnings == null ? [] : warnings;
+	this.putils = putils;
+};
+JsonParser_Impl3.__name__ = true;
+JsonParser_Impl3.prototype = {
+	loadJson: function(values,objectPos) {
+		var _g = [];
+		var _g1 = 0;
+		while(_g1 < values.length) {
+			var v = values[_g1];
+			++_g1;
+			var _g2 = v.value;
+			var tmp;
+			switch(_g2[1]) {
+			case 0:
+				var s0 = _g2[2];
+				tmp = s0;
+				break;
+			case 5:
+				tmp = null;
+				break;
+			default:
+				this.warnings.push(json2object.Error.IncorrectType("Array value","String",this.putils.convertPosition(v.pos)));
+				continue;
+			}
+			_g.push(tmp);
+		}
+		this.object = _g;
+		return this.object;
+	}
+	,__class__: JsonParser_Impl3
+};
+var JsonParser_Impl4 = function(warnings,putils) {
+	this.warnings = warnings == null ? [] : warnings;
+	this.putils = putils;
+};
+JsonParser_Impl4.__name__ = true;
+JsonParser_Impl4.prototype = {
+	loadJson: function(values,objectPos) {
+		var _g = [];
+		var _g1 = 0;
+		while(_g1 < values.length) {
+			var v = values[_g1];
+			++_g1;
+			var _g2 = v.value;
+			var tmp;
+			switch(_g2[1]) {
+			case 2:
+				var s0 = _g2[2];
+				tmp = new JsonParser_Impl5(this.warnings,this.putils).loadJson(s0,v.pos);
+				break;
+			case 5:
+				tmp = null;
+				break;
+			default:
+				this.warnings.push(json2object.Error.IncorrectType("Array value","Anonymous",this.putils.convertPosition(v.pos)));
+				continue;
+			}
+			_g.push(tmp);
+		}
+		this.object = _g;
+		return this.object;
+	}
+	,__class__: JsonParser_Impl4
+};
+var JsonParser_Impl5 = function(warnings,putils) {
+	this.warnings = warnings == null ? [] : warnings;
+	this.putils = putils;
+};
+JsonParser_Impl5.__name__ = true;
+JsonParser_Impl5.prototype = {
 	loadJson: function(fields,objectPos) {
 		var assigned = new haxe.ds.StringMap();
 		if(__map_reserved["afterBuildCommands"] != null) {
@@ -139,49 +504,7 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_displ
 				switch(_g11[1]) {
 				case 3:
 					var s0 = _g11[2];
-					var _g12 = [];
-					var _g2 = 0;
-					while(_g2 < s0.length) {
-						var content1 = s0[_g2];
-						++_g2;
-						var _g3 = content1.value;
-						var tmp;
-						switch(_g3[1]) {
-						case 3:
-							var s1 = _g3[2];
-							var _g31 = [];
-							var _g4 = 0;
-							while(_g4 < s1.length) {
-								var content2 = s1[_g4];
-								++_g4;
-								var _g5 = content2.value;
-								var tmp1;
-								switch(_g5[1]) {
-								case 0:
-									var s2 = _g5[2];
-									tmp1 = s2;
-									break;
-								case 5:
-									tmp1 = null;
-									break;
-								default:
-									this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content2.pos)));
-									continue;
-								}
-								_g31.push(tmp1);
-							}
-							tmp = _g31;
-							break;
-						case 5:
-							tmp = null;
-							break;
-						default:
-							this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(content1.pos)));
-							continue;
-						}
-						_g12.push(tmp);
-					}
-					this.object.afterBuildCommands = _g12;
+					this.object.afterBuildCommands = new JsonParser_Impl6(this.warnings,this.putils).loadJson(s0,field.value.pos);
 					var key = field.name;
 					if(__map_reserved[key] != null) {
 						assigned.setReserved(key,true);
@@ -203,11 +526,11 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_displ
 				}
 				break;
 			case "args":
-				var _g13 = field.value.value;
-				switch(_g13[1]) {
+				var _g12 = field.value.value;
+				switch(_g12[1]) {
 				case 2:
-					var s01 = _g13[2];
-					this.object.args = new JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main_noInline_output_packageName_workingDirectory_(this.warnings,this.putils).loadJson(s01,field.value.pos);
+					var s01 = _g12[2];
+					this.object.args = new JsonParser_Impl7(this.warnings,this.putils).loadJson(s01,field.value.pos);
 					var key2 = field.name;
 					if(__map_reserved[key2] != null) {
 						assigned.setReserved(key2,true);
@@ -229,53 +552,11 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_displ
 				}
 				break;
 			case "beforeBuildCommands":
-				var _g14 = field.value.value;
-				switch(_g14[1]) {
+				var _g13 = field.value.value;
+				switch(_g13[1]) {
 				case 3:
-					var s02 = _g14[2];
-					var _g15 = [];
-					var _g21 = 0;
-					while(_g21 < s02.length) {
-						var content11 = s02[_g21];
-						++_g21;
-						var _g32 = content11.value;
-						var tmp2;
-						switch(_g32[1]) {
-						case 3:
-							var s11 = _g32[2];
-							var _g33 = [];
-							var _g41 = 0;
-							while(_g41 < s11.length) {
-								var content21 = s11[_g41];
-								++_g41;
-								var _g51 = content21.value;
-								var tmp3;
-								switch(_g51[1]) {
-								case 0:
-									var s21 = _g51[2];
-									tmp3 = s21;
-									break;
-								case 5:
-									tmp3 = null;
-									break;
-								default:
-									this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content21.pos)));
-									continue;
-								}
-								_g33.push(tmp3);
-							}
-							tmp2 = _g33;
-							break;
-						case 5:
-							tmp2 = null;
-							break;
-						default:
-							this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(content11.pos)));
-							continue;
-						}
-						_g15.push(tmp2);
-					}
-					this.object.beforeBuildCommands = _g15;
+					var s02 = _g13[2];
+					this.object.beforeBuildCommands = new JsonParser_Impl6(this.warnings,this.putils).loadJson(s02,field.value.pos);
 					var key4 = field.name;
 					if(__map_reserved[key4] != null) {
 						assigned.setReserved(key4,true);
@@ -297,10 +578,10 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_displ
 				}
 				break;
 			case "composite":
-				var _g16 = field.value.value;
-				switch(_g16[1]) {
+				var _g14 = field.value.value;
+				switch(_g14[1]) {
 				case 4:
-					var s03 = _g16[2];
+					var s03 = _g14[2];
 					this.object.composite = s03;
 					var key6 = field.name;
 					if(__map_reserved[key6] != null) {
@@ -317,11 +598,11 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_displ
 				}
 				break;
 			case "debug":
-				var _g17 = field.value.value;
-				switch(_g17[1]) {
+				var _g15 = field.value.value;
+				switch(_g15[1]) {
 				case 2:
-					var s04 = _g17[2];
-					this.object.debug = new JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_installCommands_targetDependencies_(this.warnings,this.putils).loadJson(s04,field.value.pos);
+					var s04 = _g15[2];
+					this.object.debug = new JsonParser_Impl9(this.warnings,this.putils).loadJson(s04,field.value.pos);
 					var key7 = field.name;
 					if(__map_reserved[key7] != null) {
 						assigned.setReserved(key7,true);
@@ -343,11 +624,11 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_displ
 				}
 				break;
 			case "display":
-				var _g18 = field.value.value;
-				switch(_g18[1]) {
+				var _g16 = field.value.value;
+				switch(_g16[1]) {
 				case 2:
-					var s05 = _g18[2];
-					this.object.display = new JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_installCommands_targetDependencies_(this.warnings,this.putils).loadJson(s05,field.value.pos);
+					var s05 = _g16[2];
+					this.object.display = new JsonParser_Impl9(this.warnings,this.putils).loadJson(s05,field.value.pos);
 					var key9 = field.name;
 					if(__map_reserved[key9] != null) {
 						assigned.setReserved(key9,true);
@@ -369,10 +650,10 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_displ
 				}
 				break;
 			case "inherit":
-				var _g19 = field.value.value;
-				switch(_g19[1]) {
+				var _g17 = field.value.value;
+				switch(_g17[1]) {
 				case 0:
-					var s06 = _g19[2];
+					var s06 = _g17[2];
 					this.object.inherit = s06;
 					var key11 = field.name;
 					if(__map_reserved[key11] != null) {
@@ -395,53 +676,11 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_displ
 				}
 				break;
 			case "installCommands":
-				var _g110 = field.value.value;
-				switch(_g110[1]) {
+				var _g18 = field.value.value;
+				switch(_g18[1]) {
 				case 3:
-					var s07 = _g110[2];
-					var _g111 = [];
-					var _g22 = 0;
-					while(_g22 < s07.length) {
-						var content12 = s07[_g22];
-						++_g22;
-						var _g34 = content12.value;
-						var tmp4;
-						switch(_g34[1]) {
-						case 3:
-							var s12 = _g34[2];
-							var _g35 = [];
-							var _g42 = 0;
-							while(_g42 < s12.length) {
-								var content22 = s12[_g42];
-								++_g42;
-								var _g52 = content22.value;
-								var tmp5;
-								switch(_g52[1]) {
-								case 0:
-									var s22 = _g52[2];
-									tmp5 = s22;
-									break;
-								case 5:
-									tmp5 = null;
-									break;
-								default:
-									this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content22.pos)));
-									continue;
-								}
-								_g35.push(tmp5);
-							}
-							tmp4 = _g35;
-							break;
-						case 5:
-							tmp4 = null;
-							break;
-						default:
-							this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(content12.pos)));
-							continue;
-						}
-						_g111.push(tmp4);
-					}
-					this.object.installCommands = _g111;
+					var s07 = _g18[2];
+					this.object.installCommands = new JsonParser_Impl6(this.warnings,this.putils).loadJson(s07,field.value.pos);
 					var key13 = field.name;
 					if(__map_reserved[key13] != null) {
 						assigned.setReserved(key13,true);
@@ -463,10 +702,10 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_displ
 				}
 				break;
 			case "isBuildCommand":
-				var _g112 = field.value.value;
-				switch(_g112[1]) {
+				var _g19 = field.value.value;
+				switch(_g19[1]) {
 				case 4:
-					var s08 = _g112[2];
+					var s08 = _g19[2];
 					this.object.isBuildCommand = s08;
 					var key15 = field.name;
 					if(__map_reserved[key15] != null) {
@@ -483,10 +722,10 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_displ
 				}
 				break;
 			case "isTestCommand":
-				var _g113 = field.value.value;
-				switch(_g113[1]) {
+				var _g110 = field.value.value;
+				switch(_g110[1]) {
 				case 4:
-					var s09 = _g113[2];
+					var s09 = _g110[2];
 					this.object.isTestCommand = s09;
 					var key16 = field.name;
 					if(__map_reserved[key16] != null) {
@@ -503,10 +742,10 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_displ
 				}
 				break;
 			case "name":
-				var _g114 = field.value.value;
-				switch(_g114[1]) {
+				var _g111 = field.value.value;
+				switch(_g111[1]) {
 				case 0:
-					var s010 = _g114[2];
+					var s010 = _g111[2];
 					this.object.name = s010;
 					var key17 = field.name;
 					if(__map_reserved[key17] != null) {
@@ -529,32 +768,11 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_displ
 				}
 				break;
 			case "targetDependencies":
-				var _g115 = field.value.value;
-				switch(_g115[1]) {
+				var _g112 = field.value.value;
+				switch(_g112[1]) {
 				case 3:
-					var s011 = _g115[2];
-					var _g116 = [];
-					var _g23 = 0;
-					while(_g23 < s011.length) {
-						var content13 = s011[_g23];
-						++_g23;
-						var _g36 = content13.value;
-						var tmp6;
-						switch(_g36[1]) {
-						case 0:
-							var s13 = _g36[2];
-							tmp6 = s13;
-							break;
-						case 5:
-							tmp6 = null;
-							break;
-						default:
-							this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content13.pos)));
-							continue;
-						}
-						_g116.push(tmp6);
-					}
-					this.object.targetDependencies = _g116;
+					var s011 = _g112[2];
+					this.object.targetDependencies = new JsonParser_Impl3(this.warnings,this.putils).loadJson(s011,field.value.pos);
 					var key19 = field.name;
 					if(__map_reserved[key19] != null) {
 						assigned.setReserved(key19,true);
@@ -582,354 +800,54 @@ JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_displ
 		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max - 1));
 		var s = assigned.keys();
 		while(s.hasNext()) {
-			var s3 = s.next();
-			if(!(__map_reserved[s3] != null ? assigned.getReserved(s3) : assigned.h[s3])) {
-				this.warnings.push(json2object.Error.UninitializedVariable(s3,lastPos));
+			var s1 = s.next();
+			if(!(__map_reserved[s1] != null ? assigned.getReserved(s1) : assigned.h[s1])) {
+				this.warnings.push(json2object.Error.UninitializedVariable(s1,lastPos));
 			}
 		}
 		return this.object;
 	}
-	,__class__: JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name___Inst_StringtargetDependencies_
+	,__class__: JsonParser_Impl5
 };
-var JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_installCommands_targetDependencies_ = function(warnings,putils) {
+var JsonParser_Impl6 = function(warnings,putils) {
 	this.warnings = warnings == null ? [] : warnings;
 	this.putils = putils;
 };
-JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_installCommands_targetDependencies_.__name__ = true;
-JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_installCommands_targetDependencies_.prototype = {
-	loadJson: function(fields,objectPos) {
-		var assigned = new haxe.ds.StringMap();
-		if(__map_reserved["afterBuildCommands"] != null) {
-			assigned.setReserved("afterBuildCommands",true);
-		} else {
-			assigned.h["afterBuildCommands"] = true;
-		}
-		if(__map_reserved["args"] != null) {
-			assigned.setReserved("args",true);
-		} else {
-			assigned.h["args"] = true;
-		}
-		if(__map_reserved["beforeBuildCommands"] != null) {
-			assigned.setReserved("beforeBuildCommands",true);
-		} else {
-			assigned.h["beforeBuildCommands"] = true;
-		}
-		if(__map_reserved["installCommands"] != null) {
-			assigned.setReserved("installCommands",true);
-		} else {
-			assigned.h["installCommands"] = true;
-		}
-		if(__map_reserved["targetDependencies"] != null) {
-			assigned.setReserved("targetDependencies",true);
-		} else {
-			assigned.h["targetDependencies"] = true;
-		}
-		this.object = { afterBuildCommands : null, args : { }, beforeBuildCommands : null, installCommands : null, targetDependencies : null};
-		var _g = 0;
-		while(_g < fields.length) {
-			var field = fields[_g];
-			++_g;
-			var _g1 = field.name;
-			switch(_g1) {
-			case "afterBuildCommands":
-				var _g11 = field.value.value;
-				switch(_g11[1]) {
-				case 3:
-					var s0 = _g11[2];
-					var _g12 = [];
-					var _g2 = 0;
-					while(_g2 < s0.length) {
-						var content1 = s0[_g2];
-						++_g2;
-						var _g3 = content1.value;
-						var tmp;
-						switch(_g3[1]) {
-						case 3:
-							var s1 = _g3[2];
-							var _g31 = [];
-							var _g4 = 0;
-							while(_g4 < s1.length) {
-								var content2 = s1[_g4];
-								++_g4;
-								var _g5 = content2.value;
-								var tmp1;
-								switch(_g5[1]) {
-								case 0:
-									var s2 = _g5[2];
-									tmp1 = s2;
-									break;
-								case 5:
-									tmp1 = null;
-									break;
-								default:
-									this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content2.pos)));
-									continue;
-								}
-								_g31.push(tmp1);
-							}
-							tmp = _g31;
-							break;
-						case 5:
-							tmp = null;
-							break;
-						default:
-							this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(content1.pos)));
-							continue;
-						}
-						_g12.push(tmp);
-					}
-					this.object.afterBuildCommands = _g12;
-					var key = field.name;
-					if(__map_reserved[key] != null) {
-						assigned.setReserved(key,true);
-					} else {
-						assigned.h[key] = true;
-					}
-					break;
-				case 5:
-					this.object.afterBuildCommands = null;
-					var key1 = field.name;
-					if(__map_reserved[key1] != null) {
-						assigned.setReserved(key1,true);
-					} else {
-						assigned.h[key1] = true;
-					}
-					break;
-				default:
-					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
-				}
+JsonParser_Impl6.__name__ = true;
+JsonParser_Impl6.prototype = {
+	loadJson: function(values,objectPos) {
+		var _g = [];
+		var _g1 = 0;
+		while(_g1 < values.length) {
+			var v = values[_g1];
+			++_g1;
+			var _g2 = v.value;
+			var tmp;
+			switch(_g2[1]) {
+			case 3:
+				var s0 = _g2[2];
+				tmp = new JsonParser_Impl3(this.warnings,this.putils).loadJson(s0,v.pos);
 				break;
-			case "args":
-				var _g13 = field.value.value;
-				switch(_g13[1]) {
-				case 2:
-					var s01 = _g13[2];
-					this.object.args = new JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main_noInline_output_packageName_workingDirectory_(this.warnings,this.putils).loadJson(s01,field.value.pos);
-					var key2 = field.name;
-					if(__map_reserved[key2] != null) {
-						assigned.setReserved(key2,true);
-					} else {
-						assigned.h[key2] = true;
-					}
-					break;
-				case 5:
-					this.object.args = null;
-					var key3 = field.name;
-					if(__map_reserved[key3] != null) {
-						assigned.setReserved(key3,true);
-					} else {
-						assigned.h[key3] = true;
-					}
-					break;
-				default:
-					this.warnings.push(json2object.Error.IncorrectType(field.name,"Anonymous",this.putils.convertPosition(field.value.pos)));
-				}
-				break;
-			case "beforeBuildCommands":
-				var _g14 = field.value.value;
-				switch(_g14[1]) {
-				case 3:
-					var s02 = _g14[2];
-					var _g15 = [];
-					var _g21 = 0;
-					while(_g21 < s02.length) {
-						var content11 = s02[_g21];
-						++_g21;
-						var _g32 = content11.value;
-						var tmp2;
-						switch(_g32[1]) {
-						case 3:
-							var s11 = _g32[2];
-							var _g33 = [];
-							var _g41 = 0;
-							while(_g41 < s11.length) {
-								var content21 = s11[_g41];
-								++_g41;
-								var _g51 = content21.value;
-								var tmp3;
-								switch(_g51[1]) {
-								case 0:
-									var s21 = _g51[2];
-									tmp3 = s21;
-									break;
-								case 5:
-									tmp3 = null;
-									break;
-								default:
-									this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content21.pos)));
-									continue;
-								}
-								_g33.push(tmp3);
-							}
-							tmp2 = _g33;
-							break;
-						case 5:
-							tmp2 = null;
-							break;
-						default:
-							this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(content11.pos)));
-							continue;
-						}
-						_g15.push(tmp2);
-					}
-					this.object.beforeBuildCommands = _g15;
-					var key4 = field.name;
-					if(__map_reserved[key4] != null) {
-						assigned.setReserved(key4,true);
-					} else {
-						assigned.h[key4] = true;
-					}
-					break;
-				case 5:
-					this.object.beforeBuildCommands = null;
-					var key5 = field.name;
-					if(__map_reserved[key5] != null) {
-						assigned.setReserved(key5,true);
-					} else {
-						assigned.h[key5] = true;
-					}
-					break;
-				default:
-					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
-				}
-				break;
-			case "installCommands":
-				var _g16 = field.value.value;
-				switch(_g16[1]) {
-				case 3:
-					var s03 = _g16[2];
-					var _g17 = [];
-					var _g22 = 0;
-					while(_g22 < s03.length) {
-						var content12 = s03[_g22];
-						++_g22;
-						var _g34 = content12.value;
-						var tmp4;
-						switch(_g34[1]) {
-						case 3:
-							var s12 = _g34[2];
-							var _g35 = [];
-							var _g42 = 0;
-							while(_g42 < s12.length) {
-								var content22 = s12[_g42];
-								++_g42;
-								var _g52 = content22.value;
-								var tmp5;
-								switch(_g52[1]) {
-								case 0:
-									var s22 = _g52[2];
-									tmp5 = s22;
-									break;
-								case 5:
-									tmp5 = null;
-									break;
-								default:
-									this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content22.pos)));
-									continue;
-								}
-								_g35.push(tmp5);
-							}
-							tmp4 = _g35;
-							break;
-						case 5:
-							tmp4 = null;
-							break;
-						default:
-							this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(content12.pos)));
-							continue;
-						}
-						_g17.push(tmp4);
-					}
-					this.object.installCommands = _g17;
-					var key6 = field.name;
-					if(__map_reserved[key6] != null) {
-						assigned.setReserved(key6,true);
-					} else {
-						assigned.h[key6] = true;
-					}
-					break;
-				case 5:
-					this.object.installCommands = null;
-					var key7 = field.name;
-					if(__map_reserved[key7] != null) {
-						assigned.setReserved(key7,true);
-					} else {
-						assigned.h[key7] = true;
-					}
-					break;
-				default:
-					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
-				}
-				break;
-			case "targetDependencies":
-				var _g18 = field.value.value;
-				switch(_g18[1]) {
-				case 3:
-					var s04 = _g18[2];
-					var _g19 = [];
-					var _g23 = 0;
-					while(_g23 < s04.length) {
-						var content13 = s04[_g23];
-						++_g23;
-						var _g36 = content13.value;
-						var tmp6;
-						switch(_g36[1]) {
-						case 0:
-							var s13 = _g36[2];
-							tmp6 = s13;
-							break;
-						case 5:
-							tmp6 = null;
-							break;
-						default:
-							this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content13.pos)));
-							continue;
-						}
-						_g19.push(tmp6);
-					}
-					this.object.targetDependencies = _g19;
-					var key8 = field.name;
-					if(__map_reserved[key8] != null) {
-						assigned.setReserved(key8,true);
-					} else {
-						assigned.h[key8] = true;
-					}
-					break;
-				case 5:
-					this.object.targetDependencies = null;
-					var key9 = field.name;
-					if(__map_reserved[key9] != null) {
-						assigned.setReserved(key9,true);
-					} else {
-						assigned.h[key9] = true;
-					}
-					break;
-				default:
-					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
-				}
+			case 5:
+				tmp = null;
 				break;
 			default:
-				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.namePos)));
+				this.warnings.push(json2object.Error.IncorrectType("Array value","Array",this.putils.convertPosition(v.pos)));
+				continue;
 			}
+			_g.push(tmp);
 		}
-		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max - 1));
-		var s = assigned.keys();
-		while(s.hasNext()) {
-			var s3 = s.next();
-			if(!(__map_reserved[s3] != null ? assigned.getReserved(s3) : assigned.h[s3])) {
-				this.warnings.push(json2object.Error.UninitializedVariable(s3,lastPos));
-			}
-		}
+		this.object = _g;
 		return this.object;
 	}
-	,__class__: JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_installCommands_targetDependencies_
+	,__class__: JsonParser_Impl6
 };
-var JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main_noInline_output_packageName_workingDirectory_ = function(warnings,putils) {
+var JsonParser_Impl7 = function(warnings,putils) {
 	this.warnings = warnings == null ? [] : warnings;
 	this.putils = putils;
 };
-JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main_noInline_output_packageName_workingDirectory_.__name__ = true;
-JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main_noInline_output_packageName_workingDirectory_.prototype = {
+JsonParser_Impl7.__name__ = true;
+JsonParser_Impl7.prototype = {
 	loadJson: function(fields,objectPos) {
 		var assigned = new haxe.ds.StringMap();
 		if(__map_reserved["classPaths"] != null) {
@@ -999,28 +917,7 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main
 				switch(_g11[1]) {
 				case 3:
 					var s0 = _g11[2];
-					var _g12 = [];
-					var _g2 = 0;
-					while(_g2 < s0.length) {
-						var content1 = s0[_g2];
-						++_g2;
-						var _g3 = content1.value;
-						var tmp;
-						switch(_g3[1]) {
-						case 0:
-							var s1 = _g3[2];
-							tmp = s1;
-							break;
-						case 5:
-							tmp = null;
-							break;
-						default:
-							this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content1.pos)));
-							continue;
-						}
-						_g12.push(tmp);
-					}
-					this.object.classPaths = _g12;
+					this.object.classPaths = new JsonParser_Impl3(this.warnings,this.putils).loadJson(s0,field.value.pos);
 					var key = field.name;
 					if(__map_reserved[key] != null) {
 						assigned.setReserved(key,true);
@@ -1042,10 +939,10 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main
 				}
 				break;
 			case "deadCodeElimination":
-				var _g13 = field.value.value;
-				switch(_g13[1]) {
+				var _g12 = field.value.value;
+				switch(_g12[1]) {
 				case 0:
-					var s01 = _g13[2];
+					var s01 = _g12[2];
 					this.object.deadCodeElimination = s01;
 					var key2 = field.name;
 					if(__map_reserved[key2] != null) {
@@ -1068,10 +965,10 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main
 				}
 				break;
 			case "debug":
-				var _g14 = field.value.value;
-				switch(_g14[1]) {
+				var _g13 = field.value.value;
+				switch(_g13[1]) {
 				case 4:
-					var s02 = _g14[2];
+					var s02 = _g13[2];
 					this.object.debug = s02;
 					var key4 = field.name;
 					if(__map_reserved[key4] != null) {
@@ -1088,32 +985,11 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main
 				}
 				break;
 			case "defines":
-				var _g15 = field.value.value;
-				switch(_g15[1]) {
+				var _g14 = field.value.value;
+				switch(_g14[1]) {
 				case 3:
-					var s03 = _g15[2];
-					var _g16 = [];
-					var _g21 = 0;
-					while(_g21 < s03.length) {
-						var content11 = s03[_g21];
-						++_g21;
-						var _g31 = content11.value;
-						var tmp1;
-						switch(_g31[1]) {
-						case 0:
-							var s11 = _g31[2];
-							tmp1 = s11;
-							break;
-						case 5:
-							tmp1 = null;
-							break;
-						default:
-							this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content11.pos)));
-							continue;
-						}
-						_g16.push(tmp1);
-					}
-					this.object.defines = _g16;
+					var s03 = _g14[2];
+					this.object.defines = new JsonParser_Impl3(this.warnings,this.putils).loadJson(s03,field.value.pos);
 					var key5 = field.name;
 					if(__map_reserved[key5] != null) {
 						assigned.setReserved(key5,true);
@@ -1135,32 +1011,11 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main
 				}
 				break;
 			case "haxelibs":
-				var _g17 = field.value.value;
-				switch(_g17[1]) {
+				var _g15 = field.value.value;
+				switch(_g15[1]) {
 				case 3:
-					var s04 = _g17[2];
-					var _g18 = [];
-					var _g22 = 0;
-					while(_g22 < s04.length) {
-						var content12 = s04[_g22];
-						++_g22;
-						var _g32 = content12.value;
-						var tmp2;
-						switch(_g32[1]) {
-						case 0:
-							var s12 = _g32[2];
-							tmp2 = s12;
-							break;
-						case 5:
-							tmp2 = null;
-							break;
-						default:
-							this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content12.pos)));
-							continue;
-						}
-						_g18.push(tmp2);
-					}
-					this.object.haxelibs = _g18;
+					var s04 = _g15[2];
+					this.object.haxelibs = new JsonParser_Impl3(this.warnings,this.putils).loadJson(s04,field.value.pos);
 					var key7 = field.name;
 					if(__map_reserved[key7] != null) {
 						assigned.setReserved(key7,true);
@@ -1182,32 +1037,11 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main
 				}
 				break;
 			case "macros":
-				var _g19 = field.value.value;
-				switch(_g19[1]) {
+				var _g16 = field.value.value;
+				switch(_g16[1]) {
 				case 3:
-					var s05 = _g19[2];
-					var _g110 = [];
-					var _g23 = 0;
-					while(_g23 < s05.length) {
-						var content13 = s05[_g23];
-						++_g23;
-						var _g33 = content13.value;
-						var tmp3;
-						switch(_g33[1]) {
-						case 0:
-							var s13 = _g33[2];
-							tmp3 = s13;
-							break;
-						case 5:
-							tmp3 = null;
-							break;
-						default:
-							this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content13.pos)));
-							continue;
-						}
-						_g110.push(tmp3);
-					}
-					this.object.macros = _g110;
+					var s05 = _g16[2];
+					this.object.macros = new JsonParser_Impl3(this.warnings,this.putils).loadJson(s05,field.value.pos);
 					var key9 = field.name;
 					if(__map_reserved[key9] != null) {
 						assigned.setReserved(key9,true);
@@ -1229,10 +1063,10 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main
 				}
 				break;
 			case "main":
-				var _g111 = field.value.value;
-				switch(_g111[1]) {
+				var _g17 = field.value.value;
+				switch(_g17[1]) {
 				case 0:
-					var s06 = _g111[2];
+					var s06 = _g17[2];
 					this.object.main = s06;
 					var key11 = field.name;
 					if(__map_reserved[key11] != null) {
@@ -1255,10 +1089,10 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main
 				}
 				break;
 			case "noInline":
-				var _g112 = field.value.value;
-				switch(_g112[1]) {
+				var _g18 = field.value.value;
+				switch(_g18[1]) {
 				case 4:
-					var s07 = _g112[2];
+					var s07 = _g18[2];
 					this.object.noInline = s07;
 					var key13 = field.name;
 					if(__map_reserved[key13] != null) {
@@ -1275,11 +1109,11 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main
 				}
 				break;
 			case "output":
-				var _g113 = field.value.value;
-				switch(_g113[1]) {
+				var _g19 = field.value.value;
+				switch(_g19[1]) {
 				case 2:
-					var s08 = _g113[2];
-					this.object.output = new JsonParser_Ano_path___Inst_Stringtarget___Abstract_HaxeTarget(this.warnings,this.putils).loadJson(s08,field.value.pos);
+					var s08 = _g19[2];
+					this.object.output = new JsonParser_Impl8(this.warnings,this.putils).loadJson(s08,field.value.pos);
 					var key14 = field.name;
 					if(__map_reserved[key14] != null) {
 						assigned.setReserved(key14,true);
@@ -1301,10 +1135,10 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main
 				}
 				break;
 			case "packageName":
-				var _g114 = field.value.value;
-				switch(_g114[1]) {
+				var _g110 = field.value.value;
+				switch(_g110[1]) {
 				case 0:
-					var s09 = _g114[2];
+					var s09 = _g110[2];
 					this.object.packageName = s09;
 					var key16 = field.name;
 					if(__map_reserved[key16] != null) {
@@ -1327,10 +1161,10 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main
 				}
 				break;
 			case "workingDirectory":
-				var _g115 = field.value.value;
-				switch(_g115[1]) {
+				var _g111 = field.value.value;
+				switch(_g111[1]) {
 				case 0:
-					var s010 = _g115[2];
+					var s010 = _g111[2];
 					this.object.workingDirectory = s010;
 					var key18 = field.name;
 					if(__map_reserved[key18] != null) {
@@ -1359,350 +1193,21 @@ JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main
 		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max - 1));
 		var s = assigned.keys();
 		while(s.hasNext()) {
-			var s2 = s.next();
-			if(!(__map_reserved[s2] != null ? assigned.getReserved(s2) : assigned.h[s2])) {
-				this.warnings.push(json2object.Error.UninitializedVariable(s2,lastPos));
+			var s1 = s.next();
+			if(!(__map_reserved[s1] != null ? assigned.getReserved(s1) : assigned.h[s1])) {
+				this.warnings.push(json2object.Error.UninitializedVariable(s1,lastPos));
 			}
 		}
 		return this.object;
 	}
-	,__class__: JsonParser_Ano_classPaths_deadCodeElimination_debug_defines_haxelibs_macros_main_noInline_output_packageName_workingDirectory_
+	,__class__: JsonParser_Impl7
 };
-var JsonParser_Ano_haxelibs_inherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_ = function(warnings,putils) {
+var JsonParser_Impl8 = function(warnings,putils) {
 	this.warnings = warnings == null ? [] : warnings;
 	this.putils = putils;
 };
-JsonParser_Ano_haxelibs_inherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_.__name__ = true;
-JsonParser_Ano_haxelibs_inherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_.prototype = {
-	loadJson: function(fields,objectPos) {
-		var assigned = new haxe.ds.StringMap();
-		if(__map_reserved["haxelibs"] != null) {
-			assigned.setReserved("haxelibs",true);
-		} else {
-			assigned.h["haxelibs"] = true;
-		}
-		if(__map_reserved["inherit"] != null) {
-			assigned.setReserved("inherit",true);
-		} else {
-			assigned.h["inherit"] = true;
-		}
-		if(__map_reserved["mainTarget"] != null) {
-			assigned.setReserved("mainTarget",true);
-		} else {
-			assigned.h["mainTarget"] = true;
-		}
-		if(__map_reserved["targets"] != null) {
-			assigned.setReserved("targets",false);
-		} else {
-			assigned.h["targets"] = false;
-		}
-		this.object = { haxelibs : null, inherit : null, mainTarget : null, targets : null};
-		var _g = 0;
-		while(_g < fields.length) {
-			var field = fields[_g];
-			++_g;
-			var _g1 = field.name;
-			switch(_g1) {
-			case "haxelibs":
-				var _g11 = field.value.value;
-				switch(_g11[1]) {
-				case 3:
-					var s0 = _g11[2];
-					var _g12 = [];
-					var _g2 = 0;
-					while(_g2 < s0.length) {
-						var content1 = s0[_g2];
-						++_g2;
-						var _g3 = content1.value;
-						var tmp;
-						switch(_g3[1]) {
-						case 2:
-							var s1 = _g3[2];
-							tmp = new JsonParser_Ano_installArgs___Abstract_ArrayHandle___Inst_Stringname___Inst_String(this.warnings,this.putils).loadJson(s1,content1.pos);
-							break;
-						case 5:
-							tmp = null;
-							break;
-						default:
-							this.warnings.push(json2object.Error.IncorrectType(field.name,"Anonymous",this.putils.convertPosition(content1.pos)));
-							continue;
-						}
-						_g12.push(tmp);
-					}
-					this.object.haxelibs = _g12;
-					var key = field.name;
-					if(__map_reserved[key] != null) {
-						assigned.setReserved(key,true);
-					} else {
-						assigned.h[key] = true;
-					}
-					break;
-				case 5:
-					this.object.haxelibs = null;
-					var key1 = field.name;
-					if(__map_reserved[key1] != null) {
-						assigned.setReserved(key1,true);
-					} else {
-						assigned.h[key1] = true;
-					}
-					break;
-				default:
-					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
-				}
-				break;
-			case "inherit":
-				var _g13 = field.value.value;
-				switch(_g13[1]) {
-				case 0:
-					var s01 = _g13[2];
-					this.object.inherit = s01;
-					var key2 = field.name;
-					if(__map_reserved[key2] != null) {
-						assigned.setReserved(key2,true);
-					} else {
-						assigned.h[key2] = true;
-					}
-					break;
-				case 5:
-					this.object.inherit = null;
-					var key3 = field.name;
-					if(__map_reserved[key3] != null) {
-						assigned.setReserved(key3,true);
-					} else {
-						assigned.h[key3] = true;
-					}
-					break;
-				default:
-					this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
-				}
-				break;
-			case "mainTarget":
-				var _g14 = field.value.value;
-				switch(_g14[1]) {
-				case 0:
-					var s02 = _g14[2];
-					this.object.mainTarget = s02;
-					var key4 = field.name;
-					if(__map_reserved[key4] != null) {
-						assigned.setReserved(key4,true);
-					} else {
-						assigned.h[key4] = true;
-					}
-					break;
-				case 5:
-					this.object.mainTarget = null;
-					var key5 = field.name;
-					if(__map_reserved[key5] != null) {
-						assigned.setReserved(key5,true);
-					} else {
-						assigned.h[key5] = true;
-					}
-					break;
-				default:
-					this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
-				}
-				break;
-			case "targets":
-				var _g15 = field.value.value;
-				switch(_g15[1]) {
-				case 3:
-					var s03 = _g15[2];
-					var _g16 = [];
-					var _g21 = 0;
-					while(_g21 < s03.length) {
-						var content11 = s03[_g21];
-						++_g21;
-						var _g31 = content11.value;
-						var tmp1;
-						switch(_g31[1]) {
-						case 2:
-							var s11 = _g31[2];
-							tmp1 = new JsonParser_Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name___Inst_StringtargetDependencies_(this.warnings,this.putils).loadJson(s11,content11.pos);
-							break;
-						case 5:
-							tmp1 = null;
-							break;
-						default:
-							this.warnings.push(json2object.Error.IncorrectType(field.name,"Anonymous",this.putils.convertPosition(content11.pos)));
-							continue;
-						}
-						_g16.push(tmp1);
-					}
-					this.object.targets = _g16;
-					var key6 = field.name;
-					if(__map_reserved[key6] != null) {
-						assigned.setReserved(key6,true);
-					} else {
-						assigned.h[key6] = true;
-					}
-					break;
-				case 5:
-					this.object.targets = null;
-					var key7 = field.name;
-					if(__map_reserved[key7] != null) {
-						assigned.setReserved(key7,true);
-					} else {
-						assigned.h[key7] = true;
-					}
-					break;
-				default:
-					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
-				}
-				break;
-			default:
-				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.namePos)));
-			}
-		}
-		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max - 1));
-		var s = assigned.keys();
-		while(s.hasNext()) {
-			var s2 = s.next();
-			if(!(__map_reserved[s2] != null ? assigned.getReserved(s2) : assigned.h[s2])) {
-				this.warnings.push(json2object.Error.UninitializedVariable(s2,lastPos));
-			}
-		}
-		return this.object;
-	}
-	,fromJson: function(jsonString,filename) {
-		this.putils = new json2object.PosUtils(jsonString);
-		try {
-			var json = new hxjsonast.Parser(jsonString,filename).parseRec();
-			var _g = json.value;
-			if(_g[1] == 2) {
-				var fields = _g[2];
-				return this.loadJson(fields,json.pos);
-			} else {
-				return null;
-			}
-		} catch( e ) {
-			if (e instanceof js._Boot.HaxeError) e = e.val;
-			if( js.Boot.__instanceof(e,hxjsonast.Error) ) {
-				throw new js._Boot.HaxeError(json2object.Error.ParserError(e.message,this.putils.convertPosition(e.pos)));
-			} else throw(e);
-		}
-	}
-	,__class__: JsonParser_Ano_haxelibs_inherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_
-};
-var JsonParser_Ano_installArgs___Abstract_ArrayHandle___Inst_Stringname___Inst_String = function(warnings,putils) {
-	this.warnings = warnings == null ? [] : warnings;
-	this.putils = putils;
-};
-JsonParser_Ano_installArgs___Abstract_ArrayHandle___Inst_Stringname___Inst_String.__name__ = true;
-JsonParser_Ano_installArgs___Abstract_ArrayHandle___Inst_Stringname___Inst_String.prototype = {
-	loadJson: function(fields,objectPos) {
-		var assigned = new haxe.ds.StringMap();
-		if(__map_reserved["installArgs"] != null) {
-			assigned.setReserved("installArgs",false);
-		} else {
-			assigned.h["installArgs"] = false;
-		}
-		if(__map_reserved["name"] != null) {
-			assigned.setReserved("name",false);
-		} else {
-			assigned.h["name"] = false;
-		}
-		this.object = { installArgs : null, name : null};
-		var _g = 0;
-		while(_g < fields.length) {
-			var field = fields[_g];
-			++_g;
-			var _g1 = field.name;
-			switch(_g1) {
-			case "installArgs":
-				var _g11 = field.value.value;
-				switch(_g11[1]) {
-				case 3:
-					var s0 = _g11[2];
-					var _g12 = [];
-					var _g2 = 0;
-					while(_g2 < s0.length) {
-						var content1 = s0[_g2];
-						++_g2;
-						var _g3 = content1.value;
-						var tmp;
-						switch(_g3[1]) {
-						case 0:
-							var s1 = _g3[2];
-							tmp = s1;
-							break;
-						case 5:
-							tmp = null;
-							break;
-						default:
-							this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(content1.pos)));
-							continue;
-						}
-						_g12.push(tmp);
-					}
-					this.object.installArgs = _g12;
-					var key = field.name;
-					if(__map_reserved[key] != null) {
-						assigned.setReserved(key,true);
-					} else {
-						assigned.h[key] = true;
-					}
-					break;
-				case 5:
-					this.object.installArgs = null;
-					var key1 = field.name;
-					if(__map_reserved[key1] != null) {
-						assigned.setReserved(key1,true);
-					} else {
-						assigned.h[key1] = true;
-					}
-					break;
-				default:
-					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
-				}
-				break;
-			case "name":
-				var _g13 = field.value.value;
-				switch(_g13[1]) {
-				case 0:
-					var s01 = _g13[2];
-					this.object.name = s01;
-					var key2 = field.name;
-					if(__map_reserved[key2] != null) {
-						assigned.setReserved(key2,true);
-					} else {
-						assigned.h[key2] = true;
-					}
-					break;
-				case 5:
-					this.object.name = null;
-					var key3 = field.name;
-					if(__map_reserved[key3] != null) {
-						assigned.setReserved(key3,true);
-					} else {
-						assigned.h[key3] = true;
-					}
-					break;
-				default:
-					this.warnings.push(json2object.Error.IncorrectType(field.name,"String",this.putils.convertPosition(field.value.pos)));
-				}
-				break;
-			default:
-				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.namePos)));
-			}
-		}
-		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max - 1));
-		var s = assigned.keys();
-		while(s.hasNext()) {
-			var s2 = s.next();
-			if(!(__map_reserved[s2] != null ? assigned.getReserved(s2) : assigned.h[s2])) {
-				this.warnings.push(json2object.Error.UninitializedVariable(s2,lastPos));
-			}
-		}
-		return this.object;
-	}
-	,__class__: JsonParser_Ano_installArgs___Abstract_ArrayHandle___Inst_Stringname___Inst_String
-};
-var JsonParser_Ano_path___Inst_Stringtarget___Abstract_HaxeTarget = function(warnings,putils) {
-	this.warnings = warnings == null ? [] : warnings;
-	this.putils = putils;
-};
-JsonParser_Ano_path___Inst_Stringtarget___Abstract_HaxeTarget.__name__ = true;
-JsonParser_Ano_path___Inst_Stringtarget___Abstract_HaxeTarget.prototype = {
+JsonParser_Impl8.__name__ = true;
+JsonParser_Impl8.prototype = {
 	loadJson: function(fields,objectPos) {
 		var assigned = new haxe.ds.StringMap();
 		if(__map_reserved["path"] != null) {
@@ -1788,38 +1293,193 @@ JsonParser_Ano_path___Inst_Stringtarget___Abstract_HaxeTarget.prototype = {
 		}
 		return this.object;
 	}
-	,__class__: JsonParser_Ano_path___Inst_Stringtarget___Abstract_HaxeTarget
+	,__class__: JsonParser_Impl8
 };
-var List = function() {
-	this.length = 0;
+var JsonParser_Impl9 = function(warnings,putils) {
+	this.warnings = warnings == null ? [] : warnings;
+	this.putils = putils;
 };
-List.__name__ = true;
-List.prototype = {
-	iterator: function() {
-		return new _List.ListIterator(this.h);
+JsonParser_Impl9.__name__ = true;
+JsonParser_Impl9.prototype = {
+	loadJson: function(fields,objectPos) {
+		var assigned = new haxe.ds.StringMap();
+		if(__map_reserved["afterBuildCommands"] != null) {
+			assigned.setReserved("afterBuildCommands",true);
+		} else {
+			assigned.h["afterBuildCommands"] = true;
+		}
+		if(__map_reserved["args"] != null) {
+			assigned.setReserved("args",true);
+		} else {
+			assigned.h["args"] = true;
+		}
+		if(__map_reserved["beforeBuildCommands"] != null) {
+			assigned.setReserved("beforeBuildCommands",true);
+		} else {
+			assigned.h["beforeBuildCommands"] = true;
+		}
+		if(__map_reserved["installCommands"] != null) {
+			assigned.setReserved("installCommands",true);
+		} else {
+			assigned.h["installCommands"] = true;
+		}
+		if(__map_reserved["targetDependencies"] != null) {
+			assigned.setReserved("targetDependencies",true);
+		} else {
+			assigned.h["targetDependencies"] = true;
+		}
+		this.object = { afterBuildCommands : null, args : { }, beforeBuildCommands : null, installCommands : null, targetDependencies : null};
+		var _g = 0;
+		while(_g < fields.length) {
+			var field = fields[_g];
+			++_g;
+			var _g1 = field.name;
+			switch(_g1) {
+			case "afterBuildCommands":
+				var _g11 = field.value.value;
+				switch(_g11[1]) {
+				case 3:
+					var s0 = _g11[2];
+					this.object.afterBuildCommands = new JsonParser_Impl6(this.warnings,this.putils).loadJson(s0,field.value.pos);
+					var key = field.name;
+					if(__map_reserved[key] != null) {
+						assigned.setReserved(key,true);
+					} else {
+						assigned.h[key] = true;
+					}
+					break;
+				case 5:
+					this.object.afterBuildCommands = null;
+					var key1 = field.name;
+					if(__map_reserved[key1] != null) {
+						assigned.setReserved(key1,true);
+					} else {
+						assigned.h[key1] = true;
+					}
+					break;
+				default:
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
+				}
+				break;
+			case "args":
+				var _g12 = field.value.value;
+				switch(_g12[1]) {
+				case 2:
+					var s01 = _g12[2];
+					this.object.args = new JsonParser_Impl7(this.warnings,this.putils).loadJson(s01,field.value.pos);
+					var key2 = field.name;
+					if(__map_reserved[key2] != null) {
+						assigned.setReserved(key2,true);
+					} else {
+						assigned.h[key2] = true;
+					}
+					break;
+				case 5:
+					this.object.args = null;
+					var key3 = field.name;
+					if(__map_reserved[key3] != null) {
+						assigned.setReserved(key3,true);
+					} else {
+						assigned.h[key3] = true;
+					}
+					break;
+				default:
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Anonymous",this.putils.convertPosition(field.value.pos)));
+				}
+				break;
+			case "beforeBuildCommands":
+				var _g13 = field.value.value;
+				switch(_g13[1]) {
+				case 3:
+					var s02 = _g13[2];
+					this.object.beforeBuildCommands = new JsonParser_Impl6(this.warnings,this.putils).loadJson(s02,field.value.pos);
+					var key4 = field.name;
+					if(__map_reserved[key4] != null) {
+						assigned.setReserved(key4,true);
+					} else {
+						assigned.h[key4] = true;
+					}
+					break;
+				case 5:
+					this.object.beforeBuildCommands = null;
+					var key5 = field.name;
+					if(__map_reserved[key5] != null) {
+						assigned.setReserved(key5,true);
+					} else {
+						assigned.h[key5] = true;
+					}
+					break;
+				default:
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
+				}
+				break;
+			case "installCommands":
+				var _g14 = field.value.value;
+				switch(_g14[1]) {
+				case 3:
+					var s03 = _g14[2];
+					this.object.installCommands = new JsonParser_Impl6(this.warnings,this.putils).loadJson(s03,field.value.pos);
+					var key6 = field.name;
+					if(__map_reserved[key6] != null) {
+						assigned.setReserved(key6,true);
+					} else {
+						assigned.h[key6] = true;
+					}
+					break;
+				case 5:
+					this.object.installCommands = null;
+					var key7 = field.name;
+					if(__map_reserved[key7] != null) {
+						assigned.setReserved(key7,true);
+					} else {
+						assigned.h[key7] = true;
+					}
+					break;
+				default:
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
+				}
+				break;
+			case "targetDependencies":
+				var _g15 = field.value.value;
+				switch(_g15[1]) {
+				case 3:
+					var s04 = _g15[2];
+					this.object.targetDependencies = new JsonParser_Impl3(this.warnings,this.putils).loadJson(s04,field.value.pos);
+					var key8 = field.name;
+					if(__map_reserved[key8] != null) {
+						assigned.setReserved(key8,true);
+					} else {
+						assigned.h[key8] = true;
+					}
+					break;
+				case 5:
+					this.object.targetDependencies = null;
+					var key9 = field.name;
+					if(__map_reserved[key9] != null) {
+						assigned.setReserved(key9,true);
+					} else {
+						assigned.h[key9] = true;
+					}
+					break;
+				default:
+					this.warnings.push(json2object.Error.IncorrectType(field.name,"Array",this.putils.convertPosition(field.value.pos)));
+				}
+				break;
+			default:
+				this.warnings.push(json2object.Error.UnknownVariable(field.name,this.putils.convertPosition(field.namePos)));
+			}
+		}
+		var lastPos = this.putils.convertPosition(new hxjsonast.Position(objectPos.file,objectPos.max - 1,objectPos.max - 1));
+		var s = assigned.keys();
+		while(s.hasNext()) {
+			var s1 = s.next();
+			if(!(__map_reserved[s1] != null ? assigned.getReserved(s1) : assigned.h[s1])) {
+				this.warnings.push(json2object.Error.UninitializedVariable(s1,lastPos));
+			}
+		}
+		return this.object;
 	}
-	,__class__: List
-};
-var _List = {};
-_List.ListNode = function() { };
-_List.ListNode.__name__ = true;
-_List.ListNode.prototype = {
-	__class__: _List.ListNode
-};
-_List.ListIterator = function(head) {
-	this.head = head;
-};
-_List.ListIterator.__name__ = true;
-_List.ListIterator.prototype = {
-	hasNext: function() {
-		return this.head != null;
-	}
-	,next: function() {
-		var val = this.head.item;
-		this.head = this.head.next;
-		return val;
-	}
-	,__class__: _List.ListIterator
+	,__class__: JsonParser_Impl9
 };
 Math.__name__ = true;
 var Reflect = function() { };
@@ -1853,129 +1513,6 @@ Reflect.copy = function(o) {
 		o2[f] = Reflect.field(o,f);
 	}
 	return o2;
-};
-var SourceMap = function(sourceMapData) {
-	this.mappings = [];
-	this.sourceRoot = "";
-	this.version = 3;
-	this.parse(sourceMapData);
-};
-SourceMap.__name__ = true;
-SourceMap.prototype = {
-	originalPositionFor: function(line,column) {
-		if(column == null) {
-			column = 0;
-		}
-		if(line < 1 || line > this.mappings.length) {
-			return null;
-		}
-		var pos = null;
-		var _g = 0;
-		var _g1 = this.mappings[line - 1];
-		while(_g < _g1.length) {
-			var mapping = _g1[_g];
-			++_g;
-			if(mapping[0] <= column) {
-				var pos1 = { generatedLine : line, generatedColumn : mapping[0]};
-				if(mapping.length > 1) {
-					pos1.originalLine = mapping[2] + 1;
-					pos1.originalColumn = mapping[3];
-					pos1.source = this.sourceRoot + this.sources[mapping[1]];
-					if(mapping.length > 4) {
-						pos1.name = this.names[mapping[4]];
-					}
-				}
-				pos = pos1;
-				break;
-			}
-		}
-		return pos;
-	}
-	,parse: function(json) {
-		var data = JSON.parse(json);
-		if(data == null) {
-			throw new js._Boot.HaxeError("Failed to parse source map data.");
-		}
-		this.version = data.version;
-		this.file = data.file;
-		this.sourceRoot = data.sourceRoot == null ? "" : data.sourceRoot;
-		this.sources = data.sources;
-		this.sourcesContent = data.sourcesContent == null ? [] : data.sourcesContent;
-		this.names = data.names;
-		var encoded = data.mappings.split(";");
-		this.mappings[encoded.length - 1] = null;
-		var previousSource = 0;
-		var previousLine = 0;
-		var previousColumn = 0;
-		var previousName = 0;
-		var _g1 = 0;
-		var _g = encoded.length;
-		while(_g1 < _g) {
-			var l = _g1++;
-			this.mappings[l] = [];
-			if(encoded[l].length == 0) {
-				continue;
-			}
-			var previousGeneratedColumn = 0;
-			var segments = encoded[l].split(",");
-			this.mappings[l][segments.length - 1] = null;
-			var _g3 = 0;
-			var _g2 = segments.length;
-			while(_g3 < _g2) {
-				var s = _g3++;
-				var vlq = segments[s];
-				var data1 = [0,0,0,0];
-				var index = -1;
-				var _g11 = 0;
-				var _g4 = data1.length;
-				while(_g11 < _g4) {
-					var i = _g11++;
-					var value = 0;
-					var shift = 0;
-					var digit;
-					var masked;
-					while(true) {
-						var charCode = vlq.charCodeAt(++index);
-						if(97 <= charCode) {
-							digit = charCode - 97 + 26;
-						} else if(65 <= charCode) {
-							digit = charCode - 65;
-						} else if(48 <= charCode) {
-							digit = charCode - 48 + 52;
-						} else if(charCode == 43) {
-							digit = 62;
-						} else {
-							digit = 63;
-						}
-						masked = digit & 31;
-						value += masked << shift;
-						shift += 5;
-						if(!(digit != masked)) {
-							break;
-						}
-					}
-					data1[i] = (value & 1) == 1 ? -(value >> 1) : value >> 1;
-				}
-				var mapping = data1;
-				this.mappings[l][s] = mapping;
-				mapping[0] += previousGeneratedColumn;
-				if(mapping.length > 1) {
-					mapping[1] += previousSource;
-					mapping[2] += previousLine;
-					mapping[3] += previousColumn;
-					if(mapping.length > 4) {
-						mapping[4] += previousName;
-						previousName = mapping[4];
-					}
-					previousLine = mapping[2];
-					previousSource = mapping[1];
-					previousColumn = mapping[3];
-				}
-				previousGeneratedColumn = mapping[0];
-			}
-		}
-	}
-	,__class__: SourceMap
 };
 var Std = function() { };
 Std.__name__ = true;
@@ -2169,92 +1706,6 @@ haxe.CallStack.makeStack = function(s) {
 };
 haxe.IMap = function() { };
 haxe.IMap.__name__ = true;
-haxe.Http = function(url) {
-	this.url = url;
-	this.headers = new List();
-	this.params = new List();
-};
-haxe.Http.__name__ = true;
-haxe.Http.prototype = {
-	request: function(post) {
-		var me = this;
-		me.responseData = null;
-		var parsedUrl = js.node.Url.parse(this.url);
-		var secure = parsedUrl.protocol == "https:";
-		var host = parsedUrl.hostname;
-		var path = parsedUrl.path;
-		var port = parsedUrl.port != null ? Std.parseInt(parsedUrl.port) : secure ? 443 : 80;
-		var h = { };
-		var _g_head = this.headers.h;
-		while(_g_head != null) {
-			var val = _g_head.item;
-			_g_head = _g_head.next;
-			var i = val;
-			var arr = Reflect.field(h,i.header);
-			if(arr == null) {
-				arr = [];
-				h[i.header] = arr;
-			}
-			arr.push(i.value);
-		}
-		var uri = this.postData;
-		if(uri != null) {
-			post = true;
-		} else {
-			var _g_head1 = this.params.h;
-			while(_g_head1 != null) {
-				var val1 = _g_head1.item;
-				_g_head1 = _g_head1.next;
-				var p = val1;
-				if(uri == null) {
-					uri = "";
-				} else {
-					uri += "&";
-				}
-				var s = p.param;
-				var uri1 = encodeURIComponent(s) + "=";
-				var s1 = p.value;
-				uri += uri1 + encodeURIComponent(s1);
-			}
-		}
-		var question = path.split("?").length <= 1;
-		if(!post && uri != null) {
-			path += (question ? "?" : "&") + uri;
-		}
-		var opts = { protocol : parsedUrl.protocol, hostname : host, port : port, method : post ? "POST" : "GET", path : path, headers : h};
-		var httpResponse = function(res) {
-			var s2 = res.statusCode;
-			if(s2 != null) {
-				me.onStatus(s2);
-			}
-			var body = "";
-			res.on("data",function(d) {
-				body += d;
-			});
-			res.on("end",function(_) {
-				me.responseData = body;
-				me.req = null;
-				if(s2 != null && s2 >= 200 && s2 < 400) {
-					me.onData(body);
-				} else {
-					me.onError("Http Error #" + s2);
-				}
-			});
-		};
-		this.req = secure ? js.node.Https.request(opts,httpResponse) : js.node.Http.request(opts,httpResponse);
-		if(post) {
-			this.req.write(uri);
-		}
-		this.req.end();
-	}
-	,onData: function(data) {
-	}
-	,onError: function(msg) {
-	}
-	,onStatus: function(status) {
-	}
-	,__class__: haxe.Http
-};
 haxe.ds = {};
 haxe.ds.Option = { __ename__ : true, __constructs__ : ["Some","None"] };
 haxe.ds.Option.Some = function(v) { var $x = ["Some",0,v]; $x.__enum__ = haxe.ds.Option; $x.toString = $estr; return $x; };
@@ -2321,34 +1772,7 @@ haxe.io.Eof.prototype = {
 	}
 	,__class__: haxe.io.Eof
 };
-haxe.io.Path = function(path) {
-	switch(path) {
-	case ".":case "..":
-		this.dir = path;
-		this.file = "";
-		return;
-	}
-	var c1 = path.lastIndexOf("/");
-	var c2 = path.lastIndexOf("\\");
-	if(c1 < c2) {
-		this.dir = HxOverrides.substr(path,0,c2);
-		path = HxOverrides.substr(path,c2 + 1,null);
-		this.backslash = true;
-	} else if(c2 < c1) {
-		this.dir = HxOverrides.substr(path,0,c1);
-		path = HxOverrides.substr(path,c1 + 1,null);
-	} else {
-		this.dir = null;
-	}
-	var cp = path.lastIndexOf(".");
-	if(cp != -1) {
-		this.ext = HxOverrides.substr(path,cp + 1,null);
-		this.file = HxOverrides.substr(path,0,cp);
-	} else {
-		this.ext = null;
-		this.file = path;
-	}
-};
+haxe.io.Path = function() { };
 haxe.io.Path.__name__ = true;
 haxe.io.Path.join = function(paths) {
 	var paths1 = paths.filter(function(s) {
@@ -2444,9 +1868,6 @@ haxe.io.Path.addTrailingSlash = function(path) {
 	} else {
 		return path;
 	}
-};
-haxe.io.Path.prototype = {
-	__class__: haxe.io.Path
 };
 var hxjsonast = {};
 hxjsonast.Error = function(message,pos) {
@@ -2965,9 +2386,6 @@ js.Boot.__resolveNativeClass = function(name) {
 js.node = {};
 js.node.ChildProcess = require("child_process");
 js.node.Fs = require("fs");
-js.node.Http = require("http");
-js.node.Https = require("https");
-js.node.Url = require("url");
 js.node.buffer = {};
 js.node.buffer.Buffer = require("buffer").Buffer;
 var json2object = {};
@@ -3073,167 +2491,6 @@ json2object.PosUtils.prototype = {
 	}
 	,__class__: json2object.PosUtils
 };
-var jstack = {};
-jstack.js = {};
-jstack.js.JStack = function() {
-	this.ready = false;
-	if(jstack.js.JStack.isNode()) {
-		process.on("uncaughtException", jstack.js.JStack._uncaughtExceptionHandler);
-	}
-	this.inject();
-};
-jstack.js.JStack.__name__ = true;
-jstack.js.JStack.onReady = function(callback) {
-	jstack.js.JStack.onReadyCallback = callback;
-	if(jstack.js.JStack.instance.ready) {
-		callback();
-	}
-};
-jstack.js.JStack.uncaughtExceptionHandler = function(e) {
-	var stack = haxe.CallStack.getStack(e).map(jstack.js.JStack.improveStackItem);
-	var error = e.message + haxe.CallStack.toString(stack) + "\n";
-	return error;
-};
-jstack.js.JStack._uncaughtExceptionHandler = function(e) {
-	var error = jstack.js.JStack.uncaughtExceptionHandler(e);
-	if(error != null && error.length > 0) {
-		console.log(error);
-	}
-};
-jstack.js.JStack.isNode = function() {
-	return typeof window == 'undefined';
-};
-jstack.js.JStack.improveStackItem = function(item) {
-	if(item[1] == 1) {
-		var line = item[2];
-		if(jstack.js.JStack.stackFile.match(line)) {
-			var file = jstack.js.JStack.stackFile.matched(1);
-			if(file != jstack.js.JStack.currentFile()) {
-				return item;
-			}
-			var line1 = Std.parseInt(jstack.js.JStack.stackFile.matched(2));
-			var column = Std.parseInt(jstack.js.JStack.stackFile.matched(3));
-			var pos = jstack.js.JStack.mapper.originalPositionFor(line1,column);
-			return haxe.StackItem.FilePos(null,pos.source,pos.originalLine);
-		} else {
-			var line2 = item[2];
-			if(jstack.js.JStack.stackFunctionFile.match(line2)) {
-				var file1 = jstack.js.JStack.stackFunctionFile.matched(2);
-				if(file1 != jstack.js.JStack.currentFile()) {
-					return item;
-				}
-				var line3 = Std.parseInt(jstack.js.JStack.stackFunctionFile.matched(3));
-				var column1 = Std.parseInt(jstack.js.JStack.stackFunctionFile.matched(4));
-				var pos1 = jstack.js.JStack.mapper.originalPositionFor(line3,column1);
-				if(pos1 == null) {
-					return item;
-				}
-				var fn = jstack.js.JStack.stackFunctionFile.matched(1).split(".");
-				var method = fn.pop();
-				var cls = fn.join(".");
-				var methodItem = cls != null && method != null ? haxe.StackItem.Method(cls,method) : null;
-				return haxe.StackItem.FilePos(methodItem,pos1.source,pos1.originalLine);
-			} else {
-				return item;
-			}
-		}
-	} else {
-		return item;
-	}
-};
-jstack.js.JStack.currentFile = function() {
-	if(jstack.js.JStack.isNode()) {
-		return __filename;
-	}
-	return null;
-};
-jstack.js.JStack.prototype = {
-	inject: function() {
-		var _gthis = this;
-		this.loadSourceMap(function(sourceMapData) {
-			jstack.js.JStack.mapper = new SourceMap(sourceMapData);
-			haxe.CallStack.wrapCallSite = function(site) {
-				var pos = jstack.js.JStack.mapper.originalPositionFor(site.getLineNumber(),site.getColumnNumber());
-				return new jstack.js.StackPos(site,pos);
-			};
-			_gthis.ready = true;
-			if(jstack.js.JStack.onReadyCallback != null) {
-				jstack.js.JStack.onReadyCallback();
-			}
-		});
-	}
-	,loadSourceMap: function(callback) {
-		if(!jstack.js.JStack.isNode()) {
-			this.loadInBrowser(callback);
-		} else {
-			this.loadInNode(callback);
-		}
-	}
-	,loadInBrowser: function(callback) {
-		var file = this.getCurrentDirInBrowser() + "/" + ("run.js" + ".map");
-		var http = new haxe.Http(file);
-		http.onError = function(error) {
-			console.log(error);
-		};
-		http.onData = function(sourceMap) {
-			callback(sourceMap);
-		};
-		http.request();
-	}
-	,loadInNode: function(callback) {
-		var dir = __dirname;
-		var fs = require('fs');
-		fs.readFile(dir + "/" + ("run.js" + ".map"),function(error,sourceMap) {
-			if(error != null) {
-				console.log(error);
-			} else {
-				callback(sourceMap);
-			}
-		});
-	}
-	,getCurrentDirInBrowser: function() {
-		var file = "run.js";
-		var scripts = window.document.getElementsByTagName("script");
-		var fullPath = "./" + file;
-		var _g1 = 0;
-		var _g = scripts.length;
-		while(_g1 < _g) {
-			var i = _g1++;
-			var src = scripts.item(i).attributes.getNamedItem("src");
-			if(src != null && src.value.indexOf(file) >= 0) {
-				fullPath = src.value;
-			}
-		}
-		var path = new haxe.io.Path(fullPath);
-		return path.dir;
-	}
-	,__class__: jstack.js.JStack
-};
-jstack.js.StackPos = function(js,hx) {
-	this.js = js;
-	this.hx = hx;
-};
-jstack.js.StackPos.__name__ = true;
-jstack.js.StackPos.prototype = {
-	getFunctionName: function() {
-		return this.js.getFunctionName();
-	}
-	,getFileName: function() {
-		if(this.hx == null || this.hx.originalLine == null) {
-			return this.js.getFileName();
-		} else {
-			return this.hx.source;
-		}
-	}
-	,getLineNumber: function() {
-		if(this.hx == null || this.hx.originalLine == null) {
-			return this.js.getLineNumber();
-		} else {
-			return this.hx.originalLine;
-		}
-	}
-	,__class__: jstack.js.StackPos
-};
 var vshaxeBuild = {};
 vshaxeBuild.Main = function() {
 	var args = process.argv.slice(2);
@@ -3262,19 +2519,17 @@ vshaxeBuild.Main = function() {
 };
 vshaxeBuild.Main.__name__ = true;
 vshaxeBuild.Main.main = function() {
-	jstack.js.JStack.onReady(function() {
-		try {
-			new vshaxeBuild.Main();
-		} catch( e ) {
-			if (e instanceof js._Boot.HaxeError) e = e.val;
-			process.stdout.write(Std.string(e));
-			process.stdout.write("\n");
-			var v = haxe.CallStack.toString(haxe.CallStack.callStack());
-			process.stdout.write(Std.string(v));
-			process.stdout.write("\n");
-			process.exit(1);
-		}
-	});
+	try {
+		new vshaxeBuild.Main();
+	} catch( e ) {
+		if (e instanceof js._Boot.HaxeError) e = e.val;
+		process.stdout.write(Std.string(e));
+		process.stdout.write("\n");
+		var v = haxe.CallStack.toString(haxe.CallStack.callStack());
+		process.stdout.write(Std.string(v));
+		process.stdout.write("\n");
+		process.exit(1);
+	}
 };
 vshaxeBuild.Main.prototype = {
 	listTargets: function(projects) {
@@ -4025,7 +3280,7 @@ vshaxeBuild.project.ProjectLoader.prototype = {
 	}
 	,readProjectFile: function(path) {
 		this.cli.println("Reading project file '" + path + "'...");
-		var parser = new JsonParser_Ano_haxelibs_inherit_mainTarget_targets___Abstract_ArrayHandle___Ano_afterBuildCommands_args_beforeBuildCommands_composite_debug_display_inherit_installCommands_isBuildCommand_isTestCommand_name_____Inst_StringtargetDependencies_();
+		var parser = new JsonParser_Impl0();
 		var json = parser.fromJson(js.node.Fs.readFileSync(path,{ encoding : "utf8"}),path);
 		if(parser.warnings.length > 0) {
 			this.cli.fail(json2object.ErrorUtils.convertErrorArray(parser.warnings));
@@ -4127,9 +3382,6 @@ var Class = { __name__ : ["Class"]};
 var Enum = { };
 var __map_reserved = {}
 js.Boot.__toStr = ({ }).toString;
-jstack.js.JStack.instance = new jstack.js.JStack();
-jstack.js.JStack.stackFile = new EReg("^at (.+?js):([0-9]+):([0-9]+)$","");
-jstack.js.JStack.stackFunctionFile = new EReg("^at (.+?) \\((.+?js):([0-9]+):([0-9]+)\\)$","");
 vshaxeBuild.builders.VSCodeTasksBuilder.problemMatcher = { owner : "haxe", pattern : { "regexp" : "^(.+):(\\d+): (?:lines \\d+-(\\d+)|character(?:s (\\d+)-| )(\\d+)) : (?:(Warning) : )?(.*)$", "file" : 1, "line" : 2, "endLine" : 3, "column" : 4, "endColumn" : 5, "severity" : 6, "message" : 7}};
 vshaxeBuild.builders.VSCodeTasksBuilder.template = { version : "2.0.0", command : "haxelib", suppressTaskName : true, tasks : []};
 vshaxeBuild.Main.main();
