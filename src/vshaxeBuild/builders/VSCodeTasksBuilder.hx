@@ -1,8 +1,9 @@
 package vshaxeBuild.builders;
 
 class VSCodeTasksBuilder extends BaseBuilder {
-    static var problemMatcher = {
+    static var problemMatcher:ProblemMatcher = {
         owner: "haxe",
+        fileLocation: ["relative", "${workspaceRoot}/<directory>"],
         pattern: {
             "regexp": "^(.+):(\\d+): (?:lines \\d+-(\\d+)|character(?:s (\\d+)-| )(\\d+)) : (?:(Warning) : )?(.*)$",
             "file": 1,
@@ -44,7 +45,7 @@ class VSCodeTasksBuilder extends BaseBuilder {
         var task:Task = {
             taskName: '${target.name}$suffix',
             args: makeArgs(["-t", target.name]),
-            problemMatcher: problemMatcher
+            problemMatcher: createProblemMatcher(target.args.workingDirectory)
         }
 
         if (target.args.debug || debug) {
@@ -64,12 +65,29 @@ class VSCodeTasksBuilder extends BaseBuilder {
         ));
     }
 
+    function createProblemMatcher(directory:String):ProblemMatcher {
+        return {
+            owner: "haxe",
+            fileLocation: ["relative", '$${workspaceRoot}/$directory'],
+            pattern: {
+                "regexp": "^(.+):(\\d+): (?:lines \\d+-(\\d+)|character(?:s (\\d+)-| )(\\d+)) : (?:(Warning) : )?(.*)$",
+                "file": 1,
+                "line": 2,
+                "endLine": 3,
+                "column": 4,
+                "endColumn": 5,
+                "severity": 6,
+                "message": 7
+            }
+        };
+    }
+
     function createDefaultTasks(target:String):Array<Task> {
         inline function makeTask(name:String, additionalArgs:Array<String>):Task
             return {
                 taskName: '{$name}',
                 args: makeArgs(["--target", target].concat(additionalArgs)),
-                problemMatcher: problemMatcher
+                problemMatcher: createProblemMatcher(".")
             };
 
         return [
@@ -87,7 +105,13 @@ class VSCodeTasksBuilder extends BaseBuilder {
 typedef Task = {
     var taskName:String;
     var args:Array<String>;
-    var problemMatcher:{};
+    var problemMatcher:ProblemMatcher;
     @:optional var isBuildCommand:Bool;
     @:optional var isTestCommand:Bool;
+}
+
+typedef ProblemMatcher = {
+    var owner:String;
+    var fileLocation:Array<String>;
+    var pattern:{};
 }
