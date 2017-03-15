@@ -5,3 +5,4 @@
 -lib json2object
 -debug
 -neko run.n
+-main vshaxeBuild.Main

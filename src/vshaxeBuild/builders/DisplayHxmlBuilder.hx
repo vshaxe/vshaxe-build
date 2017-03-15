@@ -22,6 +22,7 @@ class DisplayHxmlBuilder extends BaseBuilder {
         if (hxml.debug) lines.push("-debug");
         if (hxml.output != null) lines.push('-${hxml.output.target} ${hxml.output.path}');
         if (hxml.noInline == true) lines.push('--no-inline');
+        if (hxml.main != null) lines.push('-main ${hxml.main}');
         return lines;
     }
 }
