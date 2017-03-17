@@ -1,23 +1,9 @@
 package vshaxeBuild.builders;
 
+import haxe.io.Path;
 import sys.FileSystem;
 
 class VSCodeTasksBuilder extends BaseBuilder {
-    static var problemMatcher:ProblemMatcher = {
-        owner: "haxe",
-        fileLocation: ["relative", "${workspaceRoot}/<directory>"],
-        pattern: {
-            "regexp": "^(.+):(\\d+): (?:lines \\d+-(\\d+)|character(?:s (\\d+)-| )(\\d+)) : (?:(Warning) : )?(.*)$",
-            "file": 1,
-            "line": 2,
-            "endLine": 3,
-            "column": 4,
-            "endColumn": 5,
-            "severity": 6,
-            "message": 7
-        }
-    }
-
     static var template = {
         version: "2.0.0",
         command: "haxelib",
@@ -45,10 +31,17 @@ class VSCodeTasksBuilder extends BaseBuilder {
         var suffix = "";
         if (!target.args.debug && debug) suffix = " (debug)";
 
+        var workingDir = target.args.workingDirectory;
+        var fileLocation = Absolute;
+        if (!Path.isAbsolute(workingDir)) {
+            workingDir = "${workspaceRoot}/" + workingDir;
+            fileLocation = Relative;
+        }
+
         var task:Task = {
             taskName: '${target.name}$suffix',
             args: makeArgs(["-t", target.name]),
-            problemMatcher: createProblemMatcher(target.args.workingDirectory)
+            problemMatcher: createProblemMatcher(fileLocation, workingDir)
         }
 
         if (target.args.debug || debug) {
@@ -68,10 +61,10 @@ class VSCodeTasksBuilder extends BaseBuilder {
         ));
     }
 
-    function createProblemMatcher(directory:String):ProblemMatcher {
+    function createProblemMatcher(fileLocation:FileLocation, directory:String):ProblemMatcher {
         return {
             owner: "haxe",
-            fileLocation: ["relative", '$${workspaceRoot}/$directory'],
+            fileLocation: [fileLocation, directory],
             pattern: {
                 "regexp": "^(.+):(\\d+): (?:lines \\d+-(\\d+)|character(?:s (\\d+)-| )(\\d+)) : (?:(Warning) : )?(.*)$",
                 "file": 1,
@@ -90,7 +83,7 @@ class VSCodeTasksBuilder extends BaseBuilder {
             return {
                 taskName: '{$name}',
                 args: makeArgs(["--target", target].concat(additionalArgs)),
-                problemMatcher: createProblemMatcher(".")
+                problemMatcher: createProblemMatcher(Relative, "${workspaceRoot}")
             };
 
         return [
@@ -117,4 +110,9 @@ typedef ProblemMatcher = {
     var owner:String;
     var fileLocation:Array<String>;
     var pattern:{};
+}
+
+@:enum abstract FileLocation(String) to String {
+    var Absolute = "absolute";
+    var Relative = "relative";
 }

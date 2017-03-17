@@ -3,6 +3,7 @@ package vshaxeBuild.project;
 import haxe.io.Path;
 import json2object.JsonParser;
 import sys.FileSystem;
+import vshaxeBuild.tools.HaxelibHelper;
 using json2object.ErrorUtils;
 
 class ProjectLoader {
@@ -36,7 +37,21 @@ class ProjectLoader {
                 adjustWorkingDirectories(project, dir);
             }
         }
-        if (project != null) project.subProjects = subProjects;
+
+        if (project != null) {
+            project.subProjects = subProjects;
+
+            for (haxelib in project.haxelibs.get()) {
+                if (haxelib.includeProjectFile) {
+                    var dir = HaxelibHelper.getLibraryPath(haxelib.name);
+                    dir = Path.join([dir, ".."]); // this is a dangerous assumption..
+                    if (FileSystem.exists(dir)) {
+                        var subProject = findProjectFiles(dir);
+                        if (subProject != null) subProjects.push(subProject);
+                    }
+                }
+            }
+        }
         return project;
     }
 

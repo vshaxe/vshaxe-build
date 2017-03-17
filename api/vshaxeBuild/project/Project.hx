@@ -23,6 +23,8 @@ typedef PlacedProject = {
 typedef Haxelib = {
     >Named,
     var installArgs(default,null):ArrayHandle<String>;
+    /** whether to look for a vshaxe-build.json in the install location of this lib **/
+    @:optional var includeProjectFile:Bool;
 }
 
 typedef Target = {
