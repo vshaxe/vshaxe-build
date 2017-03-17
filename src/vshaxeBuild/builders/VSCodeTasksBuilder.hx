@@ -1,5 +1,7 @@
 package vshaxeBuild.builders;
 
+import sys.FileSystem;
+
 class VSCodeTasksBuilder extends BaseBuilder {
     static var problemMatcher:ProblemMatcher = {
         owner: "haxe",
@@ -35,6 +37,7 @@ class VSCodeTasksBuilder extends BaseBuilder {
 
         var tasksJson = haxe.Json.stringify(base, null, "    ");
         tasksJson = '// ${BaseBuilder.Warning}\n$tasksJson';
+        if (!FileSystem.exists(".vscode")) FileSystem.createDirectory(".vscode");
         cli.saveContent(".vscode/tasks.json", tasksJson);
     }
 
