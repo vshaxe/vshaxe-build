@@ -44,6 +44,7 @@ class ProjectLoader {
             for (haxelib in project.haxelibs.get()) {
                 if (haxelib.includeProjectFile) {
                     var dir = HaxelibHelper.getLibraryPath(haxelib.name);
+                    if (dir == null) continue;
                     dir = Path.join([dir, ".."]); // this is a dangerous assumption..
                     cli.println('Resolved \'${haxelib.name}\' to \'$dir\'');
                     if (FileSystem.exists(dir)) {

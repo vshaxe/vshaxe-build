@@ -7,7 +7,7 @@ class HaxelibHelper {
     public static function getLibraryPath(library:String):String {
         var output = getProcessOutput("haxelib", ["path", library]);
 
-        var result = "";
+        var result = null;
         var lines = output.split("\n");
         for (i in 1...lines.length) {
             if (lines[i].startsWith('-D $library')) {
