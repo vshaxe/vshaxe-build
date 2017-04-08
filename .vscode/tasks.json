@@ -14,23 +14,7 @@
             ],
             "taskName": "run-script - BUILD",
             "isBuildCommand": true,
-            "problemMatcher": {
-                "pattern": {
-                    "file": 1,
-                    "column": 4,
-                    "line": 2,
-                    "regexp": "^(.+):(\\d+): (?:lines \\d+-(\\d+)|character(?:s (\\d+)-| )(\\d+)) : (?:(Warning) : )?(.*)$",
-                    "endColumn": 5,
-                    "message": 7,
-                    "endLine": 3,
-                    "severity": 6
-                },
-                "fileLocation": [
-                    "relative",
-                    "${workspaceRoot}/."
-                ],
-                "owner": "haxe"
-            }
+            "problemMatcher": "$haxe"
         },
         {
             "args": [
@@ -42,23 +26,7 @@
                 "install"
             ],
             "taskName": "{install-all}",
-            "problemMatcher": {
-                "pattern": {
-                    "file": 1,
-                    "column": 4,
-                    "line": 2,
-                    "regexp": "^(.+):(\\d+): (?:lines \\d+-(\\d+)|character(?:s (\\d+)-| )(\\d+)) : (?:(Warning) : )?(.*)$",
-                    "endColumn": 5,
-                    "message": 7,
-                    "endLine": 3,
-                    "severity": 6
-                },
-                "fileLocation": [
-                    "relative",
-                    "${workspaceRoot}/."
-                ],
-                "owner": "haxe"
-            }
+            "problemMatcher": "$haxe"
         },
         {
             "args": [
@@ -69,23 +37,7 @@
                 "--display"
             ],
             "taskName": "{generate-complete-hxml}",
-            "problemMatcher": {
-                "pattern": {
-                    "file": 1,
-                    "column": 4,
-                    "line": 2,
-                    "regexp": "^(.+):(\\d+): (?:lines \\d+-(\\d+)|character(?:s (\\d+)-| )(\\d+)) : (?:(Warning) : )?(.*)$",
-                    "endColumn": 5,
-                    "message": 7,
-                    "endLine": 3,
-                    "severity": 6
-                },
-                "fileLocation": [
-                    "relative",
-                    "${workspaceRoot}/."
-                ],
-                "owner": "haxe"
-            }
+            "problemMatcher": "$haxe"
         },
         {
             "args": [
@@ -96,23 +48,7 @@
                 "--gen-tasks"
             ],
             "taskName": "{generate-vscode-tasks}",
-            "problemMatcher": {
-                "pattern": {
-                    "file": 1,
-                    "column": 4,
-                    "line": 2,
-                    "regexp": "^(.+):(\\d+): (?:lines \\d+-(\\d+)|character(?:s (\\d+)-| )(\\d+)) : (?:(Warning) : )?(.*)$",
-                    "endColumn": 5,
-                    "message": 7,
-                    "endLine": 3,
-                    "severity": 6
-                },
-                "fileLocation": [
-                    "relative",
-                    "${workspaceRoot}/."
-                ],
-                "owner": "haxe"
-            }
+            "problemMatcher": "$haxe"
         }
     ]
 }

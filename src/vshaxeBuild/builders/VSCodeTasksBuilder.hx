@@ -1,5 +1,6 @@
 package vshaxeBuild.builders;
 
+import haxe.extern.EitherType;
 import haxe.io.Path;
 import sys.FileSystem;
 
@@ -38,10 +39,14 @@ class VSCodeTasksBuilder extends BaseBuilder {
             fileLocation = Relative;
         }
 
+        var problemMatcher:EitherType<String, ProblemMatcher> = "$haxe";
+        if (workingDir != "${workspaceRoot}/." || fileLocation != Relative)
+            problemMatcher = createProblemMatcher(fileLocation, workingDir);
+
         var task:Task = {
             taskName: '${target.name}$suffix',
             args: makeArgs(["-t", target.name]),
-            problemMatcher: createProblemMatcher(fileLocation, workingDir)
+            problemMatcher: problemMatcher
         }
 
         if (target.args.debug || debug) {
@@ -65,16 +70,7 @@ class VSCodeTasksBuilder extends BaseBuilder {
         return {
             owner: "haxe",
             fileLocation: [fileLocation, directory],
-            pattern: {
-                "regexp": "^(.+):(\\d+): (?:lines \\d+-(\\d+)|character(?:s (\\d+)-| )(\\d+)) : (?:(Warning) : )?(.*)$",
-                "file": 1,
-                "line": 2,
-                "endLine": 3,
-                "column": 4,
-                "endColumn": 5,
-                "severity": 6,
-                "message": 7
-            }
+            pattern: "$haxe"
         };
     }
 
@@ -83,7 +79,7 @@ class VSCodeTasksBuilder extends BaseBuilder {
             return {
                 taskName: '{$name}',
                 args: makeArgs(["--target", target].concat(additionalArgs)),
-                problemMatcher: createProblemMatcher(Relative, "${workspaceRoot}")
+                problemMatcher: "$haxe"
             };
 
         return [
@@ -101,7 +97,7 @@ class VSCodeTasksBuilder extends BaseBuilder {
 typedef Task = {
     var taskName:String;
     var args:Array<String>;
-    var problemMatcher:ProblemMatcher;
+    var problemMatcher:EitherType<String, ProblemMatcher>;
     @:optional var isBuildCommand:Bool;
     @:optional var isTestCommand:Bool;
 }
@@ -109,7 +105,7 @@ typedef Task = {
 typedef ProblemMatcher = {
     var owner:String;
     var fileLocation:Array<String>;
-    var pattern:{};
+    var pattern:String;
 }
 
 @:enum abstract FileLocation(String) to String {
