@@ -67,8 +67,8 @@ class ProjectLoader {
         cli.println('Reading project file \'$path\'...');
         var parser = new JsonParser<Project>();
         var json = parser.fromJson(sys.io.File.getContent(path), path);
-        if (parser.warnings.length > 0)
-            cli.fail(parser.warnings.convertErrorArray());
+        if (parser.errors.length > 0)
+            cli.fail(parser.errors.convertErrorArray());
         return json;
     }
 
