@@ -7,10 +7,10 @@ import sys.FileSystem;
 class VSCodeTasksBuilder extends BaseBuilder {
     static var template = {
         version: "2.0.0",
-        command: "haxelib",
-        suppressTaskName: true,
         tasks: []
     }
+
+    static var defaultProblemMatchers = ["$haxe-absolute", "$haxe", "$haxe-error", "$haxe-trace"];
 
     override public function build(cliArgs:CliArguments) {
         var base = Reflect.copy(template);
@@ -18,12 +18,12 @@ class VSCodeTasksBuilder extends BaseBuilder {
             var target = resolveTarget(name);
             base.tasks = buildTask(target, false).concat(buildTask(target, true));
         }
-        base.tasks = base.tasks.filterDuplicates(function(t1, t2) return t1.taskName == t2.taskName);
+        base.tasks = base.tasks.filterDuplicates(function(t1, t2) return t1.label == t2.label);
         if (projects.length > 1 && projects[1].mainTarget != null)
             base.tasks = base.tasks.concat(createDefaultTasks(projects[1].mainTarget));
 
         var tasksJson = haxe.Json.stringify(base, null, "    ");
-        tasksJson = '// ${BaseBuilder.Warning}\n$tasksJson';
+        tasksJson = '// ${BaseBuilder.Warning}\n$tasksJson\n';
         if (!FileSystem.exists(".vscode")) FileSystem.createDirectory(".vscode");
         cli.saveContent(".vscode/tasks.json", tasksJson);
     }
@@ -39,24 +39,31 @@ class VSCodeTasksBuilder extends BaseBuilder {
             fileLocation = Relative;
         }
 
-        var problemMatcher:EitherType<String, ProblemMatcher> = "$haxe";
+        var problemMatcher:ProblemMatcherList = defaultProblemMatchers;
         if (workingDir != "${workspaceRoot}/." || fileLocation != Relative)
             problemMatcher = createProblemMatcher(fileLocation, workingDir);
 
         var task:Task = {
-            taskName: '${target.name}$suffix',
+            label: '${target.name}$suffix',
+            command: "haxelib",
             args: makeArgs(["-t", target.name]),
             problemMatcher: problemMatcher
         }
 
         if (target.args.debug || debug) {
             if (target.isBuildCommand) {
-                task.isBuildCommand = true;
-                task.taskName += " - BUILD";
+                task.group = {
+                    kind: Build,
+                    isDefault: true
+                };
+                task.label += " - BUILD";
             }
             if (target.isTestCommand) {
-                task.isTestCommand = true;
-                task.taskName += " - TEST";
+                task.group = {
+                    kind: Test,
+                    isDefault: true
+                };
+                task.label += " - TEST";
             }
             task.args.push("--debug");
         }
@@ -66,7 +73,7 @@ class VSCodeTasksBuilder extends BaseBuilder {
         ));
     }
 
-    function createProblemMatcher(fileLocation:FileLocation, directory:String):ProblemMatcher {
+    function createProblemMatcher(fileLocation:FileLocation, directory:String):ProblemMatcherList {
         return {
             owner: "haxe",
             fileLocation: [fileLocation, directory],
@@ -77,9 +84,10 @@ class VSCodeTasksBuilder extends BaseBuilder {
     function createDefaultTasks(target:String):Array<Task> {
         inline function makeTask(name:String, additionalArgs:Array<String>):Task
             return {
-                taskName: '{$name}',
+                label: '{$name}',
+                command: "haxelib",
                 args: makeArgs(["--target", target].concat(additionalArgs)),
-                problemMatcher: "$haxe"
+                problemMatcher: defaultProblemMatchers
             };
 
         return [
@@ -95,12 +103,16 @@ class VSCodeTasksBuilder extends BaseBuilder {
 }
 
 typedef Task = {
-    var taskName:String;
+    var label:String;
+    var command:String;
     var args:Array<String>;
-    var problemMatcher:EitherType<String, ProblemMatcher>;
+    var problemMatcher:ProblemMatcherList;
+    @:optional var group:TaskGroup;
     @:optional var isBuildCommand:Bool;
     @:optional var isTestCommand:Bool;
 }
+
+typedef ProblemMatcherList = EitherType<Array<EitherType<String, ProblemMatcher>>, EitherType<String, ProblemMatcher>>;
 
 typedef ProblemMatcher = {
     var owner:String;
@@ -111,4 +123,14 @@ typedef ProblemMatcher = {
 @:enum abstract FileLocation(String) to String {
     var Absolute = "absolute";
     var Relative = "relative";
+}
+
+typedef TaskGroup = {
+    var kind:TaskKind;
+    var isDefault:Bool;
+}
+
+@:enum abstract TaskKind(String) {
+    var Build = "build";
+    var Test = "test";
 }
