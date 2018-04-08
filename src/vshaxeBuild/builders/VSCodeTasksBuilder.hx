@@ -108,8 +108,6 @@ typedef Task = {
     var args:Array<String>;
     var problemMatcher:ProblemMatcherList;
     @:optional var group:TaskGroup;
-    @:optional var isBuildCommand:Bool;
-    @:optional var isTestCommand:Bool;
 }
 
 typedef ProblemMatcherList = EitherType<Array<EitherType<String, ProblemMatcher>>, EitherType<String, ProblemMatcher>>;
