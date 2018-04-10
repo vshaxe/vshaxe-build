@@ -1,7 +1,5 @@
 package vshaxeBuild.builders;
 
-import haxe.extern.EitherType;
-import haxe.io.Path;
 import sys.FileSystem;
 
 class VSCodeTasksBuilder extends BaseBuilder {
@@ -9,8 +7,6 @@ class VSCodeTasksBuilder extends BaseBuilder {
         version: "2.0.0",
         tasks: []
     }
-
-    static var defaultProblemMatchers = ["$haxe-absolute", "$haxe", "$haxe-error", "$haxe-trace"];
 
     override public function build(cliArgs:CliArguments) {
         var base = Reflect.copy(template);
@@ -32,22 +28,10 @@ class VSCodeTasksBuilder extends BaseBuilder {
         var suffix = "";
         if (!target.args.debug && debug) suffix = " (debug)";
 
-        var workingDir = target.args.workingDirectory;
-        var fileLocation = Absolute;
-        if (!Path.isAbsolute(workingDir)) {
-            workingDir = "${workspaceRoot}/" + workingDir;
-            fileLocation = Relative;
-        }
-
-        var problemMatcher:ProblemMatcherList = defaultProblemMatchers;
-        if (workingDir != "${workspaceRoot}/." || fileLocation != Relative)
-            problemMatcher = createProblemMatcher(fileLocation, workingDir);
-
         var task:Task = {
             label: '${target.name}$suffix',
             command: "haxelib",
-            args: makeArgs(["-t", target.name]),
-            problemMatcher: problemMatcher
+            args: makeArgs(["-t", target.name])
         }
 
         if (target.args.debug || debug) {
@@ -73,21 +57,12 @@ class VSCodeTasksBuilder extends BaseBuilder {
         ));
     }
 
-    function createProblemMatcher(fileLocation:FileLocation, directory:String):ProblemMatcherList {
-        return {
-            owner: "haxe",
-            fileLocation: [fileLocation, directory],
-            pattern: "$haxe"
-        };
-    }
-
     function createDefaultTasks(target:String):Array<Task> {
         inline function makeTask(name:String, additionalArgs:Array<String>):Task
             return {
                 label: '{$name}',
                 command: "haxelib",
-                args: makeArgs(["--target", target].concat(additionalArgs)),
-                problemMatcher: defaultProblemMatchers
+                args: makeArgs(["--target", target].concat(additionalArgs))
             };
 
         return [
@@ -106,21 +81,7 @@ typedef Task = {
     var label:String;
     var command:String;
     var args:Array<String>;
-    var problemMatcher:ProblemMatcherList;
     @:optional var group:TaskGroup;
-}
-
-typedef ProblemMatcherList = EitherType<Array<EitherType<String, ProblemMatcher>>, EitherType<String, ProblemMatcher>>;
-
-typedef ProblemMatcher = {
-    var owner:String;
-    var fileLocation:Array<String>;
-    var pattern:String;
-}
-
-@:enum abstract FileLocation(String) to String {
-    var Absolute = "absolute";
-    var Relative = "relative";
 }
 
 typedef TaskGroup = {
