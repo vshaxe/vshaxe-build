@@ -30,7 +30,9 @@
                 "run-script",
                 "extension"
             ],
-            "isBuildCommand": true
+            "args": {
+                "debug": true
+            }
         },
         {
             "name": "run-script",

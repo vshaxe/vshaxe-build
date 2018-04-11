@@ -28,6 +28,10 @@
                     "target": {
                         "type": "string",
                         "description": "The target name."
+                    },
+                    "debug": {
+                        "type": "boolean",
+                        "default": "Whether this is the debug version of a task."
                     }
                 }
             }

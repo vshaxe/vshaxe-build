@@ -11,30 +11,45 @@ class TaskProvider {
     }
 
     public function provideTasks(?token:CancellationToken):ProviderResult<Array<Task>> {
-        return [for (target in projects.getTargets()) {
+        var tasks = [];
+        for (target in projects.getTargets()) {
             if (target.name == "empty" || target.name == "vshaxe-node") {
                 continue; // hack: skip stuff from defaults.json
             }
-
-            var definition:VSHaxeBuildTaskDefinition = {
-                type: "vshaxe-build",
-                target: target.name
-            };
-            var args = ["run", "vshaxe-build", "--target", target.name];
-            if (vshaxe.displayPort != null && vshaxe.enableCompilationServer) {
-                args = args.concat(["--connect", Std.string(vshaxe.displayPort)]);
+            tasks.push(createTask(target, false));
+            if (!target.args.debug) {
+                tasks.push(createTask(target, true));
             }
-            var execution = new ShellExecution("haxelib", args, {env: vshaxe.haxeExecutable.configuration.env});
-            var task = new Task(definition, target.name, "vshaxe-build", execution, vshaxe.problemMatchers.get());
-            var presentation = vshaxe.taskPresentation;
-            task.presentationOptions = {
-                reveal: presentation.reveal,
-                echo: presentation.echo,
-                focus: presentation.focus,
-                panel: presentation.panel
-            };
-            task;
-        }];
+        }
+        return tasks;
+    }
+
+    function createTask(target:Target, debug:Bool):Task {
+        var suffix = "";
+        if (!target.args.debug && debug) suffix = " (debug)";
+
+        var definition:VSHaxeBuildTaskDefinition = {
+            type: "vshaxe-build",
+            target: target.name
+        };
+        if (debug) {
+            definition.debug = true;
+        }
+
+        var args = ["run", "vshaxe-build", "--target", target.name];
+        if (vshaxe.displayPort != null && vshaxe.enableCompilationServer) {
+            args = args.concat(["--connect", Std.string(vshaxe.displayPort)]);
+        }
+        var execution = new ShellExecution("haxelib", args, {env: vshaxe.haxeExecutable.configuration.env});
+        var task = new Task(definition, target.name + suffix, "vshaxe-build", execution, vshaxe.problemMatchers.get());
+        var presentation = vshaxe.taskPresentation;
+        task.presentationOptions = {
+            reveal: presentation.reveal,
+            echo: presentation.echo,
+            focus: presentation.focus,
+            panel: presentation.panel
+        };
+        return task;
     }
 
     public function resolveTask(task:Task, ?token:CancellationToken):ProviderResult<Task> {
@@ -44,5 +59,6 @@ class TaskProvider {
 
 typedef VSHaxeBuildTaskDefinition =  {
     >TaskDefinition,
-    target:String
+    target:String,
+    ?debug:Bool
 }
