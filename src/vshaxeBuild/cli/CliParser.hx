@@ -83,15 +83,15 @@ class CliParser {
 }
 
 typedef CliArguments = {
-    var targets(default,null):Array<String>;
-    var mode(default,null):Mode;
-    var debug(default,null):Bool;
-    var dryRun(default,null):Bool;
-    var verbose(default,null):Bool;
-    var genTasks(default,null):Bool;
-    var display(default,null):Bool;
-    var dump(default,null):Bool;
-    var listTargets(default,null):Bool;
+    final targets:Array<String>;
+    final mode:Mode;
+    final debug:Bool;
+    final dryRun:Bool;
+    final verbose:Bool;
+    final genTasks:Bool;
+    final display:Bool;
+    final dump:Bool;
+    final listTargets:Bool;
 }
 
 @:enum abstract Mode(String) from String {
