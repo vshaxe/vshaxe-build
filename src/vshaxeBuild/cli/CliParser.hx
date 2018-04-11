@@ -12,7 +12,7 @@ class CliParser {
         var mode = Build;
         var debug = false;
         var executable = "haxe";
-        var port = null;
+        var port_ = null;
         var dryRun = false;
         var verbose = false;
         var dump = false;
@@ -34,7 +34,7 @@ class CliParser {
             ["--executable"] => function(path:String) executable = path,
 
             @doc("Add --connect <port> when calling Haxe.")
-            ["--connect"] => function(i:Int) port = i,
+            ["--connect"] => function(port:Int) port_ = port,
 
             @doc("Perform a dry run (no command invocations). Implies -verbose.")
             ["--dry-run"] => function() dryRun = true,
@@ -70,7 +70,7 @@ class CliParser {
             mode: mode,
             debug: debug,
             executable: executable,
-            port: port,
+            port: port_,
             dryRun: dryRun,
             verbose: verbose,
             listTargets: listTargets,
