@@ -14,7 +14,7 @@
         "nadako.vshaxe": "^1.11.0"
     },
     "activationEvents": [
-        "workspaceContains:**/vshaxe-build.json"
+        "workspaceContains:vshaxe-build.json"
     ],
     "main": "./extension.js",
     "contributes": {
