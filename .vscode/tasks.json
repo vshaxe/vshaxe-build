@@ -1,76 +1,13 @@
-// This file is generated with vshaxe-build - DO NOT EDIT MANUALLY!
 {
     "version": "2.0.0",
     "tasks": [
         {
-            "args": [
-                "run",
-                "vshaxe-build",
-                "-t",
-                "all"
-            ],
-            "label": "all",
-            "command": "haxelib"
-        },
-        {
-            "args": [
-                "run",
-                "vshaxe-build",
-                "-t",
-                "run-script",
-                "--debug"
-            ],
-            "label": "run-script",
-            "command": "haxelib"
-        },
-        {
-            "args": [
-                "run",
-                "vshaxe-build",
-                "-t",
-                "extension",
-                "--debug"
-            ],
-            "label": "extension",
-            "command": "haxelib"
-        },
-        {
-            "args": [
-                "run",
-                "vshaxe-build",
-                "-t",
-                "all",
-                "--debug"
-            ],
-            "label": "all (debug) - BUILD",
-            "command": "haxelib",
+            "type": "vshaxe-build",
+            "target": "all",
             "group": {
                 "kind": "build",
                 "isDefault": true
             }
-        },
-        {
-            "args": [
-                "run",
-                "vshaxe-build",
-                "--target",
-                "all",
-                "--mode",
-                "install"
-            ],
-            "label": "{install-all}",
-            "command": "haxelib"
-        },
-        {
-            "args": [
-                "run",
-                "vshaxe-build",
-                "--target",
-                "all",
-                "--gen-tasks"
-            ],
-            "label": "{generate-vscode-tasks}",
-            "command": "haxelib"
         }
     ]
 }

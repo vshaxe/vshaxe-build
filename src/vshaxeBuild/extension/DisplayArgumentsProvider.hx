@@ -11,17 +11,14 @@ class DisplayArgumentsProvider {
     public function new(projects:ProjectList, vshaxe:Vshaxe) {
         this.projects = projects;
         this.vshaxe = vshaxe;
-
         vshaxe.registerDisplayArgumentsProvider("VSHaxe-Build", this);
     }
 
     public function activate(provideArguments:Array<String>->Void) {
-        var hxmls = projects.resolveTargets(projects.getTargets()).map(projects.resolveTargetHxml.bind(_, true, true, true));
+        var hxmls = projects.getTargets().map(projects.resolveTargetHxml.bind(_, true, true, true));
         var hxml = HxmlTools.mergeHxmls(hxmls, true, true);
         var arguments = getHxmlArguments(hxml);
         arguments = arguments.filterDuplicates((s1, s2) -> s1 == s2);
-
-        trace(arguments);
         provideArguments(arguments);
     }
 

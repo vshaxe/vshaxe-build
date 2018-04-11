@@ -90,11 +90,11 @@ abstract ProjectList(Array<PlacedProject>) from Array<PlacedProject> {
         return None;
     }
 
-    public function getTargets():Array<String> {
+    public function getTargets():Array<Target> {
         var targets = [];
         for (project in this) {
             for (target in project.targets.get())
-                targets.push(target.name);
+                targets.push(target);
             targets = targets.concat((project.subProjects.get() : ProjectList).getTargets());
         }
         return targets;

@@ -21,7 +21,7 @@ class Main {
         if (cliArgs.dump) File.saveContent("dump.json", Json.stringify(projects, "    "));
         if (cliArgs.listTargets) {
             var projects:ProjectList = [projects[1]];
-            Sys.println(projects.getTargets().join("\n"));
+            Sys.println(projects.getTargets().map(target -> target.name).join("\n"));
             Sys.exit(0);
         }
 

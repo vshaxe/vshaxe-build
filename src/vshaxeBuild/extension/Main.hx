@@ -1,6 +1,7 @@
 package vshaxeBuild.extension;
 
 import vshaxeBuild.project.ProjectLoader;
+import vshaxeBuild.extension.TaskProvider;
 
 class Main {
     function new(context:ExtensionContext) {
@@ -15,6 +16,7 @@ class Main {
         var vshaxe:Vshaxe = extensions.getExtension("nadako.vshaxe").exports;
 
         new DisplayArgumentsProvider(projects, vshaxe);
+        new TaskProvider(projects, vshaxe);
     }
 
     @:keep

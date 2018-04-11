@@ -17,5 +17,20 @@
         "workspaceContains:**/vshaxe-build.json"
     ],
     "main": "./extension.js",
-    "contributes": {}
+    "contributes": {
+        "taskDefinitions": [
+            {
+                "type": "vshaxe-build",
+                "required": [
+                    "target"
+                ],
+                "properties": {
+                    "target": {
+                        "type": "string",
+                        "description": "The target name."
+                    }
+                }
+            }
+        ]
+    }
 }
