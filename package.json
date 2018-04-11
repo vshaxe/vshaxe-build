@@ -13,6 +13,9 @@
         "vscode": "^1.20.0",
         "nadako.vshaxe": "^1.11.0"
     },
+    "extensionDependencies": [
+        "nadako.vshaxe"
+    ],
     "activationEvents": [
         "workspaceContains:vshaxe-build.json"
     ],
