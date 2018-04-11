@@ -1,7 +1,15 @@
 package vshaxeBuild.builders;
 
-class HaxeBuilder extends BaseBuilder {
-    override public function build(cliArgs:CliArguments) {
+class HaxeBuilder {
+    var cli:CliTools;
+    var projects:ProjectList;
+
+    public function new(cli:CliTools, projects:ProjectList) {
+        this.cli = cli;
+        this.projects = projects;
+    }
+
+    public function build(cliArgs:CliArguments) {
         for (name in cliArgs.targets)
             buildTarget(projects.resolveTarget(name), cliArgs.debug, cliArgs.port, cliArgs.mode);
     }

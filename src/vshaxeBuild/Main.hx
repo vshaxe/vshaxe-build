@@ -25,7 +25,6 @@ class Main {
             Sys.exit(0);
         }
 
-        if (cliArgs.genTasks) new VSCodeTasksBuilder(cli, projects).build(cliArgs);
-        else new HaxeBuilder(cli, projects).build(cliArgs);
+        new HaxeBuilder(cli, projects).build(cliArgs);
     }
 }

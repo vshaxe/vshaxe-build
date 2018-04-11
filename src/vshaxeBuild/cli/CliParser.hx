@@ -14,7 +14,6 @@ class CliParser {
         var port = null;
         var dryRun = false;
         var verbose = false;
-        var genTasks = false;
         var dump = false;
         var listTargets = false;
 
@@ -38,9 +37,6 @@ class CliParser {
 
             @doc("Output the commands that are executed.")
             ["-v", "--verbose"] => function() verbose = true,
-
-            @doc("Generate a tasks.json to .vscode (and don't build anything).")
-            ["--gen-tasks"] => function() genTasks = true,
 
             @doc("Dump the parsed project files to dump.json.")
             ["--dump"] => function() dump = true,
@@ -72,7 +68,6 @@ class CliParser {
             port: port,
             dryRun: dryRun,
             verbose: verbose,
-            genTasks: genTasks,
             listTargets: listTargets,
             dump: dump
         };
@@ -86,7 +81,6 @@ typedef CliArguments = {
     final port:Null<Int>;
     final dryRun:Bool;
     final verbose:Bool;
-    final genTasks:Bool;
     final dump:Bool;
     final listTargets:Bool;
 }
