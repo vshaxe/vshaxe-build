@@ -3,7 +3,7 @@ package vshaxeBuild.builders;
 class HaxeBuilder extends BaseBuilder {
     override public function build(cliArgs:CliArguments) {
         for (name in cliArgs.targets)
-            buildTarget(resolveTarget(name), cliArgs.debug, cliArgs.mode);
+            buildTarget(projects.resolveTarget(name), cliArgs.debug, cliArgs.mode);
     }
 
     function installTarget(target:Target, debug:Bool) {
@@ -12,10 +12,10 @@ class HaxeBuilder extends BaseBuilder {
         cli.runCommands(target.installCommands);
 
         // TODO: might wanna avoid calling resolveTargetHxml() twice
-        var libs = resolveTargetHxml(target, debug, false, false).haxelibs.get();
-        libs = libs.filterDuplicates(function(lib1, lib2) return lib1 == lib2);
+        var libs = projects.resolveTargetHxml(target, debug, false, false).haxelibs.get();
+        libs = libs.filterDuplicates((lib1, lib2) -> lib1 == lib2);
         for (lib in libs)
-            cli.run("haxelib", resolveHaxelib(lib).installArgs.get());
+            cli.run("haxelib", projects.resolveHaxelib(lib).installArgs.get());
 
         cli.println('');
     }
@@ -27,7 +27,7 @@ class HaxeBuilder extends BaseBuilder {
             installTarget(target, debug);
 
         for (dependency in target.targetDependencies.get())
-            buildTarget(resolveTarget(dependency), debug, mode);
+            buildTarget(projects.resolveTarget(dependency), debug, mode);
 
         if (mode == Install)
             return;
@@ -39,7 +39,7 @@ class HaxeBuilder extends BaseBuilder {
         cli.inDir(workingDirectory, function() {
             cli.runCommands(target.beforeBuildCommands);
             if (!target.composite)
-                cli.run("haxe", printHxml(resolveTargetHxml(target, debug, false, false)));
+                cli.run("haxe", printHxml(projects.resolveTargetHxml(target, debug, false, false)));
             cli.runCommands(target.afterBuildCommands);
         });
 
@@ -54,7 +54,7 @@ class HaxeBuilder extends BaseBuilder {
 
         for (lib in hxml.haxelibs.get()) {
             args.push("-lib");
-            args.push(resolveHaxelib(lib).name);
+            args.push(projects.resolveHaxelib(lib).name);
         }
 
         for (cp in hxml.classPaths.get()) {

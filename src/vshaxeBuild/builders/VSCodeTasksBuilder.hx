@@ -11,7 +11,7 @@ class VSCodeTasksBuilder extends BaseBuilder {
     override public function build(cliArgs:CliArguments) {
         var base = Reflect.copy(template);
         for (name in cliArgs.targets) {
-            var target = resolveTarget(name);
+            var target = projects.resolveTarget(name);
             base.tasks = buildTask(target, false).concat(buildTask(target, true));
         }
         base.tasks = base.tasks.filterDuplicates(function(t1, t2) return t1.label == t2.label);
@@ -53,7 +53,7 @@ class VSCodeTasksBuilder extends BaseBuilder {
         }
 
         return [task].concat(target.targetDependencies.get().flatMap(
-            function(name) return buildTask(resolveTarget(name), debug)
+            name -> buildTask(projects.resolveTarget(name), debug)
         ));
     }
 

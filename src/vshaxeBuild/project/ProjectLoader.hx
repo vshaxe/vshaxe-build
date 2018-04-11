@@ -16,7 +16,7 @@ class ProjectLoader {
         this.cli = cli;
     }
 
-    public function load(vshaxeBuildDir:String, cwd:String):Array<PlacedProject> {
+    public function load(vshaxeBuildDir:String, cwd:String):ProjectList {
         cli.setCwd(vshaxeBuildDir);
         var defaults = toPlacedProject(vshaxeBuildDir, readProjectFile(DEFAULTS_FILE));
         cli.setCwd(cwd);

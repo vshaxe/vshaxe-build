@@ -1,7 +1,7 @@
 package vshaxeBuild.project;
 
 typedef Named = {
-    public final name:String;
+    final name:String;
 }
 
 typedef Project = {
