@@ -1,5 +1,5 @@
 {
-    "mainTarget": "run-script",
+    "mainTarget": "all",
     "haxelibs": [
         {
             "name": "hxargs",
@@ -8,9 +8,25 @@
         {
             "name": "json2object",
             "installArgs": ["git", "json2object", "https://github.com/elnabo/json2object"]
+        },
+        {
+            "name": "hxnodejs",
+            "installArgs": ["git", "hxnodejs", "https://github.com/HaxeFoundation/hxnodejs"]
+        },
+        {
+            "name": "vscode",
+            "installArgs": ["install", "vscode"]
         }
     ],
     "targets": [
+        {
+            "name": "all",
+            "composite": true,
+            "targetDependencies": [
+                "run-script",
+                "extension"
+            ]
+        },
         {
             "name": "run-script",
             "args": {
@@ -24,6 +40,19 @@
                 "debug": true
             },
             "isBuildCommand": true
+        },
+        {
+            "name": "extension",
+            "args": {
+                "classPaths": ["src", "api"],
+                "haxelibs": ["hxargs", "json2object", "hxnodejs", "vscode"],
+                "output": {
+                    "target": "js",
+                    "path": "extension.js"
+                },
+                "debug": true,
+                "packageName": "vshaxeBuild.extension.Main"
+            }
         }
     ]
 }

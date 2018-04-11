@@ -1,0 +1,20 @@
+{
+    "name": "vshaxe-build",
+    "description": "Tasks and completion for vshaxe-build.json projects.",
+    "publisher": "vshaxe",
+    "version": "0.0.1",
+    "icon": "icon.png",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/vshaxe/vshaxe-build"
+    },
+    "engines": {
+        "vscode": "^1.20.0",
+        "nadako.vshaxe": "^1.11.0"
+    },
+    "activationEvents": [
+        "workspaceContains:**/vshaxe-build.json"
+    ],
+    "main": "./extension.js",
+    "contributes": {}
+}
