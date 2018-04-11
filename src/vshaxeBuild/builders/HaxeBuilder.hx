@@ -11,7 +11,7 @@ class HaxeBuilder {
 
     public function build(cliArgs:CliArguments) {
         for (name in cliArgs.targets)
-            buildTarget(projects.resolveTarget(name), cliArgs.debug, cliArgs.port, cliArgs.mode);
+            buildTarget(projects.resolveTarget(name), cliArgs.debug, cliArgs.executable, cliArgs.port, cliArgs.mode);
     }
 
     function installTarget(target:Target, debug:Bool) {
@@ -28,14 +28,14 @@ class HaxeBuilder {
         cli.println('');
     }
 
-    function buildTarget(target:Target, debug:Bool, port:Null<Int>, mode:Mode) {
+    function buildTarget(target:Target, debug:Bool, executable:String, port:Null<Int>, mode:Mode) {
         debug = debug || target.args.debug;
 
         if (mode != Build)
             installTarget(target, debug);
 
         for (dependency in target.targetDependencies.get())
-            buildTarget(projects.resolveTarget(dependency), debug, port, mode);
+            buildTarget(projects.resolveTarget(dependency), debug, executable, port, mode);
 
         if (mode == Install)
             return;
@@ -51,7 +51,7 @@ class HaxeBuilder {
                 if (port != null) {
                     args = args.concat(["--connect", Std.string(port)]);
                 }
-                cli.run("haxe", args);
+                cli.run(executable, args);
             }
             cli.runCommands(target.afterBuildCommands);
         });
