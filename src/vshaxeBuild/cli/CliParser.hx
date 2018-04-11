@@ -14,7 +14,6 @@ class CliParser {
         var dryRun = false;
         var verbose = false;
         var genTasks = false;
-        var display = false;
         var dump = false;
         var listTargets = false;
 
@@ -39,9 +38,6 @@ class CliParser {
             @doc("Generate a tasks.json to .vscode (and don't build anything).")
             ["--gen-tasks"] => function() genTasks = true,
 
-            @doc("Generate a complete.hxml for auto completion (and don't build anything).")
-            ["--display"] => function() display = true,
-
             @doc("Dump the parsed project files to dump.json.")
             ["--dump"] => function() dump = true,
 
@@ -62,9 +58,6 @@ class CliParser {
         if (args.length == 0 || help)
             cli.exit(argHandler.getDoc());
 
-        if (genTasks && display)
-            cli.fail("Can only specify one: --gen-tasks or --display");
-
         if (!mode.isValid())
             cli.fail('Unknown --mode: $mode');
 
@@ -75,7 +68,6 @@ class CliParser {
             dryRun: dryRun,
             verbose: verbose,
             genTasks: genTasks,
-            display: display,
             listTargets: listTargets,
             dump: dump
         };
@@ -89,7 +81,6 @@ typedef CliArguments = {
     final dryRun:Bool;
     final verbose:Bool;
     final genTasks:Bool;
-    final display:Bool;
     final dump:Bool;
     final listTargets:Bool;
 }

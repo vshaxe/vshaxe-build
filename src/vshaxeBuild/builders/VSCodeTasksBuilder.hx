@@ -67,7 +67,6 @@ class VSCodeTasksBuilder extends BaseBuilder {
 
         return [
             makeTask("install-all", ["--mode", "install"]),
-            makeTask("generate-complete-hxml", ["--display"]),
             makeTask("generate-vscode-tasks", ["--gen-tasks"])
         ];
     }

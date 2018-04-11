@@ -89,4 +89,14 @@ abstract ProjectList(Array<PlacedProject>) from Array<PlacedProject> {
         }
         return None;
     }
+
+    public function getTargets():Array<String> {
+        var targets = [];
+        for (project in this) {
+            for (target in project.targets.get())
+                targets.push(target.name);
+            targets = targets.concat((project.subProjects.get() : ProjectList).getTargets());
+        }
+        return targets;
+    }
 }

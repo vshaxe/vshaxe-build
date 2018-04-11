@@ -20,22 +20,12 @@ class Main {
         var projects = new ProjectLoader(cli).load(".", cwd);
         if (cliArgs.dump) File.saveContent("dump.json", Json.stringify(projects, "    "));
         if (cliArgs.listTargets) {
-            Sys.println(listTargets([projects[1]]).join("\n"));
+            var projects:ProjectList = [projects[1]];
+            Sys.println(projects.getTargets().join("\n"));
             Sys.exit(0);
         }
 
         if (cliArgs.genTasks) new VSCodeTasksBuilder(cli, projects).build(cliArgs);
-        else if (cliArgs.display) new DisplayHxmlBuilder(cli, projects).build(cliArgs);
         else new HaxeBuilder(cli, projects).build(cliArgs);
-    }
-
-    function listTargets(projects:Array<PlacedProject>):Array<String> {
-        var targets = [];
-        for (project in projects) {
-            for (target in project.targets.get())
-                targets.push(target.name);
-            targets = targets.concat(listTargets(project.subProjects.get()));
-        }
-        return targets;
     }
 }

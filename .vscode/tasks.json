@@ -67,17 +67,6 @@
                 "vshaxe-build",
                 "--target",
                 "all",
-                "--display"
-            ],
-            "label": "{generate-complete-hxml}",
-            "command": "haxelib"
-        },
-        {
-            "args": [
-                "run",
-                "vshaxe-build",
-                "--target",
-                "all",
                 "--gen-tasks"
             ],
             "label": "{generate-vscode-tasks}",
