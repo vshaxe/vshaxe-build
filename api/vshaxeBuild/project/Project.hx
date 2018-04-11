@@ -68,7 +68,7 @@ typedef Hxml = {
 }
 
 @:enum abstract DeadCodeElimination(String) to String {
-    var Std = "std";
+    var Standard = "std";
     var Full = "full";
     var No = "no";
 }

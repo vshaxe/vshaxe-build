@@ -3,7 +3,7 @@ package vshaxeBuild.builders;
 class HaxeBuilder extends BaseBuilder {
     override public function build(cliArgs:CliArguments) {
         for (name in cliArgs.targets)
-            buildTarget(projects.resolveTarget(name), cliArgs.debug, cliArgs.mode);
+            buildTarget(projects.resolveTarget(name), cliArgs.debug, cliArgs.port, cliArgs.mode);
     }
 
     function installTarget(target:Target, debug:Bool) {
@@ -20,14 +20,14 @@ class HaxeBuilder extends BaseBuilder {
         cli.println('');
     }
 
-    function buildTarget(target:Target, debug:Bool, mode:Mode) {
+    function buildTarget(target:Target, debug:Bool, port:Null<Int>, mode:Mode) {
         debug = debug || target.args.debug;
 
         if (mode != Build)
             installTarget(target, debug);
 
         for (dependency in target.targetDependencies.get())
-            buildTarget(projects.resolveTarget(dependency), debug, mode);
+            buildTarget(projects.resolveTarget(dependency), debug, port, mode);
 
         if (mode == Install)
             return;
@@ -38,8 +38,13 @@ class HaxeBuilder extends BaseBuilder {
         workingDirectory = target.args.workingDirectory;
         cli.inDir(workingDirectory, function() {
             cli.runCommands(target.beforeBuildCommands);
-            if (!target.composite)
-                cli.run("haxe", printHxml(projects.resolveTargetHxml(target, debug, false, false)));
+            if (!target.composite) {
+                var args = printHxml(projects.resolveTargetHxml(target, debug, false, false));
+                if (port != null) {
+                    args = args.concat(["--connect", Std.string(port)]);
+                }
+                cli.run("haxe", args);
+            }
             cli.runCommands(target.afterBuildCommands);
         });
 

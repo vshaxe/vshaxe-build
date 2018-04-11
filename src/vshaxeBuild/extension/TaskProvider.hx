@@ -1,7 +1,5 @@
 package vshaxeBuild.extension;
 
-import Std.string;
-
 class TaskProvider {
     final projects:ProjectList;
     final vshaxe:Vshaxe;
@@ -23,9 +21,9 @@ class TaskProvider {
                 target: target.name
             };
             var args = ["run", "vshaxe-build", "--target", target.name];
-            /* if (vshaxe.displayPort != null && vshaxe.enableCompilationServer) {
-                args = args.concat(["--connect", string(vshaxe.displayPort)]);
-            } */
+            if (vshaxe.displayPort != null && vshaxe.enableCompilationServer) {
+                args = args.concat(["--connect", Std.string(vshaxe.displayPort)]);
+            }
             var execution = new ShellExecution("haxelib", args, {env: vshaxe.haxeExecutable.configuration.env});
             var task = new Task(definition, target.name, "vshaxe-build", execution, vshaxe.problemMatchers.get());
             var presentation = vshaxe.taskPresentation;

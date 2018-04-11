@@ -11,6 +11,7 @@ class CliParser {
         var targets = [];
         var mode = Build;
         var debug = false;
+        var port = null;
         var dryRun = false;
         var verbose = false;
         var genTasks = false;
@@ -28,6 +29,9 @@ class CliParser {
 
             @doc("Build the target(s) in debug mode.")
             ["--debug"] => function() debug = true,
+
+            @doc("Add --connect <port> when calling Haxe.")
+            ["--connect"] => function(i:Int) port = i,
 
             @doc("Perform a dry run (no command invocations). Implies -verbose.")
             ["--dry-run"] => function() dryRun = true,
@@ -65,6 +69,7 @@ class CliParser {
             targets: targets,
             mode: mode,
             debug: debug,
+            port: port,
             dryRun: dryRun,
             verbose: verbose,
             genTasks: genTasks,
@@ -78,6 +83,7 @@ typedef CliArguments = {
     final targets:Array<String>;
     final mode:Mode;
     final debug:Bool;
+    final port:Null<Int>;
     final dryRun:Bool;
     final verbose:Bool;
     final genTasks:Bool;
