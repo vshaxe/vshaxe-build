@@ -1,11 +1,11 @@
 # This file is generated with vshaxe-build - DO NOT EDIT MANUALLY!
 -cp src
 -cp api
--cp extension
 -lib hxargs
 -lib json2object
 -lib hxnodejs
 -lib vscode
+-lib vshaxe
 -debug
 -js extension.js
--main extension.Main
+-main vshaxeBuild.Main

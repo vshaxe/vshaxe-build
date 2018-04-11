@@ -2,8 +2,8 @@ package vshaxeBuild.cli;
 
 @:publicFields
 class CliTools {
-    private var verbose:Bool;
-    private var dryRun:Bool;
+    private var verbose:Bool = false;
+    private var dryRun:Bool = false;
 
     function new() {}
 

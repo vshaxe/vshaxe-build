@@ -20,12 +20,8 @@
                 "run-script",
                 "--debug"
             ],
-            "label": "run-script - BUILD",
-            "command": "haxelib",
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+            "label": "run-script",
+            "command": "haxelib"
         },
         {
             "args": [
@@ -46,8 +42,12 @@
                 "all",
                 "--debug"
             ],
-            "label": "all (debug)",
-            "command": "haxelib"
+            "label": "all (debug) - BUILD",
+            "command": "haxelib",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         },
         {
             "args": [

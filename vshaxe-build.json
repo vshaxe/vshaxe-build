@@ -16,6 +16,10 @@
         {
             "name": "vscode",
             "installArgs": ["install", "vscode"]
+        },
+        {
+            "name": "vshaxe",
+            "installArgs": []
         }
     ],
     "targets": [
@@ -25,7 +29,8 @@
             "targetDependencies": [
                 "run-script",
                 "extension"
-            ]
+            ],
+            "isBuildCommand": true
         },
         {
             "name": "run-script",
@@ -38,14 +43,13 @@
                     "path": "run.n"
                 },
                 "debug": true
-            },
-            "isBuildCommand": true
+            }
         },
         {
             "name": "extension",
             "args": {
                 "classPaths": ["src", "api"],
-                "haxelibs": ["hxargs", "json2object", "hxnodejs", "vscode"],
+                "haxelibs": ["hxargs", "json2object", "hxnodejs", "vscode", "vshaxe"],
                 "output": {
                     "target": "js",
                     "path": "extension.js"

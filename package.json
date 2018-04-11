@@ -1,5 +1,6 @@
 {
     "name": "vshaxe-build",
+    "displayName": "VSHaxe-Build",
     "description": "Tasks and completion for vshaxe-build.json projects.",
     "publisher": "vshaxe",
     "version": "0.0.1",

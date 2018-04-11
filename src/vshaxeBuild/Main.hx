@@ -17,7 +17,7 @@ class Main {
         var cliArgs = parser.parse(args);
         cli.init(cliArgs.verbose, cliArgs.dryRun);
 
-        var projects = new ProjectLoader(cli).load(cwd);
+        var projects = new ProjectLoader(cli).load(".", cwd);
         if (cliArgs.dump) File.saveContent("dump.json", Json.stringify(projects, "    "));
         if (cliArgs.listTargets) {
             Sys.println(listTargets([projects[1]]).join("\n"));
