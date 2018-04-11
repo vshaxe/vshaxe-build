@@ -38,10 +38,6 @@ typedef Target = {
     @:optional @:default({}) final debug:TargetArguments;
     /** arguments that only apply for display **/
     @:optional @:default({}) final display:TargetArguments;
-
-    /** VSCode tasks.json config **/
-    @:optional final isBuildCommand:Bool;
-    @:optional final isTestCommand:Bool;
 }
 
 typedef TargetArguments = {

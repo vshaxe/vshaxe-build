@@ -192,10 +192,6 @@
                     "propertyOrder": 11,
                     "$ref": "#/definitions/Hxml"
                 },
-                "isTestCommand": {
-                    "type": "boolean",
-                    "propertyOrder": 6
-                },
                 "name": {
                     "type": "string",
                     "propertyOrder": 0
@@ -242,11 +238,6 @@
                     },
                     "type": "array",
                     "propertyOrder": 7
-                },
-                "isBuildCommand": {
-                    "type": "boolean",
-                    "description": "VSCode tasks.json config",
-                    "propertyOrder": 5
                 },
                 "composite": {
                     "type": "boolean",
