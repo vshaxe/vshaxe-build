@@ -40,9 +40,6 @@ class TaskProvider {
             type: "vshaxe-build",
             target: name
         };
-        if (debug) {
-            definition.debug = true;
-        }
 
         var args = ["run", "vshaxe-build", "--target", target, "--executable", vshaxe.haxeExecutable.configuration.executable];
         if (additionalArgs != null) {

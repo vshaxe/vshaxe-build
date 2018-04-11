@@ -4193,9 +4193,6 @@ vshaxeBuild_extension_TaskProvider.prototype = {
 	}
 	,createTask: function(name,target,debug,additionalArgs) {
 		var definition = { type : "vshaxe-build", target : name};
-		if(debug) {
-			definition.debug = true;
-		}
 		var args = ["run","vshaxe-build","--target",target,"--executable",this.vshaxe.haxeExecutable.configuration.executable];
 		if(additionalArgs != null) {
 			args = args.concat(additionalArgs);
