@@ -4185,11 +4185,13 @@ vshaxeBuild_extension_TaskProvider.prototype = {
 		return tasks;
 	}
 	,createTaskForTarget: function(target,debug) {
+		var args = [];
 		var suffix = "";
 		if(!target.args.debug && debug) {
+			args.push("--debug");
 			suffix = " (debug)";
 		}
-		return this.createTask(target.name + suffix,target.name,debug);
+		return this.createTask(target.name + suffix,target.name,debug,args);
 	}
 	,createTask: function(name,target,debug,additionalArgs) {
 		var definition = { type : "vshaxe-build", target : name};

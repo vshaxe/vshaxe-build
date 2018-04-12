@@ -30,9 +30,13 @@ class TaskProvider {
     }
 
     function createTaskForTarget(target:Target, debug:Bool):Task {
+        var args = [];
         var suffix = "";
-        if (!target.args.debug && debug) suffix = " (debug)";
-        return createTask(target.name + suffix, target.name, debug);
+        if (!target.args.debug && debug) {
+            args.push("--debug");
+            suffix = " (debug)";
+        }
+        return createTask(target.name + suffix, target.name, debug, args);
     }
 
     function createTask(name:String, target:String, debug:Bool, ?additionalArgs:Array<String>):Task {
