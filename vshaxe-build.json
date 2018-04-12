@@ -37,7 +37,7 @@
         {
             "name": "run-script",
             "args": {
-                "classPaths": ["src", "api"],
+                "classPaths": ["src"],
                 "haxelibs": ["hxargs", "json2object"],
                 "main": "vshaxeBuild.Main",
                 "output": {
@@ -50,7 +50,7 @@
         {
             "name": "extension",
             "args": {
-                "classPaths": ["src", "api"],
+                "classPaths": ["src"],
                 "haxelibs": ["hxargs", "json2object", "hxnodejs", "vscode", "vshaxe"],
                 "output": {
                     "target": "js",

@@ -4,7 +4,6 @@
     "license": "MIT",
     "tags": [],
     "description": "Tool used to build vshaxe.",
-    "classPath": "api",
     "version": "0.0.1",
     "contributors": ["vshaxe"],
     "dependencies": {}
