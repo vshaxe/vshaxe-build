@@ -4092,10 +4092,7 @@ vshaxeBuild_extension_DisplayArgumentsProvider.prototype = {
 		};
 		var hxmls1 = vshaxeBuild_project__$ProjectList_ProjectList_$Impl_$.getTargets(this.projects).map(hxmls);
 		var hxml = vshaxeBuild_tools_HxmlTools.mergeHxmls(hxmls1,true,true);
-		var $arguments = this.getHxmlArguments(hxml);
-		$arguments = vshaxeBuild_tools_ArrayTools.filterDuplicates($arguments,function(s1,s2) {
-			return s1 == s2;
-		});
+		var $arguments = this.vshaxe.parseHxmlToArguments(this.getHxmlArguments(hxml).join("\n"));
 		provideArguments($arguments);
 	}
 	,deactivate: function() {

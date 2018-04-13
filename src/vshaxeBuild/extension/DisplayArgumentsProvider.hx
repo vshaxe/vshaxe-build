@@ -17,8 +17,7 @@ class DisplayArgumentsProvider {
     public function activate(provideArguments:Array<String>->Void) {
         var hxmls = projects.getTargets().map(projects.resolveTargetHxml.bind(_, true, true, true));
         var hxml = HxmlTools.mergeHxmls(hxmls, true, true);
-        var arguments = getHxmlArguments(hxml);
-        arguments = arguments.filterDuplicates((s1, s2) -> s1 == s2);
+        var arguments = vshaxe.parseHxmlToArguments(getHxmlArguments(hxml).join("\n"));
         provideArguments(arguments);
     }
 
