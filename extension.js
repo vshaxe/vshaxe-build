@@ -4103,21 +4103,27 @@ vshaxeBuild_extension_DisplayArgumentsProvider.prototype = {
 		}
 		var lines = [];
 		var _g = 0;
-		var _g1 = vshaxeBuild_project__$Project_ArrayHandle_$Impl_$.get(hxml.classPaths);
+		var _g1 = vshaxeBuild_tools_ArrayTools.filterDuplicates(vshaxeBuild_project__$Project_ArrayHandle_$Impl_$.get(hxml.classPaths),function(e1,e2) {
+			return e1 == e2;
+		});
 		while(_g < _g1.length) {
 			var cp = _g1[_g];
 			++_g;
 			lines.push("-cp " + cp);
 		}
 		var _g2 = 0;
-		var _g11 = vshaxeBuild_project__$Project_ArrayHandle_$Impl_$.get(hxml.defines);
+		var _g11 = vshaxeBuild_tools_ArrayTools.filterDuplicates(vshaxeBuild_project__$Project_ArrayHandle_$Impl_$.get(hxml.defines),function(e11,e21) {
+			return e11 == e21;
+		});
 		while(_g2 < _g11.length) {
 			var define = _g11[_g2];
 			++_g2;
 			lines.push("-D " + define);
 		}
 		var _g3 = 0;
-		var _g12 = vshaxeBuild_project__$Project_ArrayHandle_$Impl_$.get(hxml.haxelibs);
+		var _g12 = vshaxeBuild_tools_ArrayTools.filterDuplicates(vshaxeBuild_project__$Project_ArrayHandle_$Impl_$.get(hxml.haxelibs),function(e12,e22) {
+			return e12 == e22;
+		});
 		while(_g3 < _g12.length) {
 			var lib = _g12[_g3];
 			++_g3;
@@ -4472,26 +4478,31 @@ vshaxeBuild_project_ProjectLoader.prototype = {
 };
 var vshaxeBuild_tools_ArrayTools = function() { };
 vshaxeBuild_tools_ArrayTools.__name__ = true;
-vshaxeBuild_tools_ArrayTools.filterDuplicates = function(tasks,filter) {
-	var uniqueTasks = [];
+vshaxeBuild_tools_ArrayTools.filterDuplicates = function(array,filter) {
+	var unique = [];
 	var _g = 0;
-	while(_g < tasks.length) {
-		var task = tasks[_g];
+	while(_g < array.length) {
+		var element = array[_g];
 		++_g;
 		var present = false;
 		var _g1 = 0;
-		while(_g1 < uniqueTasks.length) {
-			var unique = uniqueTasks[_g1];
+		while(_g1 < unique.length) {
+			var unique1 = unique[_g1];
 			++_g1;
-			if(filter(unique,task)) {
+			if(filter(unique1,element)) {
 				present = true;
 			}
 		}
 		if(!present) {
-			uniqueTasks.push(task);
+			unique.push(element);
 		}
 	}
-	return uniqueTasks;
+	return unique;
+};
+vshaxeBuild_tools_ArrayTools.unique = function(array) {
+	return vshaxeBuild_tools_ArrayTools.filterDuplicates(array,function(e1,e2) {
+		return e1 == e2;
+	});
 };
 vshaxeBuild_tools_ArrayTools.findNamed = function(a,name) {
 	var _g = 0;

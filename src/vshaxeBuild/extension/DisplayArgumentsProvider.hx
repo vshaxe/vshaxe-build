@@ -28,9 +28,9 @@ class DisplayArgumentsProvider {
             return [];
 
         var lines = [];
-        for (cp in hxml.classPaths.get()) lines.push('-cp $cp');
-        for (define in hxml.defines.get()) lines.push('-D $define');
-        for (lib in hxml.haxelibs.get()) lines.push('-lib ${projects.resolveHaxelib(lib).name}');
+        for (cp in hxml.classPaths.get().unique()) lines.push('-cp $cp');
+        for (define in hxml.defines.get().unique()) lines.push('-D $define');
+        for (lib in hxml.haxelibs.get().unique()) lines.push('-lib ${projects.resolveHaxelib(lib).name}');
         if (hxml.debug) lines.push("-debug");
         if (hxml.output != null) lines.push('-${hxml.output.target} ${hxml.output.path}');
         if (hxml.noInline == true) lines.push('--no-inline');

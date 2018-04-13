@@ -1,16 +1,20 @@
 package vshaxeBuild.tools;
 
 class ArrayTools {
-    public static function filterDuplicates<T>(tasks:Array<T>, filter:T->T->Bool):Array<T> {
-        var uniqueTasks:Array<T> = [];
-        for (task in tasks) {
+    public static function filterDuplicates<T>(array:Array<T>, filter:T->T->Bool):Array<T> {
+        var unique:Array<T> = [];
+        for (element in array) {
             var present = false;
-            for (unique in uniqueTasks) if (filter(unique, task))
+            for (unique in unique) if (filter(unique, element))
                 present = true;
             if (!present)
-                uniqueTasks.push(task);
+                unique.push(element);
         }
-        return uniqueTasks;
+        return unique;
+    }
+
+    public static inline function unique<T>(array:Array<T>):Array<T> {
+        return filterDuplicates(array, (e1, e2) -> e1 == e2);
     }
 
     public static function findNamed<T:Named>(a:ArrayHandle<T>, name:String):T {
