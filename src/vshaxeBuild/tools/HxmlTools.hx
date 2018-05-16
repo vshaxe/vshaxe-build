@@ -12,6 +12,7 @@ class HxmlTools {
         var output = null;
         var deadCodeElimination = null;
         var noInline = false;
+        var times = false;
         var main = null;
         var packageName = null;
 
@@ -27,6 +28,7 @@ class HxmlTools {
             if (hxml.output != null) output = hxml.output; // just use the most recent one I guess?
             if (hxml.deadCodeElimination != null) deadCodeElimination = hxml.deadCodeElimination;
             if (hxml.noInline == true) noInline = true;
+            if (hxml.times == true) times = true;
             if (hxml.main != null) main = hxml.main;
             if (hxml.packageName != null) packageName = hxml.packageName;
         }
@@ -43,6 +45,7 @@ class HxmlTools {
             output: output,
             deadCodeElimination: deadCodeElimination,
             noInline: noInline,
+            times: times,
             main: main,
             packageName: packageName
         };

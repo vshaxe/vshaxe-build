@@ -34,6 +34,7 @@ class DisplayArgumentsProvider {
         if (hxml.debug) lines.push("-debug");
         if (hxml.output != null) lines.push('-${hxml.output.target} ${hxml.output.path}');
         if (hxml.noInline == true) lines.push('--no-inline');
+        if (hxml.times == true) lines.push('--times');
         if (hxml.main != null) lines.push('-main ${hxml.main}');
         return lines;
     }

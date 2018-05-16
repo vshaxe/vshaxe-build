@@ -86,6 +86,7 @@ class HaxeBuilder {
         }
 
         if (hxml.noInline == true) args.push('--no-inline');
+        if (hxml.times == true) args.push('--times');
 
         if (hxml.debug) args.push("-debug");
 

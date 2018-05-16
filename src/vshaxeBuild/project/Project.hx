@@ -59,6 +59,7 @@ typedef Hxml = {
     @:optional final output:Output;
     @:optional final deadCodeElimination:DeadCodeElimination;
     @:optional final noInline:Bool;
+    @:optional final times:Bool;
     @:optional final main:String; // can only specify either main or package, but you could specify both here :/
     @:optional final packageName:String;
 }
