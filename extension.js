@@ -2839,6 +2839,32 @@ _$Sys_FileInput.prototype = $extend(haxe_io_Input.prototype,{
 var Vscode = require("vscode");
 var haxe_IMap = function() { };
 haxe_IMap.__name__ = true;
+var haxe_Timer = function(time_ms) {
+	var me = this;
+	this.id = setInterval(function() {
+		me.run();
+	},time_ms);
+};
+haxe_Timer.__name__ = true;
+haxe_Timer.delay = function(f,time_ms) {
+	var t = new haxe_Timer(time_ms);
+	t.run = function() {
+		t.stop();
+		f();
+	};
+	return t;
+};
+haxe_Timer.prototype = {
+	stop: function() {
+		if(this.id == null) {
+			return;
+		}
+		clearInterval(this.id);
+		this.id = null;
+	}
+	,run: function() {
+	}
+};
 var haxe_ds_Option = { __ename__ : true, __constructs__ : ["Some","None"] };
 $hxEnums["haxe_ds_Option"] = haxe_ds_Option;
 haxe_ds_Option.Some = function(v) { var $x = {_hx_index:0,v:v,__enum__:"haxe_ds_Option"}; $x.toString = $estr; return $x; }
@@ -3860,6 +3886,46 @@ sys_io_FileInput.prototype = $extend(haxe_io_Input.prototype,{
 		return this.pos >= js_node_Fs.fstatSync(this.fd).size;
 	}
 });
+var sys_io_FileOutput = function(fd) {
+	this.fd = fd;
+	this.pos = 0;
+};
+sys_io_FileOutput.__name__ = true;
+sys_io_FileOutput.__super__ = haxe_io_Output;
+sys_io_FileOutput.prototype = $extend(haxe_io_Output.prototype,{
+	writeByte: function(b) {
+		var buf = new js_node_buffer_Buffer(1);
+		buf[0] = b;
+		js_node_Fs.writeSync(this.fd,buf,0,1,this.pos);
+		this.pos++;
+	}
+	,writeBytes: function(s,pos,len) {
+		var data = s.b;
+		var buf = new js_node_buffer_Buffer(data.buffer,data.byteOffset,s.length);
+		var wrote = js_node_Fs.writeSync(this.fd,buf,pos,len,this.pos);
+		this.pos += wrote;
+		return wrote;
+	}
+	,close: function() {
+		js_node_Fs.closeSync(this.fd);
+	}
+	,seek: function(p,pos) {
+		switch(pos._hx_index) {
+		case 0:
+			this.pos = p;
+			break;
+		case 1:
+			this.pos += p;
+			break;
+		case 2:
+			this.pos = js_node_Fs.fstatSync(this.fd).size + p;
+			break;
+		}
+	}
+	,tell: function() {
+		return this.pos;
+	}
+});
 var sys_io_FileSeek = { __ename__ : true, __constructs__ : ["SeekBegin","SeekCur","SeekEnd"] };
 $hxEnums["sys_io_FileSeek"] = sys_io_FileSeek;
 sys_io_FileSeek.SeekBegin = {_hx_index:0};
@@ -3871,14 +3937,6 @@ sys_io_FileSeek.SeekCur.__enum__ = "sys_io_FileSeek";
 sys_io_FileSeek.SeekEnd = {_hx_index:2};
 sys_io_FileSeek.SeekEnd.toString = $estr;
 sys_io_FileSeek.SeekEnd.__enum__ = "sys_io_FileSeek";
-var ts__$ReadonlyArray_ReadonlyArray_$Impl_$ = {};
-ts__$ReadonlyArray_ReadonlyArray_$Impl_$.__name__ = true;
-ts__$ReadonlyArray_ReadonlyArray_$Impl_$.arrayAccess = function(this1,i) {
-	return this1[i];
-};
-ts__$ReadonlyArray_ReadonlyArray_$Impl_$.get = function(this1) {
-	return this1.slice();
-};
 var vscode_ShellExecution = require("vscode").ShellExecution;
 var vscode_Task = require("vscode").Task;
 var vshaxe__$ReadOnlyArray_ReadOnlyArray_$Impl_$ = {};
@@ -4139,7 +4197,10 @@ vshaxeBuild_extension_DisplayArgumentsProvider.prototype = {
 		var hxmls1 = vshaxeBuild_project__$ProjectList_ProjectList_$Impl_$.getTargets(this.projects).map(hxmls);
 		var hxml = vshaxeBuild_tools_HxmlTools.mergeHxmls(hxmls1,true,true);
 		var $arguments = this.vshaxe.parseHxmlToArguments(this.getHxmlArguments(hxml).join("\n"));
-		provideArguments($arguments);
+		haxe_Timer.delay(function() {
+			provideArguments($arguments);
+			return;
+		},500);
 	}
 	,deactivate: function() {
 	}
@@ -4295,8 +4356,7 @@ vshaxeBuild_project__$ProjectList_ProjectList_$Impl_$.resolveHaxelib = function(
 		}
 		return null;
 	};
-	var loop1 = loop;
-	return loop1(this1);
+	return loop(this1);
 };
 vshaxeBuild_project__$ProjectList_ProjectList_$Impl_$.resolveTarget = function(this1,name) {
 	var loop = null;
@@ -4315,8 +4375,7 @@ vshaxeBuild_project__$ProjectList_ProjectList_$Impl_$.resolveTarget = function(t
 		}
 		return null;
 	};
-	var loop1 = loop;
-	return loop1(this1);
+	return loop(this1);
 };
 vshaxeBuild_project__$ProjectList_ProjectList_$Impl_$.resolveTargets = function(this1,names) {
 	var _e = this1;

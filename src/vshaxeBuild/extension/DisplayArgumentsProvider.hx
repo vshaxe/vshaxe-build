@@ -18,7 +18,7 @@ class DisplayArgumentsProvider {
         var hxmls = projects.getTargets().map(projects.resolveTargetHxml.bind(_, true, true, true));
         var hxml = HxmlTools.mergeHxmls(hxmls, true, true);
         var arguments = vshaxe.parseHxmlToArguments(getHxmlArguments(hxml).join("\n"));
-        provideArguments(arguments);
+        haxe.Timer.delay(() -> provideArguments(arguments), 500);
     }
 
     public function deactivate() {}
