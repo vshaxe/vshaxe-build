@@ -30,9 +30,10 @@ class HaxeBuilder {
 
     function buildTarget(target:Target, debug:Bool, executable:String, port:Null<Int>, mode:Mode) {
         debug = debug || target.args.debug;
+        var workingDirectory = target.args.workingDirectory;
 
         if (mode != Build)
-            installTarget(target, debug);
+            cli.inDir(workingDirectory, installTarget.bind(target, debug));
 
         for (dependency in target.targetDependencies.get())
             buildTarget(projects.resolveTarget(dependency), debug, executable, port, mode);
@@ -42,8 +43,6 @@ class HaxeBuilder {
 
         cli.println('Building \'${target.name}\'...\n');
 
-        var workingDirectory = null;
-        workingDirectory = target.args.workingDirectory;
         cli.inDir(workingDirectory, function() {
             cli.runCommands(target.beforeBuildCommands);
             if (!target.composite) {
