@@ -7,7 +7,7 @@ class TaskProvider {
     public function new(projects:ProjectList, vshaxe:Vshaxe) {
         this.projects = projects;
         this.vshaxe = vshaxe;
-        workspace.registerTaskProvider("vshaxe-build", this);
+        tasks.registerTaskProvider("vshaxe-build", this);
     }
 
     public function provideTasks(?token:CancellationToken):ProviderResult<Array<Task>> {
@@ -59,7 +59,8 @@ class TaskProvider {
             reveal: presentation.reveal,
             echo: presentation.echo,
             focus: presentation.focus,
-            panel: presentation.panel
+            panel: presentation.panel,
+            showReuseMessage: presentation.showReuseMessage
         };
         return task;
     }
