@@ -1,4 +1,5 @@
 {
-    "editor.insertSpaces": true,
-    "files.trimTrailingWhitespace": true
+	"[haxe]": {
+		"editor.formatOnSave": true
+	}
 }

@@ -1,49 +1,49 @@
 {
-    "name": "vshaxe-build",
-    "displayName": "VSHaxe-Build",
-    "description": "Tasks and completion for vshaxe-build.json projects.",
-    "publisher": "vshaxe",
-    "version": "0.0.1",
-    "icon": "icon.png",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/vshaxe/vshaxe-build"
-    },
-    "engines": {
-        "vscode": "^1.25.0",
-        "nadako.vshaxe": "^2.1.0"
-    },
-    "extensionDependencies": [
-        "nadako.vshaxe"
-    ],
-    "activationEvents": [
-        "workspaceContains:vshaxe-build.json"
-    ],
-    "main": "./extension.js",
-    "contributes": {
-        "taskDefinitions": [
-            {
-                "type": "vshaxe-build",
-                "required": [
-                    "target"
-                ],
-                "properties": {
-                    "target": {
-                        "type": "string",
-                        "description": "The target name."
-                    }
-                }
-            }
-        ],
-        "jsonValidation": [
-            {
-                "fileMatch": "vshaxe-build.json",
-                "url": "./schemas/vshaxe-build-schema.json"
-            },
-            {
-                "fileMatch": "vshaxe-build-defaults.json",
-                "url": "./schemas/vshaxe-build-schema.json"
-            }
-        ]
-    }
+	"name": "vshaxe-build",
+	"displayName": "VSHaxe-Build",
+	"description": "Tasks and completion for vshaxe-build.json projects.",
+	"publisher": "vshaxe",
+	"version": "0.0.1",
+	"icon": "icon.png",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/vshaxe/vshaxe-build"
+	},
+	"engines": {
+		"vscode": "^1.25.0",
+		"nadako.vshaxe": "^2.1.0"
+	},
+	"extensionDependencies": [
+		"nadako.vshaxe"
+	],
+	"activationEvents": [
+		"workspaceContains:vshaxe-build.json"
+	],
+	"main": "./extension.js",
+	"contributes": {
+		"taskDefinitions": [
+			{
+				"type": "vshaxe-build",
+				"required": [
+					"target"
+				],
+				"properties": {
+					"target": {
+						"type": "string",
+						"description": "The target name."
+					}
+				}
+			}
+		],
+		"jsonValidation": [
+			{
+				"fileMatch": "vshaxe-build.json",
+				"url": "./schemas/vshaxe-build-schema.json"
+			},
+			{
+				"fileMatch": "vshaxe-build-defaults.json",
+				"url": "./schemas/vshaxe-build-schema.json"
+			}
+		]
+	}
 }

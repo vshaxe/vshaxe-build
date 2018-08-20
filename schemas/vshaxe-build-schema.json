@@ -1,264 +1,264 @@
 {
-    "$ref": "#/definitions/Project",
-    "$schema": "http://json-schema.org/draft-04/schema#",
-    "definitions": {
-        "Output": {
-            "type": "object",
-            "properties": {
-                "path": {
-                    "type": "string",
-                    "propertyOrder": 1
-                },
-                "target": {
-                    "type": "string",
-                    "propertyOrder": 0
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "target",
-                "path"
-            ]
-        },
-        "Project": {
-            "type": "object",
-            "properties": {
-                "mainTarget": {
-                    "type": "string",
-                    "description": "name of a target to generate special task.json tasks for (install-all, generate-complete-hxml, generate-vscode-tasks)",
-                    "propertyOrder": 1
-                },
-                "haxelibs": {
-                    "items": {
-                        "$ref": "#/definitions/Haxelib"
-                    },
-                    "type": "array",
-                    "propertyOrder": 2
-                },
-                "targets": {
-                    "items": {
-                        "$ref": "#/definitions/Target"
-                    },
-                    "type": "array",
-                    "propertyOrder": 3
-                },
-                "inherit": {
-                    "type": "string",
-                    "description": "name of a target in defaults.json to base all targets in this config on",
-                    "propertyOrder": 0
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "haxelibs",
-                "targets"
-            ]
-        },
-        "Haxelib": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "propertyOrder": 0
-                },
-                "installArgs": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array",
-                    "propertyOrder": 1
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "name",
-                "installArgs"
-            ]
-        },
-        "Hxml": {
-            "type": "object",
-            "properties": {
-                "main": {
-                    "type": "string",
-                    "propertyOrder": 9
-                },
-                "debug": {
-                    "type": "boolean",
-                    "propertyOrder": 5
-                },
-                "haxelibs": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array",
-                    "propertyOrder": 3
-                },
-                "noInline": {
-                    "type": "boolean",
-                    "propertyOrder": 8
-                },
-                "workingDirectory": {
-                    "type": "string",
-                    "propertyOrder": 0
-                },
-                "classPaths": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array",
-                    "propertyOrder": 1
-                },
-                "packageName": {
-                    "type": "string",
-                    "propertyOrder": 10
-                },
-                "output": {
-                    "propertyOrder": 6,
-                    "$ref": "#/definitions/Output"
-                },
-                "defines": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array",
-                    "propertyOrder": 2
-                },
-                "deadCodeElimination": {
-                    "type": "string",
-                    "propertyOrder": 7
-                },
-                "macros": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array",
-                    "propertyOrder": 4
-                }
-            },
-            "additionalProperties": false
-        },
-        "TargetArguments": {
-            "type": "object",
-            "properties": {
-                "args": {
-                    "propertyOrder": 4,
-                    "$ref": "#/definitions/Hxml"
-                },
-                "afterBuildCommands": {
-                    "items": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "type": "array",
-                    "propertyOrder": 3
-                },
-                "beforeBuildCommands": {
-                    "items": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "type": "array",
-                    "propertyOrder": 2
-                },
-                "installCommands": {
-                    "items": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "type": "array",
-                    "description": "additional, non-haxelib install commands (npm install...)",
-                    "propertyOrder": 1
-                },
-                "targetDependencies": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array",
-                    "propertyOrder": 0
-                }
-            },
-            "additionalProperties": false
-        },
-        "Target": {
-            "type": "object",
-            "properties": {
-                "args": {
-                    "propertyOrder": 11,
-                    "$ref": "#/definitions/Hxml"
-                },
-                "name": {
-                    "type": "string",
-                    "propertyOrder": 0
-                },
-                "debug": {
-                    "description": "arguments that only apply in debug mode",
-                    "propertyOrder": 3,
-                    "$ref": "#/definitions/TargetArguments"
-                },
-                "afterBuildCommands": {
-                    "items": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "type": "array",
-                    "propertyOrder": 10
-                },
-                "beforeBuildCommands": {
-                    "items": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "type": "array",
-                    "propertyOrder": 9
-                },
-                "installCommands": {
-                    "items": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "type": "array",
-                    "description": "additional, non-haxelib install commands (npm install...)",
-                    "propertyOrder": 8
-                },
-                "targetDependencies": {
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array",
-                    "propertyOrder": 7
-                },
-                "composite": {
-                    "type": "boolean",
-                    "description": "Whether this target is just a collection of other targets",
-                    "propertyOrder": 1
-                },
-                "inherit": {
-                    "type": "string",
-                    "description": "name of a target in defaults.json to base this config on",
-                    "propertyOrder": 2
-                },
-                "display": {
-                    "description": "arguments that only apply for display",
-                    "propertyOrder": 4,
-                    "$ref": "#/definitions/TargetArguments"
-                }
-            },
-            "additionalProperties": false,
-            "required": [
-                "name"
-            ]
-        }
-    }
+	"$ref": "#/definitions/Project",
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"definitions": {
+		"Output": {
+			"type": "object",
+			"properties": {
+				"path": {
+					"type": "string",
+					"propertyOrder": 1
+				},
+				"target": {
+					"type": "string",
+					"propertyOrder": 0
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"target",
+				"path"
+			]
+		},
+		"Project": {
+			"type": "object",
+			"properties": {
+				"mainTarget": {
+					"type": "string",
+					"description": "name of a target to generate special task.json tasks for (install-all, generate-complete-hxml, generate-vscode-tasks)",
+					"propertyOrder": 1
+				},
+				"haxelibs": {
+					"items": {
+						"$ref": "#/definitions/Haxelib"
+					},
+					"type": "array",
+					"propertyOrder": 2
+				},
+				"targets": {
+					"items": {
+						"$ref": "#/definitions/Target"
+					},
+					"type": "array",
+					"propertyOrder": 3
+				},
+				"inherit": {
+					"type": "string",
+					"description": "name of a target in defaults.json to base all targets in this config on",
+					"propertyOrder": 0
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"haxelibs",
+				"targets"
+			]
+		},
+		"Haxelib": {
+			"type": "object",
+			"properties": {
+				"name": {
+					"type": "string",
+					"propertyOrder": 0
+				},
+				"installArgs": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array",
+					"propertyOrder": 1
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"name",
+				"installArgs"
+			]
+		},
+		"Hxml": {
+			"type": "object",
+			"properties": {
+				"main": {
+					"type": "string",
+					"propertyOrder": 9
+				},
+				"debug": {
+					"type": "boolean",
+					"propertyOrder": 5
+				},
+				"haxelibs": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array",
+					"propertyOrder": 3
+				},
+				"noInline": {
+					"type": "boolean",
+					"propertyOrder": 8
+				},
+				"workingDirectory": {
+					"type": "string",
+					"propertyOrder": 0
+				},
+				"classPaths": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array",
+					"propertyOrder": 1
+				},
+				"packageName": {
+					"type": "string",
+					"propertyOrder": 10
+				},
+				"output": {
+					"propertyOrder": 6,
+					"$ref": "#/definitions/Output"
+				},
+				"defines": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array",
+					"propertyOrder": 2
+				},
+				"deadCodeElimination": {
+					"type": "string",
+					"propertyOrder": 7
+				},
+				"macros": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array",
+					"propertyOrder": 4
+				}
+			},
+			"additionalProperties": false
+		},
+		"TargetArguments": {
+			"type": "object",
+			"properties": {
+				"args": {
+					"propertyOrder": 4,
+					"$ref": "#/definitions/Hxml"
+				},
+				"afterBuildCommands": {
+					"items": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"type": "array",
+					"propertyOrder": 3
+				},
+				"beforeBuildCommands": {
+					"items": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"type": "array",
+					"propertyOrder": 2
+				},
+				"installCommands": {
+					"items": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"type": "array",
+					"description": "additional, non-haxelib install commands (npm install...)",
+					"propertyOrder": 1
+				},
+				"targetDependencies": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array",
+					"propertyOrder": 0
+				}
+			},
+			"additionalProperties": false
+		},
+		"Target": {
+			"type": "object",
+			"properties": {
+				"args": {
+					"propertyOrder": 11,
+					"$ref": "#/definitions/Hxml"
+				},
+				"name": {
+					"type": "string",
+					"propertyOrder": 0
+				},
+				"debug": {
+					"description": "arguments that only apply in debug mode",
+					"propertyOrder": 3,
+					"$ref": "#/definitions/TargetArguments"
+				},
+				"afterBuildCommands": {
+					"items": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"type": "array",
+					"propertyOrder": 10
+				},
+				"beforeBuildCommands": {
+					"items": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"type": "array",
+					"propertyOrder": 9
+				},
+				"installCommands": {
+					"items": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
+					"type": "array",
+					"description": "additional, non-haxelib install commands (npm install...)",
+					"propertyOrder": 8
+				},
+				"targetDependencies": {
+					"items": {
+						"type": "string"
+					},
+					"type": "array",
+					"propertyOrder": 7
+				},
+				"composite": {
+					"type": "boolean",
+					"description": "Whether this target is just a collection of other targets",
+					"propertyOrder": 1
+				},
+				"inherit": {
+					"type": "string",
+					"description": "name of a target in defaults.json to base this config on",
+					"propertyOrder": 2
+				},
+				"display": {
+					"description": "arguments that only apply for display",
+					"propertyOrder": 4,
+					"$ref": "#/definitions/TargetArguments"
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"name"
+			]
+		}
+	}
 }

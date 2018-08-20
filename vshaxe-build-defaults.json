@@ -1,31 +1,31 @@
 {
-    "haxelibs": [
-        {
-            "name": "hxnodejs",
-            "installArgs": ["git", "hxnodejs", "https://github.com/HaxeFoundation/hxnodejs"]
-        },
-        {
-            "name": "jstack",
-            "installArgs": ["install", "jstack"]
-        }
-    ],
-    "targets": [
-        {
-            "name": "empty"
-        },
-        {
-            "name": "vshaxe-node",
-            "debug": {
-                "args": {
-                    "defines": ["js_unflatten"],
-                    "haxelibs": ["jstack"]
-                }
-            },
-            "args": {
-                "haxelibs": ["hxnodejs"],
-                "deadCodeElimination": "full",
-                "defines": ["analyzer-optimize", "js-enums-as-arrays"]
-            }
-        }
-    ]
+	"haxelibs": [
+		{
+			"name": "hxnodejs",
+			"installArgs": ["git", "hxnodejs", "https://github.com/HaxeFoundation/hxnodejs"]
+		},
+		{
+			"name": "jstack",
+			"installArgs": ["install", "jstack"]
+		}
+	],
+	"targets": [
+		{
+			"name": "empty"
+		},
+		{
+			"name": "vshaxe-node",
+			"debug": {
+				"args": {
+					"defines": ["js_unflatten"],
+					"haxelibs": ["jstack"]
+				}
+			},
+			"args": {
+				"haxelibs": ["hxnodejs"],
+				"deadCodeElimination": "full",
+				"defines": ["analyzer-optimize", "js-enums-as-arrays"]
+			}
+		}
+	]
 }

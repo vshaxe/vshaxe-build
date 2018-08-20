@@ -1,64 +1,64 @@
 {
-    "mainTarget": "all",
-    "haxelibs": [
-        {
-            "name": "hxargs",
-            "installArgs": ["install", "hxargs"]
-        },
-        {
-            "name": "json2object",
-            "installArgs": ["git", "json2object", "https://github.com/elnabo/json2object"]
-        },
-        {
-            "name": "hxnodejs",
-            "installArgs": ["git", "hxnodejs", "https://github.com/HaxeFoundation/hxnodejs"]
-        },
-        {
-            "name": "vscode",
-            "installArgs": ["install", "vscode"]
-        },
-        {
-            "name": "vshaxe",
-            "installArgs": []
-        }
-    ],
-    "targets": [
-        {
-            "name": "all",
-            "composite": true,
-            "targetDependencies": [
-                "run-script",
-                "extension"
-            ],
-            "args": {
-                "debug": true
-            }
-        },
-        {
-            "name": "run-script",
-            "args": {
-                "classPaths": ["src"],
-                "haxelibs": ["hxargs", "json2object"],
-                "main": "vshaxeBuild.Main",
-                "output": {
-                    "target": "neko",
-                    "path": "run.n"
-                },
-                "debug": true
-            }
-        },
-        {
-            "name": "extension",
-            "args": {
-                "classPaths": ["src"],
-                "haxelibs": ["hxargs", "json2object", "hxnodejs", "vscode", "vshaxe"],
-                "output": {
-                    "target": "js",
-                    "path": "extension.js"
-                },
-                "debug": true,
-                "packageName": "vshaxeBuild.extension.Main"
-            }
-        }
-    ]
+	"mainTarget": "all",
+	"haxelibs": [
+		{
+			"name": "hxargs",
+			"installArgs": ["install", "hxargs"]
+		},
+		{
+			"name": "json2object",
+			"installArgs": ["git", "json2object", "https://github.com/elnabo/json2object"]
+		},
+		{
+			"name": "hxnodejs",
+			"installArgs": ["git", "hxnodejs", "https://github.com/HaxeFoundation/hxnodejs"]
+		},
+		{
+			"name": "vscode",
+			"installArgs": ["install", "vscode"]
+		},
+		{
+			"name": "vshaxe",
+			"installArgs": []
+		}
+	],
+	"targets": [
+		{
+			"name": "all",
+			"composite": true,
+			"targetDependencies": [
+				"run-script",
+				"extension"
+			],
+			"args": {
+				"debug": true
+			}
+		},
+		{
+			"name": "run-script",
+			"args": {
+				"classPaths": ["src"],
+				"haxelibs": ["hxargs", "json2object"],
+				"main": "vshaxeBuild.Main",
+				"output": {
+					"target": "neko",
+					"path": "run.n"
+				},
+				"debug": true
+			}
+		},
+		{
+			"name": "extension",
+			"args": {
+				"classPaths": ["src"],
+				"haxelibs": ["hxargs", "json2object", "hxnodejs", "vscode", "vshaxe"],
+				"output": {
+					"target": "js",
+					"path": "extension.js"
+				},
+				"debug": true,
+				"packageName": "vshaxeBuild.extension.Main"
+			}
+		}
+	]
 }
