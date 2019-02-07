@@ -4150,7 +4150,7 @@ vshaxeBuild_extension_TaskProvider.prototype = {
 		var execution = new vscode_ShellExecution("haxelib",args,{ env : this.vshaxe.haxeExecutable.configuration.env});
 		var task = new vscode_Task(definition,vscode__$TaskScope_TaskScope_$Impl_$.Workspace,name,"vshaxe-build",execution,vshaxe__$ReadOnlyArray_ReadOnlyArray_$Impl_$.get(this.vshaxe.problemMatchers));
 		var presentation = this.vshaxe.taskPresentation;
-		task.presentationOptions = { reveal : presentation.reveal, echo : presentation.echo, focus : presentation.focus, panel : presentation.panel, showReuseMessage : presentation.showReuseMessage};
+		task.presentationOptions = { reveal : presentation.reveal, echo : presentation.echo, focus : presentation.focus, panel : presentation.panel, showReuseMessage : presentation.showReuseMessage, clear : presentation.clear};
 		return task;
 	}
 	,resolveTask: function(task,token) {

@@ -67,7 +67,8 @@ class TaskProvider {
 			echo: presentation.echo,
 			focus: presentation.focus,
 			panel: presentation.panel,
-			showReuseMessage: presentation.showReuseMessage
+			showReuseMessage: presentation.showReuseMessage,
+			clear: presentation.clear
 		};
 		return task;
 	}
