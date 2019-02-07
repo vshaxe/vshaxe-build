@@ -10,8 +10,8 @@
 		"url": "https://github.com/vshaxe/vshaxe-build"
 	},
 	"engines": {
-		"vscode": "^1.25.0",
-		"nadako.vshaxe": "^2.1.0"
+		"vscode": "^1.31.0",
+		"nadako.vshaxe": "^2.5.0"
 	},
 	"extensionDependencies": [
 		"nadako.vshaxe"
