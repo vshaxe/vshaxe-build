@@ -57,7 +57,7 @@ abstract ProjectList(Array<PlacedProject>) from Array<PlacedProject> {
 					if (parent != null) {
 						var inheritedHxml = resolveTargetHxml(parent, debug, flatten, display, false);
 						if (inheritedHxml != null)
-							hxmls.push(inheritedHxml);
+							hxmls.unshift(inheritedHxml);
 					}
 				case None:
 			}
