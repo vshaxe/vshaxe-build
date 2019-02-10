@@ -50,7 +50,6 @@
 			},
 			"additionalProperties": false,
 			"required": [
-				"haxelibs",
 				"targets"
 			]
 		},
