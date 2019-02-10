@@ -67,6 +67,11 @@
 					},
 					"type": "array",
 					"propertyOrder": 1
+				},
+				"includeProjectFile": {
+					"type": "boolean",
+					"propertyOrder": 2,
+					"description": "whether to look for a vshaxe-build.json in the install location of this lib"
 				}
 			},
 			"additionalProperties": false,
