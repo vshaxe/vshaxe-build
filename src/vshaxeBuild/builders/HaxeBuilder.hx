@@ -1,8 +1,8 @@
 package vshaxeBuild.builders;
 
 class HaxeBuilder {
-	var cli:CliTools;
-	var projects:ProjectList;
+	final cli:CliTools;
+	final projects:ProjectList;
 
 	public function new(cli:CliTools, projects:ProjectList) {
 		this.cli = cli;

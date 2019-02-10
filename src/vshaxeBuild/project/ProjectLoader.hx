@@ -11,7 +11,7 @@ class ProjectLoader {
 	static inline var PROJECT_FILE = "vshaxe-build.json";
 	static inline var DEFAULTS_FILE = "vshaxe-build-defaults.json";
 
-	var cli:CliTools;
+	final cli:CliTools;
 
 	public function new(cli:CliTools) {
 		this.cli = cli;

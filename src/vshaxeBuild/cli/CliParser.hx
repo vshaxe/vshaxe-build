@@ -1,7 +1,7 @@
 package vshaxeBuild.cli;
 
 class CliParser {
-	var cli:CliTools;
+	final cli:CliTools;
 
 	public function new(cli:CliTools) {
 		this.cli = cli;
@@ -92,7 +92,7 @@ typedef CliArguments = {
 	final listTargets:Bool;
 }
 
-@:enum abstract Mode(String) from String {
+enum abstract Mode(String) from String {
 	var Build = "build";
 	var Install = "install";
 	var Both = "both";

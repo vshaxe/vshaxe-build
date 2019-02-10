@@ -19,7 +19,6 @@ class Main {
 		new TaskProvider(projects, vshaxe);
 	}
 
-	@:keep
 	@:expose("activate")
 	static function main(context:ExtensionContext) {
 		new Main(context);
