@@ -49,10 +49,22 @@ class CliParser {
 			@doc("List all available targets and exit.")
 			["--list-targets"] => function() listTargets = true,
 			
+			@doc("Any arguments after this are passed directly to Haxe.")
+			["-- args..."] => function() {/* just for --help docs */},
+
 			@doc("Display this help text and exit.")
 			["--help"] => function() help = true,
 		]);
 		// @formatter:on
+		var additional = [];
+		var doubleDashIndex = args.indexOf("--");
+		if (doubleDashIndex != -1) {
+			for (i in doubleDashIndex + 1...args.length) {
+				additional.push(args[i]);
+			}
+			args = args.slice(0, doubleDashIndex);
+		}
+
 		try {
 			argHandler.parse(args);
 		} catch (e:Any) {
@@ -75,7 +87,8 @@ class CliParser {
 			dryRun: dryRun,
 			verbose: verbose,
 			listTargets: listTargets,
-			dump: dump
+			dump: dump,
+			additional: additional
 		};
 	}
 }
@@ -90,6 +103,7 @@ typedef CliArguments = {
 	final verbose:Bool;
 	final dump:Bool;
 	final listTargets:Bool;
+	final additional:Array<String>;
 }
 
 enum abstract Mode(String) from String {

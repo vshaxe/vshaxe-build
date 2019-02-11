@@ -3799,13 +3799,21 @@ vshaxeBuild_cli_CliParser.prototype = {
 		var listTargets = false;
 		var help = false;
 		var argHandler_getDoc = function() {
-			return "[-t | --target] <name> : One or multiple targets to build.\n[-m | --mode] <name>   : Build mode - accepted values are 'build', 'install', and 'both'.\n[--debug]              : Build the target(s) in debug mode.\n[--executable] <path>  : Path to the Haxe executable.\n[--connect] <port>     : Add --connect <port> when calling Haxe.\n[--dry-run]            : Perform a dry run (no command invocations). Implies -verbose.\n[-v | --verbose]       : Output the commands that are executed.\n[--dump]               : Dump the parsed project files to dump.json.\n[--list-targets]       : List all available targets and exit.\n[--help]               : Display this help text and exit.";
+			return "[-t | --target] <name> : One or multiple targets to build.\n[-m | --mode] <name>   : Build mode - accepted values are 'build', 'install', and 'both'.\n[--debug]              : Build the target(s) in debug mode.\n[--executable] <path>  : Path to the Haxe executable.\n[--connect] <port>     : Add --connect <port> when calling Haxe.\n[--dry-run]            : Perform a dry run (no command invocations). Implies -verbose.\n[-v | --verbose]       : Output the commands that are executed.\n[--dump]               : Dump the parsed project files to dump.json.\n[--list-targets]       : List all available targets and exit.\n[-- args...]           : Any arguments after this are passed directly to Haxe.\n[--help]               : Display this help text and exit.";
 		};
 		var argHandler_parse = function(__args) {
 			var __index = 0;
 			while(__index < __args.length) {
 				var _g = __args[__index++];
 				switch(_g) {
+				case "-- args...":
+					if(__index > __args.length) {
+						if(![][__args.length - 1]) {
+							throw new js__$Boot_HaxeError("Not enough arguments: " + Std.string(__args[__index - 1]) + " expects " + 0);
+						}
+					}
+					__index += 0;
+					break;
 				case "--connect":
 					if(__index + 1 > __args.length) {
 						if(![false][__args.length - 1]) {
@@ -3902,6 +3910,17 @@ vshaxeBuild_cli_CliParser.prototype = {
 				}
 			}
 		};
+		var additional = [];
+		var doubleDashIndex = args.indexOf("--");
+		if(doubleDashIndex != -1) {
+			var _g1 = doubleDashIndex + 1;
+			var _g11 = args.length;
+			while(_g1 < _g11) {
+				var i = _g1++;
+				additional.push(args[i]);
+			}
+			args = args.slice(0,doubleDashIndex);
+		}
 		try {
 			argHandler_parse(args);
 		} catch( e ) {
@@ -3916,7 +3935,7 @@ vshaxeBuild_cli_CliParser.prototype = {
 		if(!vshaxeBuild_cli__$CliParser_Mode_$Impl_$.isValid(mode)) {
 			this.cli.fail("Unknown --mode: " + mode);
 		}
-		return { targets : targets, mode : mode, debug : debug, executable : executable, port : port_, dryRun : dryRun, verbose : verbose, listTargets : listTargets, dump : dump};
+		return { targets : targets, mode : mode, debug : debug, executable : executable, port : port_, dryRun : dryRun, verbose : verbose, listTargets : listTargets, dump : dump, additional : additional};
 	}
 };
 var vshaxeBuild_cli__$CliParser_Mode_$Impl_$ = {};
