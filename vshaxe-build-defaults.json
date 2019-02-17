@@ -18,7 +18,7 @@
 			"debug": {
 				"args": {
 					"defines": ["js_unflatten"],
-					"haxelibs": ["jstack"]
+					"haxelibs": []
 				}
 			},
 			"args": {
