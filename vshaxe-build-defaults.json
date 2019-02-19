@@ -24,7 +24,7 @@
 			"args": {
 				"haxelibs": ["hxnodejs"],
 				"deadCodeElimination": "full",
-				"defines": ["analyzer-optimize", "js-enums-as-arrays"]
+				"defines": ["analyzer-optimize", "js-enums-as-arrays", "js-es=6"]
 			}
 		}
 	]
