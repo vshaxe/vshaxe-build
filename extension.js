@@ -4454,8 +4454,10 @@ vshaxeBuild_tools_HxmlTools.mergeHxmls = function(hxmls,flatten,debug) {
 		var macros1 = vshaxeBuild_project__$Project_ArrayHandle_$Impl_$.get(hxml.macros);
 		macros = macros.concat(macros1);
 		debug1 = debug1 || hxml.debug;
-		if(hxml.output != null && hxml.output.target != "interp") {
-			output = hxml.output;
+		if(hxml.output != null) {
+			if(hxml.output.target != "interp" || output == null) {
+				output = hxml.output;
+			}
 		}
 		if(hxml.deadCodeElimination != null) {
 			deadCodeElimination = hxml.deadCodeElimination;

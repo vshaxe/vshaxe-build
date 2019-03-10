@@ -2,11 +2,9 @@
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"definitions": {
 		"vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>": {
-			"items": [
-				{
-					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<String>"
-				}
-			],
+			"items": {
+				"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<String>"
+			},
 			"type": "array"
 		},
 		"vshaxeBuild.project.Project": {
@@ -110,11 +108,9 @@
 			"type": "object"
 		},
 		"vshaxeBuild.project.ArrayHandle<String>": {
-			"items": [
-				{
-					"type": "string"
-				}
-			],
+			"items": {
+				"type": "string"
+			},
 			"type": "array"
 		},
 		"vshaxeBuild.project.HaxeTarget": {
@@ -173,11 +169,9 @@
 			"type": "object"
 		},
 		"vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.Target>": {
-			"items": [
-				{
-					"$ref": "#/definitions/vshaxeBuild.project.Target"
-				}
-			],
+			"items": {
+				"$ref": "#/definitions/vshaxeBuild.project.Target"
+			},
 			"type": "array"
 		},
 		"vshaxeBuild.project.Target": {
@@ -225,11 +219,9 @@
 			"type": "object"
 		},
 		"vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.Haxelib>": {
-			"items": [
-				{
-					"$ref": "#/definitions/vshaxeBuild.project.Haxelib"
-				}
-			],
+			"items": {
+				"$ref": "#/definitions/vshaxeBuild.project.Haxelib"
+			},
 			"type": "array"
 		},
 		"vshaxeBuild.project.Haxelib": {
