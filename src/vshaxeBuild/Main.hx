@@ -4,6 +4,8 @@ import haxe.Json;
 import sys.io.File;
 import vshaxeBuild.builders.*;
 import vshaxeBuild.project.ProjectLoader;
+import vshaxeBuild.cli.CliTools;
+import vshaxeBuild.cli.CliParser;
 
 /** The build tool for VSHaxe **/
 class Main {

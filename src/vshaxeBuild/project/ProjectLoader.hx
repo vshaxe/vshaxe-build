@@ -4,6 +4,7 @@ import haxe.io.Path;
 import json2object.JsonParser;
 import sys.FileSystem;
 import vshaxeBuild.tools.HaxelibHelper;
+import vshaxeBuild.cli.CliTools;
 
 using json2object.ErrorUtils;
 

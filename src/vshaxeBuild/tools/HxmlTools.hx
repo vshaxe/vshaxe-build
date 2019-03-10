@@ -27,7 +27,7 @@ class HxmlTools {
 			haxelibs = haxelibs.concat(hxml.haxelibs.get());
 			macros = macros.concat(hxml.macros.get());
 			debug = debug || hxml.debug;
-			if (hxml.output != null)
+			if (hxml.output != null && hxml.output.target != Interp)
 				output = hxml.output; // just use the most recent one I guess?
 			if (hxml.deadCodeElimination != null)
 				deadCodeElimination = hxml.deadCodeElimination;

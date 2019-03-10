@@ -1,268 +1,257 @@
 {
-	"$ref": "#/definitions/Project",
-	"$schema": "http://json-schema.org/draft-04/schema#",
+	"$schema": "http://json-schema.org/draft-07/schema#",
 	"definitions": {
-		"Output": {
-			"type": "object",
-			"properties": {
-				"path": {
-					"type": "string",
-					"propertyOrder": 1
-				},
-				"target": {
-					"type": "string",
-					"propertyOrder": 0
+		"vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>": {
+			"items": [
+				{
+					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<String>"
 				}
-			},
-			"additionalProperties": false,
-			"required": [
-				"target",
-				"path"
-			]
+			],
+			"type": "array"
 		},
-		"Project": {
-			"type": "object",
-			"properties": {
-				"mainTarget": {
-					"type": "string",
-					"description": "name of a target to generate special task.json tasks for (install-all, generate-complete-hxml, generate-vscode-tasks)",
-					"propertyOrder": 1
-				},
-				"haxelibs": {
-					"items": {
-						"$ref": "#/definitions/Haxelib"
-					},
-					"type": "array",
-					"propertyOrder": 2
-				},
-				"targets": {
-					"items": {
-						"$ref": "#/definitions/Target"
-					},
-					"type": "array",
-					"propertyOrder": 3
-				},
-				"inherit": {
-					"type": "string",
-					"description": "name of a target in defaults.json to base all targets in this config on",
-					"propertyOrder": 0
-				}
-			},
-			"additionalProperties": false,
+		"vshaxeBuild.project.Project": {
 			"required": [
 				"targets"
-			]
-		},
-		"Haxelib": {
-			"type": "object",
-			"properties": {
-				"name": {
-					"type": "string",
-					"propertyOrder": 0
-				},
-				"installArgs": {
-					"items": {
-						"type": "string"
-					},
-					"type": "array",
-					"propertyOrder": 1
-				},
-				"includeProjectFile": {
-					"type": "boolean",
-					"propertyOrder": 2,
-					"description": "whether to look for a vshaxe-build.json in the install location of this lib"
-				}
-			},
+			],
 			"additionalProperties": false,
-			"required": [
-				"name",
-				"installArgs"
-			]
-		},
-		"Hxml": {
-			"type": "object",
 			"properties": {
-				"main": {
-					"type": "string",
-					"propertyOrder": 9
-				},
-				"debug": {
-					"type": "boolean",
-					"propertyOrder": 5
-				},
 				"haxelibs": {
-					"items": {
-						"type": "string"
-					},
-					"type": "array",
-					"propertyOrder": 3
+					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.Haxelib>"
 				},
-				"noInline": {
-					"type": "boolean",
-					"propertyOrder": 8
+				"inherit": {
+					"description": "name of a target in defaults.json to base all targets in this config on",
+					"type": "string"
 				},
-				"workingDirectory": {
-					"type": "string",
-					"propertyOrder": 0
+				"targets": {
+					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.Target>"
 				},
-				"classPaths": {
-					"items": {
-						"type": "string"
-					},
-					"type": "array",
-					"propertyOrder": 1
-				},
-				"packageName": {
-					"type": "string",
-					"propertyOrder": 10
-				},
-				"output": {
-					"propertyOrder": 6,
-					"$ref": "#/definitions/Output"
-				},
-				"defines": {
-					"items": {
-						"type": "string"
-					},
-					"type": "array",
-					"propertyOrder": 2
-				},
-				"deadCodeElimination": {
-					"type": "string",
-					"propertyOrder": 7
-				},
-				"macros": {
-					"items": {
-						"type": "string"
-					},
-					"type": "array",
-					"propertyOrder": 4
+				"mainTarget": {
+					"description": "name of a target to generate special task.json tasks for (install-all, generate-complete-hxml, generate-vscode-tasks)",
+					"type": "string"
 				}
 			},
-			"additionalProperties": false
+			"type": "object"
 		},
-		"TargetArguments": {
-			"type": "object",
+		"vshaxeBuild.project.DeadCodeElimination": {
+			"anyOf": [
+				{
+					"const": "std"
+				},
+				{
+					"const": "full"
+				},
+				{
+					"const": "no"
+				}
+			]
+		},
+		"vshaxeBuild.project.TargetArguments": {
+			"additionalProperties": false,
 			"properties": {
-				"args": {
-					"propertyOrder": 4,
-					"$ref": "#/definitions/Hxml"
+				"installCommands": {
+					"description": "additional, non-haxelib install commands (npm install...)",
+					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>"
 				},
 				"afterBuildCommands": {
-					"items": {
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
-					},
-					"type": "array",
-					"propertyOrder": 3
+					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>"
 				},
 				"beforeBuildCommands": {
-					"items": {
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
-					},
-					"type": "array",
-					"propertyOrder": 2
-				},
-				"installCommands": {
-					"items": {
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
-					},
-					"type": "array",
-					"description": "additional, non-haxelib install commands (npm install...)",
-					"propertyOrder": 1
+					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>"
 				},
 				"targetDependencies": {
-					"items": {
-						"type": "string"
-					},
-					"type": "array",
-					"propertyOrder": 0
+					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<String>"
+				},
+				"args": {
+					"$ref": "#/definitions/vshaxeBuild.project.Hxml"
 				}
 			},
-			"additionalProperties": false
+			"type": "object"
 		},
-		"Target": {
-			"type": "object",
+		"vshaxeBuild.project.Hxml": {
+			"additionalProperties": false,
 			"properties": {
-				"args": {
-					"propertyOrder": 11,
-					"$ref": "#/definitions/Hxml"
+				"main": {
+					"type": "string"
 				},
+				"deadCodeElimination": {
+					"$ref": "#/definitions/vshaxeBuild.project.DeadCodeElimination"
+				},
+				"times": {
+					"type": "boolean"
+				},
+				"haxelibs": {
+					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<String>"
+				},
+				"packageName": {
+					"type": "string"
+				},
+				"output": {
+					"$ref": "#/definitions/vshaxeBuild.project.Output"
+				},
+				"workingDirectory": {
+					"type": "string"
+				},
+				"defines": {
+					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<String>"
+				},
+				"macros": {
+					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<String>"
+				},
+				"debug": {
+					"type": "boolean"
+				},
+				"noInline": {
+					"type": "boolean"
+				},
+				"classPaths": {
+					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<String>"
+				}
+			},
+			"type": "object"
+		},
+		"vshaxeBuild.project.ArrayHandle<String>": {
+			"items": [
+				{
+					"type": "string"
+				}
+			],
+			"type": "array"
+		},
+		"vshaxeBuild.project.HaxeTarget": {
+			"anyOf": [
+				{
+					"const": "swf"
+				},
+				{
+					"const": "js"
+				},
+				{
+					"const": "neko"
+				},
+				{
+					"const": "php"
+				},
+				{
+					"const": "cpp"
+				},
+				{
+					"const": "cppia"
+				},
+				{
+					"const": "as3"
+				},
+				{
+					"const": "java"
+				},
+				{
+					"const": "python"
+				},
+				{
+					"const": "hl"
+				},
+				{
+					"const": "lua"
+				},
+				{
+					"const": "interp"
+				}
+			]
+		},
+		"vshaxeBuild.project.Output": {
+			"required": [
+				"target"
+			],
+			"additionalProperties": false,
+			"properties": {
+				"target": {
+					"$ref": "#/definitions/vshaxeBuild.project.HaxeTarget"
+				},
+				"path": {
+					"type": "string"
+				}
+			},
+			"type": "object"
+		},
+		"vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.Target>": {
+			"items": [
+				{
+					"$ref": "#/definitions/vshaxeBuild.project.Target"
+				}
+			],
+			"type": "array"
+		},
+		"vshaxeBuild.project.Target": {
+			"required": [
+				"name"
+			],
+			"additionalProperties": false,
+			"properties": {
 				"name": {
-					"type": "string",
-					"propertyOrder": 0
+					"type": "string"
+				},
+				"installCommands": {
+					"description": "additional, non-haxelib install commands (npm install...)",
+					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>"
+				},
+				"afterBuildCommands": {
+					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>"
+				},
+				"inherit": {
+					"description": "name of a target in defaults.json to base this config on",
+					"type": "string"
 				},
 				"debug": {
 					"description": "arguments that only apply in debug mode",
-					"propertyOrder": 3,
-					"$ref": "#/definitions/TargetArguments"
-				},
-				"afterBuildCommands": {
-					"items": {
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
-					},
-					"type": "array",
-					"propertyOrder": 10
-				},
-				"beforeBuildCommands": {
-					"items": {
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
-					},
-					"type": "array",
-					"propertyOrder": 9
-				},
-				"installCommands": {
-					"items": {
-						"items": {
-							"type": "string"
-						},
-						"type": "array"
-					},
-					"type": "array",
-					"description": "additional, non-haxelib install commands (npm install...)",
-					"propertyOrder": 8
-				},
-				"targetDependencies": {
-					"items": {
-						"type": "string"
-					},
-					"type": "array",
-					"propertyOrder": 7
+					"$ref": "#/definitions/vshaxeBuild.project.TargetArguments"
 				},
 				"composite": {
-					"type": "boolean",
 					"description": "Whether this target is just a collection of other targets",
-					"propertyOrder": 1
+					"type": "boolean"
 				},
-				"inherit": {
-					"type": "string",
-					"description": "name of a target in defaults.json to base this config on",
-					"propertyOrder": 2
+				"beforeBuildCommands": {
+					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>"
+				},
+				"targetDependencies": {
+					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<String>"
 				},
 				"display": {
 					"description": "arguments that only apply for display",
-					"propertyOrder": 4,
-					"$ref": "#/definitions/TargetArguments"
+					"$ref": "#/definitions/vshaxeBuild.project.TargetArguments"
+				},
+				"args": {
+					"$ref": "#/definitions/vshaxeBuild.project.Hxml"
 				}
 			},
-			"additionalProperties": false,
+			"type": "object"
+		},
+		"vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.Haxelib>": {
+			"items": [
+				{
+					"$ref": "#/definitions/vshaxeBuild.project.Haxelib"
+				}
+			],
+			"type": "array"
+		},
+		"vshaxeBuild.project.Haxelib": {
 			"required": [
+				"installArgs",
 				"name"
-			]
+			],
+			"additionalProperties": false,
+			"properties": {
+				"includeProjectFile": {
+					"description": "whether to look for a vshaxe-build.json in the install location of this lib",
+					"type": "boolean"
+				},
+				"name": {
+					"type": "string"
+				},
+				"installArgs": {
+					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<String>"
+				}
+			},
+			"type": "object"
 		}
-	}
+	},
+	"$ref": "#/definitions/vshaxeBuild.project.Project"
 }

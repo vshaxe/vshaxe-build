@@ -28,7 +28,8 @@
 			"composite": true,
 			"targetDependencies": [
 				"run-script",
-				"extension"
+				"extension",
+				"schema"
 			],
 			"args": {
 				"debug": true
@@ -58,6 +59,18 @@
 				},
 				"debug": true,
 				"packageName": "vshaxeBuild.extension.Main"
+			}
+		},
+		{
+			"name": "schema",
+			"args": {
+				"classPaths": ["src"],
+				"haxelibs": ["json2object"],
+				"output": {
+					"target": "interp"
+				},
+				"debug": true,
+				"main": "vshaxeBuild.tools.SchemaGenerator"
 			}
 		}
 	]

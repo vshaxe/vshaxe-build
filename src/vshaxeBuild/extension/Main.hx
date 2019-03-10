@@ -2,6 +2,7 @@ package vshaxeBuild.extension;
 
 import vshaxeBuild.project.ProjectLoader;
 import vshaxeBuild.extension.TaskProvider;
+import vshaxeBuild.cli.CliTools;
 
 class Main {
 	function new(context:ExtensionContext) {

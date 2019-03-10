@@ -75,7 +75,7 @@ enum abstract DeadCodeElimination(String) to String {
 
 typedef Output = {
 	final target:HaxeTarget;
-	final path:String;
+	final ?path:String;
 }
 
 enum abstract HaxeTarget(String) to String {
@@ -90,6 +90,7 @@ enum abstract HaxeTarget(String) to String {
 	var Python = "python";
 	var Hl = "hl";
 	var Lua = "lua";
+	var Interp = "interp";
 }
 
 @:forward(iterator)

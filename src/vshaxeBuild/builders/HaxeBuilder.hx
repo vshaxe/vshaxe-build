@@ -1,5 +1,8 @@
 package vshaxeBuild.builders;
 
+import vshaxeBuild.cli.CliTools;
+import vshaxeBuild.cli.CliParser;
+
 class HaxeBuilder {
 	final cli:CliTools;
 	final projects:ProjectList;
@@ -99,8 +102,12 @@ class HaxeBuilder {
 		}
 
 		if (hxml.output != null) {
-			args.push('-${hxml.output.target}');
-			args.push(hxml.output.path);
+			if (hxml.output.target == Interp) {
+				args.push("--interp");
+			} else {
+				args.push('-${hxml.output.target}');
+				args.push(hxml.output.path);
+			}
 		}
 
 		if (hxml.main != null) {

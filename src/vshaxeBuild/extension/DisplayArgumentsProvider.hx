@@ -36,8 +36,13 @@ class DisplayArgumentsProvider {
 			lines.push('-lib ${projects.resolveHaxelib(lib).name}');
 		if (hxml.debug)
 			lines.push("-debug");
-		if (hxml.output != null)
-			lines.push('-${hxml.output.target} ${hxml.output.path}');
+		if (hxml.output != null) {
+			lines.push(if (hxml.output.target == Interp) {
+				"--interp";
+			} else {
+				'-${hxml.output.target} ${hxml.output.path}';
+			});
+		}
 		if (hxml.noInline == true)
 			lines.push('--no-inline');
 		if (hxml.times == true)
