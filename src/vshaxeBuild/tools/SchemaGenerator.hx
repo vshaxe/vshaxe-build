@@ -1,13 +1,14 @@
 package vshaxeBuild.tools;
 
-import haxe.Json;
 import sys.io.File;
 import json2object.utils.JsonSchemaWriter;
 
+using StringTools;
+
 class SchemaGenerator {
 	static function main() {
-		var schema = new JsonSchemaWriter<Project>().schema;
-		schema = Json.stringify(Json.parse(schema), "\t");
+		var schema = new JsonSchemaWriter<Project>("\t").schema;
+		schema = schema.replace('"description"', '"markdownDescription"');
 		File.saveContent("schemas/vshaxe-build-schema.json", schema);
 	}
 }
