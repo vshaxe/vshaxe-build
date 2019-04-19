@@ -6,7 +6,7 @@
 		},
 		{
 			"name": "jstack",
-			"installArgs": ["install", "jstack"]
+			"installArgs": ["git", "jstack", "https://github.com/RealyUniqueName/JStack"]
 		}
 	],
 	"targets": [
