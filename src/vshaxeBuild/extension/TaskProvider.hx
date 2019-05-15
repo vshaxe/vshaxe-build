@@ -61,15 +61,7 @@ class TaskProvider {
 		}
 		var execution = new ShellExecution("haxelib", args, {env: vshaxe.haxeExecutable.configuration.env});
 		var task = new Task(definition, TaskScope.Workspace, name, "vshaxe-build", execution, vshaxe.problemMatchers.get());
-		var presentation = vshaxe.taskPresentation;
-		task.presentationOptions = {
-			reveal: presentation.reveal,
-			echo: presentation.echo,
-			focus: presentation.focus,
-			panel: presentation.panel,
-			showReuseMessage: presentation.showReuseMessage,
-			clear: presentation.clear
-		};
+		task.presentationOptions = cast vshaxe.taskPresentation;
 		return task;
 	}
 
