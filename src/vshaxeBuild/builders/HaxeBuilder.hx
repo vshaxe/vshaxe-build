@@ -67,6 +67,11 @@ class HaxeBuilder {
 			return [];
 
 		var args = [];
+		
+		for (_macro in hxml.macros.get()) {
+			args.push("--macro");
+			args.push(_macro);
+		}
 
 		for (lib in hxml.haxelibs.get()) {
 			args.push("-lib");
@@ -95,11 +100,6 @@ class HaxeBuilder {
 
 		if (hxml.debug)
 			args.push("-debug");
-
-		for (_macro in hxml.macros.get()) {
-			args.push("--macro");
-			args.push(_macro);
-		}
 
 		if (hxml.output != null) {
 			if (hxml.output.target == Interp) {
