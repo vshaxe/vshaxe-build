@@ -7,7 +7,7 @@
 					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<String>"
 				},
 				"installCommands": {
-					"markdownDescription": "",
+					"markdownDescription": "additional, non-haxelib install commands (npm install...)",
 					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>"
 				},
 				"beforeBuildCommands": {
@@ -32,23 +32,23 @@
 					"type": "string"
 				},
 				"installCommands": {
-					"markdownDescription": "",
+					"markdownDescription": "additional, non-haxelib install commands (npm install...)",
 					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>"
 				},
 				"inherit": {
-					"markdownDescription": "",
+					"markdownDescription": "name of a target in defaults.json to base this config on",
 					"type": "string"
 				},
 				"display": {
-					"markdownDescription": "",
+					"markdownDescription": "arguments that only apply for display",
 					"$ref": "#/definitions/vshaxeBuild.project.TargetArguments"
 				},
 				"debug": {
-					"markdownDescription": "",
+					"markdownDescription": "arguments that only apply in debug mode",
 					"$ref": "#/definitions/vshaxeBuild.project.TargetArguments"
 				},
 				"composite": {
-					"markdownDescription": "",
+					"markdownDescription": "Whether this target is just a collection of other targets",
 					"type": "boolean"
 				},
 				"beforeBuildCommands": {
@@ -73,11 +73,11 @@
 					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.Target>"
 				},
 				"mainTarget": {
-					"markdownDescription": "",
+					"markdownDescription": "name of a target to generate special task.json tasks for (install-all, generate-complete-hxml, generate-vscode-tasks)",
 					"type": "string"
 				},
 				"inherit": {
-					"markdownDescription": "",
+					"markdownDescription": "name of a target in defaults.json to base all targets in this config on",
 					"type": "string"
 				},
 				"haxelibs": {
@@ -156,7 +156,7 @@
 					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<String>"
 				},
 				"includeProjectFile": {
-					"markdownDescription": "",
+					"markdownDescription": "whether to look for a vshaxe-build.json in the install location of this lib",
 					"type": "boolean"
 				}
 			},
@@ -167,56 +167,26 @@
 			"type": "object"
 		},
 		"vshaxeBuild.project.HaxeTarget": {
-			"anyOf": [
-				{
-					"const": "swf"
-				},
-				{
-					"const": "js"
-				},
-				{
-					"const": "neko"
-				},
-				{
-					"const": "php"
-				},
-				{
-					"const": "cpp"
-				},
-				{
-					"const": "cppia"
-				},
-				{
-					"const": "as3"
-				},
-				{
-					"const": "java"
-				},
-				{
-					"const": "python"
-				},
-				{
-					"const": "hl"
-				},
-				{
-					"const": "lua"
-				},
-				{
-					"const": "interp"
-				}
+			"enum": [
+				"swf",
+				"js",
+				"neko",
+				"php",
+				"cpp",
+				"cppia",
+				"as3",
+				"java",
+				"python",
+				"hl",
+				"lua",
+				"interp"
 			]
 		},
 		"vshaxeBuild.project.DeadCodeElimination": {
-			"anyOf": [
-				{
-					"const": "std"
-				},
-				{
-					"const": "full"
-				},
-				{
-					"const": "no"
-				}
+			"enum": [
+				"std",
+				"full",
+				"no"
 			]
 		},
 		"vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.Target>": {
