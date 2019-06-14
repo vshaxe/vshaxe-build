@@ -79,9 +79,6 @@
 				"inherit": {
 					"markdownDescription": "name of a target in defaults.json to base all targets in this config on",
 					"type": "string"
-				},
-				"haxelibs": {
-					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.Haxelib>"
 				}
 			},
 			"required": [
@@ -146,26 +143,6 @@
 			},
 			"type": "object"
 		},
-		"vshaxeBuild.project.Haxelib": {
-			"additionalProperties": false,
-			"properties": {
-				"name": {
-					"type": "string"
-				},
-				"installArgs": {
-					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<String>"
-				},
-				"includeProjectFile": {
-					"markdownDescription": "whether to look for a vshaxe-build.json in the install location of this lib",
-					"type": "boolean"
-				}
-			},
-			"required": [
-				"installArgs",
-				"name"
-			],
-			"type": "object"
-		},
 		"vshaxeBuild.project.HaxeTarget": {
 			"enum": [
 				"swf",
@@ -192,12 +169,6 @@
 		"vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.Target>": {
 			"items": {
 				"$ref": "#/definitions/vshaxeBuild.project.Target"
-			},
-			"type": "array"
-		},
-		"vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.Haxelib>": {
-			"items": {
-				"$ref": "#/definitions/vshaxeBuild.project.Haxelib"
 			},
 			"type": "array"
 		},

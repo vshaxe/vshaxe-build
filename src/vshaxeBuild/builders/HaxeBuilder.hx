@@ -55,7 +55,7 @@ class HaxeBuilder {
 
 		for (lib in hxml.haxelibs.get()) {
 			args.push("-lib");
-			args.push(projects.resolveHaxelib(lib).name);
+			args.push(lib);
 		}
 
 		for (cp in hxml.classPaths.get()) {

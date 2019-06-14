@@ -33,7 +33,7 @@ class DisplayArgumentsProvider {
 		for (define in hxml.defines.get().unique())
 			lines.push('-D $define');
 		for (lib in hxml.haxelibs.get().unique())
-			lines.push('-lib ${projects.resolveHaxelib(lib).name}');
+			lines.push('-lib $lib');
 		if (hxml.debug)
 			lines.push("-debug");
 		if (hxml.output != null) {

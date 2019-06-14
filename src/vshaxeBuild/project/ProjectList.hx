@@ -8,22 +8,6 @@ abstract ProjectList(Array<PlacedProject>) from Array<PlacedProject> {
 	@:op([]) inline function get(i:Int)
 		return this[i];
 
-	/** TODO: return Option<Haxelib> **/
-	public function resolveHaxelib(name:String):Haxelib {
-		function loop(projects:ArrayHandle<PlacedProject>):Haxelib {
-			for (project in projects) {
-				var lib = project.haxelibs.findNamed(name);
-				if (lib != null)
-					return lib;
-				var libInSub = loop(project.subProjects);
-				if (libInSub != null)
-					return libInSub;
-			}
-			return null;
-		}
-		return loop(this);
-	}
-
 	/** TODO: return Option<Target> **/
 	public function resolveTarget(name:String):Target {
 		function loop(projects:ArrayHandle<PlacedProject>):Target {

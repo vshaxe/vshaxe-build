@@ -10,7 +10,6 @@ typedef Project = {
 
 	/** name of a target to generate special task.json tasks for (install-all, generate-complete-hxml, generate-vscode-tasks) **/
 	final ?mainTarget:String;
-	final ?haxelibs:ArrayHandle<Haxelib>;
 	final targets:ArrayHandle<Target>;
 }
 
@@ -18,13 +17,6 @@ typedef Project = {
 typedef PlacedProject = Project & {
 	final directory:String;
 	var subProjects:ArrayHandle<PlacedProject>;
-}
-
-typedef Haxelib = Named & {
-	final installArgs:ArrayHandle<String>;
-
-	/** whether to look for a vshaxe-build.json in the install location of this lib **/
-	var ?includeProjectFile:Bool;
 }
 
 typedef Target = Named &

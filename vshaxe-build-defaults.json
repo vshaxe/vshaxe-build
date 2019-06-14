@@ -1,14 +1,4 @@
 {
-	"haxelibs": [
-		{
-			"name": "hxnodejs",
-			"installArgs": ["git", "hxnodejs", "https://github.com/HaxeFoundation/hxnodejs"]
-		},
-		{
-			"name": "jstack",
-			"installArgs": ["git", "jstack", "https://github.com/RealyUniqueName/JStack"]
-		}
-	],
 	"targets": [
 		{
 			"name": "empty"

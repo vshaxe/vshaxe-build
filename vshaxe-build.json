@@ -1,27 +1,5 @@
 {
 	"mainTarget": "all",
-	"haxelibs": [
-		{
-			"name": "hxargs",
-			"installArgs": ["install", "hxargs"]
-		},
-		{
-			"name": "json2object",
-			"installArgs": ["git", "json2object", "https://github.com/elnabo/json2object"]
-		},
-		{
-			"name": "hxnodejs",
-			"installArgs": ["git", "hxnodejs", "https://github.com/HaxeFoundation/hxnodejs"]
-		},
-		{
-			"name": "vscode",
-			"installArgs": ["install", "vscode"]
-		},
-		{
-			"name": "vshaxe",
-			"installArgs": []
-		}
-	],
 	"targets": [
 		{
 			"name": "all",

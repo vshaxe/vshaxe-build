@@ -3,7 +3,6 @@ package vshaxeBuild.project;
 import haxe.io.Path;
 import json2object.JsonParser;
 import sys.FileSystem;
-import vshaxeBuild.tools.HaxelibHelper;
 import vshaxeBuild.cli.CliTools;
 
 using json2object.ErrorUtils;
@@ -45,21 +44,6 @@ class ProjectLoader {
 
 		if (project != null) {
 			project.subProjects = subProjects;
-
-			for (haxelib in project.haxelibs.get()) {
-				if (haxelib.includeProjectFile) {
-					var dir = HaxelibHelper.getLibraryPath(haxelib.name);
-					if (dir == null)
-						continue;
-					dir = Path.join([dir, ".."]); // this is a dangerous assumption..
-					cli.println('Resolved \'${haxelib.name}\' to \'$dir\'');
-					if (FileSystem.exists(dir)) {
-						var subProject = findProjectFiles(dir);
-						if (subProject != null)
-							subProjects.push(subProject);
-					}
-				}
-			}
 		}
 		return project;
 	}
@@ -85,7 +69,6 @@ class ProjectLoader {
 		return {
 			inherit: project.inherit,
 			mainTarget: project.mainTarget,
-			haxelibs: project.haxelibs,
 			targets: project.targets,
 			directory: directory,
 			subProjects: []
