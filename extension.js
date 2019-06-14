@@ -2253,9 +2253,6 @@ vshaxeBuild_extension_TaskProvider.prototype = {
 				tasks.push(this.createTaskForTarget(target,true));
 			}
 		}
-		if(this.projects.length > 1 && this.projects[1].mainTarget != null) {
-			tasks.push(this.createTask("install dependencies",this.projects[1].mainTarget,false,["--mode","install"]));
-		}
 		return tasks;
 	}
 	,createTaskForTarget: function(target,debug) {

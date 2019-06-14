@@ -14,35 +14,15 @@ class HaxeBuilder {
 
 	public function build(cliArgs:CliArguments) {
 		for (name in cliArgs.targets)
-			buildTarget(projects.resolveTarget(name), cliArgs.debug, cliArgs.port, cliArgs.mode, cliArgs.additional);
+			buildTarget(projects.resolveTarget(name), cliArgs.debug, cliArgs.port, cliArgs.additional);
 	}
 
-	function installTarget(target:Target, debug:Bool) {
-		cli.println('Installing dependencies for \'${target.name}\'...\n');
-
-		cli.runCommands(target.installCommands);
-
-		// TODO: might wanna avoid calling resolveTargetHxml() twice
-		var libs = projects.resolveTargetHxml(target, debug, false, false).haxelibs.get();
-		libs = libs.filterDuplicates((lib1, lib2) -> lib1 == lib2);
-		for (lib in libs)
-			cli.run("haxelib", projects.resolveHaxelib(lib).installArgs.get());
-
-		cli.println('');
-	}
-
-	function buildTarget(target:Target, debug:Bool, port:Null<Int>, mode:Mode, additional:Array<String>) {
+	function buildTarget(target:Target, debug:Bool, port:Null<Int>, additional:Array<String>) {
 		debug = debug || target.args.debug;
 		var workingDirectory = target.args.workingDirectory;
 
-		if (mode != Build)
-			cli.inDir(workingDirectory, installTarget.bind(target, debug));
-
 		for (dependency in target.targetDependencies.get())
-			buildTarget(projects.resolveTarget(dependency), debug, port, mode, additional);
-
-		if (mode == Install)
-			return;
+			buildTarget(projects.resolveTarget(dependency), debug, port, additional);
 
 		cli.println('Building \'${target.name}\'...\n');
 

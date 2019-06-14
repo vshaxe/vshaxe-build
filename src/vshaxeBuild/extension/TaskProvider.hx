@@ -21,11 +21,6 @@ class TaskProvider {
 				tasks.push(createTaskForTarget(target, true));
 			}
 		}
-
-		if (projects.length > 1 && projects[1].mainTarget != null) {
-			tasks.push(createTask("install dependencies", projects[1].mainTarget, false, ["--mode", "install"]));
-		}
-
 		return tasks;
 	}
 
@@ -45,12 +40,7 @@ class TaskProvider {
 			target: name
 		};
 
-		var args = [
-			"run",
-			"vshaxe-build",
-			"--target",
-			target
-		];
+		var args = ["run", "vshaxe-build", "--target", target];
 		if (additionalArgs != null) {
 			args = args.concat(additionalArgs);
 		}

@@ -9,7 +9,6 @@ class CliParser {
 
 	public function parse(args:Array<String>):CliArguments {
 		var targets = [];
-		var mode = Build;
 		var debug = false;
 		var port_ = null;
 		var dryRun = false;
@@ -23,9 +22,6 @@ class CliParser {
 		var argHandler = hxargs.Args.generate([
 			@doc("One or multiple targets to build.")
 			["-t", "--target"] => function(name:String) targets.push(name),
-			
-			@doc("Build mode - accepted values are 'build', 'install', and 'both'.")
-			["-m", "--mode"] => function(name:String) mode = name,
 			
 			@doc("Build the target(s) in debug mode.")
 			["--debug"] => function() debug = true,
@@ -71,12 +67,8 @@ class CliParser {
 		if (args.length == 0 || help)
 			cli.exit(argHandler.getDoc());
 
-		if (!mode.isValid())
-			cli.fail('Unknown --mode: $mode');
-
 		return {
 			targets: targets,
-			mode: mode,
 			debug: debug,
 			port: port_,
 			dryRun: dryRun,
@@ -90,7 +82,6 @@ class CliParser {
 
 typedef CliArguments = {
 	final targets:Array<String>;
-	final mode:Mode;
 	final debug:Bool;
 	final port:Null<Int>;
 	final dryRun:Bool;
@@ -98,14 +89,4 @@ typedef CliArguments = {
 	final dump:Bool;
 	final listTargets:Bool;
 	final additional:Array<String>;
-}
-
-enum abstract Mode(String) from String {
-	var Build = "build";
-	var Install = "install";
-	var Both = "both";
-
-	public function isValid() {
-		return this == Build || this == Install || this == Both;
-	}
 }
