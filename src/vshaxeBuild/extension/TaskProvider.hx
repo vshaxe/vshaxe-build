@@ -49,9 +49,7 @@ class TaskProvider {
 			"run",
 			"vshaxe-build",
 			"--target",
-			target,
-			"--executable",
-			vshaxe.haxeExecutable.configuration.executable
+			target
 		];
 		if (additionalArgs != null) {
 			args = args.concat(additionalArgs);
