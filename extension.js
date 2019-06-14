@@ -2020,14 +2020,14 @@ vshaxeBuild_extension_TaskProvider.prototype = {
 	}
 	,createTask: function(name,target,debug,additionalArgs) {
 		var definition = { type : "vshaxe-build", target : name};
-		var args = ["run","vshaxe-build","--target",target];
+		var args = ["lix","run","vshaxe-build","--target",target];
 		if(additionalArgs != null) {
 			args = args.concat(additionalArgs);
 		}
 		if(this.vshaxe.displayPort != null && this.vshaxe.enableCompilationServer) {
 			args = args.concat(["--connect",Std.string(this.vshaxe.displayPort)]);
 		}
-		var execution = new vscode_ShellExecution("haxelib",args,{ env : this.vshaxe.haxeExecutable.configuration.env});
+		var execution = new vscode_ShellExecution("npx",args,{ env : this.vshaxe.haxeExecutable.configuration.env});
 		var task = new vscode_Task(definition,vscode__$TaskScope_TaskScope_$Impl_$.Workspace,name,"vshaxe-build",execution,vshaxe__$ReadOnlyArray_ReadOnlyArray_$Impl_$.get(this.vshaxe.problemMatchers));
 		task.presentationOptions = this.vshaxe.taskPresentation;
 		return task;

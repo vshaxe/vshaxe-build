@@ -40,14 +40,14 @@ class TaskProvider {
 			target: name
 		};
 
-		var args = ["run", "vshaxe-build", "--target", target];
+		var args = ["lix", "run", "vshaxe-build", "--target", target];
 		if (additionalArgs != null) {
 			args = args.concat(additionalArgs);
 		}
 		if (vshaxe.displayPort != null && vshaxe.enableCompilationServer) {
 			args = args.concat(["--connect", Std.string(vshaxe.displayPort)]);
 		}
-		var execution = new ShellExecution("haxelib", args, {env: vshaxe.haxeExecutable.configuration.env});
+		var execution = new ShellExecution("npx", args, {env: vshaxe.haxeExecutable.configuration.env});
 		var task = new Task(definition, TaskScope.Workspace, name, "vshaxe-build", execution, vshaxe.problemMatchers.get());
 		task.presentationOptions = cast vshaxe.taskPresentation;
 		return task;
