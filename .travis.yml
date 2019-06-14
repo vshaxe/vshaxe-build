@@ -3,5 +3,8 @@ dist: xenial
 haxe:
  - development
 
+install:
+  - npm install
+
 script:
- - neko run.n -v -t run-script -m both .
+  - neko run.n -v -t run-script .

@@ -11,7 +11,6 @@ class CliParser {
 		var targets = [];
 		var mode = Build;
 		var debug = false;
-		var executable = "haxe";
 		var port_ = null;
 		var dryRun = false;
 		var verbose = false;
@@ -30,9 +29,6 @@ class CliParser {
 			
 			@doc("Build the target(s) in debug mode.")
 			["--debug"] => function() debug = true,
-			
-			@doc("Path to the Haxe executable.")
-			["--executable"] => function(path:String) executable = path,
 			
 			@doc("Add --connect <port> when calling Haxe.")
 			["--connect"] => function(port:Int) port_ = port,
@@ -82,7 +78,6 @@ class CliParser {
 			targets: targets,
 			mode: mode,
 			debug: debug,
-			executable: executable,
 			port: port_,
 			dryRun: dryRun,
 			verbose: verbose,
@@ -97,7 +92,6 @@ typedef CliArguments = {
 	final targets:Array<String>;
 	final mode:Mode;
 	final debug:Bool;
-	final executable:String;
 	final port:Null<Int>;
 	final dryRun:Bool;
 	final verbose:Bool;
