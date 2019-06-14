@@ -10,6 +10,7 @@ typedef Project = {
 
 	/** name of a target to generate special task.json tasks for (install-all, generate-complete-hxml, generate-vscode-tasks) **/
 	final ?mainTarget:String;
+
 	final targets:ArrayHandle<Target>;
 }
 
@@ -36,9 +37,6 @@ typedef Target = Named &
 
 typedef TargetArguments = {
 	final ?targetDependencies:ArrayHandle<String>;
-
-	/** additional, non-haxelib install commands (npm install...) **/
-	final ?installCommands:ArrayHandle<ArrayHandle<String>>;
 	final ?beforeBuildCommands:ArrayHandle<ArrayHandle<String>>;
 	final ?afterBuildCommands:ArrayHandle<ArrayHandle<String>>;
 	@:default({}) final ?args:Hxml;

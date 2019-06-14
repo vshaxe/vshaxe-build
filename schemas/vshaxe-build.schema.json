@@ -6,10 +6,6 @@
 				"targetDependencies": {
 					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<String>"
 				},
-				"installCommands": {
-					"markdownDescription": "additional, non-haxelib install commands (npm install...)",
-					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>"
-				},
 				"beforeBuildCommands": {
 					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>"
 				},
@@ -30,10 +26,6 @@
 				},
 				"name": {
 					"type": "string"
-				},
-				"installCommands": {
-					"markdownDescription": "additional, non-haxelib install commands (npm install...)",
-					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>"
 				},
 				"inherit": {
 					"markdownDescription": "name of a target in defaults.json to base this config on",

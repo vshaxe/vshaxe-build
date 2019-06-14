@@ -412,7 +412,7 @@ JsonParser_$18.__name__ = true;
 JsonParser_$18.__super__ = json2object_reader_BaseParser;
 JsonParser_$18.prototype = $extend(json2object_reader_BaseParser.prototype,{
 	onIncorrectType: function(pos,variable) {
-		this.errors.push(json2object_Error.IncorrectType(variable,"{ ?targetDependencies : Null<vshaxeBuild.project.ArrayHandle<String>>, ?installCommands : Null<vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>>, ?beforeBuildCommands : Null<vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>>, ?args : Null<vshaxeBuild.project.Hxml>, ?afterBuildCommands : Null<vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>> }",pos));
+		this.errors.push(json2object_Error.IncorrectType(variable,"{ ?targetDependencies : Null<vshaxeBuild.project.ArrayHandle<String>>, ?beforeBuildCommands : Null<vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>>, ?args : Null<vshaxeBuild.project.Hxml>, ?afterBuildCommands : Null<vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>> }",pos));
 		json2object_reader_BaseParser.prototype.onIncorrectType.call(this,pos,variable);
 	}
 	,loadJsonNull: function(pos,variable) {
@@ -420,7 +420,7 @@ JsonParser_$18.prototype = $extend(json2object_reader_BaseParser.prototype,{
 	}
 	,loadJsonObject: function(o,pos,variable) {
 		var assigned = new haxe_ds_StringMap();
-		this.objectSetupAssign(assigned,["afterBuildCommands","args","beforeBuildCommands","installCommands","targetDependencies"],[true,true,true,true,true]);
+		this.objectSetupAssign(assigned,["afterBuildCommands","args","beforeBuildCommands","targetDependencies"],[true,true,true,true]);
 		this.value = this.getAuto();
 		var _g = 0;
 		while(_g < o.length) {
@@ -436,9 +436,6 @@ JsonParser_$18.prototype = $extend(json2object_reader_BaseParser.prototype,{
 			case "beforeBuildCommands":
 				this.loadObjectFieldReflect(($_=new JsonParser_$7(this.errors,this.putils,1),$bind($_,$_.loadJson)),field,"beforeBuildCommands",assigned);
 				break;
-			case "installCommands":
-				this.loadObjectFieldReflect(($_=new JsonParser_$7(this.errors,this.putils,1),$bind($_,$_.loadJson)),field,"installCommands",assigned);
-				break;
 			case "targetDependencies":
 				this.loadObjectFieldReflect(($_=new JsonParser_$12(this.errors,this.putils,1),$bind($_,$_.loadJson)),field,"targetDependencies",assigned);
 				break;
@@ -451,9 +448,8 @@ JsonParser_$18.prototype = $extend(json2object_reader_BaseParser.prototype,{
 	,getAuto: function() {
 		var tmp = new JsonParser_$7([],this.putils,0).loadJson(new hxjsonast_Json(hxjsonast_JsonValue.JNull,new hxjsonast_Position("",0,1)));
 		var tmp1 = new JsonParser_$7([],this.putils,0).loadJson(new hxjsonast_Json(hxjsonast_JsonValue.JNull,new hxjsonast_Position("",0,1)));
-		var tmp2 = new JsonParser_$7([],this.putils,0).loadJson(new hxjsonast_Json(hxjsonast_JsonValue.JNull,new hxjsonast_Position("",0,1)));
-		var tmp3 = new JsonParser_$12([],this.putils,0).loadJson(new hxjsonast_Json(hxjsonast_JsonValue.JNull,new hxjsonast_Position("",0,1)));
-		return { afterBuildCommands : tmp, args : { }, beforeBuildCommands : tmp1, installCommands : tmp2, targetDependencies : tmp3};
+		var tmp2 = new JsonParser_$12([],this.putils,0).loadJson(new hxjsonast_Json(hxjsonast_JsonValue.JNull,new hxjsonast_Position("",0,1)));
+		return { afterBuildCommands : tmp, args : { }, beforeBuildCommands : tmp1, targetDependencies : tmp2};
 	}
 });
 var JsonParser_$24 = function(errors,putils,errorType) {
@@ -624,7 +620,7 @@ JsonParser_$5.__name__ = true;
 JsonParser_$5.__super__ = json2object_reader_BaseParser;
 JsonParser_$5.prototype = $extend(json2object_reader_BaseParser.prototype,{
 	onIncorrectType: function(pos,variable) {
-		this.errors.push(json2object_Error.IncorrectType(variable,"{ ?targetDependencies : Null<vshaxeBuild.project.ArrayHandle<String>>, name : String, ?installCommands : Null<vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>>, ?inherit : Null<String>, ?display : Null<vshaxeBuild.project.TargetArguments>, ?debug : Null<vshaxeBuild.project.TargetArguments>, ?composite : Null<Bool>, ?beforeBuildCommands : Null<vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>>, ?args : Null<vshaxeBuild.project.Hxml>, ?afterBuildCommands : Null<vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>> }",pos));
+		this.errors.push(json2object_Error.IncorrectType(variable,"{ ?targetDependencies : Null<vshaxeBuild.project.ArrayHandle<String>>, name : String, ?inherit : Null<String>, ?display : Null<vshaxeBuild.project.TargetArguments>, ?debug : Null<vshaxeBuild.project.TargetArguments>, ?composite : Null<Bool>, ?beforeBuildCommands : Null<vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>>, ?args : Null<vshaxeBuild.project.Hxml>, ?afterBuildCommands : Null<vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>> }",pos));
 		json2object_reader_BaseParser.prototype.onIncorrectType.call(this,pos,variable);
 	}
 	,loadJsonNull: function(pos,variable) {
@@ -632,7 +628,7 @@ JsonParser_$5.prototype = $extend(json2object_reader_BaseParser.prototype,{
 	}
 	,loadJsonObject: function(o,pos,variable) {
 		var assigned = new haxe_ds_StringMap();
-		this.objectSetupAssign(assigned,["afterBuildCommands","args","beforeBuildCommands","composite","debug","display","inherit","installCommands","name","targetDependencies"],[true,true,true,true,true,true,true,true,false,true]);
+		this.objectSetupAssign(assigned,["afterBuildCommands","args","beforeBuildCommands","composite","debug","display","inherit","name","targetDependencies"],[true,true,true,true,true,true,true,false,true]);
 		this.value = this.getAuto();
 		var _g = 0;
 		while(_g < o.length) {
@@ -660,9 +656,6 @@ JsonParser_$5.prototype = $extend(json2object_reader_BaseParser.prototype,{
 			case "inherit":
 				this.loadObjectFieldReflect(($_=new JsonParser_$3(this.errors,this.putils,1),$bind($_,$_.loadJson)),field,"inherit",assigned);
 				break;
-			case "installCommands":
-				this.loadObjectFieldReflect(($_=new JsonParser_$7(this.errors,this.putils,1),$bind($_,$_.loadJson)),field,"installCommands",assigned);
-				break;
 			case "name":
 				this.loadObjectFieldReflect(($_=new JsonParser_$10(this.errors,this.putils,1),$bind($_,$_.loadJson)),field,"name",assigned);
 				break;
@@ -680,10 +673,9 @@ JsonParser_$5.prototype = $extend(json2object_reader_BaseParser.prototype,{
 		var tmp1 = new JsonParser_$7([],this.putils,0).loadJson(new hxjsonast_Json(hxjsonast_JsonValue.JNull,new hxjsonast_Position("",0,1)));
 		var tmp2 = new JsonParser_$9([],this.putils,0).loadJson(new hxjsonast_Json(hxjsonast_JsonValue.JNull,new hxjsonast_Position("",0,1)));
 		var tmp3 = new JsonParser_$3([],this.putils,0).loadJson(new hxjsonast_Json(hxjsonast_JsonValue.JNull,new hxjsonast_Position("",0,1)));
-		var tmp4 = new JsonParser_$7([],this.putils,0).loadJson(new hxjsonast_Json(hxjsonast_JsonValue.JNull,new hxjsonast_Position("",0,1)));
-		var tmp5 = new JsonParser_$10([],this.putils,0).loadJson(new hxjsonast_Json(hxjsonast_JsonValue.JNull,new hxjsonast_Position("",0,1)));
-		var tmp6 = new JsonParser_$12([],this.putils,0).loadJson(new hxjsonast_Json(hxjsonast_JsonValue.JNull,new hxjsonast_Position("",0,1)));
-		return { afterBuildCommands : tmp, args : { }, beforeBuildCommands : tmp1, composite : tmp2, debug : { }, display : { }, inherit : tmp3, installCommands : tmp4, name : tmp5, targetDependencies : tmp6};
+		var tmp4 = new JsonParser_$10([],this.putils,0).loadJson(new hxjsonast_Json(hxjsonast_JsonValue.JNull,new hxjsonast_Position("",0,1)));
+		var tmp5 = new JsonParser_$12([],this.putils,0).loadJson(new hxjsonast_Json(hxjsonast_JsonValue.JNull,new hxjsonast_Position("",0,1)));
+		return { afterBuildCommands : tmp, args : { }, beforeBuildCommands : tmp1, composite : tmp2, debug : { }, display : { }, inherit : tmp3, name : tmp4, targetDependencies : tmp5};
 	}
 });
 var JsonParser_$7 = function(errors,putils,errorType) {
