@@ -8,9 +8,7 @@ typedef Project = {
 	/** name of a target in defaults.json to base all targets in this config on **/
 	final ?inherit:String;
 
-	/** name of a target to generate special task.json tasks for (install-all, generate-complete-hxml, generate-vscode-tasks) **/
 	final ?mainTarget:String;
-
 	final targets:ArrayHandle<Target>;
 }
 
@@ -39,6 +37,7 @@ typedef TargetArguments = {
 	final ?targetDependencies:ArrayHandle<String>;
 	final ?beforeBuildCommands:ArrayHandle<ArrayHandle<String>>;
 	final ?afterBuildCommands:ArrayHandle<ArrayHandle<String>>;
+	final ?releaseAfterBuildCommands:ArrayHandle<ArrayHandle<String>>;
 	@:default({}) final ?args:Hxml;
 }
 

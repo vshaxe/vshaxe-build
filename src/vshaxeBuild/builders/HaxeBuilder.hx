@@ -37,6 +37,9 @@ class HaxeBuilder {
 				cli.run("npx", ["haxe"].concat(args));
 			}
 			cli.runCommands(target.afterBuildCommands);
+			if (!debug) {
+				cli.runCommands(target.releaseAfterBuildCommands);
+			}
 		});
 
 		cli.println("\n----------------------------------------------\n");

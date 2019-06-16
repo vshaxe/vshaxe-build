@@ -6,6 +6,9 @@
 				"targetDependencies": {
 					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<String>"
 				},
+				"releaseAfterBuildCommands": {
+					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>"
+				},
 				"beforeBuildCommands": {
 					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>"
 				},
@@ -23,6 +26,9 @@
 			"properties": {
 				"targetDependencies": {
 					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<String>"
+				},
+				"releaseAfterBuildCommands": {
+					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.ArrayHandle<String>>"
 				},
 				"name": {
 					"type": "string"
@@ -65,7 +71,6 @@
 					"$ref": "#/definitions/vshaxeBuild.project.ArrayHandle<vshaxeBuild.project.Target>"
 				},
 				"mainTarget": {
-					"markdownDescription": "name of a target to generate special task.json tasks for (install-all, generate-complete-hxml, generate-vscode-tasks)",
 					"type": "string"
 				},
 				"inherit": {
