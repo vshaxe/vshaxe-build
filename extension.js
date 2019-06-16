@@ -1943,6 +1943,15 @@ vshaxeBuild_extension_DisplayArgumentsProvider.prototype = {
 			++_g4;
 			lines.push("-lib " + lib);
 		}
+		var _g6 = 0;
+		var _g7 = vshaxeBuild_tools_ArrayTools.filterDuplicates(vshaxeBuild_project__$Project_ArrayHandle_$Impl_$.get(hxml.macros),function(e13,e23) {
+			return e13 == e23;
+		});
+		while(_g6 < _g7.length) {
+			var macroArg = _g7[_g6];
+			++_g6;
+			lines.push("--macro " + macroArg);
+		}
 		if(hxml.debug) {
 			lines.push("-debug");
 		}

@@ -34,6 +34,8 @@ class DisplayArgumentsProvider {
 			lines.push('-D $define');
 		for (lib in hxml.haxelibs.get().unique())
 			lines.push('-lib $lib');
+		for (macroArg in hxml.macros.get().unique())
+			lines.push('--macro $macroArg');
 		if (hxml.debug)
 			lines.push("-debug");
 		if (hxml.output != null) {
