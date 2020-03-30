@@ -1,0 +1,1 @@
+[![CI](https://img.shields.io/github/workflow/status/vshaxe/vshaxe-build/CI.svg?logo=github)](https://github.com/vshaxe/vshaxe-build/actions?query=workflow%3ACI)

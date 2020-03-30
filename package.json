@@ -17,10 +17,10 @@
 		"nadako.vshaxe"
 	],
 	"devDependencies": {
-		"lix": "^15.5.3"
+		"lix": "^15.8.9"
 	},
 	"scripts": {
-		"postinstall": "npx lix download"
+		"postinstall": "lix download"
 	},
 	"activationEvents": [
 		"workspaceContains:vshaxe-build.json"
