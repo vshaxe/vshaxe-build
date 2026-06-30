@@ -17,7 +17,7 @@
 		"nadako.vshaxe"
 	],
 	"devDependencies": {
-		"lix": "^15.8.9"
+		"lix": "^17.0.0"
 	},
 	"scripts": {
 		"postinstall": "lix download"
