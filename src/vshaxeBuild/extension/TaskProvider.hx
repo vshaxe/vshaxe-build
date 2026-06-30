@@ -48,7 +48,7 @@ class TaskProvider {
 			args = args.concat(["--connect", Std.string(vshaxe.displayPort)]);
 		}
 		var execution = new ShellExecution("npx", args, {env: vshaxe.haxeExecutable.configuration.env});
-		var task = new Task(definition, TaskScope.Workspace, name, "vshaxe-build", execution, vshaxe.problemMatchers.get());
+		var task = new Task(definition, TaskScope.Workspace, name, "vshaxe-build", execution, vshaxe.problemMatchers.copy());
 		task.presentationOptions = cast vshaxe.taskPresentation;
 		return task;
 	}
