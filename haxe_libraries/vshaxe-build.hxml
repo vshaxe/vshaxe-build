@@ -1,2 +1,3 @@
 -D vshaxe-build=0.0.1
+# @run: haxelib run-dir vshaxe-build .
 -cp .
